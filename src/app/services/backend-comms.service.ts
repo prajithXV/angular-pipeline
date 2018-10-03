@@ -1438,7 +1438,7 @@ export class BackendCommsService {
   }
 
   //create case tickler
-  createCaseTickler(accountId: string, cifId: string, processCode: string, caseDescription: string, createdBy:string, custFirstName: string, custLastName: string): Promise<number> {
+  createCaseTickler(accountId: string, cifId: string, processCode: string, caseDescription: string, createdBy:string, custFirstName: string, custLastName: string, accountType: string): Promise<number> {
     let body = {
       AccountId: accountId,
       CifId: cifId,
@@ -1446,7 +1446,8 @@ export class BackendCommsService {
       CaseDesc: caseDescription,
       CreatedBy: createdBy,
       FirstName: custFirstName,
-      LastName: custLastName
+      LastName: custLastName,
+      AccountType: accountType
     };
 
     console.log(body);

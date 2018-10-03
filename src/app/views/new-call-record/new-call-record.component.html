@@ -208,7 +208,6 @@
       <button class="btn btn-secondary pull-right" [disabled]="isCancellable" (click)="cancelCall()">Skip</button>
       <!--click on create-->
       <button *ngIf="canCreateCase()" class="btn btn-secondary pull-right margin"
-              [disabled]="account?.accountType == 'D'"
               (click)="createProcess()">Create case
       </button>
     </div>

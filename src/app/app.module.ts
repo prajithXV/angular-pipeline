@@ -318,9 +318,9 @@ export const MY_MOMENT_FORMATS = {
     FilterCodeToNamePipe
     // {provide: HTTP_INTERCEPTORS, useClass: SessionLossInterceptor, multi: true}
     // providers used to create fake backend
-    // ,fakeBackendProvider,
-    // MockBackend,
-    // BaseRequestOptions
+    ,fakeBackendProvider,
+    MockBackend,
+    BaseRequestOptions
   ],
 
   bootstrap: [AppComponent]

@@ -27,10 +27,9 @@
           <i *ngIf="excluded && excluded.accountId == acc.accountId" class="fa fa-check text-navy"></i>
         </td>
 
-        <td *ngIf="hasCreateButton && canCreateCase() && acc.accountType!='D'">
+        <td *ngIf="hasCreateButton && canCreateCase()">
           <i class="create orange fas fa-plus-circle" title="Create case" (click)="open(content)"></i>
         </td>
-        <td *ngIf="acc.accountType =='D'"></td>
       <!--modal-->
         <ng-template #content let-c="close" let-d="dismiss">
           <div class="modal-header">

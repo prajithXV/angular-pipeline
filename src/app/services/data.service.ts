@@ -713,7 +713,8 @@ export class DataService {
       model.caseDescription,
       agent.account,
       customer.mainContact ? customer.mainContact.firstName : null,
-      customer.mainContact ? customer.mainContact.lastName : null
+      customer.mainContact ? customer.mainContact.lastName : null,
+      account.accountType
     );
   }
 
