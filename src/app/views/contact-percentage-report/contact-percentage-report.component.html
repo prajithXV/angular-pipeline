@@ -1,0 +1,46 @@
+<div class="row">
+  <div class="col-lg-3">
+    <div class="ibox float-e-margins">
+      <div class="ibox-title">
+        <h5>Contact Percentage Criteria</h5>
+      </div>
+      <div class="ibox-content">
+        <!--Search criteria component-->
+        <calls-per-hour-criteria
+          (onViewReport)="onViewContactData($event)"
+          [campaigns]="campaigns"
+          [searchingCallsPerHourData]="searchingCallsPerHourData">
+        </calls-per-hour-criteria>
+      </div>
+    </div>
+  </div>
+  <div class="col-lg-9">
+    <div class="ibox float-e-margins">
+      <div class="ibox-title">
+        <h5>Contact percentage Report</h5>
+      </div>
+      <div class="ibox-content">
+        <!--Total component data-->
+        <contact-percentage-data
+          [visibleTable]="isTableVisible"
+          [searchingData]="searchingCallsPerHourData"
+          [campaigns]="campaigns"
+          [contactPercentage]="contactPercentage"
+          [table]="table">
+        </contact-percentage-data>
+
+
+        <div *ngIf="searchingCallsPerHourData">
+          <waiting-backend></waiting-backend>
+          Getting contact percentage...
+        </div>
+        <div *ngIf="!searchingCallsPerHourData && !isTableVisible">Select a campaign and a date and press "View
+          report"
+        </div>
+        <p
+          *ngIf="contactPercentage && contactPercentage.length == 0 && table && table.length ==0 && !searchingCallsPerHourData && isTableVisible">
+          No contact percentage found</p>
+      </div>
+    </div>
+  </div>
+</div>

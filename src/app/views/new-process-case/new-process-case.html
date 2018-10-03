@@ -1,0 +1,41 @@
+<div class="row">
+  <div class="col-lg-12">
+    <p>You are going to create a case. Please, select a process and write a comment.</p>
+  </div>
+</div>
+<div class="row">
+  <div class="col-lg-12">
+    <div class="form-group" [class.has-error]="errorNotes">
+      <div>
+        <p class="notes"><label class="control-label">Process name</label></p>
+      </div>
+      <select class="form-control m-b" [(ngModel)]="model.processCode">
+        <option *ngFor="let op of processes" [ngValue]="op">{{op.processName}}</option>
+      </select>
+    </div>
+    <div class="form-group" [class.has-error]="errorNotes">
+      <div>
+        <p class="notes"><label class="control-label">Comment</label></p>
+      </div>
+      <!--Notes-->
+      <textarea
+        [(ngModel)]="model.caseDescription"
+        class="form-control notes-form no-resize"
+        placeholder="Enter your case description"
+        rows="3"
+        maxlength="250">
+      </textarea>
+    </div>
+  </div>
+</div>
+<div class="row">
+  <div class="col-lg-12">
+    <div class="form-group">
+      <button class="btn btn-primary" (click)="createProcessCase(model)" [disabled]="waitingResponse">{{saveText}}
+        <waiting-backend *ngIf="waitingResponse"></waiting-backend>
+      </button>
+      <button class="btn" (click)="goToRecordCall()">Cancel
+      </button>
+    </div>
+  </div>
+</div>

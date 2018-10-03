@@ -1,0 +1,26 @@
+<div class="row">
+  <div class="col-lg-3">
+
+    <div class="ibox float-e-margins">
+      <div class="ibox-title">
+        <h5>Date Range</h5>
+      </div>
+      <div class="ibox-content">
+        <collectors-productivity-criteria  [searching]="searching" (onSubmit)="searchData($event)"></collectors-productivity-criteria>
+      </div>
+    </div>
+
+  </div>
+  <div class="col-lg-9">
+
+    <div class="ibox float-e-margins">
+      <div class="ibox-title">
+        <h5>Overall Productivity</h5>
+      </div>
+      <div class="ibox-content">
+        <overall-productivity-data [records]="productivityRecords" [searching]="searching"></overall-productivity-data>
+      </div>
+    </div>
+
+  </div>
+</div>

@@ -1,0 +1,13 @@
+.create{
+  cursor: pointer;
+
+}
+
+
+.orange{
+  color: orange;
+}
+
+.close:focus{
+  outline: none;
+}

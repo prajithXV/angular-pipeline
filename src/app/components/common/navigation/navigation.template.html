@@ -1,0 +1,136 @@
+<ng-template #popMain><strong>F9</strong></ng-template>
+<ng-template #popUsers><strong>F7</strong></ng-template>
+<ng-template #popCampaigns><strong>F6</strong></ng-template>
+<nav class="navbar-default navbar-static-side" role="navigation">
+  <div class="sidebar-collapse">
+    <ul class="metismenu nav" id="side-menu">
+      <!--Logo-->
+      <li class="nav-header">
+        <div class="profile-element" dropdown>
+          <img alt="image" class="img-rectangle" src="assets/images/iberiabank-i-logo.png">
+        </div>
+        <div class="logo-element">
+          COIN
+        </div>
+      </li>
+
+      <!--Main-->
+
+      <li [ngClass]="{active: activeRoute(tokens.main)}" class="active" id="main">
+        <a  (click)="onMainPage()" [routerLink]="[routes.main.url]" class="mainActive"><i class="fa fa-tty"></i> <span class="nav-label" [popover]="popMain" placement="right" triggers="">Main</span></a>
+      </li>
+
+      <!--Processes-->
+      <!--<li [class.active]= "isMenuActive('processes')" *ngIf="isTicklerAgent()">-->
+        <!--<a aria-expanded="true">-->
+          <!--<i class="fa fa-address-book-o"></i> <span class="nav-label">Process Cases</span>-->
+          <!--<span class="fa arrow"></span>-->
+        <!--</a>-->
+        <!--<ul aria-expanded="true" class="nav nav-second-level" id="processes">-->
+          <!--<li [ngClass]="{active: activeRoute(tokens.cases)}">-->
+            <!--<a [routerLink]="[routes.process_cases.url]" class="sideActive"><i class="fa fa-search"></i> <span [popover]="popUsers" placement="right" triggers="" class="showSpan">Search</span></a>-->
+          <!--</li>-->
+        <!--</ul>-->
+      <!--</li>-->
+
+      <!--Admin-->
+      <li [class.active]= "isMenuActive('admin')" *ngIf="isAdmin() || isManager()">
+        <a aria-expanded="true" class="menuFocus">
+          <i class="fa fa-th-large"></i> <span class="nav-label">Admin</span>
+          <span class="fa arrow"></span>
+        </a>
+        <ul aria-expanded="true" class="nav nav-second-level" id="admin">
+          <li [ngClass]="{active: activeRoute(tokens.users)}">
+            <a [routerLink]="[routes.admin_users.url]" class="sideActive"><i class="fa fa-users"></i> <span [popover]="popUsers" placement="right" triggers="" class="showSpan">Users</span></a>
+          </li>
+          <li [ngClass]="{active: activeRoute(tokens.campaigns)}" >
+            <a [routerLink]="[routes.admin_campaigns.url]" class="sideActive"><!--i class="fa fa-table"></i--> <span [popover]="popCampaigns" placement="right" triggers="" class="showSpan">Campaigns</span></a>
+          </li>
+          <li [ngClass]="{active: activeRoute(tokens.processes)}" >
+            <a [routerLink]="[routes.admin_processes.url]" class="sideActive"><i class="fa fa-address-book-o"></i> <span placement="right" triggers="" class="showSpan">Processes</span></a>
+          </li>
+          <li [ngClass]="{active: activeRoute(tokens.attributes)}" >
+            <a [routerLink]="[routes.admin_attributes.url]" class="sideActive"><i class="fa fa-tag"></i> <span placement="right" triggers="" class="showSpan">Attributes</span></a>
+          </li>
+          <li [ngClass]="{active: activeRoute(tokens.lovs)}" >
+            <a [routerLink]="[routes.admin_lovs.url]" class="sideActive"><i class="fa fa-list-ul"></i> <span placement="right" triggers="" class="showSpan">LOVs</span></a>
+          </li>
+          <li *ngIf="!environment.production" [ngClass]="{active: activeRoute(tokens.stress)}">
+            <a [routerLink]="[routes.admin_stress.url]" class="sideActive"><!--i class="fa fa-table"></i--> <span class="showSpan">Stress</span></a>
+          </li>
+        </ul>
+      </li>
+
+      <!--Reports-->
+      <li [class.active]= "isMenuActive('reports')" *ngIf="isAdmin() || isManager() || isSupervisor()">
+        <a aria-expanded="true">
+          <i class="fa fa-list-alt"></i> <span class="nav-label">Reports</span>
+          <span class="fa arrow"></span>
+        </a>
+        <ul aria-expanded="true" class="nav nav-second-level" id="reports">
+          <li [ngClass]="{active: activeRoute(tokens.campaigns_accomplishment)}">
+            <a [routerLink]="[routes.reports_campaigns_accomplishment.url]" class="sideActive"><i class="fa fa-table"></i> Campaigns Accomplishment</a>
+          </li>
+          <li [ngClass]="{active: activeRoute(tokens.overall_prod)}">
+            <a [routerLink]="[routes.reports_overall_prod.url]" class="sideActive"><!--i class="fa fa-table"></i--> Overall Productivity</a>
+          </li>
+          <li [ngClass]="{active: activeRoute(tokens.collectors_prod)}">
+            <a [routerLink]="[routes.reports_collectors_prod.url]" class="sideActive"><!--i class="fa fa-table"></i--> Collectors Productivity</a>
+          </li>
+          <li [ngClass]="{active: activeRoute(tokens.calls_per_hour)}">
+            <a [routerLink]="[routes.reports_calls_per_hour.url]" class="sideActive"><!--i class="fa fa-table"></i--> Calls Per Hour</a>
+          </li>
+          <li [ngClass]="{active: activeRoute(tokens.incoming_calls)}">
+            <a [routerLink]="[routes.reports_incoming_calls.url]" class="sideActive"><!--i class="fa fa-table"></i--> Incoming Calls</a>
+          </li>
+          <li [ngClass]="{active: activeRoute(tokens.contact_pctg)}" class="sideActive">
+            <a [routerLink]="[routes.reports_contact_pctg.url]" class="sideActive"><!--i class="fa fa-table"></i--> Contact Percentage</a>
+          </li>
+        </ul>
+      </li>
+
+      <!--CISCOMOCK-->
+      <li [class.active]= "isMenuActive('ciscoMock')" *ngIf="isMockAllowed()">
+        <a aria-expanded="true">
+          <i class="fa fa-phone"></i> <span class="nav-label">Cisco Mocks</span>
+          <span class="fa arrow"></span>
+        </a>
+        <ul aria-expanded="true" class="nav nav-second-level" id="ciscoMock">
+          <li>
+            <a (click)="stateNotReady()" class="sideActive">NOT READY</a>
+          </li>
+          <li>
+            <a (click)="stateReady()" class="sideActive">READY</a>
+          </li>
+          <li>
+            <a (click)="stateWorkReady()" class="sideActive">WORK READY</a>
+          </li>
+          <li>
+            <a (click)="incomingAlerting()" class="sideActive">I: Alerting</a>
+          </li>
+          <li>
+            <a (click)="incomingPickup()" class="sideActive">I: Pick-up</a>
+          </li>
+          <li>
+            <a (click)="incomingHangup()" class="sideActive">I: Hang-up</a>
+          </li>
+          <li>
+            <a (click)="outgoingInitiating()" class="sideActive">O: Initiating</a>
+          </li>
+          <li>
+            <a (click)="outgoingCalling()" class="sideActive">O: Calling</a>
+          </li>
+          <li>
+            <a (click)="outgoingSpeaking()" class="sideActive">O: Speaking</a>
+          </li>
+          <li>
+            <a (click)="outgoingHangup()" class="sideActive">O: Hang-up (spk.)</a>
+          </li>
+          <li>
+            <a (click)="outgoingDropped()" class="sideActive">O: Dropped (not spk.)</a>
+          </li>
+        </ul>
+      </li>
+    </ul>
+  </div>
+</nav>

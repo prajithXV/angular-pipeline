@@ -1,0 +1,56 @@
+<!-- STRING -->
+<input
+  #stringInput
+  *ngIf="type == AttTypes.string"
+  [(ngModel)]="stringValue"
+  [disabled]="disabled"
+  class="form-control"
+  placeholder="Text"
+  name="valueText">
+
+<!--LOV-->
+<!--<div *ngIf="attribute.type == AttTypes.lov" class="input-group">-->
+<!--<select class="form-control m-b" [(ngModel)]="listOfValueSelected" name="lovType" title="lov">-->
+<!--<option *ngFor="let l of listOfValues " [ngValue]="l.code">{{l.name}}</option>-->
+<!--<option [ngValue]=null> Select a value </option>-->
+<!--</select>-->
+<!--</div>-->
+
+<!-- NUMBER -->
+<coin-number-input
+  #numberInput
+  *ngIf="type == AttTypes.number"
+  placeholder="Number"
+  [class.has-error]="numberInput.hasErrors()"
+  [showErrors]="false"
+  [continuosEvaluation]="true"
+  [mandatory]="true"
+  [disabled]="disabled"
+></coin-number-input>
+
+<!-- DATE and DATETIME -->
+<date-picker
+  #dateInput
+  *ngIf="type == AttTypes.date"
+  [selectedMoment]="null"
+  [continuosEvaluation]="true"
+  [upCalendar]="false"
+  [showErrors]="false"
+  [mandatory]="true"
+  [disabled]="disabled"
+  [class.has-error]="dateInput.hasErrors()">
+</date-picker>
+
+<date-picker
+  #dateInput
+  *ngIf="type == AttTypes.datetime"
+  [placeHolderDate]="'MM/DD/YYYY'"
+  [continuosEvaluation]="true"
+  [selectedMoment]="null"
+  [upCalendar]="false"
+  [pickerType]="'calendar'"
+  [showErrors]="false"
+  [mandatory]="true"
+  [disabled]="disabled"
+  [class.has-error]="dateInput.hasErrors()">
+</date-picker>

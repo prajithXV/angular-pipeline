@@ -1,0 +1,58 @@
+
+<input [(ngModel)]="selectedMoment"
+       [owlDateTime]="dt"
+       [name]="name"
+       [min]="min"
+       [max]="max"
+       [placeholder]="placeHolderDate"
+       [disabled]="disabled"
+       name="date"
+       class="form-control font-normal"
+       (input)="getInputDate()"
+       (blur)="refreshDateErrors()"
+       (keyup)="valueChange($event)"
+       #dateTime
+>
+
+
+<span *ngIf="!upCalendar" class="input-group-btn trigger" [owlDateTimeTrigger]="dt">
+  <i class="fas fa-calendar-alt" [class.disabled]="disabled"></i>
+</span>
+
+<span *ngIf="upCalendar" class="input-group-btn upcalendar trigger" [owlDateTimeTrigger]="dt">
+  <i class="fas fa-calendar-alt" [class.disabled]="disabled"></i>
+</span>
+
+
+
+<owl-date-time [disabled]="disabled" [pickerType]="pickerType" (afterPickerOpen)="initMinWhenNotAllowPast()" (afterPickerClosed)="refreshDateErrors()" #dt ></owl-date-time>
+
+
+
+<div *ngIf="showErrors && isInvalidFormat" class="help-block m-b-none font-normal">
+  Not a valid format (MM/DD/YYYY)
+</div>
+
+
+
+<div *ngIf="showErrors && isInvalidHourFormat" class="help-block m-b-none font-normal">
+  Not a valid format (MM/DD/YYYY HH:mm)
+</div>
+
+
+<div *ngIf="showErrors && isMinInvalid" class="help-block m-b-none font-normal">
+  Date Time value must after {{ setMinDate(min) | date: 'MM/dd/yyyy'}}
+</div>
+
+
+<div *ngIf="showErrors && isMaxInvalid" class="help-block m-b-none font-normal">
+  Date Time value must before {{ setMaxDate(max) | date: 'MM/dd/yyyy'}}
+</div>
+
+<div *ngIf="showErrors && mandatoryError" class="help-block m-b-none font-normal">
+    Field is mandatory.
+</div>
+
+<div *ngIf="showErrors && pastError" class="help-block m-b-none font-normal">
+  Date Time value is in the past
+</div>

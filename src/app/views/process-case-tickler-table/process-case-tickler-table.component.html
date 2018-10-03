@@ -1,0 +1,95 @@
+<!--New button-->
+<!--<div *ngIf="currentProcessCase && !searchingCaseTicklers && hasToShowNewButton">-->
+  <!--<button class="btn btn-sm btn-primary" [disabled]="isCreating || currentProcessCase.statusCode == 'CLOSED'" (click)="onNewTickler()">-->
+    <!--<i class="fa fa-file-o"></i> New-->
+  <!--</button>-->
+<!--</div>-->
+
+<div *ngIf="searchingCaseTicklers" class="search">
+  <waiting-backend></waiting-backend>
+  Searching...
+</div>
+<div *ngIf="!searchingCaseTicklers && !currentProcessCase">Select a process case.</div>
+<p *ngIf="processCaseTicklers?.length === 0 && currentProcessCase &&  !searchingCaseTicklers && !isCreating">No data
+  found.</p>
+
+<!-- New tickler case: click on NEW -->
+<div class="table" *ngIf="isCreating">
+  <div class="row">
+    <div class="col-lg-12">
+      <!--<hr/>-->
+      <new-tickler-case
+        [ticklerAttributes]="ticklerAttributes"
+        [processCaseTicklers]="processCaseTicklers"
+        [ticklerTypes]="ticklerTypes"
+        [currentProcessCase]="currentProcessCase"
+        (onCancelCaseTickler)="onNewTicklerCancelled()"
+        (onAddCaseTickler)="onNewTicklerAdded()">
+      </new-tickler-case>
+    </div>
+
+  </div>
+</div>
+
+<!--process Cases table-->
+<div *ngIf="!isCreating && processCaseTicklers && processCaseTicklers?.length > 0 && !searchingCaseTicklers">
+
+  <table class="processCases table table-striped">
+    <thead>
+    <tr>
+      <th>Tickler</th>
+      <th>Name</th>
+      <th>Description</th>
+      <th>Created by</th>
+      <th>Created on</th>
+    </tr>
+    </thead>
+    <tbody>
+    <ng-container *ngFor="let ct of processCaseTicklers">
+      <tr>
+        <td>{{ct.id}}</td>
+        <td>{{ct.ticklerName}}</td>
+        <td>{{ct.ticklerDescription}}</td>
+        <td>{{ct.createdBy}}</td>
+        <td>{{ct.createdDate | coinDateTransform}}</td>
+        <td>
+          <!--button-->
+          <button (click)="toogleAttributesDetail(ct); $event.stopPropagation()"
+                  [class.blue]="isTicklerAttributeVisible(ct)" class="btn btn-xs btn-white btnBorder">
+            <i class="pointer fa"
+               [class.fa-chevron-down]="!isTicklerAttributeVisible(ct)"
+               [class.fa-chevron-up]="isTicklerAttributeVisible(ct)">
+            </i>
+          </button>
+        </td>
+      </tr>
+      <!--attributes-->
+      <tr *ngIf="isTicklerAttributeVisible(ct)">
+        <td colspan="10" class="col-padding white">
+          <div class="box-shadow box-padding col-lg-12">
+            <h3 class="title text-success">Attributes</h3>
+            <span *ngIf="!ct.attributes">No attributes.</span>
+            <table class="table" *ngIf="ct.attributes">
+              <thead>
+              <tr>
+                <td><strong>Name</strong></td>
+                <td><strong>Values</strong></td>
+              </tr>
+              </thead>
+              <tbody>
+              <tr *ngFor="let at of ct.attributes">
+                <td>{{ticklerAttributeName(ct,at)}}</td>
+                <td>{{ticklerAttributeValues(ct,at)}}</td>
+              </tr>
+              </tbody>
+            </table>
+          </div>
+        </td>
+      </tr>
+    </ng-container>
+    </tbody>
+  </table>
+</div>
+
+
+

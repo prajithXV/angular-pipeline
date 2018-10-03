@@ -1,0 +1,10 @@
+<div *ngIf="visibleTable && !searchingData && readyChart && incomingCalls.length!=0">
+  <h3 class="text-center">Total incoming calls by hour</h3>
+  <canvas baseChart
+          [chartType]="'line'"
+          [datasets]="chartData"
+          [labels]="labelsArray"
+          [options]="options"
+          [colors]="lineColors">
+  </canvas>
+</div>

@@ -1,0 +1,37 @@
+<!--panel of standard sentences-->
+<div ngDraggable [handle]="dragHandle" class="floating">
+  <div class="ibox float-e-margins col-xs-12">
+    <div #dragHandle class="ibox-title" style="cursor: move">
+      <div class="title">
+        <h5>Sentences for notes</h5>
+      </div>
+      <span class="pull-right"><i class="fa fa-times" (click)="hide()"></i></span>
+    </div>
+    <div class="ibox-content">
+      <div class="card card-block card-header">
+        <div class="well well-lg">
+          <!--combo actions-->
+          <div class="form-group">
+            <label for="type">Call type:</label>
+            <select id="type" [(ngModel)]="filterSentences" name="standardSentence" class="form-control m-b"
+                    (change)="filter()">
+              <option [ngValue]=null>--All--</option>
+              <option *ngFor="let t of text" [ngValue]="t.action">{{t.action}}</option>
+            </select>
+            <!--filter table-->
+            <div class="col-lg-12 no-padding">
+              <table class="table table-separate">
+                <tr *ngFor="let s of sentencesWhenFilter" (click)="add(s.sentence)">
+                  <!--sentences-->
+                  <td class="sentencesTable">{{s.sentence}}</td>
+                  <!--keyCode-->
+                  <td class="keyTable">CTRL ALT {{s.letterCode}}</td>
+                </tr>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,147 @@
+<!--New button-->
+<!--<div *ngIf="currentProcess && !searchingTypes">-->
+  <!--<button class="btn btn-sm btn-primary" [disabled]="isCreating" (click)="showTicklerTypes(true)">-->
+    <!--<i class="fa fa-file-o"></i> New-->
+  <!--</button>-->
+<!--</div>-->
+
+<div *ngIf="searchingTypes" class="search">
+  <waiting-backend></waiting-backend>
+  Searching...
+</div>
+<p *ngIf="ticklerTypes && ticklerTypes.length == 0 && !searchingTypes && !isCreating">No data found.</p>
+<div *ngIf="!searchingTypes && !currentProcess">Select a process.</div>
+
+
+<div class="table" *ngIf="isCreating">
+  <!-- New tickler case: click on NEW -->
+  <!--<hr/>-->
+  <div class="container no-padding">
+    <div class="">
+      <h2 class="title2 text-success">New type</h2>
+      <p></p>
+      <new-tickler-type
+        manageTicklerTypeText="Add"
+        [hasToAddTicklerType]="true"
+        [currentProcess]="currentProcess"
+        (onCancelType)="showTicklerTypes(false)"
+        (onAddType)="newTicklerType()">
+      </new-tickler-type>
+    </div>
+  </div>
+</div>
+
+<!--tickler types table-->
+<div *ngIf="!isCreating && ticklerTypes && ticklerTypes.length > 0 && !searchingTypes">
+  <div class="table table-responsive">
+    <table class="table">
+      <thead>
+      <tr>
+        <th>ID</th>
+        <th>Code</th>
+        <th>Name</th>
+        <th>Description</th>
+        <th class="text-center">Order</th>
+        <th class="text-center">Follow up days</th>
+        <th class="text-center">Active</th>
+        <th class="text-center">Action</th>
+        <th class="text-center">Close</th>
+        <th class="text-center">Core</th>
+        <th class="text-center">Base</th>
+        <th>Created by</th>
+        <th>Created date</th>
+      </tr>
+      </thead>
+      <tbody>
+      <ng-container *ngFor="let t of ticklerTypes">
+        <tr [class.clearOrange]="isTicklerTypeVisible(t)" [class.disabled-tr]="!t.activeFlag && !isTicklerTypeVisible(t)">
+          <td>{{t.id}}</td>
+          <td>{{t.ticklerCode}}</td>
+          <td>{{t.ticklerName}}</td>
+          <td>{{t.ticklerDescription}}</td>
+          <td class="text-center">{{t.orderByCode}}</td>
+          <td class="text-center">{{t.followUpDays}}</td>
+          <td class="text-center"><semaphore [value]="t.activeFlag"></semaphore></td>
+          <td class="text-center"><semaphore [value]="t.actionRequiredFlag"></semaphore></td>
+          <td class="text-center"><semaphore [value]="t.isCloseable"></semaphore></td>
+          <td class="text-center"><semaphore [value]="t.isCore"></semaphore></td>
+          <td class="text-center"><semaphore [value]="t.isBase"></semaphore></td>
+          <td>{{t.createdBy}}</td>
+          <td>{{t.createdDate | coinDateTransform: "STD_DATE"}}</td>
+
+          <!--edit button-->
+          <td>
+            <i class="edit fas fa-edit" [class.orange]="isTicklerTypeVisible(t)" (click)="editTicklerType(t)"></i>
+          </td>
+          <td>
+            <!--remove tickler type button-->
+            <i *ngIf="!waiting(t)" class="trash fas fa-trash-alt" (click)="openModal(content)"></i>
+            <waiting-backend *ngIf="waiting(t)"></waiting-backend>
+          </td>
+          <!--modal: Remove tickler type-->
+          <ng-template #content let-c="close" let-d="dismiss">
+            <div class="modal-header">
+              <h4 class="modal-title">Remove tickler type</h4>
+              <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <p class="text">Are you sure you want to remove this tickler type?</p>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="pull-left btn btn-danger" (click)="removeTicklerType(t); c('Close click')">
+                Delete
+              </button>
+              <button type="button" class=" pull-left btn btn-outline-dark" (click)="c('Close click')">Cancel</button>
+            </div>
+          </ng-template>
+        </tr>
+
+        <tr *ngIf="isTicklerTypeVisible(t)">
+          <td colspan="15" class="no-borders col-padding white">
+            <div class="col-container">
+            <!--edit tickler types-->
+            <div class="col-lg-4 col-sm-12 col-md-12 col-xs-12 white box1">
+              <p class="title text-success">General</p>
+              <div class="table">
+                  <new-tickler-type
+                    manageTicklerTypeText="Save"
+                    [hasToAddTicklerType]="false"
+                    [currentTicklerType]="t"
+                    (onUpdateTicklerType)="onUpdate()"
+                    (onCancelType)="onCancelUpdate(t)">
+                  </new-tickler-type>
+              </div>
+            </div>
+            <!--attributes-->
+            <div class="col-lg-4 col-sm-12 col-md-12 col-xs-12 white box2">
+              <p class="title text-success">Attributes</p>
+              <div class="table">
+                  <new-tickler-attribute-map
+                    [currentTicklerType]="t"
+                    [ticklerAttributes]="ticklerAttributes">
+                  </new-tickler-attribute-map>
+              </div>
+            </div>
+            <!--maps-->
+            <div class="col-lg-4 col-sm-12 col-md-12 col-xs-12 white box3 ">
+              <p class="title text-success">Maps</p>
+              <div class="table">
+                  <!--<new-tickler-type-->
+                  <new-tickler-type-map
+                    [currentTicklerType]="t"
+                    [ticklerTypes]="ticklerTypes">
+                  </new-tickler-type-map>
+              </div>
+            </div>
+            </div>
+          </td>
+        </tr>
+      </ng-container>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+

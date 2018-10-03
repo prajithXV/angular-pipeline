@@ -1,0 +1,60 @@
+<div class="" [ngClass]="{'col-xs-12':hasToAddLovValue, 'col-lg-12': hasToAddLovValue, 'col-paddings': hasToAddLovValue, 'container-content': !hasToAddLovValue}">
+  <!--code-->
+  <div class="col-lg-12">
+    <div class="form-group" [class.has-error]="false">
+      <label class="control-label">Value *</label>
+      <!--<input [(ngModel)]="model.valueCode" #vCode="ngModel" [disabled]="!hasToAddLovValue" type="text" placeholder="Code"-->
+             <!--class="form-control" name="valueCode" required>-->
+      <value-edition #codeEdition [disabled]="!hasToAddLovValue" [value]="model.valueCode" [type]="currentLovType?.type"></value-edition>
+      <!--<span class="help-block m-b-none" *ngIf="vCode.invalid && vCode.touched">Field is mandatory.</span>-->
+    </div>
+
+    <!--name-->
+    <div class="form-group" [class.has-error]="vName.invalid && vName.touched">
+      <label class="control-label">Name *</label>
+      <input [(ngModel)]="model.valueName" #vName="ngModel" type="text" placeholder="Name" class="form-control" name="valueName" required>
+      <!--<span class="help-block m-b-none" *ngIf="vName.invalid && vName.touched">Field is mandatory.</span>-->
+    </div>
+
+    <!--active-->
+    <div class="col-lg-12 no-padding">
+      <input
+        [(ngModel)]="model.isActive"
+        [value]="'Y'"
+        type="checkbox"
+        name="activeFlag"
+        title="active"
+        [checked]="model.isActive"
+      />
+      <p class="notes"><label class="font-normal"> Active</label></p>
+    </div>
+
+    <!--description-->
+    <div class="form-group col-lg-12 no-padding">
+      <div>
+        <label class="control-label">Description</label>
+      </div>
+      <textarea
+        [(ngModel)]="model.valueDescription"
+        class="form-control notes-form no-resize"
+        placeholder="Enter your value description"
+        rows="3"
+        maxlength="250">
+      </textarea>
+    </div>
+  </div>
+
+  <!--button-->
+  <div class="col-lg-12">
+    <div class="form-group">
+      <button class="btn btn-sm btn-primary"
+              [disabled]="isWaiting || hasFormErrors"
+              (click)="manageLovValues(model)">{{manageLovValueText}}
+        <waiting-backend *ngIf="isWaiting"></waiting-backend>
+      </button>
+      <button class="btn btn-sm" (click)="cancel()">Cancel
+      </button>
+    </div>
+  </div>
+</div>
+

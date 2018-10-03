@@ -1,0 +1,34 @@
+<div class="row">
+  <div class="col-lg-6">
+    <dl class="dl-horizontal">
+      <!--<dt>Prompt Script Decision Tree:</dt>-->
+      <!--<dd>{{accountAdditional?.promptScriptDecisionTree}}</dd>-->
+      <dt>Risk rating:</dt>
+      <dd>{{accountAdditional?.riskRating}}</dd>
+      <dt>Vantage 3 score:</dt>
+      <dd>{{accountAdditional?.vantage3Score}}</dd>
+      <dt>FICO score:</dt>
+      <dd>{{accountAdditional?.ficoScore}}</dd>
+      <dt>Bankruptcy score:</dt>
+      <dd>{{accountAdditional?.bankruptcyScore}}</dd>
+      <!--<dt>Collateral Tracking Information:</dt>-->
+      <!--<dd>{{accountAdditional?.collateralTrackingInformation}}</dd>-->
+    </dl>
+  </div>
+  <div class="col-lg-6">
+    <dl class="dl-horizontal">
+      <!--<dt>Related Accounts:</dt>-->
+      <!--<dd>{{accountAdditional?.relatedAccounts}}</dd>-->
+      <dt>Risk rating date:</dt>
+      <dd>{{accountAdditional?.riskRatingDate | coinDateTransform: "STD_DATE":"MM/DD/YYYY hh:mm:ss A"}}</dd>
+      <dt>Vantage 3 score date:</dt>
+      <dd>{{accountAdditional?.vantage3ScoreDate | coinDateTransform: "STD_DATE":"MM/DD/YYYY hh:mm:ss A"}}</dd>
+      <dt>FICO score date:</dt>
+      <dd>{{accountAdditional?.ficoScoreDate | coinDateTransform: "STD_DATE":"MM/DD/YYYY hh:mm:ss A"}}</dd>
+      <dt>Bankruptcy score date:</dt>
+      <dd>{{accountAdditional?.bankruptcyScoreDate | coinDateTransform: "STD_DATE":"MM/DD/YYYY hh:mm:ss A"}}</dd>
+      <!--<dt>Historical FICO Vantage Scores:</dt>-->
+      <!--<dd>{{accountAdditional?.historicalFicoVantageScores}}</dd>-->
+    </dl>
+  </div>
+</div>

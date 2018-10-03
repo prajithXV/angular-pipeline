@@ -1,0 +1,137 @@
+<div [class.clearOrange]="!hasToAddTicklerType"
+     [class.box-shadow]="hasToAddTicklerType"
+     [class.col-lg-12]="hasToAddTicklerType"
+     [class.col-xs-12]="hasToAddTicklerType"
+     [class.col-paddings]="hasToAddTicklerType">
+  <!--code-->
+  <div class="col-lg-12">
+    <div class="form-group" [class.has-error]="tCode.invalid && tCode.touched">
+      <label class="control-label">Code *</label>
+      <input [(ngModel)]="model.ticklerCode" #tCode="ngModel" [disabled]="!hasToAddTicklerType" type="text" placeholder="Code"
+             class="form-control" name="ticklerCode" required>
+      <span class="help-block m-b-none" *ngIf="tCode.invalid && tCode.touched">Field is mandatory.</span>
+    </div>
+
+    <!--name-->
+    <div class="form-group" [class.has-error]="tName.invalid && tName.touched">
+      <label class="control-label">Name *</label>
+      <input [(ngModel)]="model.ticklerName" #tName="ngModel" type="text" placeholder="Name" class="form-control" name="ticklerName" required>
+      <span class="help-block m-b-none" *ngIf="tName.invalid && tName.touched">Field is mandatory.</span>
+    </div>
+
+
+    <!--order-->
+    <div class="form-group">
+      <label>Order</label>
+      <input [(ngModel)]="model.orderByCode" type="number" placeholder="Order by code" class="form-control"
+             name="orderByCode">
+    </div>
+
+    <!--follow up days-->
+    <div class="form-group" [class.has-error]="hasInputNumberErrors && followUpDays.touched">
+      <label class="control-label">Follow up days</label>
+      <input [(ngModel)]="model.followUpDays" #followUpDays="ngModel" type="number" min="0" placeholder="Follow up days" class="form-control"
+             name="followUpDays"
+             required/>
+      <span *ngIf="hasInputNumberErrors && followUpDays.touched" class="help-block m-b-none">Value must be greater or equal to 0.</span>
+    </div>
+
+    <!--active-->
+    <div>
+      <input
+        [(ngModel)]="model.activeFlag"
+        [value]="'Y'"
+        type="checkbox"
+        name="activeFlag"
+        title="active"
+        [checked]="model.activeFlag"
+      />
+      <p class="notes"><label class="font-normal"> Active</label></p>
+    </div>
+
+    <!--action-->
+    <div>
+      <input
+        [(ngModel)]="model.actionRequired"
+        [value]="'Y'"
+        type="checkbox"
+        name="actionRequired"
+        title="action"
+        [checked]="model.actionRequired"
+      />
+      <p class="notes"><label class="font-normal"> Action required</label></p>
+    </div>
+
+    <!--closeable-->
+    <div>
+      <input
+        [(ngModel)]="model.isCloseable"
+        [value]="'Y'"
+        type="checkbox"
+        name="isClosable"
+        title="closeable"
+        [checked]="model.isCloseable"
+      />
+      <p class="notes"><label class="font-normal"> Closes case</label></p>
+    </div>
+
+    <!--core-->
+    <div>
+      <input
+        [(ngModel)]="model.isCore"
+        [value]="'Y'"
+        type="checkbox"
+        name="coreFlag"
+        title="core"
+        [checked]="model.isCore"
+        [disabled]="model.isBase"
+      />
+      <p class="notes"><label class="font-normal"> Core</label></p>
+    </div>
+
+    <!--base-->
+    <div *ngIf="!hasToAddTicklerType">
+      <input
+        [(ngModel)]="model.isBase"
+        [value]="'Y'"
+        type="checkbox"
+        name="baseFlag"
+        title="base"
+        [checked]="model.isBase"
+        disabled
+      />
+      <p class="notes"><label class="font-normal"> Base</label></p>
+    </div>
+
+    <!--description-->
+    <div class="form-group">
+      <div>
+        <label class="control-label">Description</label>
+      </div>
+      <textarea
+        [(ngModel)]="model.ticklerDescription"
+        class="form-control notes-form no-resize"
+        placeholder="Enter your tickler description"
+        rows="3"
+        maxlength="250">
+      </textarea>
+    </div>
+
+    <div class="form-group">
+      <button class="btn btn-sm btn-primary"
+              (click)="manageTicklerTypes(model)"
+              [disabled]="isWaiting || hasFormErrors">
+        {{manageTicklerTypeText}}
+        <waiting-backend *ngIf="isWaiting"></waiting-backend>
+      </button>
+      <button class="btn btn-sm" (click)="cancel()">Cancel
+      </button>
+    </div>
+  </div>
+
+  </div>
+
+  <!--&lt;!&ndash;button&ndash;&gt;-->
+  <!--<div class="col-lg-12">-->
+    <!---->
+<!--</div>-->

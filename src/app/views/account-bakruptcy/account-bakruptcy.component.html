@@ -1,0 +1,38 @@
+<div class="row">
+  <div class="col-lg-6">
+    <dl class="dl-horizontal">
+      <dt>Bankruptcy type:</dt>
+      <dd>{{accountBankrup?.bankruptcyType}}</dd>
+      <dt>Bank attorney info:</dt>
+      <dd>{{accountBankrup?.bankAttorneyInfo}}</dd>
+      <dt>Date filed:</dt>
+      <dd>{{accountBankrup?.dateFiled | coinDateTransform: "STD:DATE":"MM/DD/YYYY hh:mm:ss A"}}</dd>
+      <dt>Case number:</dt>
+      <dd>{{accountBankrup?.caseNumber}}</dd>
+      <dt>Discharge dismissal date:</dt>
+      <dd>{{accountBankrup?.dischargeDismissalDate}}</dd>
+      <dt>Tickler dates:</dt>
+      <dd>{{accountBankrup?.ticklerDates}}</dd>
+      <dt>Action status:</dt>
+      <dd>{{accountBankrup?.actionStatus}}</dd>
+    </dl>
+  </div>
+  <div class="col-lg-6">
+    <dl class="dl-horizontal">
+      <dt>Borrower attorney info:</dt>
+      <dd>{{accountBankrup?.borrowerAttorneyInfo}}</dd>
+      <dt>Trustee info:</dt>
+      <dd>{{accountBankrup?.trusteeInfo}}</dd>
+      <dt>Date notice received:</dt>
+      <dd>{{accountBankrup?.dateNoticeReceived | coinDateTransform: "STD_DATE":"MM/DD/YYYY hh:mm:ss A"}}</dd>
+      <dt>Discharge dismissal flag:</dt>
+      <dd>{{accountBankrup?.dischargeDismissalFlag}}</dd>
+      <dt>Ticklers:</dt>
+      <dd>{{accountBankrup?.ticklers}}</dd>
+      <dt>Action codes:</dt>
+      <dd>{{accountBankrup?.actionCodes}}</dd>
+      <dt>Bankruptcy stop codes:</dt>
+      <dd>{{accountBankrup?.bankruptcyStopCodes}}</dd>
+    </dl>
+  </div>
+</div>

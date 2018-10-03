@@ -1,0 +1,38 @@
+<div>
+  <ngb-tabset>
+    <!--tab 1-->
+    <ngb-tab id="newGraphic">
+      <ng-template ngbTabTitle><span [popover]="popBasic" triggers="">Graphic</span></ng-template>
+      <ng-template ngbTabContent>
+        <p></p>
+        <div>
+          <!--Graphic-->
+          <calls-per-hour-average-new-graphic
+            [visibleTable]="visibleTable"
+            [searchingData]="searchingData"
+            [callsPerHour]="callsPerHour"
+            [campaigns]="campaigns">
+          </calls-per-hour-average-new-graphic>
+        </div>
+      </ng-template>
+    </ngb-tab>
+
+    <!--tab 2-->
+    <ngb-tab id="callsPerHourTable">
+      <ng-template ngbTabTitle><span [popover]="popBasic" triggers="">Table</span></ng-template>
+      <ng-template ngbTabContent>
+        <p></p>
+        <div>
+          <!--Calls per hour table (average)-->
+          <calls-per-hour-table
+            [table]="table"
+            [searchingData]="searchingData"
+            [visibleTable]="visibleTable"
+            [hasTotal]="false">
+          </calls-per-hour-table>
+        </div>
+      </ng-template>
+    </ngb-tab>
+  </ngb-tabset>
+</div>
+

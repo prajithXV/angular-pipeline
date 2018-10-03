@@ -1,0 +1,33 @@
+<div *ngIf="!searching && history?.length > 0">
+  <div class='table-responsive'>
+    <table class='table table-striped'>
+      <thead>
+      <tr>
+        <th style="width: 10%">Posted</th>
+        <th style="width: 10%">Effective</th>
+        <th *ngIf="accountType!= 'D'" style="width: 10%">Due</th>
+        <th style="width: 10%;text-align:right;padding-right:2em;">Amount</th>
+        <th style="width: 30%">Transaction</th>
+        <th style="width: 10%">Type</th>
+        <th style="width: 10%">AffCode</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let h of history">
+        <td>{{h.postDate | coinDateTransform: "STD_DATE":"YYYY/MM/DD"}}</td>
+        <td>{{h.effectDate | coinDateTransform: "STD_DATE":"YYYY/MM/DD"}}</td>
+        <td *ngIf="accountType!= 'D'">{{h.pmtDueDate | coinDateTransform: "STD_DATE":"YYYY/MM/DD"}}</td>
+        <td style="text-align:right;padding-right:2em;">{{h.amount | coinCurrency}}</td>
+        <td>{{h.trnCodeCode}} - {{h.trnCodeDescription}}</td>
+        <td>{{h.trnType}}</td>
+        <td>{{h.affCode}}</td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+<div *ngIf="!searching && history?.length == 0">No history found.</div>
+<div *ngIf="searching">
+  <waiting-backend></waiting-backend>
+  Searching for account history...
+</div>

@@ -1,0 +1,216 @@
+<!--panel of standard sentences-->
+<call-record-standard-sentences
+  *ngIf="isShow"
+  (onClose)="show(false)"
+  (onAddSentence)="addText($event)"
+  [newCallRecordModel]="model.action"
+  [text]="text">
+</call-record-standard-sentences>
+
+
+<div class="row" id="action">
+  <div class="col-lg-6">
+    <span class="label label-success">Action</span>
+    <label *ngFor="let ind of actionIndexes" [title]="actions[ind].display" style="margin-left: 5px">
+      <input
+        #initFocus
+        type="radio"
+        [(ngModel)]="model.action"
+        (ngModelChange)="actionChanged($event)"
+        [value]="actions[ind].value"
+        name="action"
+        [disabled]="isIncomingCallForced"
+      />
+      {{actions[ind].acronym}}
+    </label>
+  </div>
+  <div class="col-lg-6">
+    <select [(ngModel)]="model.action" class="form-control m-b" name="ActionSelect" (ngModelChange)="actionChanged($event)" [disabled]="isIncomingCallForced">
+      <option *ngFor="let op of actions" [value]="op.value">{{op.display}}</option>
+    </select>
+  </div>
+</div>
+<div class="row" id="contacted">
+  <div class="col-lg-6">
+    <span class="label label-info">Contacted</span>
+    <label *ngFor="let ind of partyIndexes" [title]="parties[ind].display" style="margin-left: 5px">
+      <input
+        type="radio"
+        [(ngModel)]="model.party"
+        (ngModelChange)="partyChanged($event)"
+        [value]="parties[ind].value"
+        name="party"
+      />
+      {{parties[ind].acronym}}
+    </label>
+  </div>
+  <div class="col-lg-6">
+    <select [(ngModel)]="model.party" class="form-control m-b" name="party" (ngModelChange)="partyChanged($event)">
+      <option *ngFor="let op of parties" [value]="op.value">{{op.display}}</option>
+    </select>
+  </div>
+</div>
+
+<div class="row" id="result">
+  <div class="col-lg-6">
+    <span class="label label-primary">Result</span>
+    <label *ngFor="let ind of resultIndexes" [title]="results[ind].display" style="margin-left: 5px">
+      <input
+        type="radio"
+        [(ngModel)]="model.result"
+        (ngModelChange)="resultChanged($event)"
+        [value]="results[ind].value"
+        name="result"/>
+      {{results[ind].acronym}}
+    </label>
+  </div>
+  <div class="col-lg-6">
+    <select [(ngModel)]="model.result" class="form-control m-b" name="party" (change)="changeResult($event)" (ngModelChange)="resultChanged($event)">
+      <option *ngFor="let op of getDisplayResults()" [value]="op.value">{{op.display}}</option>
+    </select>
+  </div>
+</div>
+
+<form [hidden]="!useCallLater" class="form-horizontal">
+  <div class="form-group" [class.has-error]="callLater.hasErrors()">
+    <div class="row">
+      <label class="col-lg-3 control-label" style="padding-right: 0px;">Call back in (minutes)*</label>
+      <div class="col-lg-4">
+        <button class="btn btn-sm btn-white btnBorder" (click)="callLater.addToValue(15)" title="Add 15 minutes">+15m
+        </button>
+        <button class="btn btn-sm btn-white btnBorder" (click)="callLater.addToValue(30)" title="Add 30 minutes">+30m
+        </button>
+        <button class="btn btn-sm btn-white btnBorder" (click)="callLater.addToValue(60)" title="Add one hour">+1h
+        </button>
+      </div>
+      <div class="col-lg-2">
+        <coin-number-input
+          #callLater
+          name="callLater"
+          [mandatory]="true"
+          placeholder="Minutes"
+          [showErrors]="false"
+        ></coin-number-input>
+      </div>
+      <span *ngIf="callLaterTime" class="col-lg-3" style="margin-top:5px;">(Call at <strong>{{callLaterTime}}</strong>)</span>
+    </div>
+    <div class="row">
+      <div class="col-lg-7"></div>
+      <div class="col-lg-5">
+        <coin-number-input-errors [host]="callLater"></coin-number-input-errors>
+      </div>
+    </div>
+  </div>
+</form>
+
+
+<div class="hr-line-dashed"></div>
+<form class="form-horizontal">
+  <div class="form-group" [class.has-error]="nextWorkDate.hasErrors()">
+    <label class="col-lg-3 control-label" style="padding-right: 0px;">Next work date *</label>
+    <div class="col-lg-4">
+      <button class="btn btn-sm btn-white btnBorder" (click)="nextWorkDate.addDays(1)" title="Add one day">+1</button>
+      <button class="btn btn-sm btn-white btnBorder" (click)="nextWorkDate.addDays(7)" title="Add one week">+7</button>
+      <button class="btn btn-sm btn-white btnBorder" (click)="nextWorkDate.addDays(30)" title="Add one month">+30
+      </button>
+    </div>
+    <div class="col-lg-5">
+
+      <date-picker #nextWorkDate name="nextWorkDate" [selectedMoment]="null" [allowPast]="false" [continuosEvaluation]="false" [showErrors]="true" [mandatory]="true"></date-picker>
+
+
+    </div>
+  </div>
+  <div class="form-group" [class.has-error]="promisedDate.hasErrors()">
+    <label class="col-lg-3 control-label" style="padding-right: 0px;">Promised date</label>
+    <div class="col-lg-4">
+      <button class="btn btn-sm btn-white btnBorder" (click)="promisedDate.addDays(1)" title="Add one day">+1</button>
+      <button class="btn btn-sm btn-white btnBorder" (click)="promisedDate.addDays(7)" title="Add one week">+7</button>
+      <button class="btn btn-sm btn-white btnBorder" (click)="promisedDate.addDays(30)" title="Add one month">+30
+      </button>
+    </div>
+    <div class="col-lg-5">
+
+      <date-picker #promisedDate name="promisedDate" [selectedMoment]="null" [allowPast]="false" [continuosEvaluation]="false" [showErrors]="true" [mandatory]="false"></date-picker>
+
+
+    </div>
+  </div>
+  <div class="form-group" [class.has-error]="promisedAmount.hasErrors()">
+    <label class="col-lg-7 control-label" style="padding-right: 0px;">Promised amount</label>
+    <div class="col-lg-5">
+      <coin-number-input #promisedAmount [name]="promisedAmount" placeholder="Promised amount"></coin-number-input>
+    </div>
+  </div>
+</form>
+<div class="hr-line-dashed"></div>
+<div class="row">
+  <div class="col-lg-12">
+    <div class="form-group" [class.has-error]="errorNotes">
+      <div>
+        <p class="notes"><span class="label label-warning">Notes *</span></p>
+        <!-- #NS#: Notes sentences -->
+        <!--<i class="fa fa-list filterSentences" aria-hidden="true" (click)="show(true)" title="Sentences for notes"></i>-->
+      </div>
+      <!--Notes-->
+      <textarea
+        class="form-control notes-form no-resize"
+        placeholder="Enter new notes here"
+        [(ngModel)]="model.message"
+        rows="3"
+        (keyup)="notesChanged()"
+        (blur)="notesBlur()"
+        maxlength="250">
+      </textarea>
+      <!-- #NS#: Notes sentences -->
+     <!--<textarea-->
+        <!--class="form-control"-->
+        <!--placeholder="Enter new notes here"-->
+        <!--[(ngModel)]="model.message"-->
+        <!--rows="3"-->
+        <!--(blur)="notesBlur()"-->
+        <!--maxlength="250"-->
+        <!--(focus)="show($event)"-->
+        <!--(keyup)="count()">-->
+      <!--</textarea>-->
+      <span *ngIf="errorNotes" class="help-block m-b-none">Field is mandatory.</span>
+    </div>
+  </div>
+</div>
+
+<!--Call attributes-->
+<!--<div class="hr-line-dashed"></div>-->
+<!--<div class="row">-->
+<!--<div class="col-lg-12">-->
+<!--<div>-->
+<!--<h3>Call info</h3>-->
+<!--<p>-->
+<!--Start Date: {{call?.talkStart}}<br/>-->
+<!--End Date: {{call?.talkEnd}}<br/>-->
+<!--PhoneNr: {{call?.counterpartNumber}}<br/>-->
+<!--PhoneType: <span *ngIf="call">{{isAutoDial ? "Land line" : "Unknown"}}</span><br/>-->
+<!--Autodial: <span *ngIf="call">{{isAutoDial ? "Y" : "N"}}</span>-->
+<!--</p>-->
+<!--</div>-->
+<!--</div>-->
+<!--</div>-->
+
+<div class="row">
+  <div class="col-lg-12">
+    <div class="form-group">
+      <button class="btn btn-primary" (click)="save(true)" [disabled]="!canSave()">Save and quit
+        <waiting-backend *ngIf="waitingResponse"></waiting-backend>
+      </button>
+      <button class="btn btn-secondary" (click)="save()" [disabled]="!canSave()">Save
+        <waiting-backend *ngIf="waitingResponse"></waiting-backend>
+      </button>
+      <!--click on skip-->
+      <button class="btn btn-secondary pull-right" [disabled]="isCancellable" (click)="cancelCall()">Skip</button>
+      <!--click on create-->
+      <button *ngIf="canCreateCase()" class="btn btn-secondary pull-right margin"
+              [disabled]="account?.accountType == 'D'"
+              (click)="createProcess()">Create case
+      </button>
+    </div>
+  </div>
+</div>

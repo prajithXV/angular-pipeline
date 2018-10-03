@@ -1,0 +1,56 @@
+[
+{
+"caseId":912345,
+"description": "Case Description 1",
+"category":"Auto",
+"dateCreated": "July 10, 2017",
+"cin":753951456,
+"customerName":"John Smith",
+"caseStatus":"Process"
+},
+{
+"caseId":912346,
+"description": "Case Description 2",
+"category":"Personal Loan",
+"dateCreated": "July 12, 2017",
+"cin":789654123,
+"customerName":"John Smith 2",
+"caseStatus":"Process"
+},
+{
+"caseId":912347,
+"description": "Case Description 3",
+"category":"Real Estate Loan",
+"dateCreated": "July 1, 2017",
+"cin":852963741,
+"customerName":"John Smith 2",
+"caseStatus":"Process"
+},
+{
+"caseId":912348,
+"description": "Case Description 4",
+"category":"Mortgage",
+"dateCreated": "July 18, 2015",
+"cin":747258963,
+"customerName":"John Smith 2",
+"caseStatus":"Process"
+},
+{
+"caseId":912349,
+"description": "Case Description 5",
+"category":"Personal Loan",
+"dateCreated": "July 25, 2017",
+"cin":456987123,
+"customerName":"John Smith 2",
+"caseStatus":"Process"
+},
+{
+"caseId":912350,
+"description": "Case Description 6",
+"category":"Auto",
+"dateCreated": "July 05, 2017",
+"cin":357159852,
+"customerName":"John Smith 2",
+"caseStatus":"Process"
+}
+]

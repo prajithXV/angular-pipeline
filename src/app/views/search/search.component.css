@@ -1,0 +1,61 @@
+.a-link{
+  padding: 10px 20px 10px 25px;
+  color: #A7B1C2;
+
+}
+
+.no-padding-bottom{
+  padding-bottom: 0!important;
+}
+
+.separator{
+  margin-top: -1px;
+  margin-bottom: 25px;
+  border: 0;
+  border-top: none;
+}
+
+
+.white{
+  background-color: white;
+}
+
+.text-white{
+  color: white;
+}
+
+
+:host /deep/ paginator div.paginator button.btn-primary{
+  /*background-color: #445e97;*/
+  background-color: #f9f9f9;
+  border-color: #f9f9f9;
+  color: black;
+}
+
+:host /deep/ paginator div.paginator button.btn-primary:hover{
+  background-color: white;
+  border-color: white;
+  color: black;
+}
+
+:host /deep/ paginator div.paginator button.btn-primary:disabled{
+  background-color: white;
+  border-color: white;
+  color: black;
+}
+
+:host /deep/ paginator div.paginator{
+  text-align: right;
+}
+
+select.form-control{
+  width: 38%;
+  float: right;
+}
+
+
+.aTypeLabel{
+  float: right;
+  margin-right: 20px;
+  margin-top: 9px;
+}

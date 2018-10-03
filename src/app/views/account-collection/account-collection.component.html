@@ -1,0 +1,94 @@
+<div class="row">
+  <div class="col-lg-6">
+    <dl class="dl-horizontal">
+      <!--<dt>Previous Broken Promise:</dt>-->
+      <!--<dd>{{accountCol?.previousBrokenPromise}}</dd>-->
+      <!--<dt>Demand Letter Flag:</dt>-->
+      <!--<dd>{{accountCol?.demandLetterFlag}}</dd>-->
+      <dt>Payment amount:</dt>
+      <dd>{{accountCol?.paymentAmount | coinCurrency}}</dd>
+      <dt>Past due amount:</dt>
+      <dd>{{accountCol?.pastDueAmount | coinCurrency}}</dd>
+      <dt>Interest due:</dt>
+      <dd>{{accountCol?.interestDue}}</dd>
+      <dt>Other charges:</dt>
+      <dd>{{accountCol?.otherCharges | coinCurrency}}</dd>
+      <dt>Escrow balance:</dt>
+      <dd>{{accountCol?.escrowBalance | coinCurrency}}</dd>
+      <dt>Due date:</dt>
+      <dd>{{accountCol?.dueDate | coinDateTransform: "STD_DATE":"MM/DD/YYYY hh:mm:ss A"}}</dd>
+      <dt>Last work date:</dt>
+      <dd>{{accountCol?.lastWorkDate | coinDateTransform: "STD_DATE":"MM/DD/YYYY hh:mm:ss A"}}</dd>
+      <dt>Payments due:</dt>
+      <dd>{{accountCol?.paymentsDue}}</dd>
+      <!--<dt>Result Codes:</dt>-->
+      <!--<dd>{{accountCol?.resultCodes}}</dd>-->
+      <dt>Collection status code:</dt>
+      <dd>{{accountCol?.collectionStatusCode}}</dd>
+      <dt>Extensions YTD:</dt>
+      <dd>{{accountCol?.numberOfExtensionsYTD}}</dd>
+      <dt>Extensions LTD:</dt>
+      <dd>{{accountCol?.numberOfExtensionsLTD}}</dd>
+      <!--<dt>Life Past Due:</dt>-->
+      <!--<dd>{{accountCol?.lifePastDue}}</dd>-->
+      <!--<dt>Delinquency Reason:</dt>-->
+      <!--<dd>{{accountCol?.reasonForDelinquency}}</dd>-->
+      <dt>Charge Off amount:</dt>
+      <dd>{{accountCol?.chargeOffAmount | coinCurrency}}</dd>
+      <dt>Reason for delinquency:</dt>
+      <dd>{{accountCol?.previousBrokenPromise}}</dd>
+      <dt>Interest rate change date:</dt>
+      <dd>{{accountCol?.interestRateChangeDate}}</dd>
+    </dl>
+  </div>
+  <div class="col-lg-6">
+    <dl class="dl-horizontal">
+      <!--<dt>Demand Letter Date:</dt>-->
+      <!--<dd>{{accountCol?.demandLetterDate}}</dd>-->
+      <dt>Payment date:</dt>
+      <dd>{{accountCol?.paymentDate | coinDateTransform: "STD_DATE":"MM/DD/YYYY hh:mm:ss A"}}</dd>
+      <dt>Next pay:</dt>
+      <dd>{{accountCol?.nextPaymentDate | coinDateTransform: "STD_DATE":"MM/DD/YYYY hh:mm:ss A"}}</dd>
+      <dt>Principal amount due:</dt>
+      <dd>{{accountCol?.principalAmountDue}}</dd>
+      <dt>Late charges:</dt>
+      <dd>{{accountCol?.lateCharges | coinCurrency}}</dd>
+      <!--<dt>Collection Notes:</dt>-->
+      <!--<dd>==> List {{accountCol?.collectionNotes}}</dd>-->
+      <dt>Days past due:</dt>
+      <dd>{{accountCol?.daysPastDue}}</dd>
+      <dt>Promise date:</dt>
+      <dd>{{accountCol?.promiseDate | coinDateTransform: "STD_DATE":"MM/DD/YYYY hh:mm:ss A"}}</dd>
+      <dt>Last promise date:</dt>
+      <dd>{{accountCol?.lastPromiseDate | coinDateTransform: "STD_DATE":"MM/DD/YYYY hh:mm:ss A"}}</dd>
+      <!--<dt>Action Codes:</dt>-->
+      <!--<dd>{{accountCol?.actionCodes}}</dd>-->
+      <!--<dt>Contact Codes:</dt>-->
+      <!--<dd>{{accountCol?.contactCodes}}</dd>-->
+      <dt>Loan status:</dt>
+      <dd>{{accountCol?.loanStatus}}</dd>
+      <dt>Date of last extension:</dt>
+      <dd>{{accountCol?.dateOfLastExtension | coinDateTransform: "STD_DATE":"MM/DD/YYYY hh:mm:ss A"}}</dd>
+      <!--<dt>Queueing Flag:</dt>-->
+      <!--<dd>{{accountCol?.queueingFlag}}</dd>-->
+      <!--<dt>Historical Attempts Calls:</dt>-->
+      <!--<dd>{{accountCol?.historicalAttemptsCalls}}</dd>-->
+      <dt>Non accrual date:</dt>
+      <dd>{{accountCol?.nonAccrualDate}}</dd>
+      <!--<dt>Date Stamp For RfD:</dt>-->
+      <!--<dd>{{accountCol?.dateStampForRfD}}</dd>-->
+      <!--<dt>End Of Draw Date:</dt>-->
+      <!--<dd>{{accountCol?.endOfDrawDate}}</dd>-->
+      <dt>Past due 10 LTD:</dt>
+      <dd>{{accountCol?.pastDue10LTD}}</dd>
+      <dt>Past due 30 LTD:</dt>
+      <dd>{{accountCol?.pastDue30LTD}}</dd>
+      <dt>Past due 60 LTD:</dt>
+      <dd>{{accountCol?.pastDue60LTD}}</dd>
+      <dt>Past due 90 LTD:</dt>
+      <dd>{{accountCol?.pastDue90LTD}}</dd>
+      <dt><span class="label" [class.memoLabel]="isMemo" >Memo post-pro pay:</span></dt>
+      <dd class="over-flow"><span *ngFor="let pro of accountCol?.memoPostProPay; let last = last;" title="{{pro}}"><b [class.red]="isMemo">{{pro}}</b><span *ngIf="!last" [class.red]="isMemo">, </span></span></dd>
+    </dl>
+  </div>
+</div>

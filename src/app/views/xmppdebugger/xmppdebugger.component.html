@@ -1,0 +1,29 @@
+<div class="row">
+  <div class="col-lg-12">
+
+    <div class="ibox float-e-margins">
+      <div class="ibox-title">
+        <h5>Cisco events</h5>
+      </div>
+      <div class="ibox-content">
+        <div>
+          <div class="form-group">
+            <!--<button (click)="connect()" [disabled]="isConnected()" class="btn"><strong>Connect</strong></button>-->
+            <!--<button (click)="disconnect()" [disabled]="!isConnected()" class="btn"><strong>Disconnect</strong></button>-->
+            <button (click)="makeCall()" [disabled]="false" class="btn"><strong>Call</strong></button>
+            <button (click)="resetMsgs()" [disabled]="false" class="btn"><strong>Clear</strong></button>
+          </div>
+          <div>
+            <!-- <ul>
+              <li *ngFor="let msg of messages">{{msg.msg}} <div class="well">{{msg.xml}}</div></li>
+            </ul> -->
+            <div *ngFor="let msg of messages">
+              <strong *ngIf="msg.msg">{{msg.msg}}</strong> {{msg.time.toString()}}
+              <div class="well" *ngIf="msg.xml">{{msg.xml}}</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

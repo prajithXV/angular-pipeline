@@ -1,0 +1,964 @@
+{
+	"id": "30b86f20-42df-50eb-1980-c2ab36992342",
+	"name": "Coin",
+	"description": "",
+	"order": [
+		"ec135fe0-f5c6-9fb2-49aa-445526b53236",
+		"4aa635eb-16e4-4fc5-e128-66e6550c6499",
+		"0e533fac-27d1-3a9c-697d-829781aa7b23",
+		"2b605b34-47b9-7870-a72c-c719b2575f16",
+		"fbf0b719-71ee-534e-fc8b-a44d6e1e4769",
+		"3df756cf-11fd-8c03-4cbb-c2fbf7a9bdf2",
+		"3ba6e5c5-9cb7-05d8-cbd8-1694f802e9f0",
+		"55143e2e-ace9-db55-28d1-10ccf9ad4088",
+		"9193b674-e847-10fd-539d-d379732a932b",
+		"1acb7692-f305-6cd2-efea-22476407fa02",
+		"974053bc-575a-2a59-3ac1-2ebe431b3055",
+		"b7e419c3-2183-bab5-a0e5-8dc94158ef29",
+		"37c6f737-b075-1494-70bd-fb7a6ffa2109",
+		"bf84fcd0-2f9e-7f58-4ade-7b6bfa3063b2",
+		"ac81de2a-155e-2007-b6cb-a396ef799545",
+		"619bd1c3-7862-2304-66cc-71aea907ba5e",
+		"812505c8-12e3-a782-6977-d8676644a10d",
+		"bc816803-c1a6-0532-0f61-59b9ec05ce62",
+		"89583364-e8dd-3d91-c297-ba6858f63519",
+		"6da72efa-4acf-7c03-9dad-13f966005861",
+		"46682367-61b3-cb91-862e-795f8b8c4447",
+		"4ccd25f4-ec96-0ee9-da6f-e0a2bc82730f"
+	],
+	"folders": [],
+	"folders_order": [],
+	"timestamp": 0,
+	"owner": "2263283",
+	"public": false,
+	"requests": [
+		{
+			"id": "0e533fac-27d1-3a9c-697d-829781aa7b23",
+			"headers": "Authorization: Bearer A2FWPlUkVNaHA7aVHUo-pI6LBRPy4fKWNRTshGMPjPPr38qcEBLbl8PJjBAcvWA_JEpra1LDqtjZ_j4U6oMkBMx76QjSXx-oudzsUT9qqUc6kRXS4ynzer5pzdWQXu8ftsVy8y1zUFJuYpektx08pEGB2zH3b70oigQpOuMbA_6i_Bilybcnpj2jeTH2NUYfJNyIu1ZLbncaB7R5Skii5X6qhqc_sP_pTZEPDcmuUSm9qyUMYreYomCf-Uzi79m_14kacYW25ngyMPjWJ6D4iPx_XSh57x-EPBjsnfDzgG59ehYbkzFwyh3fibh42-ZbhkYWQBDM4FAWDj-94k7VDg\n",
+			"headerData": [
+				{
+					"key": "Authorization",
+					"value": "Bearer A2FWPlUkVNaHA7aVHUo-pI6LBRPy4fKWNRTshGMPjPPr38qcEBLbl8PJjBAcvWA_JEpra1LDqtjZ_j4U6oMkBMx76QjSXx-oudzsUT9qqUc6kRXS4ynzer5pzdWQXu8ftsVy8y1zUFJuYpektx08pEGB2zH3b70oigQpOuMbA_6i_Bilybcnpj2jeTH2NUYfJNyIu1ZLbncaB7R5Skii5X6qhqc_sP_pTZEPDcmuUSm9qyUMYreYomCf-Uzi79m_14kacYW25ngyMPjWJ6D4iPx_XSh57x-EPBjsnfDzgG59ehYbkzFwyh3fibh42-ZbhkYWQBDM4FAWDj-94k7VDg",
+					"description": "",
+					"enabled": true
+				}
+			],
+			"url": "{{spaceURL}}/api/acctInq/v1?accountId=10003502&accountType=L",
+			"folder": null,
+			"queryParams": [
+				{
+					"key": "accountId",
+					"value": "10003502",
+					"equals": true,
+					"description": "",
+					"enabled": true
+				},
+				{
+					"key": "accountType",
+					"value": "L",
+					"equals": true,
+					"description": "",
+					"enabled": true
+				}
+			],
+			"preRequestScript": null,
+			"pathVariables": {},
+			"pathVariableData": [],
+			"method": "GET",
+			"data": null,
+			"dataMode": "params",
+			"tests": null,
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1508703210905,
+			"name": "acctInq",
+			"description": "",
+			"collectionId": "30b86f20-42df-50eb-1980-c2ab36992342",
+			"responses": []
+		},
+		{
+			"id": "1acb7692-f305-6cd2-efea-22476407fa02",
+			"headers": "Authorization: Bearer _Tri8ZM0Wdvh8NBQPTzt3Zxl8BBJfd39oIxRuMWotEYN6sJa-MmElTW1oqC-PAIdZHkUhoZg_FIz2mPGDcvj4pP0JjNcwsXE2uvS1bvRbn8lKZ_MaqorZujD8uMXVVrh9gtFtlp4Us0GyLV7--DA5_VGa47yRR0j0JdTeX5xhBkhLiNZutgLUFQRk-eNYbrsoMTqGGwc-smGecCs9m-NXDLtTzNetHCtwnGswTtC2iPuCGudEvN2q5bXnNpodsaGrdkEluYjI_8300VLo8Hh3_YvzKwOL_nDGfuHhFF_6hILKZ0-r_wp9sFB9ZMfPHr5ZxzrwOzDhcpyqTfWhdyRfg\n",
+			"headerData": [
+				{
+					"key": "Authorization",
+					"value": "Bearer _Tri8ZM0Wdvh8NBQPTzt3Zxl8BBJfd39oIxRuMWotEYN6sJa-MmElTW1oqC-PAIdZHkUhoZg_FIz2mPGDcvj4pP0JjNcwsXE2uvS1bvRbn8lKZ_MaqorZujD8uMXVVrh9gtFtlp4Us0GyLV7--DA5_VGa47yRR0j0JdTeX5xhBkhLiNZutgLUFQRk-eNYbrsoMTqGGwc-smGecCs9m-NXDLtTzNetHCtwnGswTtC2iPuCGudEvN2q5bXnNpodsaGrdkEluYjI_8300VLo8Hh3_YvzKwOL_nDGfuHhFF_6hILKZ0-r_wp9sFB9ZMfPHr5ZxzrwOzDhcpyqTfWhdyRfg",
+					"description": "",
+					"enabled": true
+				}
+			],
+			"url": "{{spaceURL}}/api/accounts/next/v1?campaignCd=INDIRECT&userCd=pblanco",
+			"folder": null,
+			"queryParams": [
+				{
+					"key": "campaignCd",
+					"value": "INDIRECT",
+					"equals": true,
+					"description": "",
+					"enabled": true
+				},
+				{
+					"key": "userCd",
+					"value": "pblanco",
+					"equals": true,
+					"description": "",
+					"enabled": true
+				}
+			],
+			"preRequestScript": null,
+			"pathVariables": {},
+			"pathVariableData": [],
+			"method": "GET",
+			"data": null,
+			"dataMode": "params",
+			"tests": null,
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1507415241868,
+			"name": "nextAccount",
+			"description": "",
+			"collectionId": "30b86f20-42df-50eb-1980-c2ab36992342",
+			"responses": []
+		},
+		{
+			"id": "2b605b34-47b9-7870-a72c-c719b2575f16",
+			"headers": "Authorization: Bearer de_JrK0c5egwmLxIN3wdc1uyxNeGZS63AIDC36YY0A4NsA3h2TUhhuHVjkAtt19Lvy7iCedsjHLVSzuiwv7Jza1NHAs0f0S2aaVAq-gUh-WYwx92UE4YxjWBUpGKGT9Y0ceoUZLhgRMFeGBKymlJHMVNXdFtjSWlcGMH5npRyvYRzFOCyg1v72UY3ImDL4JxrCJoFR5t280NotPj9mBgvBwQiVlZpXnk_4x7qILXYm1-giWmlEtGElDJrboB64CsHDs-qIdYuZcT2k1aXwPgmkFL8a7CHSaoBlSemW7hIvota_yqzYwlEgxRD9gHCY_Y\n",
+			"headerData": [
+				{
+					"key": "Authorization",
+					"value": "Bearer de_JrK0c5egwmLxIN3wdc1uyxNeGZS63AIDC36YY0A4NsA3h2TUhhuHVjkAtt19Lvy7iCedsjHLVSzuiwv7Jza1NHAs0f0S2aaVAq-gUh-WYwx92UE4YxjWBUpGKGT9Y0ceoUZLhgRMFeGBKymlJHMVNXdFtjSWlcGMH5npRyvYRzFOCyg1v72UY3ImDL4JxrCJoFR5t280NotPj9mBgvBwQiVlZpXnk_4x7qILXYm1-giWmlEtGElDJrboB64CsHDs-qIdYuZcT2k1aXwPgmkFL8a7CHSaoBlSemW7hIvota_yqzYwlEgxRD9gHCY_Y",
+					"description": "",
+					"enabled": true
+				}
+			],
+			"url": "{{spaceURL}}/api/custsrch/v1?taxId=637562547",
+			"folder": null,
+			"queryParams": [
+				{
+					"key": "taxId",
+					"value": "637562547",
+					"equals": true,
+					"description": "",
+					"enabled": true
+				}
+			],
+			"preRequestScript": null,
+			"pathVariables": {},
+			"pathVariableData": [],
+			"method": "GET",
+			"data": null,
+			"dataMode": "params",
+			"tests": null,
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1506605982085,
+			"name": "custSrch",
+			"description": "",
+			"collectionId": "30b86f20-42df-50eb-1980-c2ab36992342",
+			"responses": []
+		},
+		{
+			"id": "37c6f737-b075-1494-70bd-fb7a6ffa2109",
+			"headers": "Authorization: Bearer enCHCQb-_qAGiQE27ethoPqjTXe9-Qa-zOMMGPKWKWcCm3BYqRltgz5Mar6umdWAn3i25aES-r8zj2QWkaX9Ep8Nktv3Vd8hFOBkIXZ8Iyk6_lfO_whSSHbRWUns0_HMQZEgQoNdeiuOoK_IxlvqvA9hWnB06Y__Xk9mB3_qx0OKYv0hybuwMXCxqgFNBTTGZKMKp03XsfXIKujSXC2OlURRtHBC-jyIg2DKnrbb0bRhm3o96S5G1SE7rj1SuxJpwkWyFCZ3lTUts_FxBfiY8HNB3xD4qw6sIEkRY1J2YYV3khB6DJw2xVJwas8QyIUHAaSbBugIk0wFUdnklewK-Q\n",
+			"headerData": [
+				{
+					"key": "Authorization",
+					"value": "Bearer enCHCQb-_qAGiQE27ethoPqjTXe9-Qa-zOMMGPKWKWcCm3BYqRltgz5Mar6umdWAn3i25aES-r8zj2QWkaX9Ep8Nktv3Vd8hFOBkIXZ8Iyk6_lfO_whSSHbRWUns0_HMQZEgQoNdeiuOoK_IxlvqvA9hWnB06Y__Xk9mB3_qx0OKYv0hybuwMXCxqgFNBTTGZKMKp03XsfXIKujSXC2OlURRtHBC-jyIg2DKnrbb0bRhm3o96S5G1SE7rj1SuxJpwkWyFCZ3lTUts_FxBfiY8HNB3xD4qw6sIEkRY1J2YYV3khB6DJw2xVJwas8QyIUHAaSbBugIk0wFUdnklewK-Q",
+					"description": "",
+					"enabled": true
+				}
+			],
+			"url": "{{spaceURL}}/api/sourcedata/accounts/v1?user=vsharapo&filename=coinexport1.txt",
+			"queryParams": [
+				{
+					"key": "user",
+					"value": "vsharapo",
+					"equals": true,
+					"description": "",
+					"enabled": true
+				},
+				{
+					"key": "filename",
+					"value": "coinexport1.txt",
+					"equals": true,
+					"description": "",
+					"enabled": true
+				}
+			],
+			"preRequestScript": null,
+			"pathVariables": {},
+			"pathVariableData": [],
+			"method": "GET",
+			"data": null,
+			"dataMode": "params",
+			"version": 2,
+			"tests": null,
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1508857979398,
+			"name": "parseFile_Accounts",
+			"description": "",
+			"collectionId": "30b86f20-42df-50eb-1980-c2ab36992342",
+			"responses": []
+		},
+		{
+			"id": "3ba6e5c5-9cb7-05d8-cbd8-1694f802e9f0",
+			"headers": "Authorization: Bearer xPNiS_51-hUwXEz6LCg1SNIC2DoOCeLsh0N2hYwo1d8WuiJyn_u8oPdZpFC8EltjfsaxoFUtvH7t_EK_jc9KeLaMkrY_HbXp22uCUZI1hH-xha9sX_2BLdsGIR47VVczZgevR93YxTOvHx9qye5egaFJHH8g_kGX_MRq5f72uN8RdsPaSQ5Yfr5aIXi42uDdKemuQlJ3EPeV5X3PYV5Sd5qQZzZ4ainz_Wi_B4dJGOyOH1VTGhHZJL_bLRkTafaHR4rsE1mGTMQX4mR9_Yy-Lbvaw8tso-q-KVnq4xATkYQ\n",
+			"headerData": [
+				{
+					"key": "Authorization",
+					"value": "Bearer xPNiS_51-hUwXEz6LCg1SNIC2DoOCeLsh0N2hYwo1d8WuiJyn_u8oPdZpFC8EltjfsaxoFUtvH7t_EK_jc9KeLaMkrY_HbXp22uCUZI1hH-xha9sX_2BLdsGIR47VVczZgevR93YxTOvHx9qye5egaFJHH8g_kGX_MRq5f72uN8RdsPaSQ5Yfr5aIXi42uDdKemuQlJ3EPeV5X3PYV5Sd5qQZzZ4ainz_Wi_B4dJGOyOH1VTGhHZJL_bLRkTafaHR4rsE1mGTMQX4mR9_Yy-Lbvaw8tso-q-KVnq4xATkYQ",
+					"description": "",
+					"enabled": true
+				}
+			],
+			"url": "{{spaceURL}}/api/custsrch/v1?emailAddr=bnabshire@yahoo.com",
+			"folder": null,
+			"queryParams": [
+				{
+					"key": "emailAddr",
+					"value": "bnabshire@yahoo.com",
+					"equals": true,
+					"description": "",
+					"enabled": true
+				}
+			],
+			"preRequestScript": null,
+			"pathVariables": {},
+			"pathVariableData": [],
+			"method": "GET",
+			"data": null,
+			"dataMode": "params",
+			"tests": null,
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1505944501041,
+			"name": "custSrch_byEmail",
+			"description": "",
+			"collectionId": "30b86f20-42df-50eb-1980-c2ab36992342",
+			"responses": []
+		},
+		{
+			"id": "3df756cf-11fd-8c03-4cbb-c2fbf7a9bdf2",
+			"headers": "Authorization: Bearer PD4IE4ItHicEXE2_YkrizEBNMMdBMsk1VG45-Gq4Kq8Yn8I3W1C4MDww2GHENh4bCSBtbekCOGd-e3V-iYapO8uJxXr6vIPUur7jWKu5IMjsFvKABcWFFIatVHhV9KcPgTsnz2z_M78-6-Xu_b2kbO3y9snDbrs4m5EtV8KS8oaVfveUo8C8T2Y4G7DOz8u-OYJoXsE0ApaAs1MPqR5f2Ty8dY0t0YTXyRESTzphGH1pyPlFCJ9tjm6fJC9Eu0p4F0z7jpiy1eSJ9JcWN7o13pj9-BIBUzbH8TnqWEw0bMsQkkwQlxBfqk_51NFAp9Oc\n",
+			"headerData": [
+				{
+					"key": "Authorization",
+					"value": "Bearer PD4IE4ItHicEXE2_YkrizEBNMMdBMsk1VG45-Gq4Kq8Yn8I3W1C4MDww2GHENh4bCSBtbekCOGd-e3V-iYapO8uJxXr6vIPUur7jWKu5IMjsFvKABcWFFIatVHhV9KcPgTsnz2z_M78-6-Xu_b2kbO3y9snDbrs4m5EtV8KS8oaVfveUo8C8T2Y4G7DOz8u-OYJoXsE0ApaAs1MPqR5f2Ty8dY0t0YTXyRESTzphGH1pyPlFCJ9tjm6fJC9Eu0p4F0z7jpiy1eSJ9JcWN7o13pj9-BIBUzbH8TnqWEw0bMsQkkwQlxBfqk_51NFAp9Oc",
+					"description": "",
+					"enabled": true
+				}
+			],
+			"url": "{{spaceURL}}/api/custsrch/v1?phoneNr=3375409113",
+			"folder": null,
+			"queryParams": [
+				{
+					"key": "phoneNr",
+					"value": "3375409113",
+					"equals": true,
+					"description": "",
+					"enabled": true
+				}
+			],
+			"preRequestScript": null,
+			"pathVariables": {},
+			"pathVariableData": [],
+			"method": "GET",
+			"data": null,
+			"dataMode": "params",
+			"tests": null,
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1505945657523,
+			"name": "custSrch_byPhone",
+			"description": "",
+			"collectionId": "30b86f20-42df-50eb-1980-c2ab36992342",
+			"responses": []
+		},
+		{
+			"id": "46682367-61b3-cb91-862e-795f8b8c4447",
+			"headers": "Authorization: Bearer VYmHoBRWAMY0CYLkBqa7AN-0tUMvD0S89a1nH4HNavKgmTswldjjgrZaHfpJ7wQzohSaVsYZaGdLDJfAXB3lUvg9Xeaiz__QtYQdKLrQKbb3IoSWv2T1EcM-288AR3I05ceGO6jn8VYJnqQ9pxz0rXfj9N5b4yO6Vk46GXg7m9LtcAVn_S2jC-Q5UkT2fDJRGhVsPTybsk4w7L-jX_CLdN3BVfZ2gNSHpi6kHv4aFfatpT1BIHsKANwaiAo1Oi2JV_IpgN5t1Lk5jeM0V8wLNXB2N1grX7Ewmf6hgbijgIqOq8hufzalokU_N4F6jrcdPiaPFW-NgLDsRlxh9rtDPQ\nContent-Type: application/json\n",
+			"headerData": [
+				{
+					"key": "Authorization",
+					"value": "Bearer VYmHoBRWAMY0CYLkBqa7AN-0tUMvD0S89a1nH4HNavKgmTswldjjgrZaHfpJ7wQzohSaVsYZaGdLDJfAXB3lUvg9Xeaiz__QtYQdKLrQKbb3IoSWv2T1EcM-288AR3I05ceGO6jn8VYJnqQ9pxz0rXfj9N5b4yO6Vk46GXg7m9LtcAVn_S2jC-Q5UkT2fDJRGhVsPTybsk4w7L-jX_CLdN3BVfZ2gNSHpi6kHv4aFfatpT1BIHsKANwaiAo1Oi2JV_IpgN5t1Lk5jeM0V8wLNXB2N1grX7Ewmf6hgbijgIqOq8hufzalokU_N4F6jrcdPiaPFW-NgLDsRlxh9rtDPQ",
+					"description": "",
+					"enabled": true
+				},
+				{
+					"key": "Content-Type",
+					"value": "application/json",
+					"description": "",
+					"enabled": true
+				}
+			],
+			"url": "{{spaceURL}}/api/callrecords/v1?customerId=AAD8040&pageNr=0&pageSize=10",
+			"queryParams": [
+				{
+					"key": "customerId",
+					"value": "AAD8040",
+					"equals": true,
+					"description": "",
+					"enabled": true
+				},
+				{
+					"key": "pageNr",
+					"value": "0",
+					"equals": true,
+					"description": "",
+					"enabled": true
+				},
+				{
+					"key": "pageSize",
+					"value": "10",
+					"equals": true,
+					"description": "",
+					"enabled": true
+				}
+			],
+			"preRequestScript": null,
+			"pathVariables": {},
+			"pathVariableData": [],
+			"method": "GET",
+			"data": [],
+			"dataMode": "raw",
+			"version": 2,
+			"tests": null,
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1508456203323,
+			"name": "custNotes",
+			"description": "",
+			"collectionId": "30b86f20-42df-50eb-1980-c2ab36992342",
+			"responses": [],
+			"rawModeData": "{\r\n    \"userCd\": \"vsharapo\",\r\n    \"uploadId\": 69,\r\n    \"campaignCd\": \"TEST\"\r\n}"
+		},
+		{
+			"id": "4aa635eb-16e4-4fc5-e128-66e6550c6499",
+			"headers": "Authorization: Bearer TUy3mMeeVqTwLT3WRABeu3tz4vWh5p44Uk4X31rkd7PZuwaMOtaIwqq7TLFfff0S920mNd9E-O4a4_Gz_1BYQzGF3JxEQd0YA0tZVdEuI0h7ih0ZPnF2ZvX64fQpEvjArFuXPDWfwu4Kol5-NyCD398-Mr5wFEehcvEUFy3NUyNge0ymaj-U839T6v35suHXkNdFO2R0NaHkGsDIFDJtPysgjd_QiMvTOsvAlijSlGvy8dAPtF9NZd9EpmKflW9sTIUbWd31fSZYZF9SqjbgBU2LuxR4mLhYif9mpqpjAeaYLKCAvH2WSEy1TZ1c3iexOmG64CF_5Vj4_p3r35vMyg\n",
+			"headerData": [
+				{
+					"key": "Authorization",
+					"value": "Bearer TUy3mMeeVqTwLT3WRABeu3tz4vWh5p44Uk4X31rkd7PZuwaMOtaIwqq7TLFfff0S920mNd9E-O4a4_Gz_1BYQzGF3JxEQd0YA0tZVdEuI0h7ih0ZPnF2ZvX64fQpEvjArFuXPDWfwu4Kol5-NyCD398-Mr5wFEehcvEUFy3NUyNge0ymaj-U839T6v35suHXkNdFO2R0NaHkGsDIFDJtPysgjd_QiMvTOsvAlijSlGvy8dAPtF9NZd9EpmKflW9sTIUbWd31fSZYZF9SqjbgBU2LuxR4mLhYif9mpqpjAeaYLKCAvH2WSEy1TZ1c3iexOmG64CF_5Vj4_p3r35vMyg",
+					"description": "",
+					"enabled": true
+				}
+			],
+			"url": "{{spaceURL}}/api/acctHistSrch/v1?accountId=4509000903",
+			"folder": null,
+			"queryParams": [
+				{
+					"key": "accountId",
+					"value": "4509000903",
+					"equals": true,
+					"description": "",
+					"enabled": true
+				}
+			],
+			"preRequestScript": null,
+			"pathVariables": {},
+			"pathVariableData": [],
+			"method": "GET",
+			"data": null,
+			"dataMode": "params",
+			"tests": null,
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1508703993892,
+			"name": "acctHistSrch",
+			"description": "",
+			"collectionId": "30b86f20-42df-50eb-1980-c2ab36992342",
+			"responses": []
+		},
+		{
+			"id": "4ccd25f4-ec96-0ee9-da6f-e0a2bc82730f",
+			"headers": "Authorization: Bearer enCHCQb-_qAGiQE27ethoPqjTXe9-Qa-zOMMGPKWKWcCm3BYqRltgz5Mar6umdWAn3i25aES-r8zj2QWkaX9Ep8Nktv3Vd8hFOBkIXZ8Iyk6_lfO_whSSHbRWUns0_HMQZEgQoNdeiuOoK_IxlvqvA9hWnB06Y__Xk9mB3_qx0OKYv0hybuwMXCxqgFNBTTGZKMKp03XsfXIKujSXC2OlURRtHBC-jyIg2DKnrbb0bRhm3o96S5G1SE7rj1SuxJpwkWyFCZ3lTUts_FxBfiY8HNB3xD4qw6sIEkRY1J2YYV3khB6DJw2xVJwas8QyIUHAaSbBugIk0wFUdnklewK-Q\nContent-Type: application/json\n",
+			"headerData": [
+				{
+					"key": "Authorization",
+					"value": "Bearer enCHCQb-_qAGiQE27ethoPqjTXe9-Qa-zOMMGPKWKWcCm3BYqRltgz5Mar6umdWAn3i25aES-r8zj2QWkaX9Ep8Nktv3Vd8hFOBkIXZ8Iyk6_lfO_whSSHbRWUns0_HMQZEgQoNdeiuOoK_IxlvqvA9hWnB06Y__Xk9mB3_qx0OKYv0hybuwMXCxqgFNBTTGZKMKp03XsfXIKujSXC2OlURRtHBC-jyIg2DKnrbb0bRhm3o96S5G1SE7rj1SuxJpwkWyFCZ3lTUts_FxBfiY8HNB3xD4qw6sIEkRY1J2YYV3khB6DJw2xVJwas8QyIUHAaSbBugIk0wFUdnklewK-Q",
+					"description": "",
+					"enabled": true
+				},
+				{
+					"key": "Content-Type",
+					"value": "application/json",
+					"description": "",
+					"enabled": true
+				}
+			],
+			"url": "{{spaceURL}}/api/campaignlists/launch/v1",
+			"queryParams": [],
+			"preRequestScript": null,
+			"pathVariables": {},
+			"pathVariableData": [],
+			"method": "POST",
+			"data": [],
+			"dataMode": "raw",
+			"version": 2,
+			"tests": null,
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1508870861567,
+			"name": "campaignLaunch",
+			"description": "",
+			"collectionId": "30b86f20-42df-50eb-1980-c2ab36992342",
+			"responses": [],
+			"rawModeData": "{\r\n    \"userCd\": \"vsharapo\",\r\n    \"campaignListId\": 1\r\n}"
+		},
+		{
+			"id": "55143e2e-ace9-db55-28d1-10ccf9ad4088",
+			"headers": "Authorization: Bearer PWWbWx-YXtyHBGksanNVnshMTJNsyki4ec2I9mma41SoEwq20X1Kwty8unUbnUrozS8bbKO90o9ZBEHyExGA9YslfRdjqgBgvXGxhowak14K-5-GLacpZL8Xir5LkQBUZBGrbvShGXdiQaj6iRh3p_wvNeVX8gBsElDtbUEgVRZ8ZPuIBjtNbkKKtDdyWCthGEHKr1poSzWMIKIdnMiEBAJxb0qnRO1sph9ogtSW1neabrQdjaFWkTMtfm0T4EQ7FhgikobMjQ9Ev86auoKMjeRFStB4kkhfyYTCTFkMSIWicEnXb2VBpna_-_O_qhr9\n",
+			"headerData": [
+				{
+					"key": "Authorization",
+					"value": "Bearer PWWbWx-YXtyHBGksanNVnshMTJNsyki4ec2I9mma41SoEwq20X1Kwty8unUbnUrozS8bbKO90o9ZBEHyExGA9YslfRdjqgBgvXGxhowak14K-5-GLacpZL8Xir5LkQBUZBGrbvShGXdiQaj6iRh3p_wvNeVX8gBsElDtbUEgVRZ8ZPuIBjtNbkKKtDdyWCthGEHKr1poSzWMIKIdnMiEBAJxb0qnRO1sph9ogtSW1neabrQdjaFWkTMtfm0T4EQ7FhgikobMjQ9Ev86auoKMjeRFStB4kkhfyYTCTFkMSIWicEnXb2VBpna_-_O_qhr9",
+					"description": "",
+					"enabled": true
+				}
+			],
+			"url": "https://coindev:65026/api/custinq/v1?customerId=BAD5075",
+			"folder": null,
+			"queryParams": [
+				{
+					"key": "customerId",
+					"value": "BAD5075",
+					"equals": true,
+					"description": "",
+					"enabled": true
+				}
+			],
+			"preRequestScript": null,
+			"pathVariables": {},
+			"pathVariableData": [],
+			"method": "GET",
+			"data": null,
+			"dataMode": "params",
+			"tests": null,
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1507240009425,
+			"name": "custInq",
+			"description": "",
+			"collectionId": "30b86f20-42df-50eb-1980-c2ab36992342",
+			"responses": []
+		},
+		{
+			"id": "619bd1c3-7862-2304-66cc-71aea907ba5e",
+			"headers": "Authorization: Bearer EeKLJQp5izOZkf7sUiAS6uA1EZiejQ_LCqtQ2zkHyLokxnMuqG0F-nq6sn4unY7fUa3RKcVp7VYyeIsXcJN3DDOFKLieTPJcENu34wtzdKAsUoZwNUrTBS-dWTqPgVXt0qHtLC3t0pXfvgtBuXjsc405aVToJWnDo6ed6F28QhHdrzaVSc_HvdtUbXbEej_tFAmxYvc31dkdXVVxFJ1OKPWhRS5Rtj_jIVYzylbjImeQnIvASlUz7W-Yi9Rg4DyHYdGg9igzSklbA4P0_iSrZtFhEOFMwd_z0V_ZoNRT0LTdydzy-WSvIf_9vEkz0m70IgrtXe6t_tiw2z5OvmftOw\n",
+			"headerData": [
+				{
+					"key": "Authorization",
+					"value": "Bearer EeKLJQp5izOZkf7sUiAS6uA1EZiejQ_LCqtQ2zkHyLokxnMuqG0F-nq6sn4unY7fUa3RKcVp7VYyeIsXcJN3DDOFKLieTPJcENu34wtzdKAsUoZwNUrTBS-dWTqPgVXt0qHtLC3t0pXfvgtBuXjsc405aVToJWnDo6ed6F28QhHdrzaVSc_HvdtUbXbEej_tFAmxYvc31dkdXVVxFJ1OKPWhRS5Rtj_jIVYzylbjImeQnIvASlUz7W-Yi9Rg4DyHYdGg9igzSklbA4P0_iSrZtFhEOFMwd_z0V_ZoNRT0LTdydzy-WSvIf_9vEkz0m70IgrtXe6t_tiw2z5OvmftOw",
+					"description": "",
+					"enabled": true
+				}
+			],
+			"url": "{{spaceURL}}/api/export/notes/v1?accountfilename=acc.csv&notefilename=note.csv&createdFromDt=2017-10-21&createdToDt=2017-10-24",
+			"queryParams": [
+				{
+					"key": "accountfilename",
+					"value": "acc.csv",
+					"equals": true,
+					"description": "",
+					"enabled": true
+				},
+				{
+					"key": "notefilename",
+					"value": "note.csv",
+					"equals": true,
+					"description": "",
+					"enabled": true
+				},
+				{
+					"key": "createdFromDt",
+					"value": "2017-10-21",
+					"equals": true,
+					"description": "",
+					"enabled": true
+				},
+				{
+					"key": "createdToDt",
+					"value": "2017-10-24",
+					"equals": true,
+					"description": "",
+					"enabled": true
+				}
+			],
+			"preRequestScript": null,
+			"pathVariables": {},
+			"pathVariableData": [],
+			"method": "GET",
+			"data": null,
+			"dataMode": "params",
+			"version": 2,
+			"tests": null,
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1508870852270,
+			"name": "exportNotes",
+			"description": "",
+			"collectionId": "30b86f20-42df-50eb-1980-c2ab36992342",
+			"responses": []
+		},
+		{
+			"id": "6da72efa-4acf-7c03-9dad-13f966005861",
+			"headers": "Authorization: Bearer wWSoyehO9DSOmE4_GdiBdT8M6FGDOdWxMs8Y2bOxqPffHRBuNm2cEr80k7mwtVKYISLUbAZBloVOS6Ke2jUEIoCRktO6NLXouP9yyhqSaXw4sX1shZSyXFA4TKVWeS8TkzYvKa_zo3cxASWm8vMr94cBBAZzEkq5O5zB-I1Y3BUI6XvXFO96E5CTxeGOdM3IlrGBGPgDmr9r22tgBTUtSSvbc2agMHqbMuLzV5clxvHyBIiH850CSgCtOFBRRkCwRAp6A_psfsNv7pQ5Xse2kivgZseCy6p9Ii7GluCg9Yk\nContent-Type: application/json\n",
+			"headerData": [
+				{
+					"key": "Authorization",
+					"value": "Bearer wWSoyehO9DSOmE4_GdiBdT8M6FGDOdWxMs8Y2bOxqPffHRBuNm2cEr80k7mwtVKYISLUbAZBloVOS6Ke2jUEIoCRktO6NLXouP9yyhqSaXw4sX1shZSyXFA4TKVWeS8TkzYvKa_zo3cxASWm8vMr94cBBAZzEkq5O5zB-I1Y3BUI6XvXFO96E5CTxeGOdM3IlrGBGPgDmr9r22tgBTUtSSvbc2agMHqbMuLzV5clxvHyBIiH850CSgCtOFBRRkCwRAp6A_psfsNv7pQ5Xse2kivgZseCy6p9Ii7GluCg9Yk",
+					"description": "",
+					"enabled": true
+				},
+				{
+					"key": "Content-Type",
+					"value": "application/json",
+					"description": "",
+					"enabled": true
+				}
+			],
+			"url": "{{spaceURL}}/api/users/v1?userCd=pblanco",
+			"queryParams": [
+				{
+					"key": "userCd",
+					"value": "pblanco",
+					"equals": true,
+					"description": "",
+					"enabled": true
+				}
+			],
+			"preRequestScript": null,
+			"pathVariables": {},
+			"pathVariableData": [],
+			"method": "GET",
+			"data": [],
+			"dataMode": "raw",
+			"version": 2,
+			"tests": null,
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1508268797577,
+			"name": "getUserDetails",
+			"description": "",
+			"collectionId": "30b86f20-42df-50eb-1980-c2ab36992342",
+			"responses": [],
+			"rawModeData": "{\r\n    \"userCd\": \"vsharapo\",\r\n    \"uploadId\": 69,\r\n    \"campaignCd\": \"TEST\"\r\n}"
+		},
+		{
+			"id": "812505c8-12e3-a782-6977-d8676644a10d",
+			"headers": "Authorization: Bearer enCHCQb-_qAGiQE27ethoPqjTXe9-Qa-zOMMGPKWKWcCm3BYqRltgz5Mar6umdWAn3i25aES-r8zj2QWkaX9Ep8Nktv3Vd8hFOBkIXZ8Iyk6_lfO_whSSHbRWUns0_HMQZEgQoNdeiuOoK_IxlvqvA9hWnB06Y__Xk9mB3_qx0OKYv0hybuwMXCxqgFNBTTGZKMKp03XsfXIKujSXC2OlURRtHBC-jyIg2DKnrbb0bRhm3o96S5G1SE7rj1SuxJpwkWyFCZ3lTUts_FxBfiY8HNB3xD4qw6sIEkRY1J2YYV3khB6DJw2xVJwas8QyIUHAaSbBugIk0wFUdnklewK-Q\nContent-Type: application/json\n",
+			"headerData": [
+				{
+					"key": "Authorization",
+					"value": "Bearer enCHCQb-_qAGiQE27ethoPqjTXe9-Qa-zOMMGPKWKWcCm3BYqRltgz5Mar6umdWAn3i25aES-r8zj2QWkaX9Ep8Nktv3Vd8hFOBkIXZ8Iyk6_lfO_whSSHbRWUns0_HMQZEgQoNdeiuOoK_IxlvqvA9hWnB06Y__Xk9mB3_qx0OKYv0hybuwMXCxqgFNBTTGZKMKp03XsfXIKujSXC2OlURRtHBC-jyIg2DKnrbb0bRhm3o96S5G1SE7rj1SuxJpwkWyFCZ3lTUts_FxBfiY8HNB3xD4qw6sIEkRY1J2YYV3khB6DJw2xVJwas8QyIUHAaSbBugIk0wFUdnklewK-Q",
+					"description": "",
+					"enabled": true
+				},
+				{
+					"key": "Content-Type",
+					"value": "application/json",
+					"description": "",
+					"enabled": true
+				}
+			],
+			"url": "{{spaceURL}}/api/campaignlists/v1",
+			"queryParams": [],
+			"preRequestScript": null,
+			"pathVariables": {},
+			"pathVariableData": [],
+			"method": "POST",
+			"data": [],
+			"dataMode": "raw",
+			"version": 2,
+			"tests": null,
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1508870865853,
+			"name": "campaignCreate",
+			"description": "",
+			"collectionId": "30b86f20-42df-50eb-1980-c2ab36992342",
+			"responses": [],
+			"rawModeData": "{\r\n    \"userCd\": \"vsharapo\",\r\n    \"uploadId\": 1,\r\n    \"lastWorkDt\":\"2017-09-22\",\r\n    \"lastPromiseDt\":\"2018-09-22\",\r\n    \"campaignCd\": \"INDIRECT\"\r\n}"
+		},
+		{
+			"id": "89583364-e8dd-3d91-c297-ba6858f63519",
+			"headers": "Authorization: Bearer aCved8Od1rE8H2VtlJ6vm_0eYYhavyZ7_yInAjgbAQEbd4bCoBcK3f4r3ezzHNYmPiFhS02bXUwxnrs5D6J3eSzYzeJgJoB2sRGRrtwE_ak71EnYABrY0QDuJsJ_AA2oS_YJdDC9SvF15PagcnhH6k7zkCyLeXvQlYzme9wR_AGNQqwL-2FPTeUw9Nz_d7iQO4hoYjRb32GBAHD6n69i3NmbHywNazTrFFswnxBebaJOoZfSC4gTKm5rVpFl1hiXNaKtP5gOOET-hfNfV-MpqMDUI1LHvjZVBrTlgP3YAWICqNCEA4lmdi1wsq46EELkTFwaqx8KF60mHP9zlx0GOw\nContent-Type: application/json\n",
+			"headerData": [
+				{
+					"key": "Authorization",
+					"value": "Bearer aCved8Od1rE8H2VtlJ6vm_0eYYhavyZ7_yInAjgbAQEbd4bCoBcK3f4r3ezzHNYmPiFhS02bXUwxnrs5D6J3eSzYzeJgJoB2sRGRrtwE_ak71EnYABrY0QDuJsJ_AA2oS_YJdDC9SvF15PagcnhH6k7zkCyLeXvQlYzme9wR_AGNQqwL-2FPTeUw9Nz_d7iQO4hoYjRb32GBAHD6n69i3NmbHywNazTrFFswnxBebaJOoZfSC4gTKm5rVpFl1hiXNaKtP5gOOET-hfNfV-MpqMDUI1LHvjZVBrTlgP3YAWICqNCEA4lmdi1wsq46EELkTFwaqx8KF60mHP9zlx0GOw",
+					"description": "",
+					"enabled": true
+				},
+				{
+					"key": "Content-Type",
+					"value": "application/json",
+					"description": "",
+					"enabled": true
+				}
+			],
+			"url": "{{spaceURL}}/api/usercampaigns/v1?userCd=pblanco",
+			"queryParams": [
+				{
+					"key": "userCd",
+					"value": "pblanco",
+					"equals": true,
+					"description": "",
+					"enabled": true
+				}
+			],
+			"preRequestScript": null,
+			"pathVariables": {},
+			"pathVariableData": [],
+			"method": "GET",
+			"data": [],
+			"dataMode": "raw",
+			"version": 2,
+			"tests": null,
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1508889855100,
+			"name": "userCampaigns get",
+			"description": "",
+			"collectionId": "30b86f20-42df-50eb-1980-c2ab36992342",
+			"responses": [],
+			"rawModeData": "{\r\n    \"userCd\": \"vsharapo\",\r\n    \"uploadId\": 69,\r\n    \"campaignCd\": \"TEST\"\r\n}"
+		},
+		{
+			"id": "9193b674-e847-10fd-539d-d379732a932b",
+			"headers": "Authorization: Bearer M7bINy6-C3wd72TateWlVmZemYnrQ8YeliZDrQxe6C0QRUyNIuvA-AK4dd8tjlf_JcD1ZM8FqDoBMXnaFN_Tf1iXCq---Cduukur2l0JQi23SGpT5cRSIkgfNjpIl3w53Bf9DAg9MpJTk7jqIs9nKED9nUUJ3Nd9b7lHOC1p9uWPZRZkcUCfwwh3cezmP0WW2GGpIwFdhljLGme_0KfvR9GVN9PxGNCSzZVOvsUKOna1UhrsU9TJwrzendX34u_G1nx-HLACvXPW7QZgTb2l_9Mus_KIWG65JGEQcQiMIyr42OBYmP-oi66kSuV_sOuk-uZURQ1zX_F38-GWESmDjg\n",
+			"headerData": [
+				{
+					"key": "Authorization",
+					"value": "Bearer M7bINy6-C3wd72TateWlVmZemYnrQ8YeliZDrQxe6C0QRUyNIuvA-AK4dd8tjlf_JcD1ZM8FqDoBMXnaFN_Tf1iXCq---Cduukur2l0JQi23SGpT5cRSIkgfNjpIl3w53Bf9DAg9MpJTk7jqIs9nKED9nUUJ3Nd9b7lHOC1p9uWPZRZkcUCfwwh3cezmP0WW2GGpIwFdhljLGme_0KfvR9GVN9PxGNCSzZVOvsUKOna1UhrsU9TJwrzendX34u_G1nx-HLACvXPW7QZgTb2l_9Mus_KIWG65JGEQcQiMIyr42OBYmP-oi66kSuV_sOuk-uZURQ1zX_F38-GWESmDjg",
+					"description": "",
+					"enabled": true
+				}
+			],
+			"url": "{{spaceURL}}/api/custmsg/v1?customerId=QAI1507&msgType=Col",
+			"folder": null,
+			"queryParams": [
+				{
+					"key": "customerId",
+					"value": "QAI1507",
+					"equals": true,
+					"description": "",
+					"enabled": true
+				},
+				{
+					"key": "msgType",
+					"value": "Col",
+					"equals": true,
+					"description": "",
+					"enabled": true
+				}
+			],
+			"preRequestScript": null,
+			"pathVariables": {},
+			"pathVariableData": [],
+			"method": "GET",
+			"data": null,
+			"dataMode": "params",
+			"tests": null,
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1508533217220,
+			"name": "custMsgSrch",
+			"description": "",
+			"collectionId": "30b86f20-42df-50eb-1980-c2ab36992342",
+			"responses": []
+		},
+		{
+			"id": "974053bc-575a-2a59-3ac1-2ebe431b3055",
+			"headers": "Authorization: Bearer q6hdXHPQqSYZmPxnPA51GP56cZ0LJxyjKGKmmes8xX-P2itJtRRAWhYSIO7ccFcixFco5dYh1gXs-Hi7YIYbqFNzr7lMEOYwtsCWi8nPnBnFu-kRKc_PaCGpNrAh9EtTVFNZts2RmncOqDPP9OWU-pQQu_fNZkxkv_vFAcUcYGuumyizRI6UmnnG-kvtax8tMYVEpRlZ2oI2LL_hUuWllnAOdquOMkyVcvut-xIn1c3_-cMs1-65tpflsccvMFAXAiOl4aPig0wjCdlBUoz4G3wSbeFhFdBD2dnMVNnajiw\nContent-Type: application/json\n",
+			"headerData": [
+				{
+					"key": "Authorization",
+					"value": "Bearer q6hdXHPQqSYZmPxnPA51GP56cZ0LJxyjKGKmmes8xX-P2itJtRRAWhYSIO7ccFcixFco5dYh1gXs-Hi7YIYbqFNzr7lMEOYwtsCWi8nPnBnFu-kRKc_PaCGpNrAh9EtTVFNZts2RmncOqDPP9OWU-pQQu_fNZkxkv_vFAcUcYGuumyizRI6UmnnG-kvtax8tMYVEpRlZ2oI2LL_hUuWllnAOdquOMkyVcvut-xIn1c3_-cMs1-65tpflsccvMFAXAiOl4aPig0wjCdlBUoz4G3wSbeFhFdBD2dnMVNnajiw",
+					"description": "",
+					"enabled": true
+				},
+				{
+					"key": "Content-Type",
+					"value": "application/json",
+					"description": "",
+					"enabled": true
+				}
+			],
+			"url": "{{spaceURL}}/api/callrecords/v1",
+			"folder": null,
+			"queryParams": [],
+			"preRequestScript": null,
+			"pathVariables": {},
+			"pathVariableData": [],
+			"method": "POST",
+			"data": [],
+			"dataMode": "raw",
+			"tests": null,
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1508103425501,
+			"name": "addCallRecord",
+			"description": "",
+			"collectionId": "30b86f20-42df-50eb-1980-c2ab36992342",
+			"responses": [],
+			"rawModeData": "{\r\n    \"userCd\": \"vsharapo\",\r\n    \"accountId\": \"6900350486\",\r\n    \"accountType\": \"L\",\r\n    \"customerId\": \"BCB6019\",\r\n    \"callStartDt\": \"2017-09-22 12:47:00 AM\",\r\n    \"actionCd\": \"CH\",\r\n    \"contactedCd\": \"BW\",\r\n    \"resultCd\": \"BY\",\r\n    \"statusCd\": \"SUCCESS\",\r\n    \"nextWorkDt\": \"2017-11-23\",\r\n    \"promisedDt\": null,\r\n    \"promisedAmount\": null,\r\n    \"callNote\": \"test note\"\r\n}"
+		},
+		{
+			"id": "ac81de2a-155e-2007-b6cb-a396ef799545",
+			"headers": "Authorization: Bearer enCHCQb-_qAGiQE27ethoPqjTXe9-Qa-zOMMGPKWKWcCm3BYqRltgz5Mar6umdWAn3i25aES-r8zj2QWkaX9Ep8Nktv3Vd8hFOBkIXZ8Iyk6_lfO_whSSHbRWUns0_HMQZEgQoNdeiuOoK_IxlvqvA9hWnB06Y__Xk9mB3_qx0OKYv0hybuwMXCxqgFNBTTGZKMKp03XsfXIKujSXC2OlURRtHBC-jyIg2DKnrbb0bRhm3o96S5G1SE7rj1SuxJpwkWyFCZ3lTUts_FxBfiY8HNB3xD4qw6sIEkRY1J2YYV3khB6DJw2xVJwas8QyIUHAaSbBugIk0wFUdnklewK-Q\n",
+			"headerData": [
+				{
+					"key": "Authorization",
+					"value": "Bearer enCHCQb-_qAGiQE27ethoPqjTXe9-Qa-zOMMGPKWKWcCm3BYqRltgz5Mar6umdWAn3i25aES-r8zj2QWkaX9Ep8Nktv3Vd8hFOBkIXZ8Iyk6_lfO_whSSHbRWUns0_HMQZEgQoNdeiuOoK_IxlvqvA9hWnB06Y__Xk9mB3_qx0OKYv0hybuwMXCxqgFNBTTGZKMKp03XsfXIKujSXC2OlURRtHBC-jyIg2DKnrbb0bRhm3o96S5G1SE7rj1SuxJpwkWyFCZ3lTUts_FxBfiY8HNB3xD4qw6sIEkRY1J2YYV3khB6DJw2xVJwas8QyIUHAaSbBugIk0wFUdnklewK-Q",
+					"description": "",
+					"enabled": true
+				}
+			],
+			"url": "{{spaceURL}}/api/sourcedata/phones/v1?user=vsharapo&filename=pt.csv",
+			"queryParams": [
+				{
+					"key": "user",
+					"value": "vsharapo",
+					"equals": true,
+					"description": "",
+					"enabled": true
+				},
+				{
+					"key": "filename",
+					"value": "pt.csv",
+					"equals": true,
+					"description": "",
+					"enabled": true
+				}
+			],
+			"preRequestScript": null,
+			"pathVariables": {},
+			"pathVariableData": [],
+			"method": "GET",
+			"data": null,
+			"dataMode": "params",
+			"version": 2,
+			"tests": null,
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1508858707794,
+			"name": "parseFile_Phones",
+			"description": "",
+			"collectionId": "30b86f20-42df-50eb-1980-c2ab36992342",
+			"responses": []
+		},
+		{
+			"id": "b7e419c3-2183-bab5-a0e5-8dc94158ef29",
+			"headers": "Accept: application/json\nContent-Type: application/x-www-form-urlencoded\n",
+			"headerData": [
+				{
+					"key": "Accept",
+					"value": "application/json",
+					"description": "",
+					"enabled": true
+				},
+				{
+					"key": "Content-Type",
+					"value": "application/x-www-form-urlencoded",
+					"description": "",
+					"enabled": true
+				}
+			],
+			"url": "{{spaceURL}}/token",
+			"queryParams": [],
+			"preRequestScript": null,
+			"pathVariables": {},
+			"pathVariableData": [],
+			"method": "POST",
+			"data": [
+				{
+					"key": "grant_type",
+					"value": "password",
+					"description": "",
+					"type": "text",
+					"enabled": true
+				},
+				{
+					"key": "username",
+					"value": "vsharapo",
+					"description": "",
+					"type": "text",
+					"enabled": true
+				},
+				{
+					"key": "password",
+					"value": "Iberia$$",
+					"description": "",
+					"type": "text",
+					"enabled": true
+				}
+			],
+			"dataMode": "urlencoded",
+			"version": 2,
+			"tests": null,
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1508889857936,
+			"name": "getToken",
+			"description": "",
+			"collectionId": "30b86f20-42df-50eb-1980-c2ab36992342",
+			"responses": []
+		},
+		{
+			"id": "bc816803-c1a6-0532-0f61-59b9ec05ce62",
+			"headers": "Authorization: Bearer aCved8Od1rE8H2VtlJ6vm_0eYYhavyZ7_yInAjgbAQEbd4bCoBcK3f4r3ezzHNYmPiFhS02bXUwxnrs5D6J3eSzYzeJgJoB2sRGRrtwE_ak71EnYABrY0QDuJsJ_AA2oS_YJdDC9SvF15PagcnhH6k7zkCyLeXvQlYzme9wR_AGNQqwL-2FPTeUw9Nz_d7iQO4hoYjRb32GBAHD6n69i3NmbHywNazTrFFswnxBebaJOoZfSC4gTKm5rVpFl1hiXNaKtP5gOOET-hfNfV-MpqMDUI1LHvjZVBrTlgP3YAWICqNCEA4lmdi1wsq46EELkTFwaqx8KF60mHP9zlx0GOw\nContent-Type: application/json\n",
+			"headerData": [
+				{
+					"key": "Authorization",
+					"value": "Bearer aCved8Od1rE8H2VtlJ6vm_0eYYhavyZ7_yInAjgbAQEbd4bCoBcK3f4r3ezzHNYmPiFhS02bXUwxnrs5D6J3eSzYzeJgJoB2sRGRrtwE_ak71EnYABrY0QDuJsJ_AA2oS_YJdDC9SvF15PagcnhH6k7zkCyLeXvQlYzme9wR_AGNQqwL-2FPTeUw9Nz_d7iQO4hoYjRb32GBAHD6n69i3NmbHywNazTrFFswnxBebaJOoZfSC4gTKm5rVpFl1hiXNaKtP5gOOET-hfNfV-MpqMDUI1LHvjZVBrTlgP3YAWICqNCEA4lmdi1wsq46EELkTFwaqx8KF60mHP9zlx0GOw",
+					"description": "",
+					"enabled": true
+				},
+				{
+					"key": "Content-Type",
+					"value": "application/json",
+					"description": "",
+					"enabled": true
+				}
+			],
+			"url": "{{spaceURL}}/api/usercampaigns/v1",
+			"queryParams": [],
+			"preRequestScript": null,
+			"pathVariables": {},
+			"pathVariableData": [],
+			"method": "POST",
+			"data": [],
+			"dataMode": "raw",
+			"version": 2,
+			"tests": null,
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1508889852869,
+			"name": "userCampaigns add",
+			"description": "",
+			"collectionId": "30b86f20-42df-50eb-1980-c2ab36992342",
+			"responses": [],
+			"rawModeData": "{\r\n    \"userCd\": \"twarren\",\r\n    \"campaignCd\": \"INDIRECT\",\r\n    \"activeFlg\":\"Y\",\r\n    \"createdBy\": \"vsharapo\"\r\n}"
+		},
+		{
+			"id": "bf84fcd0-2f9e-7f58-4ade-7b6bfa3063b2",
+			"headers": "Authorization: Bearer enCHCQb-_qAGiQE27ethoPqjTXe9-Qa-zOMMGPKWKWcCm3BYqRltgz5Mar6umdWAn3i25aES-r8zj2QWkaX9Ep8Nktv3Vd8hFOBkIXZ8Iyk6_lfO_whSSHbRWUns0_HMQZEgQoNdeiuOoK_IxlvqvA9hWnB06Y__Xk9mB3_qx0OKYv0hybuwMXCxqgFNBTTGZKMKp03XsfXIKujSXC2OlURRtHBC-jyIg2DKnrbb0bRhm3o96S5G1SE7rj1SuxJpwkWyFCZ3lTUts_FxBfiY8HNB3xD4qw6sIEkRY1J2YYV3khB6DJw2xVJwas8QyIUHAaSbBugIk0wFUdnklewK-Q\n",
+			"headerData": [
+				{
+					"key": "Authorization",
+					"value": "Bearer enCHCQb-_qAGiQE27ethoPqjTXe9-Qa-zOMMGPKWKWcCm3BYqRltgz5Mar6umdWAn3i25aES-r8zj2QWkaX9Ep8Nktv3Vd8hFOBkIXZ8Iyk6_lfO_whSSHbRWUns0_HMQZEgQoNdeiuOoK_IxlvqvA9hWnB06Y__Xk9mB3_qx0OKYv0hybuwMXCxqgFNBTTGZKMKp03XsfXIKujSXC2OlURRtHBC-jyIg2DKnrbb0bRhm3o96S5G1SE7rj1SuxJpwkWyFCZ3lTUts_FxBfiY8HNB3xD4qw6sIEkRY1J2YYV3khB6DJw2xVJwas8QyIUHAaSbBugIk0wFUdnklewK-Q",
+					"description": "",
+					"enabled": true
+				}
+			],
+			"url": "{{spaceURL}}/api/sourcedata/run/v1?user=vsharapo&filename=coinexport1.txt",
+			"queryParams": [
+				{
+					"key": "user",
+					"value": "vsharapo",
+					"equals": true,
+					"description": "",
+					"enabled": true
+				},
+				{
+					"key": "filename",
+					"value": "coinexport1.txt",
+					"equals": true,
+					"description": "",
+					"enabled": true
+				}
+			],
+			"preRequestScript": null,
+			"pathVariables": {},
+			"pathVariableData": [],
+			"method": "GET",
+			"data": null,
+			"dataMode": "params",
+			"version": 2,
+			"tests": null,
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1508883557813,
+			"name": "parseFile_Accounts_master",
+			"description": "",
+			"collectionId": "30b86f20-42df-50eb-1980-c2ab36992342",
+			"responses": []
+		},
+		{
+			"id": "ec135fe0-f5c6-9fb2-49aa-445526b53236",
+			"headers": "Authorization: Bearer IXclF-EjPqoimUTe888GHZ3l20aqVTTY9C_bL_CdPpQghWCOXGrVBVTzLLQS_fRmDIMxpAZIulNP_o65ZqWQQsWb8rYDiyBYpAd-wrwwr3K-lEXO5NA4RVBoYkAersQkg2bMiqqB6Cjk6y5sycYQhFdeMZ4ULh-WUewm49o6nq_Vtg07_bk6RiEpjivm-uafFz2tQbbZ-yZr5hBYWa_cYKgc6muz-ynDKn6kooFBxh2Tlw6KjPeE2fnYZaqCqxT_dNG-2yJjRe5CP5lxcxiIHqGWsLIjgvhSAzbGHKSZJxiJ-j3iRvdTUSN1t6pFuKTd\n",
+			"headerData": [
+				{
+					"key": "Authorization",
+					"value": "Bearer IXclF-EjPqoimUTe888GHZ3l20aqVTTY9C_bL_CdPpQghWCOXGrVBVTzLLQS_fRmDIMxpAZIulNP_o65ZqWQQsWb8rYDiyBYpAd-wrwwr3K-lEXO5NA4RVBoYkAersQkg2bMiqqB6Cjk6y5sycYQhFdeMZ4ULh-WUewm49o6nq_Vtg07_bk6RiEpjivm-uafFz2tQbbZ-yZr5hBYWa_cYKgc6muz-ynDKn6kooFBxh2Tlw6KjPeE2fnYZaqCqxT_dNG-2yJjRe5CP5lxcxiIHqGWsLIjgvhSAzbGHKSZJxiJ-j3iRvdTUSN1t6pFuKTd",
+					"description": "",
+					"enabled": true
+				}
+			],
+			"url": "{{spaceURL}}/api/acctSrch/v1?customerId=AAD9461",
+			"folder": null,
+			"queryParams": [
+				{
+					"key": "customerId",
+					"value": "AAD9461",
+					"equals": true,
+					"description": "",
+					"enabled": true
+				}
+			],
+			"preRequestScript": null,
+			"pathVariables": {},
+			"pathVariableData": [],
+			"method": "GET",
+			"data": null,
+			"dataMode": "params",
+			"tests": null,
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1506605986812,
+			"name": "acctSrch",
+			"description": "",
+			"collectionId": "30b86f20-42df-50eb-1980-c2ab36992342",
+			"responses": []
+		},
+		{
+			"id": "fbf0b719-71ee-534e-fc8b-a44d6e1e4769",
+			"headers": "Authorization: Bearer xPNiS_51-hUwXEz6LCg1SNIC2DoOCeLsh0N2hYwo1d8WuiJyn_u8oPdZpFC8EltjfsaxoFUtvH7t_EK_jc9KeLaMkrY_HbXp22uCUZI1hH-xha9sX_2BLdsGIR47VVczZgevR93YxTOvHx9qye5egaFJHH8g_kGX_MRq5f72uN8RdsPaSQ5Yfr5aIXi42uDdKemuQlJ3EPeV5X3PYV5Sd5qQZzZ4ainz_Wi_B4dJGOyOH1VTGhHZJL_bLRkTafaHR4rsE1mGTMQX4mR9_Yy-Lbvaw8tso-q-KVnq4xATkYQ\n",
+			"headerData": [
+				{
+					"key": "Authorization",
+					"value": "Bearer xPNiS_51-hUwXEz6LCg1SNIC2DoOCeLsh0N2hYwo1d8WuiJyn_u8oPdZpFC8EltjfsaxoFUtvH7t_EK_jc9KeLaMkrY_HbXp22uCUZI1hH-xha9sX_2BLdsGIR47VVczZgevR93YxTOvHx9qye5egaFJHH8g_kGX_MRq5f72uN8RdsPaSQ5Yfr5aIXi42uDdKemuQlJ3EPeV5X3PYV5Sd5qQZzZ4ainz_Wi_B4dJGOyOH1VTGhHZJL_bLRkTafaHR4rsE1mGTMQX4mR9_Yy-Lbvaw8tso-q-KVnq4xATkYQ",
+					"description": "",
+					"enabled": true
+				}
+			],
+			"url": "{{spaceURL}}/api/custsrch/v1?accountId=5300429511",
+			"folder": null,
+			"queryParams": [
+				{
+					"key": "accountId",
+					"value": "5300429511",
+					"equals": true,
+					"description": "",
+					"enabled": true
+				}
+			],
+			"preRequestScript": null,
+			"pathVariables": {},
+			"pathVariableData": [],
+			"method": "GET",
+			"data": null,
+			"dataMode": "params",
+			"tests": null,
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1505944312722,
+			"name": "custSrch_byAccount",
+			"description": "",
+			"collectionId": "30b86f20-42df-50eb-1980-c2ab36992342",
+			"responses": []
+		}
+	]
+}

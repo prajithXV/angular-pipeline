@@ -1,0 +1,21 @@
+https://ibdc1-cce-fina01.ibkc.int/desktop/container/?locale=en_US
+user: coinapp
+password: 215194
+extension: 215194
+
+9134600579367
+\\IBDC0WKS96\publish
+
+Key	Value
+Request	POST /http-bind HTTP/1.1
+Accept	text/plain, */*; q=0.01
+Content-Type	text/xml
+X-Requested-With	XMLHttpRequest
+Referer	https://coindev/bosh/NonGadget/index.html
+Accept-Language	en-US
+Accept-Encoding	gzip, deflate
+User-Agent	Mozilla/5.0 (Windows NT 6.1; WOW64; Trident/7.0; rv:11.0) like Gecko
+Host	coindev
+Content-Length	232
+Connection	Keep-Alive
+Cache-Control	no-cache

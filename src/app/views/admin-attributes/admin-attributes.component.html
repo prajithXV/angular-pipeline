@@ -1,0 +1,30 @@
+<div class="row">
+  <div class="col-lg-12">
+    <div class="ibox float-e-margins">
+      <div class="ibox-title col-lg-12 col-sm-12 col-md-12 col-xs-12">
+        <h5 class="col-lg-6 col-md-6 col-sm-6 col-xs-6" style="margin-top: 6px!important;">Tickler Attribute</h5>
+
+        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 text-right">
+        <button class="btn btn-sm btn-primary" [disabled]="isCreating || searchingTicklerAttributes" (click)="showTicklerAttributes(true)">
+          <i class="fa fa-file-o"></i> New
+        </button>
+      </div>
+
+      </div>
+      <div class="ibox-content">
+        <div>
+          <tickler-attribute-table
+            [isCreating]="isCreating"
+            [lovTypes]="lovTypes"
+            [typeCodes]="typeCodes"
+            [ticklerAttributes]="ticklerAttributes"
+            [searchingTicklerAttributes]="searchingTicklerAttributes"
+            (onNewTicklerAttribute)="refreshTicklerAttributes()"
+            (onUpdateTicklerAttribute)="refreshTicklerAttributes()"
+            (onCancelTicklerAttribute)="showTicklerAttributes($event)">
+          </tickler-attribute-table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

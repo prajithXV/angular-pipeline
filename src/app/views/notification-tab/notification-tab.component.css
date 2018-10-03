@@ -1,0 +1,23 @@
+.notify {
+  position: relative;
+  top: -5px;
+  color: #ED5565;
+  font-size: 11pt;
+  margin-left: 2px;
+  animation-name: flash;
+  animation-duration: 3s;
+  animation-iteration-count: 5;
+  animation-timing-function: ease-out;
+  /*-webkit-animation: ease-out;*/
+  /*animation: ease-out;*/
+}
+@-webkit-keyframes flash {
+  0% { opacity: 1; }
+  50% { opacity: .1; }
+  100% { opacity: 1; }
+}
+@keyframes flash {
+  0% { opacity: 1; }
+  50% { opacity: .1; }
+  100% { opacity: 1; }
+}

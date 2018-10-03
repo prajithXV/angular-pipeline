@@ -1,0 +1,95 @@
+<div class="box-shadow" [ngClass]="{'col-xs-12':hasToAddTicklerAttribute, 'col-lg-12': hasToAddTicklerAttribute, 'col-paddings': hasToAddTicklerAttribute, 'container': !hasToAddTicklerAttribute}">
+  <!--code-->
+  <div class="col-lg-12">
+    <div class="form-group" [class.has-error]="aCode.invalid && aCode.touched">
+      <label class="control-label">Code *</label>
+      <input [(ngModel)]="model.attributeCode" #aCode="ngModel" [disabled]="!hasToAddTicklerAttribute" type="text" placeholder="Code"
+             class="form-control" name="attributeCode" required>
+      <span class="help-block m-b-none" *ngIf="aCode.invalid && aCode.touched">Field is mandatory.</span>
+    </div>
+
+    <!--name-->
+    <div class="form-group" [class.has-error]="aName.invalid && aName.touched">
+      <label class="control-label">Name *</label>
+      <input [(ngModel)]="model.attributeName" #aName="ngModel" type="text" placeholder="Name" class="form-control" name="attributeName" required>
+      <span class="help-block m-b-none" *ngIf="aName.invalid && aName.touched">Field is mandatory.</span>
+    </div>
+
+
+
+    <!--type-->
+    <div class="form-group">
+      <label>Type</label>
+      <div>
+        <select [(ngModel)]="model.dataType" name="dataType" title="type" class="form-control m-b"
+                (change)="typeSelected(model)"
+                [disabled]="!hasToAddTicklerAttribute">
+          <option *ngFor="let t of typeCodes" [ngValue]="t.code">{{t.name}}</option>
+        </select>
+      </div>
+    </div>
+
+    <!--LOV-->
+    <div class="form-group" *ngIf="isListOfValue(model)">
+      <label>List of values code *</label>
+      <select [(ngModel)]="model.lovCode" title="code" class="form-control" name="lovCode"
+             [disabled]="!hasToAddTicklerAttribute || model.lovCode == null">
+        <option *ngFor="let lt of lovTypes" [ngValue]="lt.lovCode">{{lt.lovCode}}</option>
+      </select>
+    </div>
+
+
+    <!--active-->
+    <div class="col-lg-12 no-padding">
+      <input
+        [(ngModel)]="model.activeFlag"
+        [value]="'Y'"
+        type="checkbox"
+        name="activeFlag"
+        title="active"
+        [checked]="model.activeFlag"
+      />
+      <p class="notes"><label class="font-normal"> Active</label></p>
+    </div>
+    <!--Array-->
+    <div class="col-lg-12 no-padding">
+      <input
+        [(ngModel)]="model.arrayFlag"
+        [value]="'Y'"
+        type="checkbox"
+        name="arrayFlag"
+        title="array"
+        [checked]="model.arrayFlag"
+      />
+      <p class="notes"><label class="font-normal"> Array</label></p>
+    </div>
+
+    <!--description-->
+    <div class="form-group col-lg-12 no-padding">
+      <div>
+        <label class="control-label">Description</label>
+      </div>
+      <textarea
+        [(ngModel)]="model.attributeDescription"
+        class="form-control notes-form no-resize"
+        placeholder="Enter your attribute description"
+        rows="3"
+        maxlength="250">
+      </textarea>
+    </div>
+  </div>
+
+  <!--button-->
+  <div class="col-lg-12">
+    <div class="form-group">
+      <button class="btn btn-sm btn-primary"
+              [disabled]="isWaiting || hasFormErrors"
+              (click)="manageTicklerAttributes(model)">{{manageTicklerAttributeText}}
+        <waiting-backend *ngIf="isWaiting"></waiting-backend>
+      </button>
+      <button class="btn btn-sm" (click)="cancel()">Cancel
+      </button>
+    </div>
+  </div>
+</div>
+

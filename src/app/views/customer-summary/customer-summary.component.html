@@ -1,0 +1,30 @@
+<div *ngIf="customers">
+  <div class='table-responsive'>
+    <table class='table table-hover pointer-cursor'>
+      <thead>
+      <tr>
+        <th style="width: 3%"></th>
+        <th style="width: 10%">ID</th>
+        <th style="width: 10%">SSN</th>
+        <th style="width: 15%">Name</th>
+        <th>Address</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr
+        *ngFor="let cust of customers"
+        (click)="searchAccounts(cust)"
+        [class.ui-state-highlight]="cust.id == currentCustomer?.id">
+        <td><i *ngIf="cust.id == currentCustomer?.id" class="fa fa-arrow-circle-right text-navy" style="font-size:1.2em;"></i></td>
+        <td>{{cust.id}}</td>
+        <td>{{cust.taxId}}</td>
+        <td>{{cust.mainContact.completeName}}</td>
+        <td>{{cust.mainAddress | address}}</td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+<div *ngIf="searching"><waiting-backend></waiting-backend> Searching...</div>
+<div *ngIf="notFound" class="customersFound">No customers found</div>
+<div *ngIf="!searching && !customers && !notFound">Use the filters on the left to search for a customer.</div>

@@ -1,0 +1,66 @@
+<div class="row">
+  <div class="col-lg-8">
+    <div class="ibox float-e-margins">
+      <div class="ibox-title">
+        <h5>Users</h5>
+      </div>
+      <div class="ibox-content">
+        <agents-table
+          [agents]="agents"
+          [campaigns]="campaigns"
+          [searching]="isSearching()"
+          [errorSearching]="isError()"
+          (onToggleCampaign)="toggleCampaign($event)"
+          [showCampaigns]="false"
+          [showSelector]="true"
+          (onAgentSelected)="selectAgent($event)"
+          [currentAgent]="currentAgent"
+        ></agents-table>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-lg-4">
+    <div class="ibox float-e-margins">
+      <div class="ibox-title">
+        <h5>User Details: {{currentAgent?.account}}</h5>
+      </div>
+      <div class="ibox-content">
+        <h3>Campaigns</h3>
+        <agent-campaigns
+          [agent]="currentAgent"
+          [campaigns]="campaigns"
+          (onToggleCampaign)="toggleCampaign($event)"
+        ></agent-campaigns>
+        <h3>Roles</h3>
+        <agent-roles
+          [agent]="currentAgent"
+          [roles]="roles"
+          [pendingOperations]="pendingOperations"
+          (onToggleRole)="toggleRole($event)"
+        ></agent-roles>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!--<div class="row">-->
+  <!--<div class="col-lg-12">-->
+
+    <!--<div class="ibox float-e-margins">-->
+      <!--<div class="ibox-title">-->
+        <!--<h5>Users</h5>-->
+      <!--</div>-->
+      <!--<div class="ibox-content">-->
+        <!--<agents-table-->
+          <!--[agents]="agents"-->
+          <!--[campaigns]="campaigns"-->
+          <!--[searching]="isSearching()"-->
+          <!--[errorSearching]="isError()"-->
+          <!--(onToggleCampaign)="toggleCampaign($event)"-->
+        <!--&gt;</agents-table>-->
+      <!--</div>-->
+    <!--</div>-->
+
+  <!--</div>-->
+<!--</div>-->

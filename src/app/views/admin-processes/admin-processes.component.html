@@ -1,0 +1,66 @@
+<div class="row">
+  <!--process table-->
+  <div class="col-lg-12">
+    <div class="ticklerProcesses ibox float-e-margins">
+      <div class="ibox-title">
+        <h5>Processes</h5>
+      </div>
+      <!--table-->
+      <div class="ibox-content">
+        <tickler-process-table
+          [currentProcess]="currentProcess"
+          [ticklerProcesses]="ticklerProcesses"
+          [searchingProcesses]="searchingProcesses"
+          (onLoadTicklerTypes)="loadTicklerTypes($event)">
+        </tickler-process-table>
+      </div>
+    </div>
+  </div>
+  <!--tickler types table-->
+  <div class="col-lg-12">
+    <div *ngIf="ticklerProcesses?.length > 0" class="ticklerTypes ibox float-e-margins">
+      <!--search criteria params-->
+      <div class="ibox-title col-lg-12 col-md-12 col-sm-12 col-xs-12">
+        <h5 *ngIf="!currentProcess" class="col-lg-6 col-md-6 col-sm-6 col-xs-6">Tickler Types</h5>
+        <h5 *ngIf="currentProcess" class="col-lg-6 col-md-6 col-sm-6 col-xs-6" style="margin-top: 6px!important;">Tickler Types
+          <span *ngIf="currentProcess.id">For </span><strong class="text-success">{{currentProcess.processName}}</strong>
+          <span>Process</span>
+        </h5>
+
+        <div *ngIf="currentProcess && !searchingTypes" class="col-lg-6 col-md-6 col-sm-6 col-xs-6 text-right">
+          <button class="btn btn-sm btn-primary" [disabled]="isCreating" (click)="showTicklerTypes(true)">
+            <i class="fa fa-file-o"></i> New
+          </button>
+        </div>
+
+      </div>
+      <!--table-->
+      <div class="ibox-content">
+        <tickler-types-table
+          [isCreating]="isCreating"
+          [ticklerAttributes]="ticklerAttributes"
+          [currentProcess]="currentProcess"
+          [ticklerTypes]="ticklerTypes"
+          [searchingTypes]="searchingTypes"
+          (addTicklerType)="refreshTicklerTypes()"
+          (onRemoveTicklerType)="refreshTicklerTypes()"
+          (onUpdateTicklerType)="refreshTicklerTypes()"
+          (onCancelTicklerType)="showTicklerTypes($event)">
+        </tickler-types-table>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+

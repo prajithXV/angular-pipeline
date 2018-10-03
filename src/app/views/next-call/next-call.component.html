@@ -1,0 +1,113 @@
+<ng-template #popNext><strong>F2</strong></ng-template>
+
+<!--<div class="ibox">-->
+<!--<div class="ibox-content no-borders">-->
+  <!--<div class="row">-->
+<!--<div class="col-lg-12">-->
+<div class="col-lg-4 col-xs-12" [ngClass]="{'col-padding': canShowViewCL(), 'col-padding2':!canShowViewCL()}">
+  <p>
+    Select a campaign:
+  </p>
+  <div>
+    <select [(ngModel)]="campaignCode" class="form-control m-b" [disabled]="campaignCode == null" name="campaign" title="campaignCode">
+      <option *ngFor="let op of campaigns"
+              [value]="op.code"
+              [class.disabled]="op.statusCode == pausedStatus"
+              [disabled]="op.statusCode == pausedStatus">
+
+        <span *ngIf="op.statusCode == pausedStatus">⏸</span> {{op.name}} </option>
+    </select>
+  </div>
+
+  <button *ngIf="canShowViewCL()" (click)="nextCall()" class="btn btn-block btn-primary"
+          [disabled]="buttonDisabled()" [popover]="popNext" triggers="">Next call
+    <waiting-backend *ngIf="waitingResponse"></waiting-backend>
+  </button>
+
+  <button *ngIf="!canShowViewCL()" (click)="nextCall()" class="btn btn-block btn-primary"
+          [disabled]="campaigns?.length == 0 || waitingResponse" [popover]="popNext" triggers="">Next call
+    <waiting-backend *ngIf="waitingResponse"></waiting-backend>
+  </button>
+
+</div>
+
+<div class="col-lg-4 col-xs-12 col-padding2" *ngIf="!canShowViewCL()">
+
+  <p>Select a campaign an click on "Next call" button</p>
+
+</div>
+
+<div class="col-lg-8" id="collapseFilter" *ngIf="!isViewClButtonClicked && isShowArrow && canShowViewCL()" (click)="showForm(true)">
+  <i class="fas fa-search" style="font-size: 8pt;"></i>
+  <i class="fa fa-chevron-up"></i>
+</div>
+  <div class="col-lg-8 col-xs-12 col-padding-search"  id="search-params" *ngIf="isViewClButtonClicked && canShowViewCL()" (click)="showForm(false)">
+    <ul class="list-unstyled">
+      <li><i class="fas fa-search"></i></li>
+      <li *ngIf="currentServiceParams.currentParams.campaignCd">Campaign: <span class="text-success">{{campaigns | filterCodeToName: currentServiceParams.currentParams.campaignCd}}</span></li>
+      <li *ngIf="currentServiceParams.currentParams.accountId">Account: <span class="text-success">{{currentServiceParams.currentParams.accountId}}</span></li>
+      <li *ngIf="currentServiceParams.currentParams.cifId">CIFNO: <span class="text-success">{{currentServiceParams.currentParams.cifId}}</span></li>
+      <li *ngIf="currentServiceParams.currentParams.statusCd">Status: <span class="text-success">{{ statuses | filterCodeToName: currentServiceParams?.currentParams.statusCd}}</span></li>
+      <li *ngIf="currentServiceParams.currentParams.customerName">Customer name: <span class="text-success">{{currentServiceParams.currentParams.customerName}}</span></li>
+      <li *ngIf="!currentServiceParams.currentParams.campaignCd && !currentServiceParams.currentParams.accountId && !currentServiceParams.currentParams.cifId
+                && !currentServiceParams.currentParams.statusCd && !currentServiceParams.currentParams.statusCd">All
+      </li>
+    </ul>
+  </div>
+
+<div id="campaignFilter" class="col-lg-8 col-xs-12" *ngIf="canShowViewCL() && !isViewClButtonClicked">
+  <form [class.form-padding]="!isShowArrow">
+    <div class="form-group">
+      <label>Account</label>
+      <input [(ngModel)]="campaignCriteria.accountId" type="text" placeholder="Account" class="form-control"
+             name="accountId">
+    </div>
+    <div class="form-group">
+      <label>CIFNO</label>
+      <input [(ngModel)]="campaignCriteria.cifId" type="text" placeholder="CIFNO" class="form-control"
+             name="cifno">
+    </div>
+
+    <!--status combo-->
+    <div class="form-group">
+      <label>Status</label>
+      <div>
+        <select *ngIf="statuses" [(ngModel)]="campaignCriteria.statusCd" name="statusCd" class="form-control m-b">
+          <option [ngValue]="null">--All--</option>
+          <option *ngFor="let st of statuses" [ngValue]="st.code">{{st.name}}</option>
+        </select>
+      </div>
+    </div>
+
+    <!--Customer Name input-->
+    <div class="form-group">
+      <label>Customer name</label>
+      <input [(ngModel)]="campaignCriteria.customerName" type="text" placeholder="Customer name"
+             class="form-control"
+             name="customerName">
+    </div>
+    <div class="form-group pull-right">
+      <button (click)="viewCL(); $event.preventDefault()" [disabled]="buttonDisabled() || searchingCampaignListAccounts"
+              class="viewClButton btn btn-sm btn-primary m-t-n-xs"
+              type="submit">
+        View CL
+        <waiting-backend *ngIf="searchingCampaignListAccounts"></waiting-backend>
+      </button>
+      <button (click)="reset()" class="btn btn-sm m-t-n-xs" type="button">Reset</button>
+    </div>
+  </form>
+</div>
+  <!--<div class="col-lg-4 col-padding3" *ngIf="!canShowViewCL()">-->
+    <!--<button (click)="nextCall()" class="btn btn-block btn-primary"-->
+            <!--[disabled]="campaigns?.length == 0 || waitingResponse" [popover]="popNext" triggers="">Next call-->
+      <!--<waiting-backend *ngIf="waitingResponse"></waiting-backend>-->
+    <!--</button>-->
+  <!--</div>-->
+  <!--<div class="row" *ngIf="!canShowViewCL()"></div>-->
+<!--</div>-->
+
+
+<!--</div>-->
+<!--</div>-->
+<!--</div>-->
+

@@ -1,0 +1,28 @@
+.hr-line-dashed {
+  margin-bottom: 0px;
+  margin-top: 0px;
+}
+
+.row {
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.col-lg-6 {
+  margin-bottom: 0px;
+}
+
+dl {
+  margin-bottom: 0px;
+}
+
+
+.phone{
+  margin-top: 8px;
+}
+
+
+.grey{
+  color: #676a6c;
+  text-decoration: none;
+}

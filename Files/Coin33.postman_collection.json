@@ -1,0 +1,2842 @@
+{
+	"id": "30b86f20-42df-50eb-1980-c2ab36992342",
+	"name": "Coin",
+	"description": "",
+	"auth": {
+		"type": "bearer",
+		"bearer": [
+			{
+				"key": "token",
+				"value": "{{cointoken}}"
+			}
+		]
+	},
+	"events": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"id": "94bdf545-0036-4cf6-93a6-b2c0373ba88e",
+				"type": "text/javascript",
+				"exec": [
+					"pm.sendRequest({",
+					"    url: \"http://IBDC0APP101D:65025/token\",",
+					"    method: 'POST',",
+					"    header: {",
+					"        'Accept': 'application/json',",
+					"        'Content-Type': 'application/x-www-form-urlencoded',",
+					"        'Authorization': 'Basic dnNoYXJhcG86SWJlcmlhMiQ='",
+					"    },",
+					"    body: {",
+					"        mode: 'urlencoded',",
+					"        urlencoded: [",
+					"            {",
+					"                key: \"grant_type\", value:\"password\", disabled: false",
+					"            },",
+					"            {",
+					"                key: \"username\", value:\"vsharapo\", disabled: false",
+					"            },",
+					"            {",
+					"                key: \"password\", value:\"Iberia5$\", disabled: false",
+					"            }",
+					"        ]",
+					"    }",
+					"}, function(err, res) {",
+					"    pm.globals.set(\"cointoken\", res.json().access_token)",
+					"})"
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"id": "df0c2139-a6d3-4779-aee5-734859e3e12b",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variables": null,
+	"order": [
+		"b7e419c3-2183-bab5-a0e5-8dc94158ef29",
+		"ec135fe0-f5c6-9fb2-49aa-445526b53236",
+		"4aa635eb-16e4-4fc5-e128-66e6550c6499",
+		"0e533fac-27d1-3a9c-697d-829781aa7b23",
+		"2b605b34-47b9-7870-a72c-c719b2575f16",
+		"fbf0b719-71ee-534e-fc8b-a44d6e1e4769",
+		"3df756cf-11fd-8c03-4cbb-c2fbf7a9bdf2",
+		"3ba6e5c5-9cb7-05d8-cbd8-1694f802e9f0",
+		"55143e2e-ace9-db55-28d1-10ccf9ad4088",
+		"9193b674-e847-10fd-539d-d379732a932b",
+		"1acb7692-f305-6cd2-efea-22476407fa02",
+		"974053bc-575a-2a59-3ac1-2ebe431b3055",
+		"37c6f737-b075-1494-70bd-fb7a6ffa2109",
+		"bf84fcd0-2f9e-7f58-4ade-7b6bfa3063b2",
+		"ac81de2a-155e-2007-b6cb-a396ef799545",
+		"619bd1c3-7862-2304-66cc-71aea907ba5e",
+		"812505c8-12e3-a782-6977-d8676644a10d",
+		"3897beaa-977b-f9e7-7ddc-641b7e414882",
+		"a74a22c2-9a5d-f25f-3a77-97770cb2ac02",
+		"4ccd25f4-ec96-0ee9-da6f-e0a2bc82730f",
+		"bc816803-c1a6-0532-0f61-59b9ec05ce62",
+		"22a0a97c-3d6a-bcbc-4bb7-548cd71f6e7a",
+		"89583364-e8dd-3d91-c297-ba6858f63519",
+		"59c2e5c3-ebcc-fcb9-17fb-1d73ffe2d2b8",
+		"f8e6b040-2ff2-0057-0a96-a3910680de4b",
+		"1aaa76b1-5979-5336-ddd8-3689e21ca44c",
+		"66224119-ffba-72c1-b6b8-81f022d0ffa9",
+		"3fe7d4be-3bf8-5672-1cc6-51094e237c25",
+		"aa67acff-6255-9842-82f3-613325a17e8e",
+		"6da72efa-4acf-7c03-9dad-13f966005861",
+		"43d7e347-6109-dc20-0268-45115e8fe2fd",
+		"c5340b0f-b3d0-878c-b31d-b902787e1b5e",
+		"ea3fd714-43e1-2277-4479-c45bf01f7855",
+		"cff14448-35f7-37ed-8cef-49c9a80c1bd7",
+		"bae30c55-9b43-439c-b0f6-540f580369ae",
+		"46682367-61b3-cb91-862e-795f8b8c4447",
+		"388a094a-9a7a-41ed-9f23-cca39df5f48d"
+	],
+	"folders_order": [
+		"a3657539-2b7c-ee3c-1634-7b07363f4356",
+		"c3575a73-8dee-43e5-bb53-817b9460b801",
+		"3701dd93-dc6f-4e7c-b981-f03bd445b178"
+	],
+	"folders": [
+		{
+			"id": "7093bd4d-d1a0-44be-8bc1-59ee1b8bc3db",
+			"name": "AutodialConsent",
+			"description": "",
+			"auth": null,
+			"events": null,
+			"collection": "30b86f20-42df-50eb-1980-c2ab36992342",
+			"folder": "3701dd93-dc6f-4e7c-b981-f03bd445b178",
+			"order": [
+				"092565b6-9f00-4fb0-ab6d-2561439ade0a",
+				"61418e4a-2d1d-4dd7-88f1-2f05942a8421"
+			],
+			"folders_order": []
+		},
+		{
+			"id": "eaf5c40a-3c69-4299-a709-22e1e8bc8266",
+			"name": "CL",
+			"description": "",
+			"auth": null,
+			"events": null,
+			"collection": "30b86f20-42df-50eb-1980-c2ab36992342",
+			"folder": "3701dd93-dc6f-4e7c-b981-f03bd445b178",
+			"order": [
+				"12187708-610d-4d84-8cc7-b3018eead406"
+			],
+			"folders_order": []
+		},
+		{
+			"id": "4e3d98dd-d0ae-4435-8f86-bea8e9aadfad",
+			"name": "CaseTicklers",
+			"description": "",
+			"auth": null,
+			"events": null,
+			"collection": "30b86f20-42df-50eb-1980-c2ab36992342",
+			"folder": "c3575a73-8dee-43e5-bb53-817b9460b801",
+			"order": [
+				"2bb6ebce-34fb-4945-a03d-eac9ddcc0cd0",
+				"b265c235-6a6c-4f08-ae91-7f78df9e0eb3"
+			],
+			"folders_order": []
+		},
+		{
+			"id": "3701dd93-dc6f-4e7c-b981-f03bd445b178",
+			"name": "Miscell",
+			"description": "",
+			"auth": null,
+			"events": null,
+			"collection": "30b86f20-42df-50eb-1980-c2ab36992342",
+			"folder": null,
+			"order": [],
+			"folders_order": [
+				"7093bd4d-d1a0-44be-8bc1-59ee1b8bc3db",
+				"eaf5c40a-3c69-4299-a709-22e1e8bc8266"
+			]
+		},
+		{
+			"id": "a3657539-2b7c-ee3c-1634-7b07363f4356",
+			"name": "Reports",
+			"description": "",
+			"auth": {
+				"type": "bearer",
+				"bearer": [
+					{
+						"key": "token",
+						"value": "2X-o5qrE_f0RFiitVg2cGRFkREIJ7OWnbW0ajA82rkf8LlQJMK7s6eX8a9xN_JSZJil5aBy1_qx4dQ_4VOsul-8PgKV9Yvlyn0iPD0dO1rJLa3OXsnGxyD-9wzVO2UJA6__xmibxK0qr0On5EigxYUZEONKlTW-BcVx3fEzgt7xQTeIoYca8R38reH-pmqNgIR8zHNOlp4VfzXxndc4Ik2lMB_5jKc9TNAKgZ83v929_o-vY1nfQd5B2nw308E42BzeHe-wRnlzzitVaqgot7qgKHhMq1HpxB76t1ZjMfdjaBDrZlIzXg7Lg2KrtQgwGn_BUvNgbg_78ACaifNvzRg"
+					}
+				]
+			},
+			"events": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "298af078-4f86-4cca-8b0c-b9c56105f942",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"id": "0ca7d968-8cdc-461a-8498-c09dc8194edb",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			],
+			"collection": "30b86f20-42df-50eb-1980-c2ab36992342",
+			"folder": null,
+			"order": [
+				"a72488d8-d72e-6933-72f9-c6b72df2bc3b",
+				"8e866426-2384-b3ec-da8e-dae1eb7a65b3",
+				"d7f01190-c5b8-dcd1-c2b1-94e024e37bc1",
+				"f62e989f-dd15-d82d-cbe0-81ac5485a83e",
+				"40cf740b-11a5-d9c4-4e45-f05955dbb35c",
+				"bdf2d18e-8b61-6b1b-458c-24a4299c786d",
+				"6eccfc96-fc93-f2d1-3562-ee72260ff5c0"
+			],
+			"folders_order": []
+		},
+		{
+			"id": "a900ab20-fe8a-487a-981f-7694977ebb6c",
+			"name": "TicklerAttributeMap",
+			"description": "",
+			"auth": null,
+			"events": null,
+			"collection": "30b86f20-42df-50eb-1980-c2ab36992342",
+			"folder": "c3575a73-8dee-43e5-bb53-817b9460b801",
+			"order": [
+				"daa068c3-b511-4635-973c-9a2a9ce05af0",
+				"1ddd35f8-5001-4fe5-9ae3-ec3ab643d836",
+				"85fb29a5-4b36-47eb-a166-27ba58792262",
+				"99147ad9-af23-45f4-8ee8-b91cbda8d88e"
+			],
+			"folders_order": []
+		},
+		{
+			"id": "bf7cfc1a-5858-4010-afb9-db7abcd0ef34",
+			"name": "TicklerAttributeType",
+			"description": "",
+			"auth": null,
+			"events": null,
+			"collection": "30b86f20-42df-50eb-1980-c2ab36992342",
+			"folder": "c3575a73-8dee-43e5-bb53-817b9460b801",
+			"order": [
+				"e32b4e39-943b-4c56-bf3b-9a167964f6fd",
+				"538111e6-554e-419a-a005-262606be0e57",
+				"1edf2379-029a-441a-8d28-a9f4d6888c59",
+				"e2e99120-cafd-4b8c-b6ba-286d2f404b34"
+			],
+			"folders_order": []
+		},
+		{
+			"id": "21d5d4b8-400e-4a26-b2f5-43f4893353c3",
+			"name": "TicklerCase",
+			"description": "",
+			"auth": null,
+			"events": null,
+			"collection": "30b86f20-42df-50eb-1980-c2ab36992342",
+			"folder": "c3575a73-8dee-43e5-bb53-817b9460b801",
+			"order": [
+				"b4255e8f-5ef0-4e04-b82f-c4395aa5b40f",
+				"b22f193a-d159-4ac6-b56a-ef9a69e5bc93"
+			],
+			"folders_order": []
+		},
+		{
+			"id": "32c2b8ac-9ebb-4d70-aa64-9df7aa371d71",
+			"name": "TicklerProcess",
+			"description": "",
+			"auth": null,
+			"events": null,
+			"collection": "30b86f20-42df-50eb-1980-c2ab36992342",
+			"folder": "c3575a73-8dee-43e5-bb53-817b9460b801",
+			"order": [
+				"d49fd653-ef53-4876-b5fa-8681b92db28c"
+			],
+			"folders_order": []
+		},
+		{
+			"id": "c3575a73-8dee-43e5-bb53-817b9460b801",
+			"name": "TicklerProcess",
+			"description": "",
+			"auth": {
+				"type": "bearer",
+				"bearer": [
+					{
+						"key": "token",
+						"value": "{{cointoken}}"
+					}
+				]
+			},
+			"events": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "7b6e3e42-ad7d-460b-8929-2e01ed244ceb",
+						"type": "text/javascript",
+						"exec": [
+							"pm.sendRequest({",
+							"    url: \"http://IBDC0APP101D:65025/token\",",
+							"    method: 'POST',",
+							"    header: {",
+							"        'Accept': 'application/json',",
+							"        'Content-Type': 'application/x-www-form-urlencoded',",
+							"        'Authorization': 'Basic dnNoYXJhcG86SWJlcmlhMiQ='",
+							"    },",
+							"    body: {",
+							"        mode: 'urlencoded',",
+							"        urlencoded: [",
+							"            {",
+							"                key: \"grant_type\", value:\"password\", disabled: false",
+							"            },",
+							"            {",
+							"                key: \"username\", value:\"vsharapo\", disabled: false",
+							"            },",
+							"            {",
+							"                key: \"password\", value:\"Iberia5$\", disabled: false",
+							"            }",
+							"        ]",
+							"    }",
+							"}, function(err, res) {",
+							"    pm.globals.set(\"cointoken\", res.json().access_token)",
+							"})"
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"id": "f9f313c2-fe63-4589-8ad2-2bd8288e3d2f",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			],
+			"collection": "30b86f20-42df-50eb-1980-c2ab36992342",
+			"folder": null,
+			"order": [],
+			"folders_order": [
+				"8c3df387-3b74-4348-ad0e-09537e24966b",
+				"bf7cfc1a-5858-4010-afb9-db7abcd0ef34",
+				"85367218-d888-46a0-843e-748c8eaff551",
+				"a900ab20-fe8a-487a-981f-7694977ebb6c",
+				"32c2b8ac-9ebb-4d70-aa64-9df7aa371d71",
+				"21d5d4b8-400e-4a26-b2f5-43f4893353c3",
+				"4e3d98dd-d0ae-4435-8f86-bea8e9aadfad"
+			]
+		},
+		{
+			"id": "8c3df387-3b74-4348-ad0e-09537e24966b",
+			"name": "TicklerType",
+			"description": "",
+			"auth": null,
+			"events": null,
+			"collection": "30b86f20-42df-50eb-1980-c2ab36992342",
+			"folder": "c3575a73-8dee-43e5-bb53-817b9460b801",
+			"order": [
+				"32ea1104-7aad-43d7-9819-84be78d48579",
+				"59174819-7114-4c15-91ae-682a3a713267",
+				"7e9e9ed3-8f00-45fc-91f1-cd2ea20dd80c",
+				"a90b8541-5218-4c8a-8edc-f7252e26c89f"
+			],
+			"folders_order": []
+		},
+		{
+			"id": "85367218-d888-46a0-843e-748c8eaff551",
+			"name": "TicklerTypeMap",
+			"description": "",
+			"auth": null,
+			"events": null,
+			"collection": "30b86f20-42df-50eb-1980-c2ab36992342",
+			"folder": "c3575a73-8dee-43e5-bb53-817b9460b801",
+			"order": [
+				"25f8c61d-924c-4e0d-946a-4eb31a8ee947",
+				"28b7dbd1-4ea6-4c48-89fb-2203273993fb",
+				"86db4c00-fb54-4854-9df3-61f043691ea0"
+			],
+			"folders_order": []
+		}
+	],
+	"requests": [
+		{
+			"id": "092565b6-9f00-4fb0-ab6d-2561439ade0a",
+			"name": "getCustomerConsent",
+			"url": "{{spaceURL}}/api/customer/consent/v1?CifId=A1",
+			"description": null,
+			"data": [],
+			"dataMode": "raw",
+			"headerData": [
+				{
+					"key": "Authorization",
+					"value": "Bearer s0nNVNo5_j0SIR-0aiN0zwBW47jDlsqOnAIKLNmBidQMa3in-ArgEJp75gQErqHPfSredlY3wglPwShf2Qftzbqc8ryTTFFxETxkbiwv_B5PoB-Tk3TMe75E7VYNtQyDRcQd36of3D9l3tuRJSg0WHD8fLxzHN3CJGiPYimLYf1rqfYS3kuY8tgTlSL4K97kf2-y3KO-57CWePBqSv-prVwzxPRmWDUxL-AacML0bojZ281vltLa-Kyv3KPR70wb8wfTphJXVHKUHFEwr-AfHh_P8Anc1nqH0Ioz48SNBOkF_jHNCTNRfkkXyMCXaJGLAAXiNG3VhcKh4ucR-jKvBQ",
+					"description": "",
+					"enabled": true
+				},
+				{
+					"key": "Content-Type",
+					"value": "application/json",
+					"description": "",
+					"enabled": true
+				}
+			],
+			"method": "GET",
+			"pathVariableData": [],
+			"queryParams": [
+				{
+					"key": "ActiveFlg",
+					"value": "N",
+					"equals": true,
+					"description": "",
+					"enabled": false
+				},
+				{
+					"key": "CifId",
+					"value": "A1",
+					"equals": true,
+					"description": "",
+					"enabled": true
+				}
+			],
+			"auth": null,
+			"events": null,
+			"folder": "7093bd4d-d1a0-44be-8bc1-59ee1b8bc3db",
+			"rawModeData": "{\r\n    \"userCd\": \"vsharapo\",\r\n    \"uploadId\": 69,\r\n    \"campaignCd\": \"TEST\"\r\n}",
+			"headers": "Authorization: Bearer s0nNVNo5_j0SIR-0aiN0zwBW47jDlsqOnAIKLNmBidQMa3in-ArgEJp75gQErqHPfSredlY3wglPwShf2Qftzbqc8ryTTFFxETxkbiwv_B5PoB-Tk3TMe75E7VYNtQyDRcQd36of3D9l3tuRJSg0WHD8fLxzHN3CJGiPYimLYf1rqfYS3kuY8tgTlSL4K97kf2-y3KO-57CWePBqSv-prVwzxPRmWDUxL-AacML0bojZ281vltLa-Kyv3KPR70wb8wfTphJXVHKUHFEwr-AfHh_P8Anc1nqH0Ioz48SNBOkF_jHNCTNRfkkXyMCXaJGLAAXiNG3VhcKh4ucR-jKvBQ\nContent-Type: application/json\n",
+			"pathVariables": {}
+		},
+		{
+			"id": "0e533fac-27d1-3a9c-697d-829781aa7b23",
+			"name": "acctInq",
+			"url": "{{spaceURL}}/api/acctInq/v1?accountId=6900526473&accountType=L",
+			"description": "",
+			"data": [],
+			"dataMode": "params",
+			"headerData": [
+				{
+					"key": "Authorization",
+					"value": "Bearer 8RPsI0JQu6Az-GXSEetLJO3NDPrn0r7fY7Q1xkgWn4poh2LyWhW8cGN1ogCqetj1bpHAdaEolvd8s-itvPtgjgK_JEi1IB8kHdxqDGtguSR2eaDyrLVCz11A60ww2qrx9M57ojZBe7N2fbtw9Ulu-O7zr2bVFyZhc0oNUoB6ES-EgUh_2tIBBxx2q-ASuT3FI6GJZ7eNyFCZ2cuxVrkZ3oGRvajnU2MlrKmsufhT7ChBuU34sNCB41anbY1XmEEKVSK5P5nNDmVsCqwL-Rpm0F7HHO1whbL0MNH2R0KTPGePQs5WtT-7Ec_W8asD5Svcq6pvngI97-yAwkx2ksDn4Q",
+					"description": "",
+					"enabled": true
+				}
+			],
+			"method": "GET",
+			"pathVariableData": [],
+			"queryParams": [
+				{
+					"key": "accountId",
+					"value": "6900526473",
+					"equals": true,
+					"description": "",
+					"enabled": true
+				},
+				{
+					"key": "accountType",
+					"value": "L",
+					"equals": true,
+					"description": "",
+					"enabled": true
+				}
+			],
+			"auth": null,
+			"events": null,
+			"folder": null,
+			"headers": "Authorization: Bearer 8RPsI0JQu6Az-GXSEetLJO3NDPrn0r7fY7Q1xkgWn4poh2LyWhW8cGN1ogCqetj1bpHAdaEolvd8s-itvPtgjgK_JEi1IB8kHdxqDGtguSR2eaDyrLVCz11A60ww2qrx9M57ojZBe7N2fbtw9Ulu-O7zr2bVFyZhc0oNUoB6ES-EgUh_2tIBBxx2q-ASuT3FI6GJZ7eNyFCZ2cuxVrkZ3oGRvajnU2MlrKmsufhT7ChBuU34sNCB41anbY1XmEEKVSK5P5nNDmVsCqwL-Rpm0F7HHO1whbL0MNH2R0KTPGePQs5WtT-7Ec_W8asD5Svcq6pvngI97-yAwkx2ksDn4Q\n",
+			"pathVariables": {}
+		},
+		{
+			"id": "12187708-610d-4d84-8cc7-b3018eead406",
+			"name": "CL order by",
+			"url": "{{spaceURL}}/api/campaignlists/orderby/v1",
+			"description": "",
+			"data": [],
+			"dataMode": "raw",
+			"headerData": [
+				{
+					"key": "Authorization",
+					"value": "Bearer RvVu_20t_s2BKlc56OseNlGIMYhBJdvwTUGcJw6a1IYhKkKrAMMeh3m0qOjUrab6PLx8T7eWOSA0FBrvFHVupPVLglEMQ3Jwot0DrcYZ6utxKApbcyha9g7OmFPTmB-b8G69R1QpvpXyQU9r3OvVjOaVW4gbMkTJOqJUu6pZSZTUNZJ08x3Y_DrlTbOhYKOi7b9zi8J56unAHqq4U6kFLZwkUMumigwsS2Ozn-y2sPdHMffZ3orzjlCHhXGI-y1tzFIA_98c9vH5zc5FYvDxWRpYyfnKQExZAWYYD-pd9MKuPuF44v8o9sEdti-4gb__P-pE3VBlITTz32yT3ivjdQ",
+					"description": "",
+					"enabled": true
+				},
+				{
+					"key": "Content-Type",
+					"value": "application/json",
+					"description": "",
+					"enabled": true
+				}
+			],
+			"method": "POST",
+			"pathVariableData": [],
+			"queryParams": [],
+			"auth": null,
+			"events": [],
+			"folder": "eaf5c40a-3c69-4299-a709-22e1e8bc8266",
+			"rawModeData": "{\r\n    \"UserCd\": \"vsharapo\",\r\n    \"CLID\": 479,\r\n    \"Column\": \"Id\",\r\n    \"Order\": \"DESC\"\r\n}",
+			"headers": "Authorization: Bearer RvVu_20t_s2BKlc56OseNlGIMYhBJdvwTUGcJw6a1IYhKkKrAMMeh3m0qOjUrab6PLx8T7eWOSA0FBrvFHVupPVLglEMQ3Jwot0DrcYZ6utxKApbcyha9g7OmFPTmB-b8G69R1QpvpXyQU9r3OvVjOaVW4gbMkTJOqJUu6pZSZTUNZJ08x3Y_DrlTbOhYKOi7b9zi8J56unAHqq4U6kFLZwkUMumigwsS2Ozn-y2sPdHMffZ3orzjlCHhXGI-y1tzFIA_98c9vH5zc5FYvDxWRpYyfnKQExZAWYYD-pd9MKuPuF44v8o9sEdti-4gb__P-pE3VBlITTz32yT3ivjdQ\nContent-Type: application/json\n",
+			"pathVariables": {}
+		},
+		{
+			"id": "1aaa76b1-5979-5336-ddd8-3689e21ca44c",
+			"name": "statistics_custCallsCount",
+			"url": "{{spaceURL}}/api/statistics/customer_calls_count/v1?CustomerId=YAI2697&StartDt=2018-02-12",
+			"description": "",
+			"data": [],
+			"dataMode": "raw",
+			"headerData": [
+				{
+					"key": "Authorization",
+					"value": "Bearer Sxz1LdfEqIYFSo3DGhajfYwX5Bvv-Ezp1rHuJpVNmcNOhZeBh4zV9g-a--CmHWfWBlgFkFCnsPudZhIMAt63Ai6VNXfhww2j5OqLNAhLTrs-FtXPb4I4tLTvlXZsPT31459Y6uPEb7e7X6rVSAmi7hrmjZa7FUqjyLbQleIMmsIcAI76kmJerU9GFe4YLnLaN2_Lrybw3eFIZ7RMLH0N8ns0K5WVwMsYTaWY2kMf0_aFEMn5KLOyYv3k0RduEytaOfuqwbTO-8H1xS5KkJU2KU6A9YvvFWQiLGhPB7dvJLzKJr0yV8kmBeA0jwulTPxAQEaQs7f6EyNeD01DTyziyw",
+					"description": "",
+					"enabled": true
+				},
+				{
+					"key": "Content-Type",
+					"value": "application/json",
+					"description": "",
+					"enabled": true
+				}
+			],
+			"method": "GET",
+			"pathVariableData": [],
+			"queryParams": [
+				{
+					"key": "CustomerId",
+					"value": "YAI2697",
+					"equals": true,
+					"description": "",
+					"enabled": true
+				},
+				{
+					"key": "StartDt",
+					"value": "2018-02-12",
+					"equals": true,
+					"description": "",
+					"enabled": true
+				}
+			],
+			"auth": null,
+			"events": [],
+			"folder": null,
+			"rawModeData": "{\r\n    \"userCd\": \"vsharapo\",\r\n    \"uploadId\": 69,\r\n    \"campaignCd\": \"TEST\"\r\n}",
+			"headers": "Authorization: Bearer Sxz1LdfEqIYFSo3DGhajfYwX5Bvv-Ezp1rHuJpVNmcNOhZeBh4zV9g-a--CmHWfWBlgFkFCnsPudZhIMAt63Ai6VNXfhww2j5OqLNAhLTrs-FtXPb4I4tLTvlXZsPT31459Y6uPEb7e7X6rVSAmi7hrmjZa7FUqjyLbQleIMmsIcAI76kmJerU9GFe4YLnLaN2_Lrybw3eFIZ7RMLH0N8ns0K5WVwMsYTaWY2kMf0_aFEMn5KLOyYv3k0RduEytaOfuqwbTO-8H1xS5KkJU2KU6A9YvvFWQiLGhPB7dvJLzKJr0yV8kmBeA0jwulTPxAQEaQs7f6EyNeD01DTyziyw\nContent-Type: application/json\n",
+			"pathVariables": {}
+		},
+		{
+			"id": "1acb7692-f305-6cd2-efea-22476407fa02",
+			"name": "nextAccount",
+			"url": "{{spaceURL}}/api/accounts/next/v1?campaignCd=INDIRECT&userCd=pblanco",
+			"description": "",
+			"data": [],
+			"dataMode": "params",
+			"headerData": [
+				{
+					"key": "Authorization",
+					"value": "Bearer _Tri8ZM0Wdvh8NBQPTzt3Zxl8BBJfd39oIxRuMWotEYN6sJa-MmElTW1oqC-PAIdZHkUhoZg_FIz2mPGDcvj4pP0JjNcwsXE2uvS1bvRbn8lKZ_MaqorZujD8uMXVVrh9gtFtlp4Us0GyLV7--DA5_VGa47yRR0j0JdTeX5xhBkhLiNZutgLUFQRk-eNYbrsoMTqGGwc-smGecCs9m-NXDLtTzNetHCtwnGswTtC2iPuCGudEvN2q5bXnNpodsaGrdkEluYjI_8300VLo8Hh3_YvzKwOL_nDGfuHhFF_6hILKZ0-r_wp9sFB9ZMfPHr5ZxzrwOzDhcpyqTfWhdyRfg",
+					"description": "",
+					"enabled": true
+				}
+			],
+			"method": "GET",
+			"pathVariableData": [],
+			"queryParams": [
+				{
+					"key": "campaignCd",
+					"value": "INDIRECT",
+					"equals": true,
+					"description": "",
+					"enabled": true
+				},
+				{
+					"key": "userCd",
+					"value": "pblanco",
+					"equals": true,
+					"description": "",
+					"enabled": true
+				}
+			],
+			"auth": null,
+			"events": null,
+			"folder": null,
+			"headers": "Authorization: Bearer _Tri8ZM0Wdvh8NBQPTzt3Zxl8BBJfd39oIxRuMWotEYN6sJa-MmElTW1oqC-PAIdZHkUhoZg_FIz2mPGDcvj4pP0JjNcwsXE2uvS1bvRbn8lKZ_MaqorZujD8uMXVVrh9gtFtlp4Us0GyLV7--DA5_VGa47yRR0j0JdTeX5xhBkhLiNZutgLUFQRk-eNYbrsoMTqGGwc-smGecCs9m-NXDLtTzNetHCtwnGswTtC2iPuCGudEvN2q5bXnNpodsaGrdkEluYjI_8300VLo8Hh3_YvzKwOL_nDGfuHhFF_6hILKZ0-r_wp9sFB9ZMfPHr5ZxzrwOzDhcpyqTfWhdyRfg\n",
+			"pathVariables": {}
+		},
+		{
+			"id": "1ddd35f8-5001-4fe5-9ae3-ec3ab643d836",
+			"name": "addTicklerAttributeMap",
+			"url": "{{spaceURL}}/api/tp/ticklers_atb_map/v1",
+			"description": "",
+			"data": [],
+			"dataMode": "raw",
+			"headerData": [
+				{
+					"key": "Content-Type",
+					"value": "application/json",
+					"description": "",
+					"enabled": true
+				}
+			],
+			"method": "POST",
+			"pathVariableData": [],
+			"queryParams": [],
+			"auth": null,
+			"events": [],
+			"folder": "a900ab20-fe8a-487a-981f-7694977ebb6c",
+			"rawModeData": "{\r\n    \"TicklerTypeId\": 3,\r\n    \"AttributeTypeId\": 1,\r\n    \"CreatedBy\": \"vsharapo\"\r\n}\r\n",
+			"headers": "Content-Type: application/json\n",
+			"pathVariables": {}
+		},
+		{
+			"id": "1edf2379-029a-441a-8d28-a9f4d6888c59",
+			"name": "updateTicklerAttributeType",
+			"url": "{{spaceURL}}/api/tp/tickler_attribute_types/v1",
+			"description": "",
+			"data": [],
+			"dataMode": "raw",
+			"headerData": [
+				{
+					"key": "Content-Type",
+					"value": "application/json",
+					"description": "",
+					"enabled": true
+				}
+			],
+			"method": "PUT",
+			"pathVariableData": [],
+			"queryParams": [],
+			"auth": null,
+			"events": [],
+			"folder": "bf7cfc1a-5858-4010-afb9-db7abcd0ef34",
+			"rawModeData": "{\r\n    \"Id\": 1,\r\n    \"AttributeNm\": \"test\",\r\n    \"AttributeDesc\":\"test\",\r\n    \"ActiveFlg\":\"Y\",\r\n    \"ArrayFlg\": \"N\",\r\n    \"MandatoryFlg\": \"Y\",\r\n    \"DataType\": \"STRING\",\r\n    \"ModifiedBy\": \"vsharapo\"\r\n}\r\n",
+			"headers": "Content-Type: application/json\n",
+			"pathVariables": {}
+		},
+		{
+			"id": "22a0a97c-3d6a-bcbc-4bb7-548cd71f6e7a",
+			"name": "userCampaigns delete",
+			"url": "{{spaceURL}}/api/usercampaigns/v1?UserCd=pblanco",
+			"description": "",
+			"data": [],
+			"dataMode": "raw",
+			"headerData": [
+				{
+					"key": "Authorization",
+					"value": "Bearer AWG5jVcEwXpm7hNvGnNF2MDPRsufecUFyeu6R-2-9-M33KPM-2qYAWROfbAR2sCWAwPihDZV0wFFp-n4y-S1v9n8G-2G5fhkDsHHuMJglrG-NB_ic8pl3gpApc64NskB89CGxTyRJH2piByQSFoKkbdIJKHgn1XXk6ZY2p_SRJRd3cieLj_xRLYOD5WckF-C_Y1YVETo5qErkRMRYlE30k5N2tyiP7rstQjYGdQANyk1wN6ZnWVNHQXxWQU4fwREYpQagyD2oB7rw0ukyFP4Roq6XkqiGhfI4F1NuicnQRzMIBfn5bYj2x7j8Ms87qydrVIIDjdcBrYL85Vr2Tl1mw",
+					"description": "",
+					"enabled": true
+				},
+				{
+					"key": "Content-Type",
+					"value": "application/json",
+					"description": "",
+					"enabled": true
+				}
+			],
+			"method": "DELETE",
+			"pathVariableData": [],
+			"queryParams": [
+				{
+					"key": "UserCd",
+					"value": "pblanco",
+					"equals": true,
+					"description": "",
+					"enabled": true
+				}
+			],
+			"auth": null,
+			"events": [],
+			"folder": null,
+			"rawModeData": "",
+			"headers": "Authorization: Bearer AWG5jVcEwXpm7hNvGnNF2MDPRsufecUFyeu6R-2-9-M33KPM-2qYAWROfbAR2sCWAwPihDZV0wFFp-n4y-S1v9n8G-2G5fhkDsHHuMJglrG-NB_ic8pl3gpApc64NskB89CGxTyRJH2piByQSFoKkbdIJKHgn1XXk6ZY2p_SRJRd3cieLj_xRLYOD5WckF-C_Y1YVETo5qErkRMRYlE30k5N2tyiP7rstQjYGdQANyk1wN6ZnWVNHQXxWQU4fwREYpQagyD2oB7rw0ukyFP4Roq6XkqiGhfI4F1NuicnQRzMIBfn5bYj2x7j8Ms87qydrVIIDjdcBrYL85Vr2Tl1mw\nContent-Type: application/json\n",
+			"pathVariables": {}
+		},
+		{
+			"id": "25f8c61d-924c-4e0d-946a-4eb31a8ee947",
+			"name": "getTicklerTypeMap",
+			"url": "{{spaceURL}}/api/tp/ticklers_map/v1",
+			"description": null,
+			"data": [],
+			"dataMode": "raw",
+			"headerData": [
+				{
+					"key": "Content-Type",
+					"value": "application/json",
+					"description": "",
+					"enabled": true
+				}
+			],
+			"method": "GET",
+			"pathVariableData": [],
+			"queryParams": [
+				{
+					"key": "TicklerFromId",
+					"value": "3",
+					"equals": true,
+					"description": "",
+					"enabled": false
+				}
+			],
+			"auth": null,
+			"events": null,
+			"folder": "85367218-d888-46a0-843e-748c8eaff551",
+			"rawModeData": "{\r\n    \"userCd\": \"vsharapo\",\r\n    \"uploadId\": 69,\r\n    \"campaignCd\": \"TEST\"\r\n}",
+			"headers": "Content-Type: application/json\n",
+			"pathVariables": {}
+		},
+		{
+			"id": "28b7dbd1-4ea6-4c48-89fb-2203273993fb",
+			"name": "addTicklerTypeMap",
+			"url": "{{spaceURL}}/api/tp/ticklers_map/v1",
+			"description": "",
+			"data": [],
+			"dataMode": "raw",
+			"headerData": [
+				{
+					"key": "Content-Type",
+					"value": "application/json",
+					"description": "",
+					"enabled": true
+				}
+			],
+			"method": "POST",
+			"pathVariableData": [],
+			"queryParams": [],
+			"auth": null,
+			"events": [],
+			"folder": "85367218-d888-46a0-843e-748c8eaff551",
+			"rawModeData": "{\r\n    \"TicklerFromId\": 7,\r\n    \"TicklerToId\": 8,\r\n    \"CreatedBy\": \"vsharapo\"\r\n}\r\n",
+			"headers": "Content-Type: application/json\n",
+			"pathVariables": {}
+		},
+		{
+			"id": "2b605b34-47b9-7870-a72c-c719b2575f16",
+			"name": "custSrch",
+			"url": "{{spaceURL}}/api/custsrch/v1?taxId=637562547",
+			"description": "",
+			"data": [],
+			"dataMode": "params",
+			"headerData": [
+				{
+					"key": "Authorization",
+					"value": "Bearer de_JrK0c5egwmLxIN3wdc1uyxNeGZS63AIDC36YY0A4NsA3h2TUhhuHVjkAtt19Lvy7iCedsjHLVSzuiwv7Jza1NHAs0f0S2aaVAq-gUh-WYwx92UE4YxjWBUpGKGT9Y0ceoUZLhgRMFeGBKymlJHMVNXdFtjSWlcGMH5npRyvYRzFOCyg1v72UY3ImDL4JxrCJoFR5t280NotPj9mBgvBwQiVlZpXnk_4x7qILXYm1-giWmlEtGElDJrboB64CsHDs-qIdYuZcT2k1aXwPgmkFL8a7CHSaoBlSemW7hIvota_yqzYwlEgxRD9gHCY_Y",
+					"description": "",
+					"enabled": true
+				}
+			],
+			"method": "GET",
+			"pathVariableData": [],
+			"queryParams": [
+				{
+					"key": "taxId",
+					"value": "637562547",
+					"equals": true,
+					"description": "",
+					"enabled": true
+				}
+			],
+			"auth": null,
+			"events": null,
+			"folder": null,
+			"headers": "Authorization: Bearer de_JrK0c5egwmLxIN3wdc1uyxNeGZS63AIDC36YY0A4NsA3h2TUhhuHVjkAtt19Lvy7iCedsjHLVSzuiwv7Jza1NHAs0f0S2aaVAq-gUh-WYwx92UE4YxjWBUpGKGT9Y0ceoUZLhgRMFeGBKymlJHMVNXdFtjSWlcGMH5npRyvYRzFOCyg1v72UY3ImDL4JxrCJoFR5t280NotPj9mBgvBwQiVlZpXnk_4x7qILXYm1-giWmlEtGElDJrboB64CsHDs-qIdYuZcT2k1aXwPgmkFL8a7CHSaoBlSemW7hIvota_yqzYwlEgxRD9gHCY_Y\n",
+			"pathVariables": {}
+		},
+		{
+			"id": "2bb6ebce-34fb-4945-a03d-eac9ddcc0cd0",
+			"name": "getCaseTicklers",
+			"url": "{{spaceURL}}/api/tp/case_ticklers/v1?CaseId=42",
+			"description": null,
+			"data": [],
+			"dataMode": "raw",
+			"headerData": [
+				{
+					"key": "Authorization",
+					"value": "Bearer s0nNVNo5_j0SIR-0aiN0zwBW47jDlsqOnAIKLNmBidQMa3in-ArgEJp75gQErqHPfSredlY3wglPwShf2Qftzbqc8ryTTFFxETxkbiwv_B5PoB-Tk3TMe75E7VYNtQyDRcQd36of3D9l3tuRJSg0WHD8fLxzHN3CJGiPYimLYf1rqfYS3kuY8tgTlSL4K97kf2-y3KO-57CWePBqSv-prVwzxPRmWDUxL-AacML0bojZ281vltLa-Kyv3KPR70wb8wfTphJXVHKUHFEwr-AfHh_P8Anc1nqH0Ioz48SNBOkF_jHNCTNRfkkXyMCXaJGLAAXiNG3VhcKh4ucR-jKvBQ",
+					"description": "",
+					"enabled": true
+				},
+				{
+					"key": "Content-Type",
+					"value": "application/json",
+					"description": "",
+					"enabled": true
+				}
+			],
+			"method": "GET",
+			"pathVariableData": [],
+			"queryParams": [
+				{
+					"key": "CaseId",
+					"value": "42",
+					"equals": true,
+					"description": "",
+					"enabled": true
+				},
+				{
+					"key": "TicklerTypeCd",
+					"value": "SPOC CONTACT WITH CUSTOMER",
+					"equals": true,
+					"description": "",
+					"enabled": false
+				}
+			],
+			"auth": null,
+			"events": null,
+			"folder": "4e3d98dd-d0ae-4435-8f86-bea8e9aadfad",
+			"rawModeData": "{\r\n    \"userCd\": \"vsharapo\",\r\n    \"uploadId\": 69,\r\n    \"campaignCd\": \"TEST\"\r\n}",
+			"headers": "Authorization: Bearer s0nNVNo5_j0SIR-0aiN0zwBW47jDlsqOnAIKLNmBidQMa3in-ArgEJp75gQErqHPfSredlY3wglPwShf2Qftzbqc8ryTTFFxETxkbiwv_B5PoB-Tk3TMe75E7VYNtQyDRcQd36of3D9l3tuRJSg0WHD8fLxzHN3CJGiPYimLYf1rqfYS3kuY8tgTlSL4K97kf2-y3KO-57CWePBqSv-prVwzxPRmWDUxL-AacML0bojZ281vltLa-Kyv3KPR70wb8wfTphJXVHKUHFEwr-AfHh_P8Anc1nqH0Ioz48SNBOkF_jHNCTNRfkkXyMCXaJGLAAXiNG3VhcKh4ucR-jKvBQ\nContent-Type: application/json\n",
+			"pathVariables": {}
+		},
+		{
+			"id": "32ea1104-7aad-43d7-9819-84be78d48579",
+			"name": "getTicklerTypes",
+			"url": "{{spaceURL}}/api/tp/tickler_types/v1?ProcessId=3&CoreFlg=Y&BaseFlg=N",
+			"description": null,
+			"data": [],
+			"dataMode": "raw",
+			"headerData": [
+				{
+					"key": "Authorization",
+					"value": "Bearer s0nNVNo5_j0SIR-0aiN0zwBW47jDlsqOnAIKLNmBidQMa3in-ArgEJp75gQErqHPfSredlY3wglPwShf2Qftzbqc8ryTTFFxETxkbiwv_B5PoB-Tk3TMe75E7VYNtQyDRcQd36of3D9l3tuRJSg0WHD8fLxzHN3CJGiPYimLYf1rqfYS3kuY8tgTlSL4K97kf2-y3KO-57CWePBqSv-prVwzxPRmWDUxL-AacML0bojZ281vltLa-Kyv3KPR70wb8wfTphJXVHKUHFEwr-AfHh_P8Anc1nqH0Ioz48SNBOkF_jHNCTNRfkkXyMCXaJGLAAXiNG3VhcKh4ucR-jKvBQ",
+					"description": "",
+					"enabled": true
+				},
+				{
+					"key": "Content-Type",
+					"value": "application/json",
+					"description": "",
+					"enabled": true
+				}
+			],
+			"method": "GET",
+			"pathVariableData": [],
+			"queryParams": [
+				{
+					"key": "ProcessId",
+					"value": "3",
+					"equals": true,
+					"description": "",
+					"enabled": true
+				},
+				{
+					"key": "CoreFlg",
+					"value": "Y",
+					"equals": true,
+					"description": "",
+					"enabled": true
+				},
+				{
+					"key": "ActiveFlg",
+					"value": "N",
+					"equals": true,
+					"description": "",
+					"enabled": false
+				},
+				{
+					"key": "BaseFlg",
+					"value": "N",
+					"equals": true,
+					"description": "",
+					"enabled": true
+				}
+			],
+			"auth": null,
+			"events": null,
+			"folder": "8c3df387-3b74-4348-ad0e-09537e24966b",
+			"rawModeData": "{\r\n    \"userCd\": \"vsharapo\",\r\n    \"uploadId\": 69,\r\n    \"campaignCd\": \"TEST\"\r\n}",
+			"headers": "Authorization: Bearer s0nNVNo5_j0SIR-0aiN0zwBW47jDlsqOnAIKLNmBidQMa3in-ArgEJp75gQErqHPfSredlY3wglPwShf2Qftzbqc8ryTTFFxETxkbiwv_B5PoB-Tk3TMe75E7VYNtQyDRcQd36of3D9l3tuRJSg0WHD8fLxzHN3CJGiPYimLYf1rqfYS3kuY8tgTlSL4K97kf2-y3KO-57CWePBqSv-prVwzxPRmWDUxL-AacML0bojZ281vltLa-Kyv3KPR70wb8wfTphJXVHKUHFEwr-AfHh_P8Anc1nqH0Ioz48SNBOkF_jHNCTNRfkkXyMCXaJGLAAXiNG3VhcKh4ucR-jKvBQ\nContent-Type: application/json\n",
+			"pathVariables": {}
+		},
+		{
+			"id": "37c6f737-b075-1494-70bd-fb7a6ffa2109",
+			"name": "parseFile_Accounts",
+			"url": "{{spaceURL}}/api/sourcedata/accounts/v1?user=vsharapo&filename=coinexport1.txt",
+			"description": "",
+			"data": [],
+			"dataMode": "params",
+			"headerData": [
+				{
+					"key": "Authorization",
+					"value": "Bearer c13d9hzjTNThdpbeBpTMzCr7-8c-wl6VEE8bXNrZBa91ledIY4g84Ol9LQeUIN_-9oz8r17MratNcdI5c_xJVcf3gPqbrMgDNtA-xme9Zm9iPIp8w_nwfgOBmxNZwE0pt1ipPTNW0mj0wOV8mrH6fc7yfWddyBndgHa5QilFv0gICD__aoItVUUnrZIfapDh5mw5o5gC5vT52tVsqxg-CmoeRiCdvmJewljGkhU57qVm03KPgppuUU8oUBNNYWJVqUrDnPewKxJHuy6ncnejT8mmolIdVxK_y4OY0AV4maM5FlqLfJk_YP_yjd-Us0ODPJLPlV9aADrqDPEFK2rrTw",
+					"description": "",
+					"enabled": true
+				}
+			],
+			"method": "GET",
+			"pathVariableData": [],
+			"queryParams": [
+				{
+					"key": "user",
+					"value": "vsharapo",
+					"equals": true,
+					"description": "",
+					"enabled": true
+				},
+				{
+					"key": "filename",
+					"value": "coinexport1.txt",
+					"equals": true,
+					"description": "",
+					"enabled": true
+				}
+			],
+			"auth": null,
+			"events": null,
+			"folder": null,
+			"headers": "Authorization: Bearer c13d9hzjTNThdpbeBpTMzCr7-8c-wl6VEE8bXNrZBa91ledIY4g84Ol9LQeUIN_-9oz8r17MratNcdI5c_xJVcf3gPqbrMgDNtA-xme9Zm9iPIp8w_nwfgOBmxNZwE0pt1ipPTNW0mj0wOV8mrH6fc7yfWddyBndgHa5QilFv0gICD__aoItVUUnrZIfapDh5mw5o5gC5vT52tVsqxg-CmoeRiCdvmJewljGkhU57qVm03KPgppuUU8oUBNNYWJVqUrDnPewKxJHuy6ncnejT8mmolIdVxK_y4OY0AV4maM5FlqLfJk_YP_yjd-Us0ODPJLPlV9aADrqDPEFK2rrTw\n",
+			"pathVariables": {}
+		},
+		{
+			"id": "388a094a-9a7a-41ed-9f23-cca39df5f48d",
+			"name": "getToken",
+			"url": "{{spaceURL}}/token",
+			"description": "",
+			"data": [
+				{
+					"disabled": false,
+					"description": {
+						"content": "",
+						"type": "text/plain"
+					},
+					"key": "grant_type",
+					"value": "password",
+					"enabled": true,
+					"type": "text"
+				},
+				{
+					"disabled": false,
+					"description": {
+						"content": "",
+						"type": "text/plain"
+					},
+					"key": "username",
+					"value": "vsharapo",
+					"enabled": true,
+					"type": "text"
+				},
+				{
+					"disabled": false,
+					"description": {
+						"content": "",
+						"type": "text/plain"
+					},
+					"key": "password",
+					"value": "Iberia5$",
+					"enabled": true,
+					"type": "text"
+				}
+			],
+			"dataMode": "urlencoded",
+			"headerData": [
+				{
+					"key": "Accept",
+					"value": "application/json",
+					"description": "",
+					"enabled": true
+				},
+				{
+					"key": "Content-Type",
+					"value": "application/x-www-form-urlencoded",
+					"description": "",
+					"enabled": true
+				},
+				{
+					"key": "Authorization",
+					"value": "Basic dnNoYXJhcG86SWJlcmlhMiQ=",
+					"description": "",
+					"enabled": true
+				}
+			],
+			"method": "POST",
+			"pathVariableData": [],
+			"queryParams": [],
+			"auth": null,
+			"events": [],
+			"folder": null,
+			"headers": "Accept: application/json\nContent-Type: application/x-www-form-urlencoded\nAuthorization: Basic dnNoYXJhcG86SWJlcmlhMiQ=\n",
+			"pathVariables": {}
+		},
+		{
+			"id": "3897beaa-977b-f9e7-7ddc-641b7e414882",
+			"name": "campaignCreate copy",
+			"url": "{{spaceURL}}/api/campaignlists/v1",
+			"description": "",
+			"data": [],
+			"dataMode": "raw",
+			"headerData": [
+				{
+					"key": "Authorization",
+					"value": "Bearer c2oIFAhisCT5TrnBjqxEUmBIpD4XRH4QFQiimC0QiW66R0wYYnLDfutTM-BlLuWXTHiLo7L8q0qKFZi-zt5ntdyxBTsyAzoah5v6CQDDwNOUmcuUIfRghFkR7FbZdfpFNc4CVMzZeQxjHk5-BxnNybfKQEBK-olCDpTVkg5-pvp1pFNNQU-q9HaQiPskY4vsozSGm1dFkJBMyZJu5mw437ERyoByQsd7ajipEUfazcdleQT9RKudfZcqSV7UelaateLN8z5WC_BSEBQ1aYV-OUwLBWUlXwXdFoT-62XgacfsYL8KGG8CiaqeAf-_ObyB5hJE3GEcivocfhBRCbvf2A",
+					"description": "",
+					"enabled": true
+				},
+				{
+					"key": "Content-Type",
+					"value": "application/json",
+					"description": "",
+					"enabled": true
+				}
+			],
+			"method": "POST",
+			"pathVariableData": [],
+			"queryParams": [],
+			"auth": null,
+			"events": null,
+			"folder": null,
+			"rawModeData": "{\r\n  \"UserCd\": \"vsharapo\",\r\n  \"UploadId\": 1,\r\n  \"CampaignCd\": \"DIRECT\",\r\n    \"GROUP_IN\":[\"310\",\"350\",\"460\",\"360\"],\r\n    \"LXSTAT_NI\":[\"B\",\"0\",\"1\",\"3\",\"7\", \"5\", \"L\", \"R\",\"S\",\"U\", \"D\"],\r\n  \"LXNWDT_LTE\": \"2017-11-28\",\r\n  \"LASTPRMDATE_LT\": \"2017-11-28\"\r\n}\r\n",
+			"headers": "Authorization: Bearer c2oIFAhisCT5TrnBjqxEUmBIpD4XRH4QFQiimC0QiW66R0wYYnLDfutTM-BlLuWXTHiLo7L8q0qKFZi-zt5ntdyxBTsyAzoah5v6CQDDwNOUmcuUIfRghFkR7FbZdfpFNc4CVMzZeQxjHk5-BxnNybfKQEBK-olCDpTVkg5-pvp1pFNNQU-q9HaQiPskY4vsozSGm1dFkJBMyZJu5mw437ERyoByQsd7ajipEUfazcdleQT9RKudfZcqSV7UelaateLN8z5WC_BSEBQ1aYV-OUwLBWUlXwXdFoT-62XgacfsYL8KGG8CiaqeAf-_ObyB5hJE3GEcivocfhBRCbvf2A\nContent-Type: application/json\n",
+			"pathVariables": {}
+		},
+		{
+			"id": "3ba6e5c5-9cb7-05d8-cbd8-1694f802e9f0",
+			"name": "custSrch_byEmail",
+			"url": "{{spaceURL}}/api/custsrch/v1?emailAddr=bnabshire@yahoo.com",
+			"description": "",
+			"data": [],
+			"dataMode": "params",
+			"headerData": [
+				{
+					"key": "Authorization",
+					"value": "Bearer xPNiS_51-hUwXEz6LCg1SNIC2DoOCeLsh0N2hYwo1d8WuiJyn_u8oPdZpFC8EltjfsaxoFUtvH7t_EK_jc9KeLaMkrY_HbXp22uCUZI1hH-xha9sX_2BLdsGIR47VVczZgevR93YxTOvHx9qye5egaFJHH8g_kGX_MRq5f72uN8RdsPaSQ5Yfr5aIXi42uDdKemuQlJ3EPeV5X3PYV5Sd5qQZzZ4ainz_Wi_B4dJGOyOH1VTGhHZJL_bLRkTafaHR4rsE1mGTMQX4mR9_Yy-Lbvaw8tso-q-KVnq4xATkYQ",
+					"description": "",
+					"enabled": true
+				}
+			],
+			"method": "GET",
+			"pathVariableData": [],
+			"queryParams": [
+				{
+					"key": "emailAddr",
+					"value": "bnabshire@yahoo.com",
+					"equals": true,
+					"description": "",
+					"enabled": true
+				}
+			],
+			"auth": null,
+			"events": null,
+			"folder": null,
+			"headers": "Authorization: Bearer xPNiS_51-hUwXEz6LCg1SNIC2DoOCeLsh0N2hYwo1d8WuiJyn_u8oPdZpFC8EltjfsaxoFUtvH7t_EK_jc9KeLaMkrY_HbXp22uCUZI1hH-xha9sX_2BLdsGIR47VVczZgevR93YxTOvHx9qye5egaFJHH8g_kGX_MRq5f72uN8RdsPaSQ5Yfr5aIXi42uDdKemuQlJ3EPeV5X3PYV5Sd5qQZzZ4ainz_Wi_B4dJGOyOH1VTGhHZJL_bLRkTafaHR4rsE1mGTMQX4mR9_Yy-Lbvaw8tso-q-KVnq4xATkYQ\n",
+			"pathVariables": {}
+		},
+		{
+			"id": "3df756cf-11fd-8c03-4cbb-c2fbf7a9bdf2",
+			"name": "custSrch_byPhone",
+			"url": "{{spaceURL}}/api/custsrch/v1?phoneNr=3375409113",
+			"description": "",
+			"data": [],
+			"dataMode": "params",
+			"headerData": [
+				{
+					"key": "Authorization",
+					"value": "Bearer PD4IE4ItHicEXE2_YkrizEBNMMdBMsk1VG45-Gq4Kq8Yn8I3W1C4MDww2GHENh4bCSBtbekCOGd-e3V-iYapO8uJxXr6vIPUur7jWKu5IMjsFvKABcWFFIatVHhV9KcPgTsnz2z_M78-6-Xu_b2kbO3y9snDbrs4m5EtV8KS8oaVfveUo8C8T2Y4G7DOz8u-OYJoXsE0ApaAs1MPqR5f2Ty8dY0t0YTXyRESTzphGH1pyPlFCJ9tjm6fJC9Eu0p4F0z7jpiy1eSJ9JcWN7o13pj9-BIBUzbH8TnqWEw0bMsQkkwQlxBfqk_51NFAp9Oc",
+					"description": "",
+					"enabled": true
+				}
+			],
+			"method": "GET",
+			"pathVariableData": [],
+			"queryParams": [
+				{
+					"key": "phoneNr",
+					"value": "3375409113",
+					"equals": true,
+					"description": "",
+					"enabled": true
+				}
+			],
+			"auth": null,
+			"events": null,
+			"folder": null,
+			"headers": "Authorization: Bearer PD4IE4ItHicEXE2_YkrizEBNMMdBMsk1VG45-Gq4Kq8Yn8I3W1C4MDww2GHENh4bCSBtbekCOGd-e3V-iYapO8uJxXr6vIPUur7jWKu5IMjsFvKABcWFFIatVHhV9KcPgTsnz2z_M78-6-Xu_b2kbO3y9snDbrs4m5EtV8KS8oaVfveUo8C8T2Y4G7DOz8u-OYJoXsE0ApaAs1MPqR5f2Ty8dY0t0YTXyRESTzphGH1pyPlFCJ9tjm6fJC9Eu0p4F0z7jpiy1eSJ9JcWN7o13pj9-BIBUzbH8TnqWEw0bMsQkkwQlxBfqk_51NFAp9Oc\n",
+			"pathVariables": {}
+		},
+		{
+			"id": "3fe7d4be-3bf8-5672-1cc6-51094e237c25",
+			"name": "campaignRecords get",
+			"url": "{{spaceURL}}/api/clrecords/v1?clid=69&statusCd=DONE&pagenr=1&pagesize=5",
+			"description": "",
+			"data": [],
+			"dataMode": "raw",
+			"headerData": [
+				{
+					"key": "Authorization",
+					"value": "Bearer 9ghvciA-M7W75QKRZ9ga_4adB2ZDjpx00W3hoGBG8JZ8TcR06cY8Zphjh0M50ID-12uD7yH36iLTK5AbI0ywvCfyJAPyr2yVWX4ObBNe1KrBWLBOB8KG4TAC0WhmqtvU-rvB7GrC5DwBDsm2vrCEwW_LBxN-Dfz0hI22Uh-_jKSRiUAcveuEfaXgyRO0mxb4CKTpaVSsQ857cJsHoQoYU97RFnvA-UkfCazWcMZ7L39s0rzy76d7YkxFCdsRSUMGkNrKivJDLOc8hU_Lhd2DXw0PS66YfS6-tu-MpmJOMkDAfxuSNooSHdxyO52K1takt-32nH6qtvp0pIH91KfHOg",
+					"description": "",
+					"enabled": true
+				},
+				{
+					"key": "Content-Type",
+					"value": "application/json",
+					"description": "",
+					"enabled": true
+				}
+			],
+			"method": "GET",
+			"pathVariableData": [],
+			"queryParams": [
+				{
+					"key": "clid",
+					"value": "69",
+					"equals": true,
+					"description": "",
+					"enabled": true
+				},
+				{
+					"key": "statusCd",
+					"value": "DONE",
+					"equals": true,
+					"description": "",
+					"enabled": true
+				},
+				{
+					"key": "pagenr",
+					"value": "1",
+					"equals": true,
+					"description": "",
+					"enabled": true
+				},
+				{
+					"key": "pagesize",
+					"value": "5",
+					"equals": true,
+					"description": "",
+					"enabled": true
+				}
+			],
+			"auth": null,
+			"events": null,
+			"folder": null,
+			"rawModeData": "{\r\n    \"userCd\": \"vsharapo\",\r\n    \"uploadId\": 69,\r\n    \"campaignCd\": \"TEST\"\r\n}",
+			"headers": "Authorization: Bearer 9ghvciA-M7W75QKRZ9ga_4adB2ZDjpx00W3hoGBG8JZ8TcR06cY8Zphjh0M50ID-12uD7yH36iLTK5AbI0ywvCfyJAPyr2yVWX4ObBNe1KrBWLBOB8KG4TAC0WhmqtvU-rvB7GrC5DwBDsm2vrCEwW_LBxN-Dfz0hI22Uh-_jKSRiUAcveuEfaXgyRO0mxb4CKTpaVSsQ857cJsHoQoYU97RFnvA-UkfCazWcMZ7L39s0rzy76d7YkxFCdsRSUMGkNrKivJDLOc8hU_Lhd2DXw0PS66YfS6-tu-MpmJOMkDAfxuSNooSHdxyO52K1takt-32nH6qtvp0pIH91KfHOg\nContent-Type: application/json\n",
+			"pathVariables": {}
+		},
+		{
+			"id": "40cf740b-11a5-d9c4-4e45-f05955dbb35c",
+			"name": "ReportOverallProductivity",
+			"url": "{{spaceURL}}/api/reports/overall_productivity/v1?StartDt=2017-11-20&EndDt=2018-10-25",
+			"description": "",
+			"data": [],
+			"dataMode": "raw",
+			"headerData": [
+				{
+					"key": "Content-Type",
+					"value": "application/json",
+					"description": "",
+					"enabled": true
+				}
+			],
+			"method": "GET",
+			"pathVariableData": [],
+			"queryParams": [
+				{
+					"key": "StartDt",
+					"value": "2017-11-20",
+					"equals": true,
+					"description": "",
+					"enabled": true
+				},
+				{
+					"key": "EndDt",
+					"value": "2018-10-25",
+					"equals": true,
+					"description": "",
+					"enabled": true
+				}
+			],
+			"auth": null,
+			"events": [],
+			"folder": "a3657539-2b7c-ee3c-1634-7b07363f4356",
+			"rawModeData": "{\r\n    \"userCd\": \"vsharapo\",\r\n    \"uploadId\": 69,\r\n    \"campaignCd\": \"TEST\"\r\n}",
+			"headers": "Content-Type: application/json\n",
+			"pathVariables": {}
+		},
+		{
+			"id": "43d7e347-6109-dc20-0268-45115e8fe2fd",
+			"name": "getRoles",
+			"url": "{{spaceURL}}/api/roles/v1",
+			"description": "",
+			"data": [],
+			"dataMode": "raw",
+			"headerData": [
+				{
+					"key": "Authorization",
+					"value": "Bearer s0nNVNo5_j0SIR-0aiN0zwBW47jDlsqOnAIKLNmBidQMa3in-ArgEJp75gQErqHPfSredlY3wglPwShf2Qftzbqc8ryTTFFxETxkbiwv_B5PoB-Tk3TMe75E7VYNtQyDRcQd36of3D9l3tuRJSg0WHD8fLxzHN3CJGiPYimLYf1rqfYS3kuY8tgTlSL4K97kf2-y3KO-57CWePBqSv-prVwzxPRmWDUxL-AacML0bojZ281vltLa-Kyv3KPR70wb8wfTphJXVHKUHFEwr-AfHh_P8Anc1nqH0Ioz48SNBOkF_jHNCTNRfkkXyMCXaJGLAAXiNG3VhcKh4ucR-jKvBQ",
+					"description": "",
+					"enabled": true
+				},
+				{
+					"key": "Content-Type",
+					"value": "application/json",
+					"description": "",
+					"enabled": true
+				}
+			],
+			"method": "GET",
+			"pathVariableData": [],
+			"queryParams": [],
+			"auth": null,
+			"events": [],
+			"folder": null,
+			"rawModeData": "{\r\n    \"userCd\": \"vsharapo\",\r\n    \"uploadId\": 69,\r\n    \"campaignCd\": \"TEST\"\r\n}",
+			"headers": "Authorization: Bearer s0nNVNo5_j0SIR-0aiN0zwBW47jDlsqOnAIKLNmBidQMa3in-ArgEJp75gQErqHPfSredlY3wglPwShf2Qftzbqc8ryTTFFxETxkbiwv_B5PoB-Tk3TMe75E7VYNtQyDRcQd36of3D9l3tuRJSg0WHD8fLxzHN3CJGiPYimLYf1rqfYS3kuY8tgTlSL4K97kf2-y3KO-57CWePBqSv-prVwzxPRmWDUxL-AacML0bojZ281vltLa-Kyv3KPR70wb8wfTphJXVHKUHFEwr-AfHh_P8Anc1nqH0Ioz48SNBOkF_jHNCTNRfkkXyMCXaJGLAAXiNG3VhcKh4ucR-jKvBQ\nContent-Type: application/json\n",
+			"pathVariables": {}
+		},
+		{
+			"id": "46682367-61b3-cb91-862e-795f8b8c4447",
+			"name": "custNotes",
+			"url": "{{spaceURL}}/api/callrecords/v1?customerId=AAD8040&pageNr=0&pageSize=10",
+			"description": "",
+			"data": [],
+			"dataMode": "raw",
+			"headerData": [
+				{
+					"key": "Authorization",
+					"value": "Bearer uXQp38NGuTrjpN36EBzMkuWvubRgIcT9KHwE5cup4ARZ1xXjgSA9CGt8yiaBE2npFL-i-2sCrXIuajnwyZUBlpC5EuqxyC1d3UOwuYClIx54rZaBRziyA2D89rf0aXliuu4njDTrWHsjx4gyDbZyAJUUkSuMsbaorx7-1ZE0yM7KejTE_kR5KsxLdnc7qoANAjzlyRCs2kDFc8JrP0bQDOeGwRzSQZH469TzAr69YYyNgFiuJ2ROFiIktrcA0-Gvub8qJbyvGrzcmCpIn5wlk91svZeiUBM5nXnU_77yOT8EB8_XL3Zd_gCvqX_dg-wu3e2Ge2DPmqhwI8VR5Jf4siT2dXOXQPQp7bHddnKLdS4",
+					"description": "",
+					"enabled": true
+				},
+				{
+					"key": "Content-Type",
+					"value": "application/json",
+					"description": "",
+					"enabled": true
+				}
+			],
+			"method": "GET",
+			"pathVariableData": [],
+			"queryParams": [
+				{
+					"key": "customerId",
+					"value": "AAD8040",
+					"equals": true,
+					"description": "",
+					"enabled": true
+				},
+				{
+					"key": "pageNr",
+					"value": "0",
+					"equals": true,
+					"description": "",
+					"enabled": true
+				},
+				{
+					"key": "pageSize",
+					"value": "10",
+					"equals": true,
+					"description": "",
+					"enabled": true
+				}
+			],
+			"auth": null,
+			"events": [],
+			"folder": null,
+			"rawModeData": "{\r\n    \"userCd\": \"vsharapo\",\r\n    \"uploadId\": 69,\r\n    \"campaignCd\": \"TEST\"\r\n}",
+			"headers": "Authorization: Bearer uXQp38NGuTrjpN36EBzMkuWvubRgIcT9KHwE5cup4ARZ1xXjgSA9CGt8yiaBE2npFL-i-2sCrXIuajnwyZUBlpC5EuqxyC1d3UOwuYClIx54rZaBRziyA2D89rf0aXliuu4njDTrWHsjx4gyDbZyAJUUkSuMsbaorx7-1ZE0yM7KejTE_kR5KsxLdnc7qoANAjzlyRCs2kDFc8JrP0bQDOeGwRzSQZH469TzAr69YYyNgFiuJ2ROFiIktrcA0-Gvub8qJbyvGrzcmCpIn5wlk91svZeiUBM5nXnU_77yOT8EB8_XL3Zd_gCvqX_dg-wu3e2Ge2DPmqhwI8VR5Jf4siT2dXOXQPQp7bHddnKLdS4\nContent-Type: application/json\n",
+			"pathVariables": {}
+		},
+		{
+			"id": "4aa635eb-16e4-4fc5-e128-66e6550c6499",
+			"name": "acctHistSrch",
+			"url": "{{spaceURL}}/api/acctHistSrch/v1?accountId=4509000903",
+			"description": "",
+			"data": [],
+			"dataMode": "params",
+			"headerData": [
+				{
+					"key": "Authorization",
+					"value": "Bearer TUy3mMeeVqTwLT3WRABeu3tz4vWh5p44Uk4X31rkd7PZuwaMOtaIwqq7TLFfff0S920mNd9E-O4a4_Gz_1BYQzGF3JxEQd0YA0tZVdEuI0h7ih0ZPnF2ZvX64fQpEvjArFuXPDWfwu4Kol5-NyCD398-Mr5wFEehcvEUFy3NUyNge0ymaj-U839T6v35suHXkNdFO2R0NaHkGsDIFDJtPysgjd_QiMvTOsvAlijSlGvy8dAPtF9NZd9EpmKflW9sTIUbWd31fSZYZF9SqjbgBU2LuxR4mLhYif9mpqpjAeaYLKCAvH2WSEy1TZ1c3iexOmG64CF_5Vj4_p3r35vMyg",
+					"description": "",
+					"enabled": true
+				}
+			],
+			"method": "GET",
+			"pathVariableData": [],
+			"queryParams": [
+				{
+					"key": "accountId",
+					"value": "4509000903",
+					"equals": true,
+					"description": "",
+					"enabled": true
+				}
+			],
+			"auth": null,
+			"events": null,
+			"folder": null,
+			"headers": "Authorization: Bearer TUy3mMeeVqTwLT3WRABeu3tz4vWh5p44Uk4X31rkd7PZuwaMOtaIwqq7TLFfff0S920mNd9E-O4a4_Gz_1BYQzGF3JxEQd0YA0tZVdEuI0h7ih0ZPnF2ZvX64fQpEvjArFuXPDWfwu4Kol5-NyCD398-Mr5wFEehcvEUFy3NUyNge0ymaj-U839T6v35suHXkNdFO2R0NaHkGsDIFDJtPysgjd_QiMvTOsvAlijSlGvy8dAPtF9NZd9EpmKflW9sTIUbWd31fSZYZF9SqjbgBU2LuxR4mLhYif9mpqpjAeaYLKCAvH2WSEy1TZ1c3iexOmG64CF_5Vj4_p3r35vMyg\n",
+			"pathVariables": {}
+		},
+		{
+			"id": "4ccd25f4-ec96-0ee9-da6f-e0a2bc82730f",
+			"name": "campaignLaunch",
+			"url": "{{spaceURL}}/api/campaignlists/launch/v1",
+			"description": "",
+			"data": [],
+			"dataMode": "raw",
+			"headerData": [
+				{
+					"key": "Authorization",
+					"value": "Bearer 0AGEiy12NLssUowphdERYvARlsmq7VNxs369usH8VTej0CC7beMDhUTA5JxaBzMHzybgTnZpuC_5N03s_SKr4DTBtxEUXBkly20iFUofeT79dqgVJcylyg5jWQiMyPfmSLeaA7HeCaYm3r5FgidVz5jHT8ei4lOMlgOCUkJGxIJOTMejeS6I6jzUpjFScmjrvOGokTjJOpnralXup_sKi0S0EEDYExRuLpt83BBBhxF_GJT3MYQzi713Ry6laZwnJQdwhkxLKwvtb-XjT4HeqxKW7epOfh2LXUxPJS_nM5OkHB5MSBRPzLlFfo0faWpWcBSvCl98Hwfhuhz-gk9yMQ",
+					"description": "",
+					"enabled": true
+				},
+				{
+					"key": "Content-Type",
+					"value": "application/json",
+					"description": "",
+					"enabled": true
+				}
+			],
+			"method": "POST",
+			"pathVariableData": [],
+			"queryParams": [],
+			"auth": null,
+			"events": null,
+			"folder": null,
+			"rawModeData": "{\r\n    \"userCd\": \"vsharapo\",\r\n    \"campaignListId\": 88\r\n}",
+			"headers": "Authorization: Bearer 0AGEiy12NLssUowphdERYvARlsmq7VNxs369usH8VTej0CC7beMDhUTA5JxaBzMHzybgTnZpuC_5N03s_SKr4DTBtxEUXBkly20iFUofeT79dqgVJcylyg5jWQiMyPfmSLeaA7HeCaYm3r5FgidVz5jHT8ei4lOMlgOCUkJGxIJOTMejeS6I6jzUpjFScmjrvOGokTjJOpnralXup_sKi0S0EEDYExRuLpt83BBBhxF_GJT3MYQzi713Ry6laZwnJQdwhkxLKwvtb-XjT4HeqxKW7epOfh2LXUxPJS_nM5OkHB5MSBRPzLlFfo0faWpWcBSvCl98Hwfhuhz-gk9yMQ\nContent-Type: application/json\n",
+			"pathVariables": {}
+		},
+		{
+			"id": "538111e6-554e-419a-a005-262606be0e57",
+			"name": "addTickerAttributeType",
+			"url": "{{spaceURL}}/api/tp/tickler_attribute_types/v1",
+			"description": "",
+			"data": [],
+			"dataMode": "raw",
+			"headerData": [
+				{
+					"key": "Content-Type",
+					"value": "application/json",
+					"description": "",
+					"enabled": true
+				}
+			],
+			"method": "POST",
+			"pathVariableData": [],
+			"queryParams": [],
+			"auth": null,
+			"events": [],
+			"folder": "bf7cfc1a-5858-4010-afb9-db7abcd0ef34",
+			"rawModeData": "{\r\n    \"AttributeCd\": \"test3\",\r\n    \"AttributeNm\": \"test3\",\r\n    \"AttributeDesc\":\"test\",\r\n    \"ActiveFlg\":\"Y\",\r\n    \"ArrayFlg\": \"Y\",\r\n    \"MandatoryFlg\": \"Y\",\r\n    \"DataType\": \"STRING\",\r\n    \"CreatedBy\": \"vsharapo\"\r\n}\r\n",
+			"headers": "Content-Type: application/json\n",
+			"pathVariables": {}
+		},
+		{
+			"id": "55143e2e-ace9-db55-28d1-10ccf9ad4088",
+			"name": "custInq",
+			"url": "https://coindev:65026/api/custinq/v1?customerId=MAA8308",
+			"description": "",
+			"data": [],
+			"dataMode": "params",
+			"headerData": [
+				{
+					"key": "Authorization",
+					"value": "Bearer HZKiNl3jHxZuvbfy-nq31YOgSGN6GEr_ebfVhZ-ZRO0KV3Mp25VMnu3bBP7R6lqUqxxsyIXf4ALtbvGZPQ-dCXx1hvOQZYkCQUdZX-vGESHGU6H9rAF9OVdzP4m0TMQyqe5kTUlJvy-qmsbBFwbr78dcqsoT28nhPmNMgZzeaBDU0aYanZPQwFvWrcDY1Xy6j_oyTTfeUQJU74gG6MGYT2255gPyBGC1xkcykwKloJOykH7uXrrr5sMPt31EGIWa5oZKMKW_GEaHJoY9_IzYSgdtqpzlYvu5DBnMq_dDi1Br9T4u03rof6cuK85cfpvGg07qgyxhK3zQgVgVMPT_sA",
+					"description": "",
+					"enabled": true
+				}
+			],
+			"method": "GET",
+			"pathVariableData": [],
+			"queryParams": [
+				{
+					"key": "customerId",
+					"value": "MAA8308",
+					"equals": true,
+					"description": "",
+					"enabled": true
+				}
+			],
+			"auth": null,
+			"events": null,
+			"folder": null,
+			"headers": "Authorization: Bearer HZKiNl3jHxZuvbfy-nq31YOgSGN6GEr_ebfVhZ-ZRO0KV3Mp25VMnu3bBP7R6lqUqxxsyIXf4ALtbvGZPQ-dCXx1hvOQZYkCQUdZX-vGESHGU6H9rAF9OVdzP4m0TMQyqe5kTUlJvy-qmsbBFwbr78dcqsoT28nhPmNMgZzeaBDU0aYanZPQwFvWrcDY1Xy6j_oyTTfeUQJU74gG6MGYT2255gPyBGC1xkcykwKloJOykH7uXrrr5sMPt31EGIWa5oZKMKW_GEaHJoY9_IzYSgdtqpzlYvu5DBnMq_dDi1Br9T4u03rof6cuK85cfpvGg07qgyxhK3zQgVgVMPT_sA\n",
+			"pathVariables": {}
+		},
+		{
+			"id": "59174819-7114-4c15-91ae-682a3a713267",
+			"name": "addTickerType",
+			"url": "{{spaceURL}}/api/tp/tickler_types/v1",
+			"description": "",
+			"data": [],
+			"dataMode": "raw",
+			"headerData": [
+				{
+					"key": "Content-Type",
+					"value": "application/json",
+					"description": "",
+					"enabled": true
+				}
+			],
+			"method": "POST",
+			"pathVariableData": [],
+			"queryParams": [],
+			"auth": null,
+			"events": [],
+			"folder": "8c3df387-3b74-4348-ad0e-09537e24966b",
+			"rawModeData": "{\r\n    \"ProcessId\": 3,\r\n    \"TicklerCd\": \"CLOSE_CASE3\",\r\n    \"TicklerNm\": \"test closable tickler type\",\r\n    \"TicklerDesc\":\"test closing\",\r\n    \"ActionRequiredFlg\":\"N\",\r\n    \"CoreFlg\": \"Y\",\r\n    \"OrderByCd\": 80,\r\n    \"CloseableFlg\": \"Y\",\r\n    \"FollowUpDays\": 1,\r\n    \"CreatedBy\": \"vsharapo\"\r\n}\r\n",
+			"headers": "Content-Type: application/json\n",
+			"pathVariables": {}
+		},
+		{
+			"id": "59c2e5c3-ebcc-fcb9-17fb-1d73ffe2d2b8",
+			"name": "campaigns get",
+			"url": "{{spaceURL}}/api/campaigns/v1",
+			"description": "",
+			"data": [],
+			"dataMode": "raw",
+			"headerData": [
+				{
+					"key": "Authorization",
+					"value": "Bearer gveRR2z8XBGtCHwViBqhopx2xdRQVjgLHx7i9KPVtIeTFCXACmSVMrKhIVoaIA6CBS-_YQstUtiL9lQinmuVkLkSuxpgBVoslaTutmFwtaPmoBW4jvbAVHXLfjbmHJ7A56bgEoDqsZScmcC2R0lFGeA3_L9uofMLoj64FzjXh2uivjSzaQ4GPVly4cIX8kOniGfi8Nd_2dI0D_NM_nktCEmt_AWP6xPQ6chgnOcW5yz0H3QIsSPY8U4vO_RVcifrW1BUxeLr_toMkygjpCse1rDyEZ_QLNecrJAwV_fMrhcA2X0fUpIGHta7u-2v5GQWRanfk0on4os9tcoXh9XAyw",
+					"description": "",
+					"enabled": true
+				},
+				{
+					"key": "Content-Type",
+					"value": "application/json",
+					"description": "",
+					"enabled": true
+				}
+			],
+			"method": "GET",
+			"pathVariableData": [],
+			"queryParams": [],
+			"auth": null,
+			"events": null,
+			"folder": null,
+			"rawModeData": "{\r\n    \"userCd\": \"vsharapo\",\r\n    \"uploadId\": 69,\r\n    \"campaignCd\": \"TEST\"\r\n}",
+			"headers": "Authorization: Bearer gveRR2z8XBGtCHwViBqhopx2xdRQVjgLHx7i9KPVtIeTFCXACmSVMrKhIVoaIA6CBS-_YQstUtiL9lQinmuVkLkSuxpgBVoslaTutmFwtaPmoBW4jvbAVHXLfjbmHJ7A56bgEoDqsZScmcC2R0lFGeA3_L9uofMLoj64FzjXh2uivjSzaQ4GPVly4cIX8kOniGfi8Nd_2dI0D_NM_nktCEmt_AWP6xPQ6chgnOcW5yz0H3QIsSPY8U4vO_RVcifrW1BUxeLr_toMkygjpCse1rDyEZ_QLNecrJAwV_fMrhcA2X0fUpIGHta7u-2v5GQWRanfk0on4os9tcoXh9XAyw\nContent-Type: application/json\n",
+			"pathVariables": {}
+		},
+		{
+			"id": "61418e4a-2d1d-4dd7-88f1-2f05942a8421",
+			"name": "addCustomerConsent",
+			"url": "{{spaceURL}}/api/customer/consent/v1",
+			"description": "",
+			"data": [],
+			"dataMode": "raw",
+			"headerData": [
+				{
+					"key": "Content-Type",
+					"value": "application/json",
+					"description": "",
+					"enabled": true
+				}
+			],
+			"method": "POST",
+			"pathVariableData": [],
+			"queryParams": [],
+			"auth": null,
+			"events": [],
+			"folder": "7093bd4d-d1a0-44be-8bc1-59ee1b8bc3db",
+			"rawModeData": "{\r\n    \"CifId\": \"MAA8308\",\r\n    \"ConsentFlg\": \"Y\",\r\n    \"Note\": \"test customer consent\",\r\n    \"CreatedBy\": \"vsharapo\"\r\n}\r\n",
+			"headers": "Content-Type: application/json\n",
+			"pathVariables": {}
+		},
+		{
+			"id": "619bd1c3-7862-2304-66cc-71aea907ba5e",
+			"name": "exportNotes",
+			"url": "{{spaceURL}}/api/export/notes/v1?accountfilename=coin_collection_accounts.csv&notefilename=coin_collection_notes.csv&createdFromDt=2017-12-01&createdToDt=2017-12-02&curDay=Y",
+			"description": "",
+			"data": [],
+			"dataMode": "params",
+			"headerData": [
+				{
+					"key": "Authorization",
+					"value": "Bearer EeKLJQp5izOZkf7sUiAS6uA1EZiejQ_LCqtQ2zkHyLokxnMuqG0F-nq6sn4unY7fUa3RKcVp7VYyeIsXcJN3DDOFKLieTPJcENu34wtzdKAsUoZwNUrTBS-dWTqPgVXt0qHtLC3t0pXfvgtBuXjsc405aVToJWnDo6ed6F28QhHdrzaVSc_HvdtUbXbEej_tFAmxYvc31dkdXVVxFJ1OKPWhRS5Rtj_jIVYzylbjImeQnIvASlUz7W-Yi9Rg4DyHYdGg9igzSklbA4P0_iSrZtFhEOFMwd_z0V_ZoNRT0LTdydzy-WSvIf_9vEkz0m70IgrtXe6t_tiw2z5OvmftOw",
+					"enabled": true
+				}
+			],
+			"method": "GET",
+			"pathVariableData": [],
+			"queryParams": [
+				{
+					"key": "accountfilename",
+					"value": "coin_collection_accounts.csv",
+					"equals": true,
+					"description": "",
+					"enabled": true
+				},
+				{
+					"key": "notefilename",
+					"value": "coin_collection_notes.csv",
+					"equals": true,
+					"description": "",
+					"enabled": true
+				},
+				{
+					"key": "createdFromDt",
+					"value": "2017-12-01",
+					"equals": true,
+					"description": "",
+					"enabled": true
+				},
+				{
+					"key": "createdToDt",
+					"value": "2017-12-02",
+					"equals": true,
+					"description": "",
+					"enabled": true
+				},
+				{
+					"key": "curDay",
+					"value": "Y",
+					"equals": true,
+					"description": "",
+					"enabled": true
+				}
+			],
+			"auth": null,
+			"events": null,
+			"folder": null,
+			"headers": "Authorization: Bearer EeKLJQp5izOZkf7sUiAS6uA1EZiejQ_LCqtQ2zkHyLokxnMuqG0F-nq6sn4unY7fUa3RKcVp7VYyeIsXcJN3DDOFKLieTPJcENu34wtzdKAsUoZwNUrTBS-dWTqPgVXt0qHtLC3t0pXfvgtBuXjsc405aVToJWnDo6ed6F28QhHdrzaVSc_HvdtUbXbEej_tFAmxYvc31dkdXVVxFJ1OKPWhRS5Rtj_jIVYzylbjImeQnIvASlUz7W-Yi9Rg4DyHYdGg9igzSklbA4P0_iSrZtFhEOFMwd_z0V_ZoNRT0LTdydzy-WSvIf_9vEkz0m70IgrtXe6t_tiw2z5OvmftOw\n",
+			"pathVariables": {}
+		},
+		{
+			"id": "66224119-ffba-72c1-b6b8-81f022d0ffa9",
+			"name": "campaignLists get",
+			"url": "{{spaceURL}}/api/campaignlists/v1?StatusCd=NEW&pagenr=0&pagesize=5",
+			"description": "",
+			"data": [],
+			"dataMode": "raw",
+			"headerData": [
+				{
+					"key": "Authorization",
+					"value": "Bearer 1fMcrjCNPX83JjhjtZvzKURT37LQFVZ69_wPyH-JYHbXbjvOxKg3mopkS1NuA-tJ07oXnBlrsp7wqVIevkrvlsZkGCG1EMUYKSfOahDh3dpfNFmWxGDlGYj-nus8vTdjlc3ZxAsyg4ea_jb_FCUvrPrciPE0_5Q_JzM2yiMDPVEynboJiCEw-tVSYJDlGXnuBG-lQIZZh9zxqhjNcFtoLz3mjnCx0J9lyuqLqqasugZawtK5_aKCmMQuIMLFOgxm58kyfPLI5T-c3LRvsyfo2Jr8HUaD6j39e3X7Ypfj9wRs1Plw8_w4hl6aPM1sqhWyZswnfcQ0ldHn44769Yl2UA",
+					"description": "",
+					"enabled": true
+				},
+				{
+					"key": "Content-Type",
+					"value": "application/json",
+					"description": "",
+					"enabled": true
+				}
+			],
+			"method": "GET",
+			"pathVariableData": [],
+			"queryParams": [
+				{
+					"key": "StatusCd",
+					"value": "NEW",
+					"equals": true,
+					"description": "",
+					"enabled": true
+				},
+				{
+					"key": "CampaignCd",
+					"value": "DEMO_CAMPAIGN",
+					"equals": true,
+					"description": "",
+					"enabled": false
+				},
+				{
+					"key": "pagenr",
+					"value": "0",
+					"equals": true,
+					"description": "",
+					"enabled": true
+				},
+				{
+					"key": "pagesize",
+					"value": "5",
+					"equals": true,
+					"description": "",
+					"enabled": true
+				}
+			],
+			"auth": null,
+			"events": null,
+			"folder": null,
+			"rawModeData": "{\r\n    \"userCd\": \"vsharapo\",\r\n    \"uploadId\": 69,\r\n    \"campaignCd\": \"TEST\"\r\n}",
+			"headers": "Authorization: Bearer 1fMcrjCNPX83JjhjtZvzKURT37LQFVZ69_wPyH-JYHbXbjvOxKg3mopkS1NuA-tJ07oXnBlrsp7wqVIevkrvlsZkGCG1EMUYKSfOahDh3dpfNFmWxGDlGYj-nus8vTdjlc3ZxAsyg4ea_jb_FCUvrPrciPE0_5Q_JzM2yiMDPVEynboJiCEw-tVSYJDlGXnuBG-lQIZZh9zxqhjNcFtoLz3mjnCx0J9lyuqLqqasugZawtK5_aKCmMQuIMLFOgxm58kyfPLI5T-c3LRvsyfo2Jr8HUaD6j39e3X7Ypfj9wRs1Plw8_w4hl6aPM1sqhWyZswnfcQ0ldHn44769Yl2UA\nContent-Type: application/json\n",
+			"pathVariables": {}
+		},
+		{
+			"id": "6da72efa-4acf-7c03-9dad-13f966005861",
+			"name": "getUserDetails",
+			"url": "{{spaceURL}}/api/users/v1",
+			"description": "",
+			"data": [],
+			"dataMode": "raw",
+			"headerData": [
+				{
+					"key": "Authorization",
+					"value": "Bearer g8zwyREMCwrZHi2io08-WYpqMKV4SaQLk8E4PQN-dQtiCDh917ofbXQiiF1AdD4I6U-XXm9BWU7g9m-z_eBaK45k9RAUCZUCJUJoca3KSepSwuucxR9UWH-LzNU36laDfzLVsPVDGp9aDfnDJvb_MdGp6XE4-hhWqbu8NMRsDUh2fE8eTYpmYLctv3F6l5tnxSQjLVKilL6iVQ7RIAVEDi2N4zwcwp6OXw9U8i4wiMhchhv8pR1bBLyryXJKycvwGT_C4tkKzk-0-yWGyS4wiPSB1ym-NsNAza4yI_a4JaRJdQ8e9AaNGQhiSeuM09yzq0bkUKLJoOLNoiuTJvB7wkaNrqDlqbXpRZUwm6IuWMY",
+					"description": "",
+					"enabled": true
+				},
+				{
+					"key": "Content-Type",
+					"value": "application/json",
+					"description": "",
+					"enabled": true
+				}
+			],
+			"method": "GET",
+			"pathVariableData": [],
+			"queryParams": [],
+			"auth": null,
+			"events": [],
+			"folder": null,
+			"rawModeData": "{\r\n    \"userCd\": \"vsharapo\",\r\n    \"uploadId\": 69,\r\n    \"campaignCd\": \"TEST\"\r\n}",
+			"headers": "Authorization: Bearer g8zwyREMCwrZHi2io08-WYpqMKV4SaQLk8E4PQN-dQtiCDh917ofbXQiiF1AdD4I6U-XXm9BWU7g9m-z_eBaK45k9RAUCZUCJUJoca3KSepSwuucxR9UWH-LzNU36laDfzLVsPVDGp9aDfnDJvb_MdGp6XE4-hhWqbu8NMRsDUh2fE8eTYpmYLctv3F6l5tnxSQjLVKilL6iVQ7RIAVEDi2N4zwcwp6OXw9U8i4wiMhchhv8pR1bBLyryXJKycvwGT_C4tkKzk-0-yWGyS4wiPSB1ym-NsNAza4yI_a4JaRJdQ8e9AaNGQhiSeuM09yzq0bkUKLJoOLNoiuTJvB7wkaNrqDlqbXpRZUwm6IuWMY\nContent-Type: application/json\n",
+			"pathVariables": {}
+		},
+		{
+			"id": "6eccfc96-fc93-f2d1-3562-ee72260ff5c0",
+			"name": "Statistics_CL",
+			"url": "{{spaceURL}}/api/statistics/cl/v1?campaignListId=133",
+			"description": "",
+			"data": [],
+			"dataMode": "raw",
+			"headerData": [
+				{
+					"key": "Authorization",
+					"value": "Bearer nogA2pxfF50sDgffSBjpSnf-MHWQAAdEKUjE23YL6nYB0x0r4BqdsJzi40gWqlSp0pPPNIBCiv9FXDHFOrTs7B50P9e3r5gqlDaztLT5g1VnLXjzK4YHG3D4OFkjz46453Dz8e-tdBgzG8sM6aXig3TotH2ZsrPu_cn3ZxypUDobwXzDMopn6trF-mCJgGGiur6s9fA3jysIveSlVodU1Kz5xU_yvJSVKgY7a7fNjeanjFMsjIuHXs9XI1G-cuAQsj5vjALS7aP9pkjq2YPAoWsrEL082z7DJz7SBOQBqX-fSYgf7YhjacT7t2QkWmgud2OCUylnFIW1dc5qq2QB9g",
+					"description": "",
+					"enabled": true
+				},
+				{
+					"key": "Content-Type",
+					"value": "application/json",
+					"description": "",
+					"enabled": true
+				}
+			],
+			"method": "GET",
+			"pathVariableData": [],
+			"queryParams": [
+				{
+					"key": "campaignListId",
+					"value": "133",
+					"equals": true,
+					"description": "",
+					"enabled": true
+				}
+			],
+			"auth": null,
+			"events": null,
+			"folder": "a3657539-2b7c-ee3c-1634-7b07363f4356",
+			"rawModeData": "{\r\n    \"userCd\": \"vsharapo\",\r\n    \"uploadId\": 69,\r\n    \"campaignCd\": \"TEST\"\r\n}",
+			"headers": "Authorization: Bearer nogA2pxfF50sDgffSBjpSnf-MHWQAAdEKUjE23YL6nYB0x0r4BqdsJzi40gWqlSp0pPPNIBCiv9FXDHFOrTs7B50P9e3r5gqlDaztLT5g1VnLXjzK4YHG3D4OFkjz46453Dz8e-tdBgzG8sM6aXig3TotH2ZsrPu_cn3ZxypUDobwXzDMopn6trF-mCJgGGiur6s9fA3jysIveSlVodU1Kz5xU_yvJSVKgY7a7fNjeanjFMsjIuHXs9XI1G-cuAQsj5vjALS7aP9pkjq2YPAoWsrEL082z7DJz7SBOQBqX-fSYgf7YhjacT7t2QkWmgud2OCUylnFIW1dc5qq2QB9g\nContent-Type: application/json\n",
+			"pathVariables": {}
+		},
+		{
+			"id": "7e9e9ed3-8f00-45fc-91f1-cd2ea20dd80c",
+			"name": "updateTicklerType",
+			"url": "{{spaceURL}}/api/tp/tickler_types/v1",
+			"description": "",
+			"data": [],
+			"dataMode": "raw",
+			"headerData": [
+				{
+					"key": "Content-Type",
+					"value": "application/json",
+					"description": "",
+					"enabled": true
+				}
+			],
+			"method": "PUT",
+			"pathVariableData": [],
+			"queryParams": [],
+			"auth": null,
+			"events": [],
+			"folder": "8c3df387-3b74-4348-ad0e-09537e24966b",
+			"rawModeData": "{\r\n        \"Id\": 119,\r\n        \"TicklerCd\": \"DEV_CLOSE_CASE2\",\r\n        \"TicklerNm\": \"test closable tickler type\",\r\n        \"TicklerDesc\": \"test closing\",\r\n        \"ActiveFlg\": \"Y\",\r\n        \"CoreFlg\": \"Y\",\r\n        \"BaseFlg\": \"N\",\r\n        \"CloseableFlg\": \"Y\",\r\n        \"ProcessId\": 3,\r\n        \"FollowUpDays\": 0,\r\n        \"ActionRequiredFlg\": \"N\",\r\n        \"OrderByCd\": 1000,\r\n        \"CreatedBy\": \"vsharapo\",\r\n        \"CreatedDt\": \"2018-04-19T16:14:11.95\",\r\n        \"ModifiedBy\": \"vsharapo\",\r\n        \"ModifiedDt\": null\r\n}",
+			"headers": "Content-Type: application/json\n",
+			"pathVariables": {}
+		},
+		{
+			"id": "812505c8-12e3-a782-6977-d8676644a10d",
+			"name": "campaignCreate",
+			"url": "{{spaceURL}}/api/campaignlists/v1",
+			"description": "",
+			"data": [],
+			"dataMode": "raw",
+			"headerData": [
+				{
+					"key": "Authorization",
+					"value": "Bearer 0AGEiy12NLssUowphdERYvARlsmq7VNxs369usH8VTej0CC7beMDhUTA5JxaBzMHzybgTnZpuC_5N03s_SKr4DTBtxEUXBkly20iFUofeT79dqgVJcylyg5jWQiMyPfmSLeaA7HeCaYm3r5FgidVz5jHT8ei4lOMlgOCUkJGxIJOTMejeS6I6jzUpjFScmjrvOGokTjJOpnralXup_sKi0S0EEDYExRuLpt83BBBhxF_GJT3MYQzi713Ry6laZwnJQdwhkxLKwvtb-XjT4HeqxKW7epOfh2LXUxPJS_nM5OkHB5MSBRPzLlFfo0faWpWcBSvCl98Hwfhuhz-gk9yMQ",
+					"description": "",
+					"enabled": true
+				},
+				{
+					"key": "Content-Type",
+					"value": "application/json",
+					"description": "",
+					"enabled": true
+				}
+			],
+			"method": "POST",
+			"pathVariableData": [],
+			"queryParams": [],
+			"auth": null,
+			"events": null,
+			"folder": null,
+			"rawModeData": "{\r\n    \"UserCd\": \"vsharapo\",\r\n    \"UploadId\": 1,\r\n    \"CampaignCd\": \"DEMO_CAMPAIGN\",\r\n    \"GROUP_IN\":[\"310\",\"350\",\"460\",\"360\"],\r\n    \"LXSTAT_NI\":[\"B\",\"0\",\"1\",\"3\",\"7\", \"5\", \"L\", \"R\",\"S\",\"U\", \"D\"]\r\n}\r\n",
+			"headers": "Authorization: Bearer 0AGEiy12NLssUowphdERYvARlsmq7VNxs369usH8VTej0CC7beMDhUTA5JxaBzMHzybgTnZpuC_5N03s_SKr4DTBtxEUXBkly20iFUofeT79dqgVJcylyg5jWQiMyPfmSLeaA7HeCaYm3r5FgidVz5jHT8ei4lOMlgOCUkJGxIJOTMejeS6I6jzUpjFScmjrvOGokTjJOpnralXup_sKi0S0EEDYExRuLpt83BBBhxF_GJT3MYQzi713Ry6laZwnJQdwhkxLKwvtb-XjT4HeqxKW7epOfh2LXUxPJS_nM5OkHB5MSBRPzLlFfo0faWpWcBSvCl98Hwfhuhz-gk9yMQ\nContent-Type: application/json\n",
+			"pathVariables": {}
+		},
+		{
+			"id": "85fb29a5-4b36-47eb-a166-27ba58792262",
+			"name": "updateTicklerAttributeMap",
+			"url": "{{spaceURL}}/api/tp/ticklers_atb_map/v1",
+			"description": "",
+			"data": [],
+			"dataMode": "raw",
+			"headerData": [
+				{
+					"key": "Content-Type",
+					"value": "application/json",
+					"description": "",
+					"enabled": true
+				}
+			],
+			"method": "PUT",
+			"pathVariableData": [],
+			"queryParams": [],
+			"auth": null,
+			"events": [],
+			"folder": "a900ab20-fe8a-487a-981f-7694977ebb6c",
+			"rawModeData": "{\r\n    \"Id\": 6,\r\n    \"MandatoryFlg\": \"Y\",\r\n    \"ModifiedBy\": \"vsharapo\"\r\n}\r\n",
+			"headers": "Content-Type: application/json\n",
+			"pathVariables": {}
+		},
+		{
+			"id": "86db4c00-fb54-4854-9df3-61f043691ea0",
+			"name": "deleteTicklerTypeMap",
+			"url": "{{spaceURL}}/api/tp/ticklers_map/v1?Id=9",
+			"description": null,
+			"data": [],
+			"dataMode": "raw",
+			"headerData": [],
+			"method": "DELETE",
+			"pathVariableData": [],
+			"queryParams": [
+				{
+					"key": "Id",
+					"value": "9",
+					"equals": true,
+					"description": "",
+					"enabled": true
+				}
+			],
+			"auth": null,
+			"events": null,
+			"folder": "85367218-d888-46a0-843e-748c8eaff551",
+			"rawModeData": "",
+			"headers": "",
+			"pathVariables": {}
+		},
+		{
+			"id": "89583364-e8dd-3d91-c297-ba6858f63519",
+			"name": "userCampaigns get",
+			"url": "{{spaceURL}}/api/usercampaigns/v1?userCd=twarren",
+			"description": "",
+			"data": [],
+			"dataMode": "raw",
+			"headerData": [
+				{
+					"key": "Authorization",
+					"value": "Bearer AWG5jVcEwXpm7hNvGnNF2MDPRsufecUFyeu6R-2-9-M33KPM-2qYAWROfbAR2sCWAwPihDZV0wFFp-n4y-S1v9n8G-2G5fhkDsHHuMJglrG-NB_ic8pl3gpApc64NskB89CGxTyRJH2piByQSFoKkbdIJKHgn1XXk6ZY2p_SRJRd3cieLj_xRLYOD5WckF-C_Y1YVETo5qErkRMRYlE30k5N2tyiP7rstQjYGdQANyk1wN6ZnWVNHQXxWQU4fwREYpQagyD2oB7rw0ukyFP4Roq6XkqiGhfI4F1NuicnQRzMIBfn5bYj2x7j8Ms87qydrVIIDjdcBrYL85Vr2Tl1mw",
+					"description": "",
+					"enabled": true
+				},
+				{
+					"key": "Content-Type",
+					"value": "application/json",
+					"description": "",
+					"enabled": true
+				}
+			],
+			"method": "GET",
+			"pathVariableData": [],
+			"queryParams": [
+				{
+					"key": "userCd",
+					"value": "twarren",
+					"equals": true,
+					"description": "",
+					"enabled": true
+				}
+			],
+			"auth": null,
+			"events": null,
+			"folder": null,
+			"rawModeData": "{\r\n    \"userCd\": \"vsharapo\",\r\n    \"uploadId\": 69,\r\n    \"campaignCd\": \"TEST\"\r\n}",
+			"headers": "Authorization: Bearer AWG5jVcEwXpm7hNvGnNF2MDPRsufecUFyeu6R-2-9-M33KPM-2qYAWROfbAR2sCWAwPihDZV0wFFp-n4y-S1v9n8G-2G5fhkDsHHuMJglrG-NB_ic8pl3gpApc64NskB89CGxTyRJH2piByQSFoKkbdIJKHgn1XXk6ZY2p_SRJRd3cieLj_xRLYOD5WckF-C_Y1YVETo5qErkRMRYlE30k5N2tyiP7rstQjYGdQANyk1wN6ZnWVNHQXxWQU4fwREYpQagyD2oB7rw0ukyFP4Roq6XkqiGhfI4F1NuicnQRzMIBfn5bYj2x7j8Ms87qydrVIIDjdcBrYL85Vr2Tl1mw\nContent-Type: application/json\n",
+			"pathVariables": {}
+		},
+		{
+			"id": "8e866426-2384-b3ec-da8e-dae1eb7a65b3",
+			"name": "ReportCallsPerCollectorByHour",
+			"url": "{{spaceURL}}/api/reports/calls_per_collector_by_hour/v1?StartDt=2018-02-19",
+			"description": null,
+			"data": [],
+			"dataMode": "raw",
+			"headerData": [
+				{
+					"key": "Content-Type",
+					"value": "application/json",
+					"enabled": true,
+					"description": ""
+				}
+			],
+			"method": "GET",
+			"pathVariableData": [],
+			"queryParams": [
+				{
+					"key": "StartDt",
+					"value": "2018-02-19",
+					"equals": true,
+					"description": "",
+					"enabled": true
+				}
+			],
+			"auth": null,
+			"events": null,
+			"folder": "a3657539-2b7c-ee3c-1634-7b07363f4356",
+			"rawModeData": "{\r\n    \"userCd\": \"vsharapo\",\r\n    \"uploadId\": 69,\r\n    \"campaignCd\": \"TEST\"\r\n}",
+			"headers": "Content-Type: application/json\n",
+			"pathVariables": {}
+		},
+		{
+			"id": "9193b674-e847-10fd-539d-d379732a932b",
+			"name": "custMsgSrch",
+			"url": "{{spaceURL}}/api/custmsg/v1?customerId=QAI1507&msgType=Col",
+			"description": "",
+			"data": [],
+			"dataMode": "params",
+			"headerData": [
+				{
+					"key": "Authorization",
+					"value": "Bearer M7bINy6-C3wd72TateWlVmZemYnrQ8YeliZDrQxe6C0QRUyNIuvA-AK4dd8tjlf_JcD1ZM8FqDoBMXnaFN_Tf1iXCq---Cduukur2l0JQi23SGpT5cRSIkgfNjpIl3w53Bf9DAg9MpJTk7jqIs9nKED9nUUJ3Nd9b7lHOC1p9uWPZRZkcUCfwwh3cezmP0WW2GGpIwFdhljLGme_0KfvR9GVN9PxGNCSzZVOvsUKOna1UhrsU9TJwrzendX34u_G1nx-HLACvXPW7QZgTb2l_9Mus_KIWG65JGEQcQiMIyr42OBYmP-oi66kSuV_sOuk-uZURQ1zX_F38-GWESmDjg",
+					"description": "",
+					"enabled": true
+				}
+			],
+			"method": "GET",
+			"pathVariableData": [],
+			"queryParams": [
+				{
+					"key": "customerId",
+					"value": "QAI1507",
+					"equals": true,
+					"description": "",
+					"enabled": true
+				},
+				{
+					"key": "msgType",
+					"value": "Col",
+					"equals": true,
+					"description": "",
+					"enabled": true
+				}
+			],
+			"auth": null,
+			"events": null,
+			"folder": null,
+			"headers": "Authorization: Bearer M7bINy6-C3wd72TateWlVmZemYnrQ8YeliZDrQxe6C0QRUyNIuvA-AK4dd8tjlf_JcD1ZM8FqDoBMXnaFN_Tf1iXCq---Cduukur2l0JQi23SGpT5cRSIkgfNjpIl3w53Bf9DAg9MpJTk7jqIs9nKED9nUUJ3Nd9b7lHOC1p9uWPZRZkcUCfwwh3cezmP0WW2GGpIwFdhljLGme_0KfvR9GVN9PxGNCSzZVOvsUKOna1UhrsU9TJwrzendX34u_G1nx-HLACvXPW7QZgTb2l_9Mus_KIWG65JGEQcQiMIyr42OBYmP-oi66kSuV_sOuk-uZURQ1zX_F38-GWESmDjg\n",
+			"pathVariables": {}
+		},
+		{
+			"id": "974053bc-575a-2a59-3ac1-2ebe431b3055",
+			"name": "addCallRecord",
+			"url": "{{spaceURL}}/api/callrecords/v1",
+			"description": "",
+			"data": [],
+			"dataMode": "raw",
+			"headerData": [
+				{
+					"key": "Authorization",
+					"value": "Bearer RvVu_20t_s2BKlc56OseNlGIMYhBJdvwTUGcJw6a1IYhKkKrAMMeh3m0qOjUrab6PLx8T7eWOSA0FBrvFHVupPVLglEMQ3Jwot0DrcYZ6utxKApbcyha9g7OmFPTmB-b8G69R1QpvpXyQU9r3OvVjOaVW4gbMkTJOqJUu6pZSZTUNZJ08x3Y_DrlTbOhYKOi7b9zi8J56unAHqq4U6kFLZwkUMumigwsS2Ozn-y2sPdHMffZ3orzjlCHhXGI-y1tzFIA_98c9vH5zc5FYvDxWRpYyfnKQExZAWYYD-pd9MKuPuF44v8o9sEdti-4gb__P-pE3VBlITTz32yT3ivjdQ",
+					"description": "",
+					"enabled": true
+				},
+				{
+					"key": "Content-Type",
+					"value": "application/json",
+					"description": "",
+					"enabled": true
+				}
+			],
+			"method": "POST",
+			"pathVariableData": [],
+			"queryParams": [],
+			"auth": null,
+			"events": [],
+			"folder": null,
+			"rawModeData": "{\r\n    \"userCd\": \"vsharapo\",\r\n    \"campaignRecordId\":483773,\r\n    \"accountId\": \"6300113248\",\r\n    \"accountType\": \"L\",\r\n    \"customerId\": \"BCB6019\",\r\n    \"callStartDt\": \"2017-09-22 12:47:00 AM\",\r\n    \"callEndDt\": \"2017-09-22 12:49:00 AM\",\r\n    \"actionCd\": \"CH\",\r\n    \"contactedCd\": \"BW\",\r\n    \"resultCd\": \"CL\",\r\n    \"statusCd\": \"SUCCESS\",\r\n    \"nextWorkDt\": \"2017-11-23\",\r\n    \"promisedDt\": null,\r\n    \"promisedAmount\": null,\r\n    \"callNote\": \"test note\",\r\n    \"nextCallDt\": \"2017-11-27 8:55:00 PM\",\r\n    \"nextCallUserCd\": \"pblanco\",\r\n    \"phoneNr\":\"123456789\",\r\n    \"phoneType\":\"P\",\r\n    \"autodialFlg\":\"Y\"\r\n}",
+			"headers": "Authorization: Bearer RvVu_20t_s2BKlc56OseNlGIMYhBJdvwTUGcJw6a1IYhKkKrAMMeh3m0qOjUrab6PLx8T7eWOSA0FBrvFHVupPVLglEMQ3Jwot0DrcYZ6utxKApbcyha9g7OmFPTmB-b8G69R1QpvpXyQU9r3OvVjOaVW4gbMkTJOqJUu6pZSZTUNZJ08x3Y_DrlTbOhYKOi7b9zi8J56unAHqq4U6kFLZwkUMumigwsS2Ozn-y2sPdHMffZ3orzjlCHhXGI-y1tzFIA_98c9vH5zc5FYvDxWRpYyfnKQExZAWYYD-pd9MKuPuF44v8o9sEdti-4gb__P-pE3VBlITTz32yT3ivjdQ\nContent-Type: application/json\n",
+			"pathVariables": {}
+		},
+		{
+			"id": "99147ad9-af23-45f4-8ee8-b91cbda8d88e",
+			"name": "deleteTicklerAttributeaMap",
+			"url": "{{spaceURL}}/api/tp/ticklers_atb_map/v1?Id=3",
+			"description": null,
+			"data": [],
+			"dataMode": "raw",
+			"headerData": [],
+			"method": "DELETE",
+			"pathVariableData": [],
+			"queryParams": [
+				{
+					"key": "Id",
+					"value": "3",
+					"equals": true,
+					"description": "",
+					"enabled": true
+				}
+			],
+			"auth": null,
+			"events": null,
+			"folder": "a900ab20-fe8a-487a-981f-7694977ebb6c",
+			"rawModeData": "",
+			"headers": "",
+			"pathVariables": {}
+		},
+		{
+			"id": "a72488d8-d72e-6933-72f9-c6b72df2bc3b",
+			"name": "ReportCollectorsProductivity",
+			"url": "{{spaceURL}}/api/reports/collectors_productivity/v1?StartDt=2017-11-28",
+			"description": "",
+			"data": [],
+			"dataMode": "raw",
+			"headerData": [
+				{
+					"key": "Content-Type",
+					"value": "application/json",
+					"description": "",
+					"enabled": true
+				}
+			],
+			"method": "GET",
+			"pathVariableData": [],
+			"queryParams": [
+				{
+					"key": "StartDt",
+					"value": "2017-11-28",
+					"equals": true,
+					"description": "",
+					"enabled": true
+				}
+			],
+			"auth": null,
+			"events": null,
+			"folder": "a3657539-2b7c-ee3c-1634-7b07363f4356",
+			"rawModeData": "{\r\n    \"userCd\": \"vsharapo\",\r\n    \"uploadId\": 69,\r\n    \"campaignCd\": \"TEST\"\r\n}",
+			"headers": "Content-Type: application/json\n",
+			"pathVariables": {}
+		},
+		{
+			"id": "a74a22c2-9a5d-f25f-3a77-97770cb2ac02",
+			"name": "campaignCreate copy copy",
+			"url": "{{spaceURL}}/api/campaignlists/v1",
+			"description": "",
+			"data": [],
+			"dataMode": "raw",
+			"headerData": [
+				{
+					"key": "Authorization",
+					"value": "Bearer _q_yOHKDCQlzqmtfeZljZ6cm-AnvUyeHeRoUyeSiLy_49FTKdR2-WtyEp59xXfZhev_CBFY1YIrRqaAmwPGfIIK4IC1AUVgJVnRNrWGL8A6kLDGVq1G8yW5TLhGWpBo_0Rp4U51DCIpDN8Z8tWQldX3ImIEG2gF8XYcgyDdQe87bNrT8UgGUyS7FP0tTthPHdhpiNfqz7Tkv6iYApzxpgaFrlCuu6uafuXvsHJWptR7GBAzu-iadQ9PtzIWSZ7swT-cHDTQQZGWZc5So-VwaUJvi9GKSR71n6MRr25pJPT6OtJCm-7K5wEsBEKWlM2QcHgwmnGiCWygiPMrkv-UXp9XxcqhMSuz72M-yax07MQU",
+					"description": "",
+					"enabled": true
+				},
+				{
+					"key": "Content-Type",
+					"value": "application/json",
+					"description": "",
+					"enabled": true
+				}
+			],
+			"method": "POST",
+			"pathVariableData": [],
+			"queryParams": [],
+			"auth": null,
+			"events": null,
+			"folder": null,
+			"rawModeData": "{\r\n  \"UserCd\": \"vsharapo\",\r\n  \"UploadId\": 1,\r\n  \"CampaignCd\": \"CUSTOM_CAMPAIGN\",\r\n  \"LASTWKDAT_LT\": \"2017-11-28\",\r\n  \"LXNWDT_LTE\": \"2017-11-28\",\r\n  \"LASTPRMDATE_LT\": \"2017-11-28\",\r\n  \"QRYBAL_GT\": 5000000\r\n}\r\n",
+			"headers": "Authorization: Bearer _q_yOHKDCQlzqmtfeZljZ6cm-AnvUyeHeRoUyeSiLy_49FTKdR2-WtyEp59xXfZhev_CBFY1YIrRqaAmwPGfIIK4IC1AUVgJVnRNrWGL8A6kLDGVq1G8yW5TLhGWpBo_0Rp4U51DCIpDN8Z8tWQldX3ImIEG2gF8XYcgyDdQe87bNrT8UgGUyS7FP0tTthPHdhpiNfqz7Tkv6iYApzxpgaFrlCuu6uafuXvsHJWptR7GBAzu-iadQ9PtzIWSZ7swT-cHDTQQZGWZc5So-VwaUJvi9GKSR71n6MRr25pJPT6OtJCm-7K5wEsBEKWlM2QcHgwmnGiCWygiPMrkv-UXp9XxcqhMSuz72M-yax07MQU\nContent-Type: application/json\n",
+			"pathVariables": {}
+		},
+		{
+			"id": "a90b8541-5218-4c8a-8edc-f7252e26c89f",
+			"name": "deleteTicklerType",
+			"url": "{{spaceURL}}/api/tp/tickler_types/v1?Id=120",
+			"description": null,
+			"data": [],
+			"dataMode": "raw",
+			"headerData": [
+				{
+					"key": "Content-Type",
+					"value": "application/json",
+					"description": "",
+					"enabled": true
+				}
+			],
+			"method": "DELETE",
+			"pathVariableData": [],
+			"queryParams": [
+				{
+					"key": "Id",
+					"value": "120",
+					"equals": true,
+					"description": "",
+					"enabled": true
+				}
+			],
+			"auth": null,
+			"events": null,
+			"folder": "8c3df387-3b74-4348-ad0e-09537e24966b",
+			"rawModeData": "{\r\n    \"userCd\": \"vsharapo\",\r\n    \"uploadId\": 69,\r\n    \"campaignCd\": \"TEST\"\r\n}",
+			"headers": "Content-Type: application/json\n",
+			"pathVariables": {}
+		},
+		{
+			"id": "aa67acff-6255-9842-82f3-613325a17e8e",
+			"name": "campaignAccounts get",
+			"url": "{{spaceURL}}/api/claccounts/v1?CampaignCd=DIRECT&CustomerName=Azz&PageNr=0&PageSize=5",
+			"description": "",
+			"data": [],
+			"dataMode": "raw",
+			"headerData": [
+				{
+					"key": "Authorization",
+					"value": "Bearer 9ghvciA-M7W75QKRZ9ga_4adB2ZDjpx00W3hoGBG8JZ8TcR06cY8Zphjh0M50ID-12uD7yH36iLTK5AbI0ywvCfyJAPyr2yVWX4ObBNe1KrBWLBOB8KG4TAC0WhmqtvU-rvB7GrC5DwBDsm2vrCEwW_LBxN-Dfz0hI22Uh-_jKSRiUAcveuEfaXgyRO0mxb4CKTpaVSsQ857cJsHoQoYU97RFnvA-UkfCazWcMZ7L39s0rzy76d7YkxFCdsRSUMGkNrKivJDLOc8hU_Lhd2DXw0PS66YfS6-tu-MpmJOMkDAfxuSNooSHdxyO52K1takt-32nH6qtvp0pIH91KfHOg",
+					"description": "",
+					"enabled": true
+				},
+				{
+					"key": "Content-Type",
+					"value": "application/json",
+					"description": "",
+					"enabled": true
+				}
+			],
+			"method": "GET",
+			"pathVariableData": [],
+			"queryParams": [
+				{
+					"key": "CampaignCd",
+					"value": "DIRECT",
+					"equals": true,
+					"description": "",
+					"enabled": true
+				},
+				{
+					"key": "CustomerName",
+					"value": "Azz",
+					"equals": true,
+					"description": "",
+					"enabled": true
+				},
+				{
+					"key": "PageNr",
+					"value": "0",
+					"equals": true,
+					"description": "",
+					"enabled": true
+				},
+				{
+					"key": "PageSize",
+					"value": "5",
+					"equals": true,
+					"description": "",
+					"enabled": true
+				}
+			],
+			"auth": null,
+			"events": [],
+			"folder": null,
+			"rawModeData": "{\r\n    \"userCd\": \"vsharapo\",\r\n    \"uploadId\": 69,\r\n    \"campaignCd\": \"TEST\"\r\n}",
+			"headers": "Authorization: Bearer 9ghvciA-M7W75QKRZ9ga_4adB2ZDjpx00W3hoGBG8JZ8TcR06cY8Zphjh0M50ID-12uD7yH36iLTK5AbI0ywvCfyJAPyr2yVWX4ObBNe1KrBWLBOB8KG4TAC0WhmqtvU-rvB7GrC5DwBDsm2vrCEwW_LBxN-Dfz0hI22Uh-_jKSRiUAcveuEfaXgyRO0mxb4CKTpaVSsQ857cJsHoQoYU97RFnvA-UkfCazWcMZ7L39s0rzy76d7YkxFCdsRSUMGkNrKivJDLOc8hU_Lhd2DXw0PS66YfS6-tu-MpmJOMkDAfxuSNooSHdxyO52K1takt-32nH6qtvp0pIH91KfHOg\nContent-Type: application/json\n",
+			"pathVariables": {}
+		},
+		{
+			"id": "ac81de2a-155e-2007-b6cb-a396ef799545",
+			"name": "parseFile_Phones",
+			"url": "{{spaceURL}}/api/sourcedata/phones/v1?user=vsharapo&filename=pt.csv",
+			"description": "",
+			"data": [],
+			"dataMode": "params",
+			"headerData": [
+				{
+					"key": "Authorization",
+					"value": "Bearer enCHCQb-_qAGiQE27ethoPqjTXe9-Qa-zOMMGPKWKWcCm3BYqRltgz5Mar6umdWAn3i25aES-r8zj2QWkaX9Ep8Nktv3Vd8hFOBkIXZ8Iyk6_lfO_whSSHbRWUns0_HMQZEgQoNdeiuOoK_IxlvqvA9hWnB06Y__Xk9mB3_qx0OKYv0hybuwMXCxqgFNBTTGZKMKp03XsfXIKujSXC2OlURRtHBC-jyIg2DKnrbb0bRhm3o96S5G1SE7rj1SuxJpwkWyFCZ3lTUts_FxBfiY8HNB3xD4qw6sIEkRY1J2YYV3khB6DJw2xVJwas8QyIUHAaSbBugIk0wFUdnklewK-Q",
+					"description": "",
+					"enabled": true
+				}
+			],
+			"method": "GET",
+			"pathVariableData": [],
+			"queryParams": [
+				{
+					"key": "user",
+					"value": "vsharapo",
+					"equals": true,
+					"description": "",
+					"enabled": true
+				},
+				{
+					"key": "filename",
+					"value": "pt.csv",
+					"equals": true,
+					"description": "",
+					"enabled": true
+				}
+			],
+			"auth": null,
+			"events": null,
+			"folder": null,
+			"headers": "Authorization: Bearer enCHCQb-_qAGiQE27ethoPqjTXe9-Qa-zOMMGPKWKWcCm3BYqRltgz5Mar6umdWAn3i25aES-r8zj2QWkaX9Ep8Nktv3Vd8hFOBkIXZ8Iyk6_lfO_whSSHbRWUns0_HMQZEgQoNdeiuOoK_IxlvqvA9hWnB06Y__Xk9mB3_qx0OKYv0hybuwMXCxqgFNBTTGZKMKp03XsfXIKujSXC2OlURRtHBC-jyIg2DKnrbb0bRhm3o96S5G1SE7rj1SuxJpwkWyFCZ3lTUts_FxBfiY8HNB3xD4qw6sIEkRY1J2YYV3khB6DJw2xVJwas8QyIUHAaSbBugIk0wFUdnklewK-Q\n",
+			"pathVariables": {}
+		},
+		{
+			"id": "b22f193a-d159-4ac6-b56a-ef9a69e5bc93",
+			"name": "createCase",
+			"url": "{{spaceURL}}/api/tp/cases/v1",
+			"description": "",
+			"data": [],
+			"dataMode": "raw",
+			"headerData": [
+				{
+					"key": "Authorization",
+					"value": "Bearer s0nNVNo5_j0SIR-0aiN0zwBW47jDlsqOnAIKLNmBidQMa3in-ArgEJp75gQErqHPfSredlY3wglPwShf2Qftzbqc8ryTTFFxETxkbiwv_B5PoB-Tk3TMe75E7VYNtQyDRcQd36of3D9l3tuRJSg0WHD8fLxzHN3CJGiPYimLYf1rqfYS3kuY8tgTlSL4K97kf2-y3KO-57CWePBqSv-prVwzxPRmWDUxL-AacML0bojZ281vltLa-Kyv3KPR70wb8wfTphJXVHKUHFEwr-AfHh_P8Anc1nqH0Ioz48SNBOkF_jHNCTNRfkkXyMCXaJGLAAXiNG3VhcKh4ucR-jKvBQ",
+					"description": "",
+					"enabled": true
+				},
+				{
+					"key": "Content-Type",
+					"value": "application/json",
+					"description": "",
+					"enabled": true
+				}
+			],
+			"method": "POST",
+			"pathVariableData": [],
+			"queryParams": [],
+			"auth": null,
+			"events": [],
+			"folder": "21d5d4b8-400e-4a26-b2f5-43f4893353c3",
+			"rawModeData": "{\r\n    \"AccountId\": \"100023420545\",\r\n    \"CifId\": \"HCC0897\",\r\n    \"ProcessCd\":\"DEV\",\r\n    \"CaseDesc\":\"test\",\r\n    \"CreatedBy\": \"vsharapo\"\r\n}\r\n",
+			"headers": "Authorization: Bearer s0nNVNo5_j0SIR-0aiN0zwBW47jDlsqOnAIKLNmBidQMa3in-ArgEJp75gQErqHPfSredlY3wglPwShf2Qftzbqc8ryTTFFxETxkbiwv_B5PoB-Tk3TMe75E7VYNtQyDRcQd36of3D9l3tuRJSg0WHD8fLxzHN3CJGiPYimLYf1rqfYS3kuY8tgTlSL4K97kf2-y3KO-57CWePBqSv-prVwzxPRmWDUxL-AacML0bojZ281vltLa-Kyv3KPR70wb8wfTphJXVHKUHFEwr-AfHh_P8Anc1nqH0Ioz48SNBOkF_jHNCTNRfkkXyMCXaJGLAAXiNG3VhcKh4ucR-jKvBQ\nContent-Type: application/json\n",
+			"pathVariables": {}
+		},
+		{
+			"id": "b265c235-6a6c-4f08-ae91-7f78df9e0eb3",
+			"name": "addCaseTicker",
+			"url": "{{spaceURL}}/api/tp/case_ticklers/v1",
+			"description": "",
+			"data": [],
+			"dataMode": "raw",
+			"headerData": [
+				{
+					"key": "Authorization",
+					"value": "Bearer s0nNVNo5_j0SIR-0aiN0zwBW47jDlsqOnAIKLNmBidQMa3in-ArgEJp75gQErqHPfSredlY3wglPwShf2Qftzbqc8ryTTFFxETxkbiwv_B5PoB-Tk3TMe75E7VYNtQyDRcQd36of3D9l3tuRJSg0WHD8fLxzHN3CJGiPYimLYf1rqfYS3kuY8tgTlSL4K97kf2-y3KO-57CWePBqSv-prVwzxPRmWDUxL-AacML0bojZ281vltLa-Kyv3KPR70wb8wfTphJXVHKUHFEwr-AfHh_P8Anc1nqH0Ioz48SNBOkF_jHNCTNRfkkXyMCXaJGLAAXiNG3VhcKh4ucR-jKvBQ",
+					"description": "",
+					"enabled": true
+				},
+				{
+					"key": "Content-Type",
+					"value": "application/json",
+					"description": "",
+					"enabled": true
+				}
+			],
+			"method": "POST",
+			"pathVariableData": [],
+			"queryParams": [],
+			"auth": null,
+			"events": [],
+			"folder": "4e3d98dd-d0ae-4435-8f86-bea8e9aadfad",
+			"rawModeData": "{\r\n    \"CaseId\": 7,\r\n    \"TicklerTypeCd\": \"SPOC CONTACT WITH CUSTOMER\",\r\n    \"TicklerDesc\":\"test\",\r\n    \"Attributes\": \"base64here\",\r\n    \"CreatedBy\": \"vsharapo\"\r\n}\r\n",
+			"headers": "Authorization: Bearer s0nNVNo5_j0SIR-0aiN0zwBW47jDlsqOnAIKLNmBidQMa3in-ArgEJp75gQErqHPfSredlY3wglPwShf2Qftzbqc8ryTTFFxETxkbiwv_B5PoB-Tk3TMe75E7VYNtQyDRcQd36of3D9l3tuRJSg0WHD8fLxzHN3CJGiPYimLYf1rqfYS3kuY8tgTlSL4K97kf2-y3KO-57CWePBqSv-prVwzxPRmWDUxL-AacML0bojZ281vltLa-Kyv3KPR70wb8wfTphJXVHKUHFEwr-AfHh_P8Anc1nqH0Ioz48SNBOkF_jHNCTNRfkkXyMCXaJGLAAXiNG3VhcKh4ucR-jKvBQ\nContent-Type: application/json\n",
+			"pathVariables": {}
+		},
+		{
+			"id": "b4255e8f-5ef0-4e04-b82f-c4395aa5b40f",
+			"name": "getCases",
+			"url": "{{spaceURL}}/api/tp/cases/v1?Id=27",
+			"description": null,
+			"data": [],
+			"dataMode": "raw",
+			"headerData": [
+				{
+					"key": "Authorization",
+					"value": "Bearer s0nNVNo5_j0SIR-0aiN0zwBW47jDlsqOnAIKLNmBidQMa3in-ArgEJp75gQErqHPfSredlY3wglPwShf2Qftzbqc8ryTTFFxETxkbiwv_B5PoB-Tk3TMe75E7VYNtQyDRcQd36of3D9l3tuRJSg0WHD8fLxzHN3CJGiPYimLYf1rqfYS3kuY8tgTlSL4K97kf2-y3KO-57CWePBqSv-prVwzxPRmWDUxL-AacML0bojZ281vltLa-Kyv3KPR70wb8wfTphJXVHKUHFEwr-AfHh_P8Anc1nqH0Ioz48SNBOkF_jHNCTNRfkkXyMCXaJGLAAXiNG3VhcKh4ucR-jKvBQ",
+					"description": "",
+					"enabled": true
+				},
+				{
+					"key": "Content-Type",
+					"value": "application/json",
+					"description": "",
+					"enabled": true
+				}
+			],
+			"method": "GET",
+			"pathVariableData": [],
+			"queryParams": [
+				{
+					"key": "Id",
+					"value": "27",
+					"equals": true,
+					"description": "",
+					"enabled": true
+				},
+				{
+					"key": "AccountId",
+					"value": "100023420545",
+					"equals": true,
+					"description": "",
+					"enabled": false
+				},
+				{
+					"key": "CifId",
+					"value": "HCC0897",
+					"equals": true,
+					"description": "",
+					"enabled": false
+				},
+				{
+					"key": "ProcessCd",
+					"value": "SPOC",
+					"equals": true,
+					"description": "",
+					"enabled": false
+				},
+				{
+					"key": "StatusCd",
+					"value": "NEW",
+					"equals": true,
+					"description": "",
+					"enabled": false
+				},
+				{
+					"key": "PageNr",
+					"value": "0",
+					"equals": true,
+					"description": "",
+					"enabled": false
+				},
+				{
+					"key": "PageSize",
+					"value": "5",
+					"equals": true,
+					"description": "",
+					"enabled": false
+				}
+			],
+			"auth": null,
+			"events": null,
+			"folder": "21d5d4b8-400e-4a26-b2f5-43f4893353c3",
+			"rawModeData": "{\r\n    \"userCd\": \"vsharapo\",\r\n    \"uploadId\": 69,\r\n    \"campaignCd\": \"TEST\"\r\n}",
+			"headers": "Authorization: Bearer s0nNVNo5_j0SIR-0aiN0zwBW47jDlsqOnAIKLNmBidQMa3in-ArgEJp75gQErqHPfSredlY3wglPwShf2Qftzbqc8ryTTFFxETxkbiwv_B5PoB-Tk3TMe75E7VYNtQyDRcQd36of3D9l3tuRJSg0WHD8fLxzHN3CJGiPYimLYf1rqfYS3kuY8tgTlSL4K97kf2-y3KO-57CWePBqSv-prVwzxPRmWDUxL-AacML0bojZ281vltLa-Kyv3KPR70wb8wfTphJXVHKUHFEwr-AfHh_P8Anc1nqH0Ioz48SNBOkF_jHNCTNRfkkXyMCXaJGLAAXiNG3VhcKh4ucR-jKvBQ\nContent-Type: application/json\n",
+			"pathVariables": {}
+		},
+		{
+			"id": "b7e419c3-2183-bab5-a0e5-8dc94158ef29",
+			"name": "getToken",
+			"url": "{{spaceURL}}/token",
+			"description": "",
+			"data": [
+				{
+					"disabled": false,
+					"description": {
+						"content": "",
+						"type": "text/plain"
+					},
+					"key": "grant_type",
+					"value": "password",
+					"enabled": true,
+					"type": "text"
+				},
+				{
+					"disabled": false,
+					"description": {
+						"content": "",
+						"type": "text/plain"
+					},
+					"key": "username",
+					"value": "vsharapo",
+					"enabled": true,
+					"type": "text"
+				},
+				{
+					"disabled": false,
+					"description": {
+						"content": "",
+						"type": "text/plain"
+					},
+					"key": "password",
+					"value": "Iberia5$",
+					"enabled": true,
+					"type": "text"
+				}
+			],
+			"dataMode": "urlencoded",
+			"headerData": [
+				{
+					"key": "Accept",
+					"value": "application/json",
+					"description": "",
+					"enabled": true
+				},
+				{
+					"key": "Content-Type",
+					"value": "application/x-www-form-urlencoded",
+					"description": "",
+					"enabled": true
+				},
+				{
+					"key": "Authorization",
+					"value": "Basic dnNoYXJhcG86SWJlcmlhMiQ=",
+					"description": "",
+					"enabled": true
+				}
+			],
+			"method": "POST",
+			"pathVariableData": [],
+			"queryParams": [],
+			"auth": null,
+			"events": null,
+			"folder": null,
+			"headers": "Accept: application/json\nContent-Type: application/x-www-form-urlencoded\nAuthorization: Basic dnNoYXJhcG86SWJlcmlhMiQ=\n",
+			"pathVariables": {}
+		},
+		{
+			"id": "bae30c55-9b43-439c-b0f6-540f580369ae",
+			"name": "userRoles add",
+			"url": "{{spaceURL}}/api/userroles/v1",
+			"description": "",
+			"data": [],
+			"dataMode": "raw",
+			"headerData": [
+				{
+					"key": "Authorization",
+					"value": "Bearer s0nNVNo5_j0SIR-0aiN0zwBW47jDlsqOnAIKLNmBidQMa3in-ArgEJp75gQErqHPfSredlY3wglPwShf2Qftzbqc8ryTTFFxETxkbiwv_B5PoB-Tk3TMe75E7VYNtQyDRcQd36of3D9l3tuRJSg0WHD8fLxzHN3CJGiPYimLYf1rqfYS3kuY8tgTlSL4K97kf2-y3KO-57CWePBqSv-prVwzxPRmWDUxL-AacML0bojZ281vltLa-Kyv3KPR70wb8wfTphJXVHKUHFEwr-AfHh_P8Anc1nqH0Ioz48SNBOkF_jHNCTNRfkkXyMCXaJGLAAXiNG3VhcKh4ucR-jKvBQ",
+					"description": "",
+					"enabled": true
+				},
+				{
+					"key": "Content-Type",
+					"value": "application/json",
+					"description": "",
+					"enabled": true
+				}
+			],
+			"method": "POST",
+			"pathVariableData": [],
+			"queryParams": [],
+			"auth": null,
+			"events": [],
+			"folder": null,
+			"rawModeData": "{\r\n    \"UserCd\": \"pblanco\",\r\n    \"RoleCd\": \"CL_CONTENT_VIEWER\",\r\n    \"ActiveFlg\":\"Y\",\r\n    \"CreatedBy\": \"vsharapo\"\r\n}",
+			"headers": "Authorization: Bearer s0nNVNo5_j0SIR-0aiN0zwBW47jDlsqOnAIKLNmBidQMa3in-ArgEJp75gQErqHPfSredlY3wglPwShf2Qftzbqc8ryTTFFxETxkbiwv_B5PoB-Tk3TMe75E7VYNtQyDRcQd36of3D9l3tuRJSg0WHD8fLxzHN3CJGiPYimLYf1rqfYS3kuY8tgTlSL4K97kf2-y3KO-57CWePBqSv-prVwzxPRmWDUxL-AacML0bojZ281vltLa-Kyv3KPR70wb8wfTphJXVHKUHFEwr-AfHh_P8Anc1nqH0Ioz48SNBOkF_jHNCTNRfkkXyMCXaJGLAAXiNG3VhcKh4ucR-jKvBQ\nContent-Type: application/json\n",
+			"pathVariables": {}
+		},
+		{
+			"id": "bc816803-c1a6-0532-0f61-59b9ec05ce62",
+			"name": "userCampaigns add",
+			"url": "{{spaceURL}}/api/usercampaigns/v1",
+			"description": "",
+			"data": [],
+			"dataMode": "raw",
+			"headerData": [
+				{
+					"key": "Authorization",
+					"value": "Bearer AWG5jVcEwXpm7hNvGnNF2MDPRsufecUFyeu6R-2-9-M33KPM-2qYAWROfbAR2sCWAwPihDZV0wFFp-n4y-S1v9n8G-2G5fhkDsHHuMJglrG-NB_ic8pl3gpApc64NskB89CGxTyRJH2piByQSFoKkbdIJKHgn1XXk6ZY2p_SRJRd3cieLj_xRLYOD5WckF-C_Y1YVETo5qErkRMRYlE30k5N2tyiP7rstQjYGdQANyk1wN6ZnWVNHQXxWQU4fwREYpQagyD2oB7rw0ukyFP4Roq6XkqiGhfI4F1NuicnQRzMIBfn5bYj2x7j8Ms87qydrVIIDjdcBrYL85Vr2Tl1mw",
+					"description": "",
+					"enabled": true
+				},
+				{
+					"key": "Content-Type",
+					"value": "application/json",
+					"description": "",
+					"enabled": true
+				}
+			],
+			"method": "POST",
+			"pathVariableData": [],
+			"queryParams": [],
+			"auth": null,
+			"events": null,
+			"folder": null,
+			"rawModeData": "{\r\n    \"userCd\": \"nkilchr\",\r\n    \"campaignCd\": \"INDIRECT\",\r\n    \"activeFlg\":\"Y\",\r\n    \"createdBy\": \"vsharapo\"\r\n}",
+			"headers": "Authorization: Bearer AWG5jVcEwXpm7hNvGnNF2MDPRsufecUFyeu6R-2-9-M33KPM-2qYAWROfbAR2sCWAwPihDZV0wFFp-n4y-S1v9n8G-2G5fhkDsHHuMJglrG-NB_ic8pl3gpApc64NskB89CGxTyRJH2piByQSFoKkbdIJKHgn1XXk6ZY2p_SRJRd3cieLj_xRLYOD5WckF-C_Y1YVETo5qErkRMRYlE30k5N2tyiP7rstQjYGdQANyk1wN6ZnWVNHQXxWQU4fwREYpQagyD2oB7rw0ukyFP4Roq6XkqiGhfI4F1NuicnQRzMIBfn5bYj2x7j8Ms87qydrVIIDjdcBrYL85Vr2Tl1mw\nContent-Type: application/json\n",
+			"pathVariables": {}
+		},
+		{
+			"id": "bdf2d18e-8b61-6b1b-458c-24a4299c786d",
+			"name": "Statistics",
+			"url": "{{spaceURL}}/api/stat/v1",
+			"description": "",
+			"data": [],
+			"dataMode": "raw",
+			"headerData": [
+				{
+					"key": "Authorization",
+					"value": "Bearer xtKnVzyqibwfuYSQz946finN51xNganRxsOI3So2xIAqY44lr5CA17N6bpLBDClXsZcfbV42HLlxGmGvW2GyAt-Vz2onJJvgt8SB19UBt70kisLAH5GCO9rEW6UyWXNYS_Dot9QPZNs3qOAeFFiNkYgW-LwxA9t8CcrgnpfJMPg5LorGyYHqNs_-5lEJdj97gWlQEUDvZXjz54LG5YHWitcFx7A2LLPtcSaCP8Zq-g5MQkHuY8YzGNv4Xl0rPWrl2VQ3EsFeopIJlBbV-TKCqdXlroZhiS0JorAH2vJixiuwOo9sv2-mGfzVRhyR88IXQqeu87i-71qZ1ymWTVERYQ",
+					"description": "",
+					"enabled": true
+				},
+				{
+					"key": "Content-Type",
+					"value": "application/json",
+					"description": "",
+					"enabled": true
+				}
+			],
+			"method": "GET",
+			"pathVariableData": [],
+			"queryParams": [],
+			"auth": null,
+			"events": null,
+			"folder": "a3657539-2b7c-ee3c-1634-7b07363f4356",
+			"rawModeData": "{\r\n    \"userCd\": \"vsharapo\",\r\n    \"uploadId\": 69,\r\n    \"campaignCd\": \"TEST\"\r\n}",
+			"headers": "Authorization: Bearer xtKnVzyqibwfuYSQz946finN51xNganRxsOI3So2xIAqY44lr5CA17N6bpLBDClXsZcfbV42HLlxGmGvW2GyAt-Vz2onJJvgt8SB19UBt70kisLAH5GCO9rEW6UyWXNYS_Dot9QPZNs3qOAeFFiNkYgW-LwxA9t8CcrgnpfJMPg5LorGyYHqNs_-5lEJdj97gWlQEUDvZXjz54LG5YHWitcFx7A2LLPtcSaCP8Zq-g5MQkHuY8YzGNv4Xl0rPWrl2VQ3EsFeopIJlBbV-TKCqdXlroZhiS0JorAH2vJixiuwOo9sv2-mGfzVRhyR88IXQqeu87i-71qZ1ymWTVERYQ\nContent-Type: application/json\n",
+			"pathVariables": {}
+		},
+		{
+			"id": "bf84fcd0-2f9e-7f58-4ade-7b6bfa3063b2",
+			"name": "parseFile_Accounts_master",
+			"url": "{{spaceURL}}/api/sourcedata/run/v1?user=vsharapo",
+			"description": "",
+			"data": [],
+			"dataMode": "params",
+			"headerData": [],
+			"method": "GET",
+			"pathVariableData": [],
+			"queryParams": [
+				{
+					"key": "user",
+					"value": "vsharapo",
+					"equals": true,
+					"description": "",
+					"enabled": true
+				}
+			],
+			"auth": null,
+			"events": [],
+			"folder": null,
+			"headers": "",
+			"pathVariables": {}
+		},
+		{
+			"id": "c5340b0f-b3d0-878c-b31d-b902787e1b5e",
+			"name": "getCancelTypes",
+			"url": "{{spaceURL}}/api/dictionary/cancel_types/v1",
+			"description": null,
+			"data": [],
+			"dataMode": "raw",
+			"headerData": [
+				{
+					"key": "Authorization",
+					"value": "Bearer s0nNVNo5_j0SIR-0aiN0zwBW47jDlsqOnAIKLNmBidQMa3in-ArgEJp75gQErqHPfSredlY3wglPwShf2Qftzbqc8ryTTFFxETxkbiwv_B5PoB-Tk3TMe75E7VYNtQyDRcQd36of3D9l3tuRJSg0WHD8fLxzHN3CJGiPYimLYf1rqfYS3kuY8tgTlSL4K97kf2-y3KO-57CWePBqSv-prVwzxPRmWDUxL-AacML0bojZ281vltLa-Kyv3KPR70wb8wfTphJXVHKUHFEwr-AfHh_P8Anc1nqH0Ioz48SNBOkF_jHNCTNRfkkXyMCXaJGLAAXiNG3VhcKh4ucR-jKvBQ",
+					"enabled": true
+				},
+				{
+					"key": "Content-Type",
+					"value": "application/json",
+					"enabled": true
+				}
+			],
+			"method": "GET",
+			"pathVariableData": [],
+			"queryParams": [],
+			"auth": null,
+			"events": null,
+			"folder": null,
+			"rawModeData": "{\r\n    \"userCd\": \"vsharapo\",\r\n    \"uploadId\": 69,\r\n    \"campaignCd\": \"TEST\"\r\n}",
+			"headers": "Authorization: Bearer s0nNVNo5_j0SIR-0aiN0zwBW47jDlsqOnAIKLNmBidQMa3in-ArgEJp75gQErqHPfSredlY3wglPwShf2Qftzbqc8ryTTFFxETxkbiwv_B5PoB-Tk3TMe75E7VYNtQyDRcQd36of3D9l3tuRJSg0WHD8fLxzHN3CJGiPYimLYf1rqfYS3kuY8tgTlSL4K97kf2-y3KO-57CWePBqSv-prVwzxPRmWDUxL-AacML0bojZ281vltLa-Kyv3KPR70wb8wfTphJXVHKUHFEwr-AfHh_P8Anc1nqH0Ioz48SNBOkF_jHNCTNRfkkXyMCXaJGLAAXiNG3VhcKh4ucR-jKvBQ\nContent-Type: application/json\n",
+			"pathVariables": {}
+		},
+		{
+			"id": "cff14448-35f7-37ed-8cef-49c9a80c1bd7",
+			"name": "cancelCampaignRecord",
+			"url": "{{spaceURL}}/api/clrecords/v1",
+			"description": null,
+			"data": [],
+			"dataMode": "raw",
+			"headerData": [
+				{
+					"key": "Authorization",
+					"value": "Bearer 1u6RqJA3X5S9-DGguFvj68ZshrhMxImBr2-PDapXEP5p_tPWyQI4ZxgVSBsdnaiQud7ASXZfIAuYTUYyUP-yO6-leIqyafeKSackw1rKNoiRyErSvyzF72M6tPzI7TsoQgcJrbMr6BkbAlzV59YrBTEEw9Wwog30jwXWN3eoRo4LPHs6c2a-S-j2joaRP7XlX_flgJZ8FG5M_cDXurmwseHQ-oziqloD5fTGr5zY2Z_kikwHxN_HR6PSTU7lRWmpp9zDkEwBdr5h5Hn1Cv6Nia0QVwdIE4c1mPDXmKLy8olInaCtKdrmjwiu6W2_tSOG1kdiAwSejKLa4bmrSEtgsQ",
+					"enabled": true,
+					"description": ""
+				},
+				{
+					"key": "Content-Type",
+					"value": "application/json",
+					"enabled": true,
+					"description": ""
+				}
+			],
+			"method": "PUT",
+			"pathVariableData": [],
+			"queryParams": [],
+			"auth": null,
+			"events": null,
+			"folder": null,
+			"rawModeData": "{\r\n    \"UserCd\": \"vsharapo\",\r\n    \"CampaignRecordId\": 1747725,\r\n    \"CancelCd\": \"AGENT_CANCELED\",\r\n    \"CancelDesc\": \"my first canceled record\",\r\n    \"CancelRelatedFlg\": \"Y\"\r\n}",
+			"headers": "Authorization: Bearer 1u6RqJA3X5S9-DGguFvj68ZshrhMxImBr2-PDapXEP5p_tPWyQI4ZxgVSBsdnaiQud7ASXZfIAuYTUYyUP-yO6-leIqyafeKSackw1rKNoiRyErSvyzF72M6tPzI7TsoQgcJrbMr6BkbAlzV59YrBTEEw9Wwog30jwXWN3eoRo4LPHs6c2a-S-j2joaRP7XlX_flgJZ8FG5M_cDXurmwseHQ-oziqloD5fTGr5zY2Z_kikwHxN_HR6PSTU7lRWmpp9zDkEwBdr5h5Hn1Cv6Nia0QVwdIE4c1mPDXmKLy8olInaCtKdrmjwiu6W2_tSOG1kdiAwSejKLa4bmrSEtgsQ\nContent-Type: application/json\n",
+			"pathVariables": {}
+		},
+		{
+			"id": "d49fd653-ef53-4876-b5fa-8681b92db28c",
+			"name": "getProcesses",
+			"url": "{{spaceURL}}/api/tp/processes/v1",
+			"description": null,
+			"data": [],
+			"dataMode": "raw",
+			"headerData": [
+				{
+					"key": "Authorization",
+					"value": "Bearer s0nNVNo5_j0SIR-0aiN0zwBW47jDlsqOnAIKLNmBidQMa3in-ArgEJp75gQErqHPfSredlY3wglPwShf2Qftzbqc8ryTTFFxETxkbiwv_B5PoB-Tk3TMe75E7VYNtQyDRcQd36of3D9l3tuRJSg0WHD8fLxzHN3CJGiPYimLYf1rqfYS3kuY8tgTlSL4K97kf2-y3KO-57CWePBqSv-prVwzxPRmWDUxL-AacML0bojZ281vltLa-Kyv3KPR70wb8wfTphJXVHKUHFEwr-AfHh_P8Anc1nqH0Ioz48SNBOkF_jHNCTNRfkkXyMCXaJGLAAXiNG3VhcKh4ucR-jKvBQ",
+					"description": "",
+					"enabled": true
+				},
+				{
+					"key": "Content-Type",
+					"value": "application/json",
+					"description": "",
+					"enabled": true
+				}
+			],
+			"method": "GET",
+			"pathVariableData": [],
+			"queryParams": [],
+			"auth": null,
+			"events": null,
+			"folder": "32c2b8ac-9ebb-4d70-aa64-9df7aa371d71",
+			"rawModeData": "{\r\n    \"userCd\": \"vsharapo\",\r\n    \"uploadId\": 69,\r\n    \"campaignCd\": \"TEST\"\r\n}",
+			"headers": "Authorization: Bearer s0nNVNo5_j0SIR-0aiN0zwBW47jDlsqOnAIKLNmBidQMa3in-ArgEJp75gQErqHPfSredlY3wglPwShf2Qftzbqc8ryTTFFxETxkbiwv_B5PoB-Tk3TMe75E7VYNtQyDRcQd36of3D9l3tuRJSg0WHD8fLxzHN3CJGiPYimLYf1rqfYS3kuY8tgTlSL4K97kf2-y3KO-57CWePBqSv-prVwzxPRmWDUxL-AacML0bojZ281vltLa-Kyv3KPR70wb8wfTphJXVHKUHFEwr-AfHh_P8Anc1nqH0Ioz48SNBOkF_jHNCTNRfkkXyMCXaJGLAAXiNG3VhcKh4ucR-jKvBQ\nContent-Type: application/json\n",
+			"pathVariables": {}
+		},
+		{
+			"id": "d7f01190-c5b8-dcd1-c2b1-94e024e37bc1",
+			"name": "ReportContactPctByHour",
+			"url": "{{spaceURL}}/api/reports/contact_pct_by_hour/v1?StartDt=2018-02-19",
+			"description": null,
+			"data": [],
+			"dataMode": "raw",
+			"headerData": [
+				{
+					"key": "Content-Type",
+					"value": "application/json",
+					"enabled": true,
+					"description": ""
+				}
+			],
+			"method": "GET",
+			"pathVariableData": [],
+			"queryParams": [
+				{
+					"key": "StartDt",
+					"value": "2018-02-19",
+					"equals": true,
+					"description": "",
+					"enabled": true
+				}
+			],
+			"auth": null,
+			"events": null,
+			"folder": "a3657539-2b7c-ee3c-1634-7b07363f4356",
+			"rawModeData": "{\r\n    \"userCd\": \"vsharapo\",\r\n    \"uploadId\": 69,\r\n    \"campaignCd\": \"TEST\"\r\n}",
+			"headers": "Content-Type: application/json\n",
+			"pathVariables": {}
+		},
+		{
+			"id": "daa068c3-b511-4635-973c-9a2a9ce05af0",
+			"name": "getTicklerAttributeMap",
+			"url": "{{spaceURL}}/api/tp/ticklers_atb_map/v1?TicklerTypeId=3",
+			"description": null,
+			"data": [],
+			"dataMode": "raw",
+			"headerData": [
+				{
+					"key": "Content-Type",
+					"value": "application/json",
+					"description": "",
+					"enabled": true
+				}
+			],
+			"method": "GET",
+			"pathVariableData": [],
+			"queryParams": [
+				{
+					"key": "TicklerTypeId",
+					"value": "3",
+					"equals": true,
+					"description": "",
+					"enabled": true
+				}
+			],
+			"auth": null,
+			"events": null,
+			"folder": "a900ab20-fe8a-487a-981f-7694977ebb6c",
+			"rawModeData": "{\r\n    \"userCd\": \"vsharapo\",\r\n    \"uploadId\": 69,\r\n    \"campaignCd\": \"TEST\"\r\n}",
+			"headers": "Content-Type: application/json\n",
+			"pathVariables": {}
+		},
+		{
+			"id": "e2e99120-cafd-4b8c-b6ba-286d2f404b34",
+			"name": "deleteTicklerAttributesTypes",
+			"url": "{{spaceURL}}/api/tp/tickler_attribute_types/v1?Id=1",
+			"description": null,
+			"data": [],
+			"dataMode": "raw",
+			"headerData": [
+				{
+					"key": "Authorization",
+					"value": "Bearer s0nNVNo5_j0SIR-0aiN0zwBW47jDlsqOnAIKLNmBidQMa3in-ArgEJp75gQErqHPfSredlY3wglPwShf2Qftzbqc8ryTTFFxETxkbiwv_B5PoB-Tk3TMe75E7VYNtQyDRcQd36of3D9l3tuRJSg0WHD8fLxzHN3CJGiPYimLYf1rqfYS3kuY8tgTlSL4K97kf2-y3KO-57CWePBqSv-prVwzxPRmWDUxL-AacML0bojZ281vltLa-Kyv3KPR70wb8wfTphJXVHKUHFEwr-AfHh_P8Anc1nqH0Ioz48SNBOkF_jHNCTNRfkkXyMCXaJGLAAXiNG3VhcKh4ucR-jKvBQ",
+					"description": "",
+					"enabled": true
+				},
+				{
+					"key": "Content-Type",
+					"value": "application/json",
+					"description": "",
+					"enabled": true
+				}
+			],
+			"method": "DELETE",
+			"pathVariableData": [],
+			"queryParams": [
+				{
+					"key": "Id",
+					"value": "1",
+					"equals": true,
+					"description": "",
+					"enabled": true
+				}
+			],
+			"auth": null,
+			"events": null,
+			"folder": "bf7cfc1a-5858-4010-afb9-db7abcd0ef34",
+			"rawModeData": "",
+			"headers": "Authorization: Bearer s0nNVNo5_j0SIR-0aiN0zwBW47jDlsqOnAIKLNmBidQMa3in-ArgEJp75gQErqHPfSredlY3wglPwShf2Qftzbqc8ryTTFFxETxkbiwv_B5PoB-Tk3TMe75E7VYNtQyDRcQd36of3D9l3tuRJSg0WHD8fLxzHN3CJGiPYimLYf1rqfYS3kuY8tgTlSL4K97kf2-y3KO-57CWePBqSv-prVwzxPRmWDUxL-AacML0bojZ281vltLa-Kyv3KPR70wb8wfTphJXVHKUHFEwr-AfHh_P8Anc1nqH0Ioz48SNBOkF_jHNCTNRfkkXyMCXaJGLAAXiNG3VhcKh4ucR-jKvBQ\nContent-Type: application/json\n",
+			"pathVariables": {}
+		},
+		{
+			"id": "e32b4e39-943b-4c56-bf3b-9a167964f6fd",
+			"name": "getTicklerAttributesTypes",
+			"url": "{{spaceURL}}/api/tp/tickler_attribute_types/v1?ActiveFlg=N",
+			"description": null,
+			"data": [],
+			"dataMode": "raw",
+			"headerData": [
+				{
+					"key": "Authorization",
+					"value": "Bearer s0nNVNo5_j0SIR-0aiN0zwBW47jDlsqOnAIKLNmBidQMa3in-ArgEJp75gQErqHPfSredlY3wglPwShf2Qftzbqc8ryTTFFxETxkbiwv_B5PoB-Tk3TMe75E7VYNtQyDRcQd36of3D9l3tuRJSg0WHD8fLxzHN3CJGiPYimLYf1rqfYS3kuY8tgTlSL4K97kf2-y3KO-57CWePBqSv-prVwzxPRmWDUxL-AacML0bojZ281vltLa-Kyv3KPR70wb8wfTphJXVHKUHFEwr-AfHh_P8Anc1nqH0Ioz48SNBOkF_jHNCTNRfkkXyMCXaJGLAAXiNG3VhcKh4ucR-jKvBQ",
+					"description": "",
+					"enabled": true
+				},
+				{
+					"key": "Content-Type",
+					"value": "application/json",
+					"description": "",
+					"enabled": true
+				}
+			],
+			"method": "GET",
+			"pathVariableData": [],
+			"queryParams": [
+				{
+					"key": "ActiveFlg",
+					"value": "N",
+					"equals": true,
+					"description": "",
+					"enabled": true
+				}
+			],
+			"auth": null,
+			"events": null,
+			"folder": "bf7cfc1a-5858-4010-afb9-db7abcd0ef34",
+			"rawModeData": "{\r\n    \"userCd\": \"vsharapo\",\r\n    \"uploadId\": 69,\r\n    \"campaignCd\": \"TEST\"\r\n}",
+			"headers": "Authorization: Bearer s0nNVNo5_j0SIR-0aiN0zwBW47jDlsqOnAIKLNmBidQMa3in-ArgEJp75gQErqHPfSredlY3wglPwShf2Qftzbqc8ryTTFFxETxkbiwv_B5PoB-Tk3TMe75E7VYNtQyDRcQd36of3D9l3tuRJSg0WHD8fLxzHN3CJGiPYimLYf1rqfYS3kuY8tgTlSL4K97kf2-y3KO-57CWePBqSv-prVwzxPRmWDUxL-AacML0bojZ281vltLa-Kyv3KPR70wb8wfTphJXVHKUHFEwr-AfHh_P8Anc1nqH0Ioz48SNBOkF_jHNCTNRfkkXyMCXaJGLAAXiNG3VhcKh4ucR-jKvBQ\nContent-Type: application/json\n",
+			"pathVariables": {}
+		},
+		{
+			"id": "ea3fd714-43e1-2277-4479-c45bf01f7855",
+			"name": "getAccountHistory",
+			"url": "{{spaceURL}}/api/account/history/v1?AccountId=7351828",
+			"description": null,
+			"data": [],
+			"dataMode": "raw",
+			"headerData": [
+				{
+					"key": "Authorization",
+					"value": "Bearer W4UvKJQTUrUgEds_Msnhhj3EQF1drvRUUyWF5QW2HCqLhAWn6WiML6fZBHbChcNYnQ8eFAD8-gVCm19KVKTk1g9XpsBfSCEi1asEkEW2e60zcBMHvF57OVIIPV2BIy1VOwMv7HE7215hg91Hzx2oqInYWPNyml3sSfzWeyQsnTVhrIu9F-wX2OMhcNJ1Y2J6v8Us9GUbp4kcCPA0o664_AA8uGex457n2Wr6LIVT3KAKtGxHPLZrGQgRtxT-pQXPycB_x-ans6Q6MEgTltxb-_pFy50PBsh2L5Rau9mUuJ9Bd8Wgq21dTzVjmfXXJAWj1Zh5tgl5GcaLdOZSdX14GA",
+					"description": "",
+					"enabled": true
+				},
+				{
+					"key": "Content-Type",
+					"value": "application/json",
+					"description": "",
+					"enabled": true
+				}
+			],
+			"method": "GET",
+			"pathVariableData": [],
+			"queryParams": [
+				{
+					"key": "AccountId",
+					"value": "7351828",
+					"equals": true,
+					"description": "",
+					"enabled": true
+				}
+			],
+			"auth": null,
+			"events": [],
+			"folder": null,
+			"rawModeData": "{\r\n    \"userCd\": \"vsharapo\",\r\n    \"uploadId\": 69,\r\n    \"campaignCd\": \"TEST\"\r\n}",
+			"headers": "Authorization: Bearer W4UvKJQTUrUgEds_Msnhhj3EQF1drvRUUyWF5QW2HCqLhAWn6WiML6fZBHbChcNYnQ8eFAD8-gVCm19KVKTk1g9XpsBfSCEi1asEkEW2e60zcBMHvF57OVIIPV2BIy1VOwMv7HE7215hg91Hzx2oqInYWPNyml3sSfzWeyQsnTVhrIu9F-wX2OMhcNJ1Y2J6v8Us9GUbp4kcCPA0o664_AA8uGex457n2Wr6LIVT3KAKtGxHPLZrGQgRtxT-pQXPycB_x-ans6Q6MEgTltxb-_pFy50PBsh2L5Rau9mUuJ9Bd8Wgq21dTzVjmfXXJAWj1Zh5tgl5GcaLdOZSdX14GA\nContent-Type: application/json\n",
+			"pathVariables": {}
+		},
+		{
+			"id": "ec135fe0-f5c6-9fb2-49aa-445526b53236",
+			"name": "acctSrch",
+			"url": "{{spaceURL}}/api/acctSrch/v1?customerId=AAD9461",
+			"description": "",
+			"data": [],
+			"dataMode": "params",
+			"headerData": [
+				{
+					"key": "Authorization",
+					"value": "Bearer IXclF-EjPqoimUTe888GHZ3l20aqVTTY9C_bL_CdPpQghWCOXGrVBVTzLLQS_fRmDIMxpAZIulNP_o65ZqWQQsWb8rYDiyBYpAd-wrwwr3K-lEXO5NA4RVBoYkAersQkg2bMiqqB6Cjk6y5sycYQhFdeMZ4ULh-WUewm49o6nq_Vtg07_bk6RiEpjivm-uafFz2tQbbZ-yZr5hBYWa_cYKgc6muz-ynDKn6kooFBxh2Tlw6KjPeE2fnYZaqCqxT_dNG-2yJjRe5CP5lxcxiIHqGWsLIjgvhSAzbGHKSZJxiJ-j3iRvdTUSN1t6pFuKTd",
+					"description": "",
+					"enabled": true
+				}
+			],
+			"method": "GET",
+			"pathVariableData": [],
+			"queryParams": [
+				{
+					"key": "customerId",
+					"value": "AAD9461",
+					"equals": true,
+					"description": "",
+					"enabled": true
+				}
+			],
+			"auth": null,
+			"events": null,
+			"folder": null,
+			"headers": "Authorization: Bearer IXclF-EjPqoimUTe888GHZ3l20aqVTTY9C_bL_CdPpQghWCOXGrVBVTzLLQS_fRmDIMxpAZIulNP_o65ZqWQQsWb8rYDiyBYpAd-wrwwr3K-lEXO5NA4RVBoYkAersQkg2bMiqqB6Cjk6y5sycYQhFdeMZ4ULh-WUewm49o6nq_Vtg07_bk6RiEpjivm-uafFz2tQbbZ-yZr5hBYWa_cYKgc6muz-ynDKn6kooFBxh2Tlw6KjPeE2fnYZaqCqxT_dNG-2yJjRe5CP5lxcxiIHqGWsLIjgvhSAzbGHKSZJxiJ-j3iRvdTUSN1t6pFuKTd\n",
+			"pathVariables": {}
+		},
+		{
+			"id": "f62e989f-dd15-d82d-cbe0-81ac5485a83e",
+			"name": "ReportIncomingByHour",
+			"url": "{{spaceURL}}/api/reports/calls_incoming_by_hour/v1?StartDt=2017-12-13",
+			"description": "",
+			"data": [],
+			"dataMode": "raw",
+			"headerData": [
+				{
+					"key": "Content-Type",
+					"value": "application/json",
+					"description": "",
+					"enabled": true
+				}
+			],
+			"method": "GET",
+			"pathVariableData": [],
+			"queryParams": [
+				{
+					"key": "StartDt",
+					"value": "2017-12-13",
+					"equals": true,
+					"description": "",
+					"enabled": true
+				}
+			],
+			"auth": null,
+			"events": [],
+			"folder": "a3657539-2b7c-ee3c-1634-7b07363f4356",
+			"rawModeData": "{\r\n    \"userCd\": \"vsharapo\",\r\n    \"uploadId\": 69,\r\n    \"campaignCd\": \"TEST\"\r\n}",
+			"headers": "Content-Type: application/json\n",
+			"pathVariables": {}
+		},
+		{
+			"id": "f8e6b040-2ff2-0057-0a96-a3910680de4b",
+			"name": "attributes get",
+			"url": "{{spaceURL}}/api/attributes/v1",
+			"description": "",
+			"data": [],
+			"dataMode": "raw",
+			"headerData": [
+				{
+					"key": "Authorization",
+					"value": "Bearer korgErTN7uhh1jzgzO2F6JJgIBpK-8SrWpMtCf5kbkPViTADBFKYfL7ibA6LWBBwwzKNbaAJm0FEdnUPA6VRfH49NCDug_Pwa1n-V7ZMb6RBWvTw6bJacboXTCCzm5-Vx0DMPLhggNwY1Q4mAMXr-by5rrluH0ylllKIfaj1hHDr0PG3pSoaGTM_WYQXfj-chGCy0ptVy__VnWDk2fwRU3PH0yTh0MVEoTh3UrFRKbS_5nzScpujYs7OWAwhf86LpnGXU4J4-UhAoBdlkSK-wFwlcCAb-C6uyh97yzzc9WNSqmakxuMWHsW3aC6xyHp-mzWy5H9-TLhQnLhkDqvLlA",
+					"description": "",
+					"enabled": true
+				},
+				{
+					"key": "Content-Type",
+					"value": "application/json",
+					"description": "",
+					"enabled": true
+				}
+			],
+			"method": "GET",
+			"pathVariableData": [],
+			"queryParams": [],
+			"auth": null,
+			"events": null,
+			"folder": null,
+			"rawModeData": "{\r\n    \"userCd\": \"vsharapo\",\r\n    \"uploadId\": 69,\r\n    \"campaignCd\": \"TEST\"\r\n}",
+			"headers": "Authorization: Bearer korgErTN7uhh1jzgzO2F6JJgIBpK-8SrWpMtCf5kbkPViTADBFKYfL7ibA6LWBBwwzKNbaAJm0FEdnUPA6VRfH49NCDug_Pwa1n-V7ZMb6RBWvTw6bJacboXTCCzm5-Vx0DMPLhggNwY1Q4mAMXr-by5rrluH0ylllKIfaj1hHDr0PG3pSoaGTM_WYQXfj-chGCy0ptVy__VnWDk2fwRU3PH0yTh0MVEoTh3UrFRKbS_5nzScpujYs7OWAwhf86LpnGXU4J4-UhAoBdlkSK-wFwlcCAb-C6uyh97yzzc9WNSqmakxuMWHsW3aC6xyHp-mzWy5H9-TLhQnLhkDqvLlA\nContent-Type: application/json\n",
+			"pathVariables": {}
+		},
+		{
+			"id": "fbf0b719-71ee-534e-fc8b-a44d6e1e4769",
+			"name": "custSrch_byAccount",
+			"url": "{{spaceURL}}/api/custsrch/v1?accountId=6900526473",
+			"description": "",
+			"data": [],
+			"dataMode": "params",
+			"headerData": [
+				{
+					"key": "Authorization",
+					"value": "Bearer HZKiNl3jHxZuvbfy-nq31YOgSGN6GEr_ebfVhZ-ZRO0KV3Mp25VMnu3bBP7R6lqUqxxsyIXf4ALtbvGZPQ-dCXx1hvOQZYkCQUdZX-vGESHGU6H9rAF9OVdzP4m0TMQyqe5kTUlJvy-qmsbBFwbr78dcqsoT28nhPmNMgZzeaBDU0aYanZPQwFvWrcDY1Xy6j_oyTTfeUQJU74gG6MGYT2255gPyBGC1xkcykwKloJOykH7uXrrr5sMPt31EGIWa5oZKMKW_GEaHJoY9_IzYSgdtqpzlYvu5DBnMq_dDi1Br9T4u03rof6cuK85cfpvGg07qgyxhK3zQgVgVMPT_sA",
+					"enabled": true,
+					"description": ""
+				}
+			],
+			"method": "GET",
+			"pathVariableData": [],
+			"queryParams": [
+				{
+					"key": "accountId",
+					"value": "6900526473",
+					"equals": true,
+					"description": "",
+					"enabled": true
+				}
+			],
+			"auth": null,
+			"events": null,
+			"folder": null,
+			"headers": "Authorization: Bearer HZKiNl3jHxZuvbfy-nq31YOgSGN6GEr_ebfVhZ-ZRO0KV3Mp25VMnu3bBP7R6lqUqxxsyIXf4ALtbvGZPQ-dCXx1hvOQZYkCQUdZX-vGESHGU6H9rAF9OVdzP4m0TMQyqe5kTUlJvy-qmsbBFwbr78dcqsoT28nhPmNMgZzeaBDU0aYanZPQwFvWrcDY1Xy6j_oyTTfeUQJU74gG6MGYT2255gPyBGC1xkcykwKloJOykH7uXrrr5sMPt31EGIWa5oZKMKW_GEaHJoY9_IzYSgdtqpzlYvu5DBnMq_dDi1Br9T4u03rof6cuK85cfpvGg07qgyxhK3zQgVgVMPT_sA\n",
+			"pathVariables": {}
+		}
+	]
+}

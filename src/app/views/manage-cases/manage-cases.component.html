@@ -1,0 +1,91 @@
+<div class="row">
+  <div class="col-lg-12">
+    <div class="ibox"  *ngIf="isTicklerVisible">
+      <!-- Process Cases table -->
+      <div class="filterCases">
+        <!--search criteria params-->
+        <div class="ibox-title col-lg-12 col-md-12 col-sm-12 col-xs-12" [ngClass]="{'tProcesses-disabled': currentTab != 'ticklerProcesses' && isTicklerVisible, 'tProcesses-enabled':
+          currentTab == 'ticklerProcesses' && isTicklerVisible}">
+          <!--<div class="col-lg-12 col-xs-12">-->
+          <h5 *ngIf="!currentParams" class="col-lg-8 col-md-8 col-sm-8 col-xs-6">Process cases</h5>
+          <h5 *ngIf="currentParams" class="col-lg-8 col-md-8 col-sm-8 col-xs-6" style="margin-top: 6px!important;">Process cases <span
+            *ngIf="currentParams.Id || currentParams.AccountId || currentParams.CifId || currentParams.ProcessCd || currentParams.StatusCd ||
+                 currentParams.AssignedUser || currentParams.FollowUpDueCd">-</span>
+            <span *ngIf="currentParams.Id">Case:<strong
+              class="black"> {{currentParams.Id}}</strong></span>
+            <span *ngIf="currentParams.AccountId">Account:<strong
+              class="black"> {{currentParams.AccountId}}</strong></span>
+            <span *ngIf="currentParams.CifId">CIFNO:<strong
+              class="black"> {{currentParams.CifId}}</strong></span>
+            <span *ngIf="currentParams.AssignedUser">Assigned user:<strong class="black"> {{currentParams.AssignedUser}}</strong></span>
+            <span *ngIf="currentParams.ProcessCd">Process:<strong
+              class="black"> {{processes | filterCodeToName: currentParams.ProcessCd : true}}</strong></span>
+            <span *ngIf="currentParams.StatusCd">Status:<strong class="black"> {{statuses | filterCodeToName: currentParams.StatusCd}}</strong></span>
+            <span *ngIf="currentParams.FollowUpDueCd">Follow up due:<strong class="black"> {{followUpDues| filterCodeToName: currentParams.FollowUpDueCd}}</strong></span>
+          </h5>
+
+          <paginator [data]="processCases"
+                     [pagination]="pagination"
+                     (onPageChange)="incPage($event)">
+          </paginator>
+          <!--</div>-->
+            <!--<paginator *ngIf="!isInRelatedInfo" [data]="ticklerProcessCases"-->
+                       <!--[pagination]="pagination"-->
+                       <!--(onPageChange)="incPage($event)">-->
+            <!--</paginator>-->
+        </div>
+
+        <div class="ibox-content">
+          <tickler-cases-table
+            [currentCasesServiceParams]="currentCasesServiceParams"
+            [currentParams]="currentParams"
+            [processCase]="currentProcessCase"
+            [ticklerProcessCases]="processCases"
+            [pagination]="pagination"
+            [sort]="sortOrder"
+            [searchingProcessCases]="searchingProcessCases"
+            (onSearchCases)="loadCaseTicklers($event)"
+            (onSearch)="refreshOrder($event)"
+            (onPageChange)="incPage($event)">
+          </tickler-cases-table>
+        </div>
+      </div>
+    </div>
+
+    <!-- Process Case ticklers table -->
+    <div class="ibox" *ngIf="isTicklerVisible && processCases?.length > 0">
+      <div class="caseTickler">
+        <!--search criteria params-->
+        <div class="ibox-title tProcesses col-lg-12 col-md-12 col-sm-12 col-xs-12" [ngClass]="{'tProcesses-disabled': currentTab != 'ticklerProcesses' && isTicklerVisible, 'tProcesses-enabled':
+          currentTab == 'ticklerProcesses' && isTicklerVisible}">
+          <h5 *ngIf="!currentProcessCase">Case</h5>
+          <h5 *ngIf="currentProcessCase" class="col-lg-6 col-md-6 col-sm-6 col-xs-6" style="margin-top: 6px!important;">Case<span *ngIf="currentProcessCase.id">: </span><strong
+            class="black">{{currentProcessCase.id}}</strong>
+          </h5>
+
+          <!--new button-->
+          <div *ngIf="currentProcessCase && !searchingCaseTicklers" class="new-button col-lg-6 col-md-6 col-sm-6 col-xs-6 text-right" style="margin-bottom: 8px">
+            <button class="btn btn-sm btn-primary" [disabled]="isCreating || currentProcessCase.statusCode == 'CLOSED'"
+                    (click)="onNewTickler()">
+              <i class="fa fa-file-o"></i> New
+            </button>
+          </div>
+
+        </div>
+
+        <!--table-->
+        <div class="ibox-content overflowTable">
+          <process-case-tickler-table
+            [isCreating]="isCreating"
+            [ticklerTypes]="ticklerTypes"
+            [currentProcessCase]="currentProcessCase"
+            [processCaseTicklers]="processCaseTicklers"
+            [searchingCaseTicklers]="searchingCaseTicklers"
+            (onCancel)="onCancel()"
+            (onAddTicklerCase)="refreshCaseTicklers()">
+          </process-case-tickler-table>
+        </div>
+      </div>
+    </div>
+</div>
+  </div>

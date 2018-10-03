@@ -1,0 +1,32 @@
+<div class="row">
+  <div class="col-lg-12">
+    <div class="ibox">
+      <div class="ibox-title col-lg-12 col-md-12 col-sm-12 col-xs-12">
+        <h5 class="col-lg-6 col-md-6 col-sm-6 col-xs-6" style="margin-top: 6px!important;">LOV Types</h5>
+
+        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 text-right">
+          <button class="btn btn-sm btn-primary" [disabled]="isCreating || searchingLovTypes" (click)="showLovTypes(true)">
+            <i class="fa fa-file-o"></i> New
+          </button>
+        </div>
+
+      </div>
+      <!--lov types table-->
+      <div class="ibox-content">
+        <div class="row">
+          <div class="col-lg-12">
+            <lov-types-table
+              [isCreating]="isCreating"
+              [lovTypes]="lovTypes"
+              [searchingLovTypes]="searchingLovTypes"
+              (onAddLovType)="refreshLov()"
+              (onUpdateLovType)="refreshLov()"
+              (onRemoveLovType)= "refreshLov()"
+              (onCancelLovType)="showLovTypes($event)">
+            </lov-types-table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

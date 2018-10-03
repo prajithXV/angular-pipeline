@@ -1,0 +1,62 @@
+.a-link{
+  padding: 10px 20px 10px 25px;
+  color: #A7B1C2;
+}
+
+.no-padding-bottom{
+  padding-bottom: 0;
+}
+
+.separator{
+  margin-top: -1px;
+  margin-bottom: 25px;
+  border: 0;
+  border-top: none;
+}
+
+.white{
+  background-color: white;
+}
+
+.text-white{
+  color: white;
+}
+
+
+:host /deep/ paginator div.paginator button.btn-primary{
+  /*background-color: #445e97;*/
+  background-color: #f9f9f9;
+  border-color: #f9f9f9;
+  color: black;
+}
+
+:host /deep/ paginator div.paginator button.btn-primary:hover{
+  background-color: white;
+  border-color: white;
+  color: black;
+}
+
+:host /deep/ paginator div.paginator button.btn-primary:disabled{
+  background-color: white;
+  border-color: white;
+  color: black;
+}
+
+:host /deep/ paginator div.paginator{
+  text-align: right;
+}
+
+
+.new-button button.btn-primary{
+  background-color: #f9f9f9;
+  /*background-color: #4f6390;*/
+  border-color: #f9f9f9;
+  color: black;
+}
+
+.new-button button.btn-primary:hover,.new-button button.btn-primary:disabled {
+  background-color: white;
+  border-color: white;
+  color: black;
+  /*border-color: #445e97;*/
+}

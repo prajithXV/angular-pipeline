@@ -1,0 +1,83 @@
+{
+	"id": "97b0622c-3e32-c838-e4f1-1afa6bf43b5b",
+	"owner": "2263283",
+	"name": "Finesse",
+	"description": "",
+	"order": [
+		"416aac74-089a-3c32-ee54-47c39cb6e964",
+		"d76eaa4f-09c6-d79c-c5ad-3f64618bdb62"
+	],
+	"folders": [],
+	"folders_order": [],
+	"timestamp": 0,
+	"public": false,
+	"lastUpdatedBy": "2263283",
+	"lastRevision": 2281968967,
+	"team": null,
+	"requests": [
+		{
+			"id": "416aac74-089a-3c32-ee54-47c39cb6e964",
+			"headers": "Authorization: Basic Y29pbmFwcDoyMTUxOTQ=\n",
+			"headerData": [
+				{
+					"key": "Authorization",
+					"value": "Basic Y29pbmFwcDoyMTUxOTQ=",
+					"description": "",
+					"enabled": true
+				}
+			],
+			"url": "http://IBDC1-CCE-FINA01/finesse/api/User/215194",
+			"queryParams": [],
+			"preRequestScript": null,
+			"pathVariables": {},
+			"pathVariableData": [],
+			"method": "GET",
+			"data": [],
+			"dataMode": "raw",
+			"version": 2,
+			"tests": null,
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1506463302300,
+			"name": "test",
+			"description": "",
+			"collectionId": "97b0622c-3e32-c838-e4f1-1afa6bf43b5b",
+			"rawModeData": "<User>\n\t<state>LOGIN</state>\n\t<extension>215194</extension>\n</User>"
+		},
+		{
+			"id": "d76eaa4f-09c6-d79c-c5ad-3f64618bdb62",
+			"headers": "Content-Type: application/xml\nAuthorization: Basic Y29pbmFwcDoyMTUxOTQ=\n",
+			"headerData": [
+				{
+					"key": "Content-Type",
+					"value": "application/xml",
+					"description": "",
+					"enabled": true
+				},
+				{
+					"key": "Authorization",
+					"value": "Basic Y29pbmFwcDoyMTUxOTQ=",
+					"description": "",
+					"enabled": true
+				}
+			],
+			"url": "http://IBDC1-CCE-FINA01/finesse/api/User/215194/Dialogs",
+			"folder": null,
+			"queryParams": [],
+			"preRequestScript": null,
+			"pathVariables": {},
+			"pathVariableData": [],
+			"method": "POST",
+			"data": [],
+			"dataMode": "raw",
+			"tests": null,
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1506512835592,
+			"name": "make a call",
+			"description": "",
+			"collectionId": "97b0622c-3e32-c838-e4f1-1afa6bf43b5b",
+			"rawModeData": "<Dialog>\r\n<requestedAction>MAKE_CALL</requestedAction>\r\n<fromAddress>215194</fromAddress>\r\n<toAddress>914696014194</toAddress>\r\n</Dialog>\r\n"
+		}
+	]
+}

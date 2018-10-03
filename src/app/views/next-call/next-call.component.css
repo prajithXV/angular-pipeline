@@ -1,0 +1,66 @@
+.col-padding{
+  padding-top: 25px;
+  padding-bottom: 25px;
+}
+
+.col-padding2{
+  padding-top: 15px;
+}
+
+.col-padding3{
+  padding-bottom: 15px;
+}
+
+.form-control{
+  width: 100%;
+}
+
+#search-params ul{
+  display: block;
+  background-color: #F9F9F9 !important;
+  margin-bottom: 0;
+  padding: 15px;
+  font-size: 10pt;
+  border-radius: 0.25em;
+}
+
+#search-params ul li{
+  display: inline-block;
+  font-weight: 700;
+  margin-right: 10px;
+}
+
+#search-params ul li i{
+  cursor: pointer;
+}
+
+
+#search-params ul li i:hover{
+  color: black;
+  font-size: 11pt;
+}
+
+.col-padding-search{
+  padding-top: 43px;
+}
+
+div#search-params{
+  cursor: pointer;
+}
+
+
+.form-padding{
+  padding-top: 25px;
+}
+
+
+#collapseFilter{
+  text-align: right;
+  padding-top: 11px;
+  cursor: pointer;
+}
+
+.disabled{
+  background-color: #eee;
+  opacity: 1;
+}

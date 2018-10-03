@@ -1,0 +1,46 @@
+.btnBorder:focus {
+  border-color: #1ab394;
+}
+
+.btn-secondary:disabled{
+  color: #333;
+  opacity: 0.4;
+}
+
+
+.notes{
+  display: inline-block;
+}
+
+.filterSentences{
+  display: inline-block;
+  float: right;
+  font-size: 13pt;
+  color: #f8ac59;
+  cursor: pointer;
+}
+
+
+
+.form-control.notes-form{
+  width: 100%;
+}
+
+.form-control, .single-line{
+  width: 98%;
+}
+
+
+.margin{
+  margin-right: 5px;
+}
+
+
+.blue{
+  background-color: #1c84c6;
+  color: white;
+}
+
+::ng-deep input.form-control{
+  width: 97%;
+}

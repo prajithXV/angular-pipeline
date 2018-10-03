@@ -1,0 +1,28 @@
+.fa.fa-sort-desc{
+  width: 12px;
+  min-width: 12px;
+  margin: 0 0 0 10px;
+  position: relative;
+  display: inline;
+  top: -3px;
+  border: none;
+}
+
+.fa.fa-sort-asc{
+  width: 12px;
+  min-width: 12px;
+  margin: 0 0 0 10px;
+  position: relative;
+  display: inline;
+  top: 3px;
+  border: none;
+}
+
+.fa.fa-sort{
+  width: 12px;
+  min-width: 12px;
+  margin: 0 0 0 10px;
+  position: relative;
+  display: inline;
+  border: none;
+}

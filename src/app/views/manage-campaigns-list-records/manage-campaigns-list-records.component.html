@@ -1,0 +1,150 @@
+<div class="ibox float-e-margins">
+  <div class="ibox-title col-lg-12 col-xs-12" style="padding-left: 0; padding-bottom: 0">
+    <iboxtools id="ibox-tools"></iboxtools>
+    <div class="col col-lg-4 col-xs-1 col-md-3 col-sm-1" style="float: left;">
+    <h5>Campaign List<span *ngIf="currentList">: <strong class="text-success">{{currentList.id}} - {{currentList.statusCode}}</strong></span></h5>
+  </div>
+    <div class="col col-lg-7 col-xs-10 col-sm-10 col-md-8 text-right" style="float: right">
+      <select title="Status" [disabled]="!records" *ngIf="statuses"
+              (change)="statusChange()" [(ngModel)]="selectedStatus"
+              class="separator select form-control m-b">
+        <option [ngValue]="null">--All--</option>
+        <option *ngFor="let st of statuses" [ngValue]="st">{{st.name}}</option>
+      </select>
+
+      <paginator id="paginator" [data]="records"
+                 (onPageChange)="incPage($event)"
+                 [pagination]="pagination"
+                 [hasNewSize]="true">
+      </paginator>
+
+    </div>
+
+  </div>
+  <div class="ibox-content">
+
+<div *ngIf="records && records.length > 0" class='records table-responsive'>
+  <table class='table table-striped'>
+    <thead>
+    <tr class="tableStyle">
+      <th>Account
+        <!--<header-sorter-->
+        <!--[currentSortType]="sort.sortType"-->
+        <!--[field]="'accountId'"-->
+        <!--[isDesc]="sort.isDesc">-->
+        <!--</header-sorter>-->
+      </th>
+      <th>Status
+        <!--<header-sorter-->
+        <!--[currentSortType]="sort.sortType"-->
+        <!--[field]="'statusCode'"-->
+        <!--[isDesc]="sort.isDesc">-->
+        <!--</header-sorter>-->
+      </th>
+      <th>Last worked by
+        <!--<header-sorter-->
+        <!--[currentSortType]="sort.sortType"-->
+        <!--[field]="'lastCalledBy'"-->
+        <!--[isDesc]="sort.isDesc">-->
+        <!--</header-sorter>-->
+      </th>
+      <th>Last worked on
+        <!--<header-sorter-->
+        <!--[currentSortType]="sort.sortType"-->
+        <!--[field]="'lastCalledDate'"-->
+        <!--[isDesc]="sort.isDesc">-->
+        <!--</header-sorter>-->
+      </th>
+      <th>Next call by
+        <!--<header-sorter-->
+        <!--[currentSortType]="sort.sortType"-->
+        <!--[field]="'nextCallUser'"-->
+        <!--[isDesc]="sort.isDesc">-->
+        <!--</header-sorter>-->
+      </th>
+      <th>Next call on
+        <!--<header-sorter-->
+        <!--[currentSortType]="sort.sortType"-->
+        <!--[field]="'nextCallDate'"-->
+        <!--[isDesc]="sort.isDesc">-->
+        <!--</header-sorter>-->
+      </th>
+      <th>Order by code</th>
+      <th></th>
+    </tr>
+    </thead>
+    <tbody>
+    <!--campaign list records-->
+    <!--<ng-container *ngFor="let rec of records | orderBy: {property: sort.sortType, direction: sortDirection}">-->
+    <ng-container *ngFor="let rec of records">
+      <tr>
+        <td>{{rec.accountId}}</td>
+        <td>{{rec.statusCode}}</td>
+        <td>{{rec.lastCalledBy}}</td>
+        <td>{{rec.lastCalledDate | coinDateTransform}}</td>
+        <td>{{rec.nextCallUser}}</td>
+        <td>{{rec.nextCallDate | coinDateTransform}}</td>
+        <td>{{rec.orderByCode}}</td>
+
+        <!--arrow button-->
+        <td>
+          <button (click)="toggleDetail(rec); $event.stopPropagation()" class="btn btn-xs btn-white btnBorder">
+            <i class="fa" [class.fa-chevron-down]="!isDetailVisible(rec)"
+               [class.fa-chevron-up]="isDetailVisible(rec)"></i>
+          </button>
+        </td>
+      </tr>
+
+      <!--campaign record history table-->
+      <tr *ngIf="isDetailVisible(rec)" class="white">
+        <td colspan="12" [class.tablePadding]="!searchCampaigns(rec)">
+          <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" [ngClass]="{'box-padding':!searchCampaigns(rec), 'box-shadow': !searchCampaigns(rec)}">
+            <table class="table recordsTable">
+              <!--show if there are campaign record history-->
+              <ng-container *ngIf="rec.campaignRecordHistory && rec.campaignRecordHistory.length > 0">
+                <thead>
+                <tr>
+                  <th class="no-top-border">Campaign list</th>
+                  <th class="no-top-border">Added</th>
+                  <th class="no-top-border">Status</th>
+                  <th class="no-top-border">Modified</th>
+                  <th class="no-top-border">Cancel type</th>
+                  <th class="no-top-border">Cancel description</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr *ngFor="let crh of rec.campaignRecordHistory">
+                  <td>{{crh.campaignListId}} - {{crh.campaignName}}</td>
+                  <td>{{crh.createdDate | coinDateTransform}}</td>
+                  <td>{{crh.statusCode}}</td>
+                  <td>{{crh.modifiedDate | coinDateTransform}}</td>
+                  <td>{{crh.cancelName}}</td>
+                  <td>{{crh.cancelDescription}}</td>
+                </tr>
+                </tbody>
+              </ng-container>
+              <!--feedback message-->
+              <p *ngIf="rec.campaignRecordHistory && rec.campaignRecordHistory.length == 0 && !searchCampaigns(rec)"
+                 class="text-danger no-margins">No campaign record history found</p>
+              <p *ngIf="searchCampaigns(rec)" class="text-success no-margins">
+                <waiting-backend></waiting-backend>
+                Searching campaign record history...
+              </p>
+            </table>
+          </div>
+        </td>
+      </tr>
+    </ng-container>
+    </tbody>
+  </table>
+</div>
+
+<p *ngIf="searching">
+  <waiting-backend></waiting-backend>
+  Getting campaign list records...
+</p>
+<p *ngIf="records && records.length == 0">No campaign list records found</p>
+<p *ngIf="!records && !searching">Select a list</p>
+  </div>
+</div>
+<!--</div>-->

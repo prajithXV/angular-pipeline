@@ -1,0 +1,78 @@
+
+<div *ngIf="searchingAccounts" class="search"><waiting-backend></waiting-backend>Searching...</div>
+<!--<div *ngIf="notFound">No Campaigns found</div>-->
+<div *ngIf="!searchingAccounts && !campaignListAccounts && !notFound">Use the filters on the left to search for a customer.</div>
+<p *ngIf="campaignListAccounts && campaignListAccounts.length == 0 && !searchingAccounts">No campaign list accounts found</p>
+<div *ngIf="campaignListAccounts && campaignListAccounts.length > 0 && !searchingAccounts">
+
+
+
+  <div class="table-responsive">
+  <!--<paginator [data]="campaignListAccounts"-->
+             <!--[pagination]="pagination"-->
+             <!--(onPageChange)="incPage($event)">-->
+  <!--</paginator>-->
+
+    <table class="clAccounts table table-striped">
+    <thead>
+    <tr>
+      <th style="">CIFNO</th>
+      <th style="">Account</th>
+      <th style="">Customer name</th>
+      <th style="">Last called by</th>
+      <th style="">Last called date</th>
+      <th style="">Last payment date</th>
+      <th style="">Last promise date</th>
+      <th style="">Past due days</th>
+      <th style="">Collection status</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let ac of campaignListAccounts">
+      <td>{{ac.campaignFId}}</td>
+      <td>{{ac.accountId}}</td>
+      <td>{{ac.customerName}}</td>
+      <td>{{ac.lastCalledBy}}</td>
+      <td>{{ac.lastCalledDate | coinDateTransform}}</td>
+      <td>{{ac.lastPayDate | coinDateTransform : "STD_DATE":"YYYY/MM/DD"}}</td>
+      <td>{{ac.lastPromiseDate | coinDateTransform : "STD_DATE":"YYYY/MM/DD"}}</td>
+      <td>{{ac.pastDueDays}}</td>
+      <td>{{ac.colStatusCode}}</td>
+      <td>
+        <button class="buttonGo btn btn-xs btn-primary" (click)="goToListAccount(ac)">Go</button>
+      </td>
+
+      <!--create process-->
+      <td *ngIf="canCreateCase() && ac.accountType!='D'">
+        <i class="create orange fas fa-plus-circle" title="Create case" (click)="open(content, ac)"></i>
+      </td>
+      <td *ngIf="ac.accountType == 'D'"></td>
+
+      <ng-template #content let-c="close" let-d="dismiss">
+        <div class="modal-header">
+          <h4 class="modal-title">Create case</h4>
+          <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <!--modal-->
+        <div class="modal-body">
+          <new-process-case
+            [processes]="processes"
+            [account]="ac"
+            [customer]="currentCustomer"
+            (caseCreated)="d('Cross click')"
+            (onCancel)="d('Cross click')">
+          </new-process-case>
+        </div>
+      </ng-template>
+    </tr>
+
+    </tbody>
+  </table>
+
+</div>
+</div>
+
+
+

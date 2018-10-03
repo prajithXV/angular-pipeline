@@ -1,0 +1,47 @@
+.help-block{
+  color: #ED5565 !important;
+}
+
+
+.col-padding{
+  padding-top: 15px;
+  padding-bottom: 15px;
+}
+
+
+#search-params ul{
+  display: block;
+  background-color: #F9F9F9 !important;
+  margin-bottom: 0;
+  padding: 15px;
+  font-size: 10pt;
+  border-radius: 0.25em;
+}
+
+#search-params ul li{
+  display: inline-block;
+  font-weight: 700;
+  margin-right: 10px;
+}
+
+#search-params ul li i{
+  cursor: pointer;
+}
+
+
+#search-params ul li i:hover{
+  color: black;
+  font-size: 11pt;
+}
+
+div#search-params{
+  cursor: pointer;
+}
+
+
+#collapseFilter3{
+  text-align: right;
+  padding-top: 15px;
+  padding-bottom: 15px;
+  cursor: pointer;
+}

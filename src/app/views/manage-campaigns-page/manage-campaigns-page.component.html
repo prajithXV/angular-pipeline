@@ -1,0 +1,52 @@
+<div class="row">
+  <div class="col-lg-2">
+    <div class="ibox float-e-margins">
+      <div class="ibox-title">
+        <h5>Campaigns</h5>
+        <iboxtools></iboxtools>
+      </div>
+      <div class="ibox-content">
+        <manage-campaigns
+          [campaigns]="campaigns"
+          [currentCampaign]="currentCampaign"
+          [searching]="searchCampaigns"
+          (onCampaignSelection)="onSelectCampaign($event)"
+        ></manage-campaigns>
+      </div>
+    </div>
+  </div>
+  <div class="col-lg-10">
+    <!--<div class="ibox float-e-margins">-->
+      <!--<div class="ibox-title">-->
+        <!--<h5>Campaign Lists<span *ngIf="currentCampaign">: <strong class="text-success">{{currentCampaign.name}}</strong></span></h5>-->
+        <!--<iboxtools></iboxtools>-->
+      <!--</div>-->
+      <!--<div class="ibox-content">-->
+        <manage-campaign-lists
+          [campaign]="currentCampaign"
+          [currentList]="currentList"
+          [currentHoverList]="currentHoverList"
+          (onListSelection)="onSelectList($event)"
+          (onHoverSelection)="onHoverList($event)"
+          (onRefreshCampaignListRecords)="refreshCampaignListRecords()"
+        ></manage-campaign-lists>
+      <!--</div>-->
+    <!--</div>-->
+  </div>
+</div>
+<div class="row">
+  <div class="col-lg-12">
+    <!--<div class="ibox float-e-margins">-->
+      <!--<div class="ibox-title">-->
+        <!--<h5>Campaign List<span *ngIf="currentList">: <strong class="text-success">{{currentList.id}} - {{currentList.statusCode}}</strong></span></h5>-->
+        <!--<iboxtools></iboxtools>-->
+      <!--</div>-->
+      <!--<div class="ibox-content">-->
+        <manage-campaign-list-records
+          #records
+          [list]="currentList">
+        </manage-campaign-list-records>
+      <!--</div>-->
+    <!--</div>-->
+  </div>
+</div>

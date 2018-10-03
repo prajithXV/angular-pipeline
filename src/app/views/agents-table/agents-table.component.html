@@ -1,0 +1,48 @@
+<div *ngIf="agents && agents.length > 0">
+  <div class='table-responsive'>
+    <table class='table table-striped' [class.table-hover]="showSelector" [class.pointer-cursor]="showSelector">
+      <thead>
+      <tr>
+        <th *ngIf="showSelector"></th>
+        <th style="">Username</th>
+        <th style="">Name</th>
+        <th style="">Last login</th>
+        <th *ngFor="let cp of shownCampaigns" class="centered">{{cp.name}}</th>
+        <th style="" title="User" class="centered">User</th>
+        <th style="" title="Manager" class="centered">Manager</th>
+        <th style="" title="Supervisor" class="centered">Supervisor</th>
+        <th style="" title="Administrator" class="centered">Administrator</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr
+        *ngFor="let agent of agents"
+        (click)="selectAgent(agent)"
+        [class.ui-state-highlight]="agent.account == currentAgent?.account"
+      >
+        <td *ngIf="showSelector"><i *ngIf="agent.account == currentAgent?.account" class="fa fa-arrow-circle-right text-navy" style="font-size:1.2em;"></i></td>
+        <td>{{agent.account}}</td>
+        <td>{{agent.completeName}}</td>
+        <td>{{agent.lastLogin | coinDateTransform}}</td>
+        <td *ngFor="let cp of shownCampaigns" class="centered">
+          <span *ngIf="agent.hasCampaign(cp) === null">?</span>
+          <span *ngIf="agent.hasCampaign(cp) && agent.getCampaign(cp).hasPendingOperation"><waiting-backend></waiting-backend></span>
+          <a *ngIf="agent.hasCampaign(cp) && !agent.getCampaign(cp).hasPendingOperation" (click)="toggleCampaign(agent, cp)">
+            <tick-cross [value]="true"></tick-cross>
+          </a>
+          <a *ngIf="agent.hasCampaign(cp) === false" (click)="toggleCampaign(agent, cp)">
+            <tick-cross [value]="false"></tick-cross>
+          </a>
+        </td>
+        <td class="centered"><semaphore [value]="agent.isUser"></semaphore></td>
+        <td class="centered"><semaphore [value]="agent.isManager"></semaphore></td>
+        <td class="centered"><semaphore [value]="agent.isSupervisor"></semaphore></td>
+        <td class="centered"><semaphore [value]="agent.isAdmin"></semaphore></td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+<div *ngIf="agents?.length == 0">No users found.</div>
+<div *ngIf="!errorSearching && searching"><waiting-backend></waiting-backend> Searching...</div>
+<div *ngIf="errorSearching">Error getting users.</div>

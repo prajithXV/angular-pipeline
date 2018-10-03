@@ -1,0 +1,63 @@
+<xmpp-debugger></xmpp-debugger>
+
+<div class="row">
+  <div class="col-lg-3">
+
+    <!--NEXT CALL -->
+    <div class="ibox float-e-margins">
+      <div class="ibox-title">
+        <h5>Max calls</h5>
+      </div>
+      <div class="ibox-content">
+        <div>
+          <p>
+            Seconds: {{max?.seconds()}}<br/>
+            Total calls: {{max?.calls}} ({{max?.calls/max?.seconds()}} per second)<br/>
+            Success: {{max?.success}} ({{max?.success/max?.seconds()}} per second)<br/>
+            Failed: {{max?.failed}} ({{max?.failed/max?.seconds()}} per second)<br/>
+          </p>
+          <div class="form-group">
+            <button (click)="startMax()" [disabled]="max.started" class="btn"><strong>Start</strong></button>
+            <button (click)="stopMax()" [disabled]="!max.started" class="btn"><strong>Stop</strong></button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-lg-3">
+
+    <!--NEXT CALL -->
+    <div class="ibox float-e-margins">
+      <div class="ibox-title">
+        <h5>Bulk calls</h5>
+      </div>
+      <div class="ibox-content">
+        <div>
+          <div class="form-group">
+            # agents: <input type="number" [(ngModel)]="numAgents"/><br/>
+            # ticks: <input type="number" [(ngModel)]="numTicks"/>
+          </div>
+          <p>
+            Ticks: {{bulk?.ticks}}<br/>
+            Started calls: {{bulk?.calls}}<br/>
+            Success: {{bulk?.success}}<br/>
+            Failed: {{bulk?.failed}}<br/>
+            Pending: {{bulk?.pending()}}<br/>
+          </p>
+          <div class="form-group">
+            <button (click)="startBulk()" [disabled]="bulk.started" class="btn"><strong>Start</strong></button>
+            <button (click)="stopBulk()" [disabled]="!bulk.started" class="btn"><strong>Stop</strong></button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+</div>
+
+
+
+<!--<tickler-attribute></tickler-attribute>-->
+

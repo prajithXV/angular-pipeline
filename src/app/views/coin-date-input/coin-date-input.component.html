@@ -1,0 +1,12 @@
+<input
+  class="form-control"
+  (blur)="refreshErrors()"
+  [ngModel]="dateStr"
+  (ngModelChange)="valueChange($event)"
+  [name]="name"
+  [placeholder]="useTime ? 'YYYY/MM/DD HH:MM' : 'YYYY/MM/DD'"
+/>
+<span *ngIf="showErrors && mandatoryError" class="help-block m-b-none">Field is mandatory.</span>
+<span *ngIf="showErrors && formatError" class="help-block m-b-none">Not a valid date (YYYY/MM/DD).</span>
+<span *ngIf="showErrors && pastError" class="help-block m-b-none">Past time not allowed.</span>
+

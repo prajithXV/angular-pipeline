@@ -1,0 +1,100 @@
+
+<!--<div class="col-lg-12">-->
+  <!--<div class="ibox-content" style="border-top: 0">-->
+
+    <div class="col-lg-12 col-xs-12"  id="search-params" *ngIf="isSearchButtonClicked" (click)="showForm(false)" style="padding-top: 15px;">
+      <ul class="list-unstyled">
+        <li><i class="fas fa-search"></i></li>
+        <li *ngIf="currentCasesServiceParams.currentParams.Id">Id: <span class="text-success">{{currentCasesServiceParams.currentParams.Id}}</span></li>
+        <li *ngIf="currentCasesServiceParams.currentParams.AccountId">Account: <span class="text-success">{{currentCasesServiceParams.currentParams.AccountId}}</span></li>
+        <li *ngIf="currentCasesServiceParams.currentParams.CifId">CIFNO: <span class="text-success">{{currentCasesServiceParams.currentParams.CifId}}</span></li>
+        <li *ngIf="currentCasesServiceParams.currentParams.AssignedUser">User: <span class="text-success">{{currentCasesServiceParams.currentParams.AssignedUser}}</span></li>
+        <li *ngIf="currentCasesServiceParams.currentParams.ProcessCd">Process: <span class="text-success">{{processes | filterCodeToName: currentCasesServiceParams.currentParams.ProcessCd : true}}</span></li>
+        <li *ngIf="currentCasesServiceParams.currentParams.StatusCd">Status: <span class="text-success">{{statuses | filterCodeToName:currentCasesServiceParams.currentParams.StatusCd}}</span></li>
+        <li *ngIf="currentCasesServiceParams.currentParams.FollowUpDueCd">Follow up due: <span class="text-success">{{followUpDues | filterCodeToName: currentCasesServiceParams.currentParams.FollowUpDueCd}}</span></li>
+        <li *ngIf="!currentCasesServiceParams.currentParams.Id && !currentCasesServiceParams.currentParams.AccountId && !currentCasesServiceParams.currentParams.CifId &&  !currentCasesServiceParams.currentParams.AssignedUser &&
+        !currentCasesServiceParams.currentParams.ProcessCd && !currentCasesServiceParams.currentParams.StatusCd && !currentCasesServiceParams.currentParams.FollowUpDueCd ">
+          All</li>
+      </ul>
+    </div>
+
+<div class="col-lg-12" id="collapseFilter3" *ngIf="!isSearchButtonClicked && isShowArrow"  (click)="showForm(true)">
+  <i class="fas fa-search" style="font-size: 8pt;"></i>
+  <i class="fa fa-chevron-up"></i>
+</div>
+
+<ng-container *ngIf="!isSearchButtonClicked">
+<form style="padding-top: 25px">
+  <div class="col-lg-4 col-xs-12">
+  <div class="form-group" [class.has-error]="hasInputNumberErrors && caseId.touched">
+    <label class="control-label">Case</label>
+    <input [(ngModel)]="criteria.Id" #caseId="ngModel" type="number" min="0" placeholder="Case" class="form-control" name="id" required>
+
+    <span *ngIf="hasInputNumberErrors && caseId.touched" class="help-block m-b-none">Value must be greater or equal to 0.</span>
+  </div>
+
+  <div class="form-group">
+    <label>Account</label>
+    <input [(ngModel)]="criteria.AccountId" type="text" placeholder="Account" class="form-control" name="accountId">
+  </div>
+  <div class="form-group">
+    <label>CIFNO</label>
+    <input [(ngModel)]="criteria.CifId" type="text" placeholder="CIFNO" class="form-control" name="cifId">
+  </div>
+  </div>
+
+  <div class="col-lg-4 col-xs-12">
+  <div class="form-group">
+    <label>User</label>
+    <input [(ngModel)]="criteria.AssignedUser" type="text" placeholder="User" class="form-control" name="assignedUser">
+  </div>
+
+  <!--process combo-->
+  <div class="form-group">
+    <label>Process</label>
+    <div>
+    <select *ngIf="processes" [(ngModel)]="criteria.ProcessCd" name="processCode" title="" class="form-control m-b">
+      <option [ngValue]="null">--All--</option>
+      <option *ngFor="let p of processes" [ngValue]="p.processCode">{{p.processName}}</option>
+    </select>
+  </div>
+  </div>
+  <!--status combo-->
+
+  </div>
+  <div class="col-lg-4 col-xs-12">
+
+    <div class="form-group">
+      <label>Status</label>
+      <div>
+        <select *ngIf="statuses" [(ngModel)]="criteria.StatusCd" name="statusCd" title="" class="form-control m-b">
+          <option [ngValue]="null">--All--</option>
+          <option *ngFor="let st of statuses" [ngValue]="st.code">{{st.name}}</option>
+        </select>
+      </div>
+    </div>
+
+  <div class="form-group">
+    <label>Follow up due </label>
+    <div>
+      <select *ngIf="followUpDues" [(ngModel)]="criteria.FollowUpDueCd" name="followUpDueCd" title="" class="form-control m-b">
+        <option [ngValue]="null">--All--</option>
+        <option *ngFor="let f of followUpDues" [ngValue]="f.code">{{f.name}}</option>
+      </select>
+    </div>
+  </div>
+
+  <!--buttons-->
+  <div class="form-group pull-right" style=" position: relative;
+    bottom: -33px;">
+    <button (click)="search(); $event.preventDefault()" [disabled]="searchingProcessCases || hasFormErrors" class="btn btn-sm btn-primary m-t-n-xs" type="submit">Search
+      <waiting-backend *ngIf="searchingProcessCases"></waiting-backend>
+    </button>
+    <button (click)="reset()" class="btn btn-sm m-t-n-xs" type="button">Reset</button>
+  </div>
+  </div>
+</form>
+</ng-container>
+<div class="row"></div>
+  <!--</div>-->
+<!--</div>-->

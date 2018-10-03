@@ -1,0 +1,113 @@
+<div class="row">
+  <div class="col-lg-12">
+    <!--NEXT CALL -->
+    <div class="ibox" *ngIf="isClAccountsVisible">
+      <div class="filterListAccounts">
+        <div class="ibox-title col-lg-12 col-md-12 col-sm-12 col-xs-12" [ngClass]="{'cProcessing-disabled': (currentTab != 'campaignProcessing') && isClAccountsVisible, 'cProcessing-enabled':
+          (currentTab == 'campaignProcessing' || currentTab == null) && isClAccountsVisible}">
+          <h5 *ngIf="!clCurrentParams" class="col-lg-8 col-md-8 col-sm-8 col-xs-6">Campaign list accounts</h5>
+          <h5 *ngIf="clCurrentParams" class="col-lg-8 col-md-8 col-sm-8 col-xs-6" style="margin-top: 6px!important;">Campaign list accounts
+            - <span
+              *ngIf="clCurrentParams.campaignCd">Campaign:<strong
+              class="black"> {{ nextCallCampaigns | filterCodeToName: clCurrentParams.campaignCd}}</strong></span>
+            <span *ngIf="clCurrentParams.accountId">Account:<strong
+              class="black"> {{clCurrentParams.accountId}}</strong></span>
+            <span *ngIf="clCurrentParams.cifId">CIFNO:<strong
+              class="black"> {{clCurrentParams.cifId}}</strong></span>
+            <span *ngIf="clCurrentParams.statusCd">Status:<strong
+              class="black"> {{nextCallStatuses | filterCodeToName: clCurrentParams.statusCd}}</strong></span>
+            <span *ngIf="clCurrentParams.customerName">Customer name:<strong class="black"> {{clCurrentParams.customerName}}</strong></span>
+          </h5>
+
+          <paginator [data]="campaignListAccounts"
+                     [pagination]="clAccountsPagination"
+                     (onPageChange)="incPage($event)">
+          </paginator>
+
+
+        </div>
+
+        <div class="ibox-content">
+          <campaign-list-accounts-table
+            [clCurrentParams]="clCurrentParams"
+            [currentServiceParams]="currentServiceParams"
+            [campaignListAccounts]="campaignListAccounts"
+            [processes]="processes"
+            [searchingAccounts]="searchingCampaignListAccounts"
+            [currentCampaign]="currentCampaignListAccounts"
+            [pagination]="clAccountsPagination"
+          ></campaign-list-accounts-table>
+        </div>
+      </div>
+    </div>
+
+
+    <!--Account search-->
+    <div class="ibox" *ngIf="isCustommerVisible">
+      <!-- CUSTOMER -->
+      <div class="customer">
+        <div class="ibox-title" [ngClass]="{'acSearch-disabled': currentTab != 'accountSearch' && isCustommerVisible, 'acSearch-enabled':
+          currentTab == 'accountSearch' && isCustommerVisible}">
+          <h5 *ngIf="!searchFilter">Customer</h5>
+          <h5 *ngIf="searchFilter">Customer
+            - <span *ngIf="searchFilter.taxId"> SSN: <strong class="black">{{searchFilter.taxId}}</strong></span>
+            <span *ngIf="searchFilter.email"> Email address: <strong class="black">{{searchFilter.email}}</strong></span>
+            <span *ngIf="searchFilter.accountType && searchFilter.accountId"> Account type: <strong class="black">{{accountTypes | filterCodeToName: searchFilter.accountType}}</strong></span>
+            <span *ngIf="searchFilter.accountId"> Account number: <strong class="black">{{searchFilter.accountId}}</strong></span>
+            <span *ngIf="searchFilter.phoneNumber"> Phone number: <strong class="black">{{searchFilter.phoneNumber}}</strong></span>
+          </h5>
+        </div>
+        <div class="ibox-content">
+          <customer-summary
+            [customers]="customers"
+            [currentCustomer]="currentCustomer"
+            [not-found]="customerNotFound"
+            [searching]="searchingCustomer"
+            (onSearchAccounts)="searchAccountsForCustomer($event)"
+          ></customer-summary>
+        </div>
+      </div>
+    </div>
+
+    <!-- ACCOUNTS -->
+    <div class="ibox" *ngIf="isCustommerVisible && customers?.length > 0">
+      <div class="accounts">
+        <div class="ibox-title col-lg-12 col-xs-12" style="padding-top: 7px!important;" [ngClass]="{'acSearch-disabled': currentTab != 'accountSearch' && isCustommerVisible, 'acSearch-enabled':
+          currentTab == 'accountSearch' && isCustommerVisible}">
+          <div class="col-lg-6 col-xs-6" style="padding-top: 10px;">
+          <h5 *ngIf="!currentCustomer">Accounts</h5>
+          <h5 *ngIf="currentCustomer">Accounts
+            - <strong class="black">{{currentCustomer?.id}}:
+              {{currentCustomer?.mainContact?.completeName}}</strong>
+          </h5>
+          </div>
+          <div class="col-lg-6 col-xs-6">
+          <div class="form-group no-margins">
+              <select [(ngModel)]="searchFilter.accountType" #aType="ngModel" name="accountType" title="type" class="form-control m-b no-margins"
+                      [disabled]="currentAccountServiceParams?.currentParams?.accountType !=null && searchFilter.accountId != '' || !currentCustomer"
+                      (change)="accountsTypeFilter()">
+                <option [ngValue]="null">--All--</option>
+                <option *ngFor="let at of accountTypes" [ngValue]="at.code">{{at.name}}</option>
+              </select>
+            <label class="aTypeLabel">Account type:</label>
+          </div>
+          </div>
+
+        </div>
+        <div class="ibox-content">
+          <accounts-table
+            [hasToSaveParams]="true"
+            [searchFilter]="searchFilter"
+            [currentAccountServiceParams]="currentAccountServiceParams"
+            [hasCreateButton]="true"
+            [accounts]="currentAccountsWhenFilter"
+            [customers]="currentCustomer"
+            [processes]="processes"
+            [searching]="searchingAccounts">
+          </accounts-table>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>

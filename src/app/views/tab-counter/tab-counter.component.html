@@ -1,0 +1,2 @@
+<span *ngIf="searching" ><waiting-backend></waiting-backend></span>
+<span *ngIf="!searching" class="badge" [class.badge-success]="data?.length > 0" [class.badge-default]="data?.length == 0">{{data?.length}}</span>

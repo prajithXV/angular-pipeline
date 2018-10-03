@@ -1,0 +1,18 @@
+.input-group-btn:last-child > .btn, .input-group-btn:last-child > .btn-group {
+  z-index: 2;
+  /*margin-bottom: 18px;*/
+  margin-left: -5px;
+
+}
+
+.form-control, .single-line, .input-group .form-control{
+  width: 97%;
+}
+
+.align{
+  text-align: left !important;
+}
+
+.lovButton{
+  vertical-align: top !important;
+}

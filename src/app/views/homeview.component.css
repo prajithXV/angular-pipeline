@@ -1,0 +1,87 @@
+.login-logo {
+  color: #002d6a;
+  font-size: 100px !important;
+}
+
+.tableLabel {
+  font-weight: bold !important;
+}
+
+.tableoverflow {
+  overflow: hidden;
+}
+
+.greenText a {
+  color: green !important;
+}
+
+.my-car-table:first-child tr:first-child td {
+  border-top: none;
+}
+
+.nav-tabs .nav-item.show .nav-link,
+.nav-tabs .nav-link.active {
+  color: #464a4c;
+  background-color: #fff;
+  border-color: #ddd #ddd #fff;
+}
+
+
+/* Styles go here */
+
+.loader {
+    border: 16px solid #f3f3f3; /* Light grey */
+    border-top: 16px solid #3498db; /* Blue */
+    border-radius: 50%;
+    width: 120px;
+    height: 120px;
+    animation: spin 2s linear infinite;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+
+/* Popover */
+
+/*:host >>> .popover {*/
+/*background-color: #009688;*/
+/*color: #fff;*/
+/*}*/
+/*:host >>> .popover>.arrow:after {*/
+/*border-top-color: #009688;*/
+/*}*/
+/*.popover {*/
+/*background-color: #009688;*/
+/*color: #fff;*/
+/*}*/
+/*.popover>.arrow:after {*/
+/*border-top-color: #009688;*/
+/*}*/
+.popover, .popover .popover-content {
+  color:white;
+  background: #90e8d6;
+}
+
+.popover.top>.arrow:after {
+  border-top-color: #90e8d6;
+}
+
+.popover.bottom>.arrow:after {
+  border-bottom-color: #90e8d6;
+}
+
+.popover.right>.arrow:after {
+  border-right-color: #90e8d6;
+}
+
+.popover.left>.arrow:after {
+  border-left-color: #90e8d6;
+}
+
+.popover-content {
+  padding: 4px 10px;
+  font-size: 90%;
+}

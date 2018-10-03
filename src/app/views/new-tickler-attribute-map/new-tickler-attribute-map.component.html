@@ -1,0 +1,54 @@
+<!--<div *ngIf="!waitingResponse && ticklerAttributeMaps?.length > 0">-->
+<div *ngIf="!waitingResponse">
+    <div class="col-lg-12">
+      <!--combo: tickler attributes-->
+      <div class="form-group">
+        <label>Name</label>
+        <div>
+          <select [disabled]="waitingToAdd || ticklerAttributes?.length == 0 || pendentTicklers?.length == 0" [(ngModel)]="currentTicklerAttribute"
+                  name="attributeName" title="" class="attributes form-control m-b">
+            <!--Important: ngValue: att (all object)-->
+            <option *ngFor="let att of pendentTicklers;" [ngValue]="att">{{att.name}}</option>
+          </select>
+          <i *ngIf="!waitingToAdd" [class.disabled]="pendentTicklers?.length == 0"
+             class="green fas fa-plus-circle pull-right" (click)="addTicklerAttributeMap()"></i>
+          <div *ngIf="waitingToAdd" class="waiting pull-right">
+            <waiting-backend></waiting-backend>
+          </div>
+        </div>
+      </div>
+      <div>
+        <p><strong>Current attributes</strong></p>
+        <ng-container *ngIf="ticklerAttributeMaps?.length >  0">
+          <div class="titles col-padding col-lg-3 col-xs-3"><strong>Name</strong></div>
+          <div class="titles col-padding col-lg-3 col-xs-3"><strong>Type</strong></div>
+          <div class="titles col-padding col-lg-3 col-xs-3"><strong>Optional</strong></div>
+        </ng-container>
+        <!--tickler attributes map-->
+        <ng-container *ngFor="let atm of ticklerAttributeMaps">
+          <div class="list col-lg-12 col-xs-12">
+            <div class="col-padding col-lg-3 col-xs-3">{{atm.name}}</div>
+            <div class="col-padding col-lg-3 col-xs-3">{{atm.type | attributeTypeToString}}</div>
+            <div *ngIf="!isWaitingToUpdate(atm)" class="col-lg-3 col-xs-3">
+              <tick-cross class="pointer-cursor" [value]="!atm.mandatoryFlag"
+                          (click)="updateMandatoryFlag(atm)"></tick-cross>
+            </div>
+            <div *ngIf="isWaitingToUpdate(atm)" class="col-lg-3 col-xs-3">
+              <waiting-backend></waiting-backend>
+            </div>
+            <div *ngIf="!isWaiting(atm)" class="col-padding-trash col-lg-2 col-sm-2 col-md-2 col-xs-2"><i
+              class="fas fa-trash-alt pull-right" (click)="deleteTicklerAttributeMap(atm)"></i></div>
+            <div *ngIf="isWaiting(atm)" class="col-padding-trash col-lg-2 col-sm-2 col-md-2 col-xs-2">
+              <waiting-backend></waiting-backend>
+            </div>
+          </div>
+        </ng-container>
+      </div>
+    </div>
+  </div>
+<div *ngIf="waitingResponse">
+  <waiting-backend></waiting-backend>
+  getting tickler attributes map...
+</div>
+<div class="col-lg-12" *ngIf="ticklerAttributeMaps?.length == 0 && !waitingResponse"> No data found.</div>
+

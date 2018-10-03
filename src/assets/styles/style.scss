@@ -1,0 +1,197 @@
+/*
+ *
+ *   INSPINIA - Responsive Admin Theme
+ *   version 2.7.1
+ *
+*/
+// Google Fonts
+@import url("https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700");
+
+// Variables, Mixins
+@import "imports/variables";
+@import "imports/mixins";
+
+// INSPINIA Theme Elements
+@import "imports/typography";
+@import "imports/navigation";
+@import "imports/top_navigation";
+@import "imports/buttons";
+@import "imports/badges_labels";
+@import "imports/elements";
+@import "imports/sidebar";
+@import "imports/base";
+@import "imports/pages";
+@import "imports/chat";
+@import "imports/metismenu";
+@import "imports/spinners";
+
+// RTL Support
+@import "imports/rtl";
+
+// For demo only - config box style
+@import "imports/theme-config";
+
+// INSPINIA Skins
+@import "imports/skins";
+@import "imports/md-skin";
+
+// Media query style
+@import "imports/media";
+
+// Custom style
+// Your custom style to override base style
+@import "imports/custom";
+
+// Clear layout on print mode
+@media print {
+  nav.navbar-static-side {
+    display: none;
+  }
+  body { overflow: visible !important; }
+
+  #page-wrapper {
+    margin: 0;
+  }
+}
+
+// Custom global styles: TODO: place in its own file
+.centered {
+  text-align: center;
+}
+
+.pointer-cursor tr {
+  cursor: pointer;
+}
+
+.table-striped > tbody > tr.ui-state-highlight {
+  background: #f2fbff;
+}
+
+
+body{
+  overflow-x: visible !important;
+}
+
+$shadow: rgba(220,220,220,.65) 1px 3px 47px -4px inset;
+
+.box-shadow{
+  box-shadow: $shadow !important;
+  -webkit-box-shadow: $shadow !important;
+  -moz-box-shadow: $shadow !important;
+}
+
+.over-flow{
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.no-outline{
+  outline: 0;
+}
+
+
+.overflowTable{
+  overflow: auto;
+}
+
+#redirectToList {
+  display: block;
+  float: left;
+  margin-top: 14px;
+  margin-left: 3px;
+}
+
+#redirectToList li{
+  display: inline-block;
+  margin-right: 16px;
+}
+
+#redirectToList span{
+  margin-left: 5px;
+  //position: relative;
+  //bottom: -4px;
+}
+
+
+#redirectToList button{
+  background-color: #ba9229;
+  padding: 5px 12px 5px 10px;
+  //padding-left: 10px;
+  border: none;
+  cursor: pointer;
+}
+
+#redirectToList button:hover{
+  background-color: #c99d2e;
+}
+
+
+#redirectToList i{
+  font-size: 11pt;
+  padding-top: 3px;
+}
+
+
+@media screen and (max-width: 992px)  {
+  .navbar-right{
+    float: left !important;
+    margin-left: 20px;
+  }
+
+}
+
+@media (max-width: 629px){
+  .widget {
+    padding-left: 2px;
+  }
+}
+
+
+
+
+
+//.nav-tabs > li > a#accountSearch{
+
+  //background-color: #7e79c15e;
+  //background-color: #8f8bc75e;
+  //background-color:#7671b95e;
+  //background-color: #c2bef75e;
+  //background-color: #495198;
+//}
+//.nav-tabs > li > a#ticklerProcesses, .nav-tabs > li > a#campaignProcessing2, .nav-tabs > li > a#accountSearch2 {
+//  color: #A7B1C2;
+//  font-weight: 600;d
+//  padding-right: 0 !important;
+//  padding-left: 0 !important;
+//  padding-top: 10px;
+//  padding-bottom: 10px;
+//  //margin-right: 10px;
+//}
+//}
+//
+//
+//.nav-tabs > li > a#ticklerProcesses, .nav-tabs > li > a#campaignProcessing,.nav-tabs > li > a#accountSearch,.nav-tabs > li > a#campaignProcessing2, .nav-tabs > li > a#accountSearch2{
+//  margin: 0;
+//  //background-color: white;
+//}
+
+//.nav-tabs > li > a#ticklerProcesses{
+//  left: 20px;
+//}
+
+//ngb-tabset.white ul{
+//  background-color: white!important;
+//  //padding-top: 15px;
+//  //border-bottom: 0;
+//  //padding-left: 15px
+//}
+//
+//ngb-tabset.white ul li{
+//  //left: 20px;
+//  //border-bottom: 0;
+//  //padding-left: 15px
+//}
+
+//ngb-tabset.white ul.nav-tabs{
+//  border-bottom: 1px solid #ddd ;
+//}

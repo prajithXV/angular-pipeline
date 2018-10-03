@@ -1,0 +1,223 @@
+[{
+    "caseId": 912345,
+    "notes": [{
+        "notesId": 1,
+        "action": "Outgoing cell",
+        "partyContacted": "Borrower",
+        "result": "Payment received",
+        "description": "Payment received when called",
+        "notesDate": "July 15, 2015",
+        "notesTime": "12:15:15"
+      },
+      {
+        "notesId":2,
+        "action": "Outgoing work",
+        "partyContacted": "Borrower",
+        "result": "Busy",
+        "description": "Received busy",
+        "notesDate": "July 15, 2015",
+        "notesTime": "14:36:36"
+      },
+      {
+        "notesId": 3,
+        "action": "Incoming call",
+        "partyContacted": "Borrower",
+        "result": "Promised pay by int",
+        "description": "promised to pay in 2 days",
+        "notesDate": "July 15, 2015",
+        "notesTime": "14:36:38"
+      },
+      {
+        "notesId": 19,
+        "action": "Emailed",
+        "partyContacted": "Attorney",
+        "result": "Payment received",
+        "description": "Emailed attorney about bankruptcy",
+        "notesDate": "July 15, 2015",
+        "notesTime": "09:42:36"
+      },
+      {
+        "notesId": 20,
+        "action": "Letter sent",
+        "partyContacted": "Dealer",
+        "result": "Payment received",
+        "description": "Payment received when letter is sent",
+        "notesDate": "July 15, 2015",
+        "notesTime": "09:42:36"
+      }
+    ]
+  },
+  {
+    "caseId": 912346,
+    "notes": [{
+        "notesId": 4,
+        "action": "Outgoing cell",
+        "partyContacted": "CoWorker",
+        "result": "Payment received",
+        "description": "Payment received when called",
+        "notesDate": "July 15, 2015",
+        "notesTime": "09:08:15"
+      },
+      {
+        "notesId": 5,
+        "action": "Outgoing cell",
+        "partyContacted": "CoBorrower",
+        "result": "Payment received",
+        "description": "Payment received when called",
+        "notesDate": "July 15, 2015",
+        "notesTime": "09:08:15"
+      },
+      {
+        "notesId": 6,
+        "action": "Outgoing Cell",
+        "partyContacted": "Guarantor",
+        "result": "Payment received",
+        "description": "Payment received when called",
+        "notesDate": "July 15, 2015",
+        "notesTime": "19:08:15"
+      }
+    ]
+  },
+  {
+    "caseId": 912347,
+    "notes": [{
+        "notesId": 7,
+        "action": "Outgoing cell",
+        "partyContacted": "Borrower",
+        "result": "Payment received",
+        "description": "Payment received when called",
+        "notesDate": "July 15, 2015",
+        "notesTime": "12:08:15"
+      },
+      {
+        "notesId": 8,
+        "action": "Outgoing cell",
+        "partyContacted": "Borrower",
+        "result": "Payment received",
+        "description": "Payment received when called",
+        "notesDate": "July 15, 2015",
+        "notesTime": "12:25:15"
+      },
+      {
+        "notesId": 9,
+        "action": "Outgoing cell",
+        "partyContacted": "Borrower",
+        "result": "Payment received",
+        "description": "Payment received when called",
+        "notesDate": "July 15, 2015",
+        "notesTime": "12:25:15"
+      }
+    ]
+  },
+  {
+    "caseId": 912348,
+    "notes": [{
+        "notesId": 10,
+        "action": "Outgoing cell",
+        "partyContacted": "Borrower",
+        "result": "Payment received",
+        "description": "Payment received when called",
+        "notesDate": "July 15, 2015",
+        "notesTime": "12:25:15"
+      },
+      {
+        "notesId": 11,
+        "action": "Outgoing cell",
+        "partyContacted": "Borrower",
+        "result": "Payment received",
+        "description": "Payment received when called",
+        "notesDate": "July 28, 2015",
+        "notesTime": "09:25:15"
+      },
+      {
+        "notesId": 12,
+        "action": "Outgoing cell",
+        "partyContacted": "Borrower",
+        "result": "Payment received",
+        "description": "Payment received when called",
+        "notesDate": "July 15, 2015",
+        "notesTime": "09:08:15"
+      }
+    ]
+  },
+  {
+    "caseId": 912349,
+    "notes": [{
+        "notesId": 13,
+        "action": "Outgoing cell",
+        "partyContacted": "Borrower",
+        "result": "Payment received",
+        "description": "Payment received when called",
+        "notesDate": "July 15, 2015",
+        "notesTime": "09:08:15"
+      },
+      {
+        "notesId": 14,
+        "action": "Outgoing cell",
+        "partyContacted": "Borrower",
+        "result": "Payment Received",
+        "description": "Payment received when called",
+        "notesDate": "July 15, 2015",
+        "notesTime": "09:08:15"
+      },
+      {
+        "notesId": 15,
+        "action": "Outgoing cell",
+        "partyContacted": "Borrower",
+        "result": "Payment received",
+        "description": "Payment received when called",
+        "notesDate": "July 15, 2015",
+        "notesTime": "09:08:15"
+      }
+    ]
+  },
+  {
+    "caseId": 912350,
+    "notes": [{
+        "notesId": 16,
+        "action": "Outgoing cell",
+        "partyContacted": "Borrower",
+        "result": "Payment received",
+        "description": "Payment received when called",
+        "notesDate": "July 15, 2015",
+        "notesTime": "09:08:15"
+      },
+      {
+        "notesId": 17,
+        "action": "Outgoing cell",
+        "partyContacted": "Borrower",
+        "result": "Payment received",
+        "description": "Payment received when called",
+        "notesDate": "July 15, 2015",
+        "notesTime": "12:15:15"
+      },
+      {
+        "notesId": 18,
+        "action": "In office",
+        "partyContacted": "Debt couns",
+        "result": "Payment received",
+        "description": "Payment received when contacted",
+        "notesDate": "July 15, 2015",
+        "notesTime": "12:15:15"
+      },
+      {
+        "notesId": 19,
+        "action": "Outgoing cell",
+        "partyContacted": "Borrower",
+        "result": "Payment received",
+        "description": "Payment received when called",
+        "notesDate": "July 15, 2015",
+        "notesTime": "12:15:15"
+      },
+      {
+        "notesId": 20,
+        "action": "In office",
+        "partyContacted": "Debt couns",
+        "result": "Payment received",
+        "description": "Payment received when contacted",
+        "notesDate": "July 15, 2015",
+        "notesTime": "12:15:15"
+      }
+    ]
+  }
+]

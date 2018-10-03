@@ -1,0 +1,64 @@
+<div *ngIf="accounts && accounts.length > 0 && !searching">
+  <div class='table-responsive'>
+    <table class='table table-striped'>
+      <thead>
+      <tr>
+        <th style="width: 10%">Account number</th>
+        <th style="width: 10%">Type</th>
+        <th style="width: 10%">Amount</th>
+        <th style="width: 10%">Status</th>
+        <th style="width: 10%">Relation</th>
+        <th style="width: 10%">Product code</th>
+        <th style="width: 30%">Product description</th>
+        <th style="width: 5%"></th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let acc of accounts">
+        <td>{{acc.accountId}}</td>
+        <td>{{acc.accountType}}</td>
+        <td style="text-align:right;padding-right:2em;">{{acc.amount | coinCurrency}}</td>
+        <td>{{acc.stateDescription}}</td>
+        <td>{{acc.relationDescription}}</td>
+        <td>{{acc.productCode}}</td>
+        <td>{{acc.productDescription}}</td>
+        <td>
+          <button *ngIf="!excluded || excluded.accountId != acc.accountId" class="btn btn-xs btn-primary" (click)="goToAccount(acc)">Go</button>
+          <i *ngIf="excluded && excluded.accountId == acc.accountId" class="fa fa-check text-navy"></i>
+        </td>
+
+        <td *ngIf="hasCreateButton && canCreateCase() && acc.accountType!='D'">
+          <i class="create orange fas fa-plus-circle" title="Create case" (click)="open(content)"></i>
+        </td>
+        <td *ngIf="acc.accountType =='D'"></td>
+      <!--modal-->
+        <ng-template #content let-c="close" let-d="dismiss">
+          <div class="modal-header">
+            <h4 class="modal-title">Create case</h4>
+            <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <!--new process component-->
+            <new-process-case
+              [processes]="processes"
+              [account]="acc"
+              [customer]="customers"
+              (caseCreated)="d('Cross click')"
+              (onCancel)="d('Cross click')">
+            </new-process-case>
+          </div>
+        </ng-template>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+
+<div *ngIf="accounts?.length == 0 && !searching && customers!=null" class="accountsFound">No accounts found.</div>
+<div *ngIf="searching"><waiting-backend></waiting-backend> Searching...</div>
+<div *ngIf="hasCreateButton &&(!accounts && !searching || customers == null)">Select a customer above to view the accounts.</div>
+
+

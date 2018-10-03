@@ -1,0 +1,18 @@
+.create{
+  cursor: pointer;
+
+}
+
+
+.orange{
+  color: orange;
+}
+
+.close:focus{
+  outline: none;
+}
+
+
+:host /deep/ div.col-sm-4.m-b-xs{
+  padding: 0;
+}

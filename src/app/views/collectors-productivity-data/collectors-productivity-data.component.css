@@ -1,0 +1,34 @@
+.right {
+  text-align: right;
+}
+
+.text-success{
+  color: #3c763d;
+  font-weight: bold;
+}
+
+.text-danger{
+  font-weight: bold;
+}
+.text-success-back{
+  background-color: #3c763d;
+  padding: 8px;
+  color: white;
+  font-weight: bold;
+}
+
+
+.text-danger-back{
+  background-color: #ED5565;
+  color: white;
+  padding: 8px;
+  font-weight: bold;
+}
+
+.text-success-normal{
+  color: #3c763d;
+}
+
+.text-danger-normal{
+  color: #ED5565;
+}

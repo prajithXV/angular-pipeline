@@ -1,0 +1,232 @@
+<!-- Toolbar -->
+
+<div class="ibox float-e-margins">
+  <div class="ibox-title col-xs-12" style="padding-bottom: 0;">
+    <iboxtools id="ibox"></iboxtools>
+    <div class="col col-lg-4 col-xs-1 col-md-3 col-sm-1 no-padding" style="float: left;">
+      <h5>Campaign Lists<span *ngIf="currentCampaign">: <strong
+        class="text-success">{{currentCampaign.name}}</strong></span></h5>
+    </div>
+    <div class="row" style="margin-right: 0">
+      <div class="col col-lg-7 col-xs-10 col-sm-10 col-md-8 text-right" style="float: right;">
+
+        <button class="btn btn-sm btn-primary separator" [disabled]="isCreating || !campaign" (click)="newList()"><i
+          class="fa fa-file-o"></i> New
+        </button>
+
+        <select title="Status" [disabled]="isCreating || !lists" *ngIf="statuses"
+                style="width: 36%;  display: inline-block" (change)="statusChange() "
+                [(ngModel)]="selectedStatus" class="separator form-control m-b">
+          <option [ngValue]="null">--All--</option>
+          <option *ngFor="let st of statuses" [ngValue]="st">{{st.name}}</option>
+        </select>
+        <paginator id="pagination" [data]="lists"
+                   (onPageChange)="incPage($event)"
+                   [pagination]="pagination"
+                   [disabled]="isCreating"
+                   [hasNewSize]="true">
+        </paginator>
+      </div>
+    </div>
+  </div>
+  <div class="ibox-content">
+
+
+    <!-- New -->
+    <div *ngIf="isCreating" class="row">
+      <div class="col-lg-12">
+        <!--<hr/>-->
+        <h2 class="text-success">Create Campaign</h2>
+        <p *ngIf="campaign.attributes.length == 0">This campaign has no attributes.</p>
+        <p></p>
+        <campaign-attribute-edition
+          *ngFor="let at of campaign.attributes"
+          [attribute]="at"
+          [values]="getAttributeValues(at)"
+          (onAddValue)="addAttribute(at, $event)"
+          (onRemoveValue)="removeAttribute(at, $event)"
+        ></campaign-attribute-edition>
+        <div class="form-group">
+          <button
+            class="btn btn-sm btn-primary m-t-n-xs"
+            (click)="createCampaign()"
+            [disabled]="waitForCreate"
+          >Create
+            <waiting-backend *ngIf="waitForCreate"></waiting-backend>
+          </button>
+          <button
+            class="btn btn-sm m-t-n-xs"
+            (click)="cancelNew()"
+            [disabled]="waitForCreate"
+          >Cancel
+          </button>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- Table -->
+    <div *ngIf="!isCreating && lists && lists?.length > 0" class='table-responsive'>
+      <table class='table table-hover'>
+        <thead>
+        <tr class="tableStyle">
+          <th style="width: 3em;"></th>
+          <th>ID</th>
+          <th>Created</th>
+          <th>Created by</th>
+          <th>Status</th>
+          <th>Status updated</th>
+          <th>Ordered by</th>
+          <th></th>
+          <th></th>
+          <th></th>
+        </tr>
+        </thead>
+        <tbody>
+
+        <ng-container *ngFor="let cpl of lists; let index = index;">
+          <tr class="pointer-cursor"
+              (mouseenter)="hoverList(cpl)"
+              (mouseleave)="hoverList(null)"
+              (click)="selectList(cpl)"
+              [class.ui-state-highlight]="cpl.id == currentList?.id"
+              [class.odd]="index % 2 == 0 && cpl.id != currentList?.id">
+            <td style="width: 3em; text-align:center;">
+              <i *ngIf="cpl.id == currentList?.id"
+                 class="fa fa-arrow-circle-right text-navy"
+                 style="font-size:1.2em;">
+              </i>
+            </td>
+            <td>{{cpl.id}}</td>
+            <td>{{cpl.createdDate | coinDateTransform}}</td>
+            <td>{{cpl.createdBy}}</td>
+            <td>
+              {{cpl.statusCode}}
+              <span *ngIf="cpl.id == currentHoverList?.id && canEditStatus(cpl)" style="margin-left: 5px;">
+            <i class="edit fas fa-edit" (click)="openModal(status)"></i>
+          </span>
+            </td>
+            <td>{{cpl.modifiedDate | coinDateTransform}}</td>
+            <td>
+              <span class="orderby-margin">{{cpl.orderedBy}}</span>
+              <span *ngIf="cpl.id == currentHoverList?.id">
+            <i class="edit fas fa-edit" (click)="openModal(order)"></i>
+          </span></td>
+            <td>
+              <button (click)="toggleDetail(cpl); $event.stopPropagation()" class="btn btn-xs btn-white btnBorder">
+                <i class="fa" [class.fa-chevron-down]="!isDetailVisible(cpl)"
+                   [class.fa-chevron-up]="isDetailVisible(cpl)"></i>
+              </button>
+              <button (click)="clone(cpl); $event.stopPropagation()" class="btn btn-xs btn-white btnBorder">
+                <i class="fa fa-clone"></i>
+              </button>
+            </td>
+            <td>
+              <button
+                *ngIf="cpl.statusCode == CodeNew"
+                (click)="launch(cpl); $event.stopPropagation()"
+                class="btn btn-xs btn-primary"
+                [disabled]="waitForLaunch">
+                Launch
+                <waiting-backend *ngIf="waitForLaunch"></waiting-backend>
+              </button>
+            </td>
+            <td></td>
+          </tr>
+
+          <!--Status modal-->
+          <ng-template #status let-c="close" let-d="dismiss">
+            <!--header-->
+            <div class="modal-header">
+              <h4 class="modal-title">Status</h4>
+              <button type="button" class="close no-outline" aria-label="Close" (click)="d('Cross click')">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <!--body-->
+            <div class="modal-body">
+              <!--order by types form-->
+              The current state for campaign list ID <span class="text-success font-bold">{{cpl.id}}</span> is <span
+              class="text-success font-bold">{{cpl.statusCode}}</span>.
+            </div>
+            <!--footer-->
+            <div class="modal-footer">
+              <button *ngIf="cpl.statusCode == pausedStatus" type="button" class="pull-left btn btn-primary"
+                      (click)="updateStatus(cpl, inProgressStatus);c('Close click')">
+                <i class="fas fa-play"></i> Resume campaign list
+              </button>
+              <button *ngIf="cpl.statusCode == inProgressStatus" type="button" class="pull-left btn btn-primary"
+                      (click)="updateStatus(cpl, pausedStatus);c('Close click')">
+                <i class="fas fa-pause"></i> Pause campaign list
+              </button>
+              <button type="button" class=" pull-left btn btn-outline-dark" (click)="c('Close click')">Cancel</button>
+            </div>
+          </ng-template>
+
+
+          <!--Modal-->
+          <ng-template #order let-c="close" let-d="dismiss">
+            <!--header-->
+            <div class="modal-header">
+              <h4 class="modal-title">Order By</h4>
+              <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <!--body-->
+            <div class="modal-body">
+              <!--order by types form-->
+              <order-by-types
+                [campaignListOrderByTypes]="campaignListOrderByTypes"
+                [currentList]="cpl">
+              </order-by-types>
+            </div>
+            <!--footer-->
+            <div class="modal-footer">
+              <button type="button" class="pull-left btn btn-primary" (click)="saveOrder(cpl); c('Close click')">
+                Apply
+              </button>
+              <button type="button" class=" pull-left btn btn-outline-dark" (click)="c('Close click')">Cancel</button>
+            </div>
+          </ng-template>
+
+          <!--campaign list detal-->
+          <tr class="no-hover"
+              *ngIf="isDetailVisible(cpl)"
+              (click)="selectList(cpl)">
+            <!--<td></td>-->
+            <td class="footable-row-detail-cell" colspan="12">
+              <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 footable-row-detail-inner box-shadow box-padding">
+                <div class="col-lg-6 col-sm-12 col-md-12 col-xs-12 col-padding">
+                  <h3 class="text-success">Attributes</h3>
+                  <p *ngFor="let at of cpl.attributes"><strong [title]="at.code">{{attributeDisplayName(at)}}: </strong>{{getStringValues(at)}}
+                  </p>
+                </div>
+                <div class="col-lg-6 col-sm-12 col-md-12 col-xs-12 col-padding">
+                  <h3 class="text-success">Statistics</h3>
+                  <ng-container *ngIf="cpl.statistics && cpl.statistics.length > 0">
+                    <p *ngFor="let st of cpl.statistics"><strong>{{st.statusCode}}: </strong>{{st.count}}</p>
+                  </ng-container>
+                  <p *ngIf="cpl.statistics && cpl.statistics.length == 0">No statistics found</p>
+                  <p *ngIf="!cpl.statistics">
+                    <waiting-backend></waiting-backend>
+                    Searching statistics
+                  </p>
+                </div>
+              </div>
+            </td>
+          </tr>
+        </ng-container>
+
+        </tbody>
+      </table>
+    </div>
+
+    <p *ngIf="searching">
+      <waiting-backend></waiting-backend>
+      Getting campaign lists...
+    </p>
+    <p *ngIf="lists && lists.length == 0">No campaign lists found</p>
+    <p *ngIf="!lists && !searching">Select a campaign</p>
+  </div>
+</div>

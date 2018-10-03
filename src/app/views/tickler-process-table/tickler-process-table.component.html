@@ -1,0 +1,40 @@
+<div *ngIf="searchingProcesses" class="search">
+  <waiting-backend></waiting-backend>
+  Searching...
+</div>
+<p *ngIf="ticklerProcesses && ticklerProcesses.length == 0">No data found.</p>
+<div *ngIf="ticklerProcesses && ticklerProcesses.length > 0 && !searchingProcesses">
+
+  <!--Processes table-->
+  <div class="table-responsive">
+    <table class="TicklerProcess table table-hover">
+      <thead>
+      <tr>
+        <th></th>
+        <th>ID</th>
+        <th>Code</th>
+        <th>Name</th>
+        <th>Created by</th>
+        <th>Created date</th>
+      </tr>
+      </thead>
+      <tbody class="pointer-cursor">
+      <tr *ngFor="let tp of ticklerProcesses" (click)="searchTypes(tp)"
+          [class.ui-state-highlight]="tp.id == currentProcess?.id">
+        <td><i *ngIf="tp.id == currentProcess?.id" class="fa fa-arrow-circle-right text-navy"
+               style="font-size:1.2em;"></i></td>
+        <td>{{tp.id}}</td>
+        <td>{{tp.processCode}}</td>
+        <td>{{tp.processName}}</td>
+        <td>{{tp.createdBy}}</td>
+        <td>{{tp.createdDate | coinDateTransform: "STD_DATE"}}</td>
+        <!--<td>-->
+        <!--<button class="buttonGo btn btn-xs btn-primary" (click)="goToListAccount(ac)">GO</button>-->
+        <!--</td>-->
+      </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+

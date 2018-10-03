@@ -1,0 +1,35 @@
+.memoLabel{
+  color: white;
+  font-size: 13px !important;
+  font-weight: bold;
+  /*background: #4186b5;*/
+  background: #ED5565;
+
+}
+
+div.ibox-tools{
+  float: right;
+  display: inline-block;
+}
+
+div.ibox-tools i.fa{
+  float: right;
+}
+
+.todayContacts{
+  display: inline-block;
+  padding-right: 28px;
+  color: #7b7f82;
+  font-size: 11pt;
+  margin: -4px 0 7px;
+}
+
+.searchingContacts{
+  margin-right: 35px;
+}
+
+
+.red{
+  color: #ED5565;
+}
+

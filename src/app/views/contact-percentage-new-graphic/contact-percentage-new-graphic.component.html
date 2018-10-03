@@ -1,0 +1,11 @@
+<div *ngIf="visibleTable && !searchingData && contactPercentage.length!=0">
+  <h3 class="text-center">Total percentage per campaign by hour</h3>
+  <canvas
+    baseChart
+    [chartType]="'line'"
+    [datasets]="chartData"
+    [labels]="labelsArray"
+    [options]="options"
+    [colors]="lineColors">
+  </canvas>
+</div>

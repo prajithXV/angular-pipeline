@@ -1,0 +1,111 @@
+<!--New button-->
+<!--<div *ngIf="!searchingLovTypes">-->
+  <!--<button class="btn btn-sm btn-primary" [disabled]="isCreating || searchingLovTypes" (click)="showLovTypes(true)">-->
+    <!--<i class="fa fa-file-o"></i> New-->
+  <!--</button>-->
+<!--</div>-->
+
+<div *ngIf="searchingLovTypes" class="search">
+  <waiting-backend></waiting-backend>
+  Searching...
+</div>
+<p *ngIf="lovTypes && lovTypes?.length == 0 && !searchingLovTypes && !isCreating" style="margin-top: 10px;">No data found.</p>
+
+<div class="table" *ngIf="isCreating">
+  <!--NEW -->
+  <!--<hr/>-->
+  <div class="container">
+    <div class="">
+      <h2 class="title text-success">New LOV type</h2>
+      <p></p>
+      <new-lov-type
+        [lovTypeCodes]="lovTypeCodes"
+        [hasToAddLovType]="true"
+        (onAddLovType)="newLovType($event)"
+        (onCancelLovType)="showLovTypes(false)"
+        manageLovTypeText="Add">
+      </new-lov-type>
+    </div>
+  </div>
+</div>
+
+<!--lov type table-->
+<div *ngIf="!isCreating && !searchingLovTypes && lovTypes?.length > 0 && lovTypes">
+<!--<div *ngIf="!isCreating">-->
+  <div class="table-responsive">
+    <table class="table table-hover">
+      <thead>
+      <tr>
+        <th>Code</th>
+        <th>Name</th>
+        <th>Description</th>
+        <th>Type</th>
+        <th class="text-center">Active</th>
+        <th class="text-center">Dynamic</th>
+      </tr>
+      </thead>
+      <tbody>
+      <ng-container *ngFor="let lt of lovTypes">
+        <tr  [class.clearOrange]="isLovTypeVisible(lt)" [class.disabledTr]="!lt.isActive">
+          <td>{{lt.lovCode}}</td>
+          <td>{{lt.lovName}}</td>
+          <td>{{lt.lovDescription}}</td>
+          <td>{{lt.type | lovTypeToString}}</td>
+          <td class="text-center"><semaphore [value]="lt.isActive"></semaphore></td>
+          <td class="text-center"><semaphore [value]="lt.isDynamic"></semaphore></td>
+          <!--edit button-->
+          <td>
+            <i class="edit fas fa-edit" [class.orange]="isLovTypeVisible(lt)"
+               (click)="editLovType(lt)" title="edit"></i>
+          </td>
+
+          <!--Update-->
+        <tr class="white" *ngIf="isLovTypeVisible(lt)">
+          <td colspan="15">
+          <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 box-shadow box-padding">
+            <div class="col-lg-4 col-sm-12 col-md-12 col-xs-12">
+              <p class="title3 text-success">General</p>
+              <div class="col-container">
+                <div class="table">
+                <new-lov-type
+                  [lovTypeCodes]="lovTypeCodes"
+                  [hasToAddLovType]="false"
+                  [currentLovType]="lt"
+                  (onCancelLovType)="onCancelUpdate(lt)"
+                  (onUpdateLovType)="onUpdate()"
+                  manageLovTypeText="Save">
+                </new-lov-type>
+              </div>
+            </div>
+            </div>
+
+            <div class="col-lg-8 col-sm-12 col-md-12 col-xs-12">
+              <p class="title2 text-success col-lg-6 col-md-6 col-sm-6 col-xs-6">Values</p>
+              <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 text-right" style="padding-top: 15px;">
+                <button class="btn btn-sm btn-primary" [disabled]="lovValues.searchingValues|| isCreatingValues || lt?.isDynamic"
+                        (click)="showLovValues(true)">
+                  <i class="fa fa-file-o"></i> New
+                </button>
+              </div>
+              <div class="col-container">
+                <div class="table">
+                  <lov-values-table #lovValues
+                  [isCreatingLovValues]="isCreatingValues"
+                  [currentLovType]="lt"
+                  (onCancelLovValues)="showLovValues($event)"
+                  (onAddLovValues)="showLovValues($event)"
+                  (onLoadLovValues)="showLovValues($event)"
+                  (onUpdateValues)="showLovValues($event)">
+                  </lov-values-table>
+                </div>
+              </div>
+            </div>
+          </div>
+          </td>
+        </tr>
+      </ng-container>
+      </tbody>
+    </table>
+  </div>
+</div>
+

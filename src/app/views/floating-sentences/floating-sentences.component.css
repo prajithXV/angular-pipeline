@@ -1,0 +1,41 @@
+div.floating  {
+  position:fixed;
+  top: 100px;
+  left: 100px;
+  width: 25%;
+  background-color: white;
+  z-index: 10000;
+
+  -webkit-box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.3);
+  -moz-box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.3);
+  box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.3);
+  border-radius:5px;
+  border: 1px solid #dbdee0;
+}
+
+mwlResizable {
+  box-sizing: border-box;
+}
+
+div.floating .ibox-content {
+  padding-bottom: 0px;
+}
+
+div.floating .fa-times {
+  cursor:pointer;
+}
+
+.fa-chevron-down{
+  cursor: pointer;
+}
+
+li .placeholder {
+  font-weight: bold;
+  font-style:italic;
+}
+
+.ibox-title{
+  border-color: transparent;
+  border-width: 0px 0 0;
+  border-radius: 5px;
+}

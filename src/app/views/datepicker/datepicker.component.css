@@ -1,0 +1,40 @@
+.fas.fa-calendar-alt{
+  font-size: 10pt;
+  cursor: pointer;
+}
+
+i{
+  margin-left: -30px;
+}
+
+span.calendar{
+  display: inline-block;
+  float: right;
+  padding-top: 7px;
+}
+
+input{
+  display: inline-block;
+  width: 97% !important;
+}
+
+
+span.input-group-btn.upcalendar{
+  display: inline-block;
+  z-index: 5;
+}
+
+.input-group-btn.upcalendar{
+  display: none;
+  width: 0%;
+}
+
+
+span.input-group-btn.upcalendar i{
+  margin-left: -25px;
+  margin-top: 12px;
+}
+
+.disabled{
+  pointer-events: none;
+}

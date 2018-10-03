@@ -1,0 +1,17 @@
+<!--Table component: total and average: boolean to show average or total in its table-->
+<div class="table-responsive" *ngIf="visibleTable && incomingCalls.length!=0">
+  <table class="table table-striped">
+    <thead>
+    <tr>
+      <th style="">Hour</th>
+      <th style="">Total</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let ac of incomingCalls">
+      <td *ngIf="incomingCalls"> {{ac.hour}}</td>
+      <td *ngIf="incomingCalls"> {{ac.total}}</td>
+    </tr>
+    </tbody>
+  </table>
+</div>

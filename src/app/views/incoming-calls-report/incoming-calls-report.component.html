@@ -1,0 +1,41 @@
+<div class="row">
+  <div class="col-lg-3">
+    <div class="ibox float-e-margins">
+      <div class="ibox-title">
+        <h5>Incoming Calls Criteria</h5>
+      </div>
+      <div class="ibox-content">
+        <calls-per-hour-criteria
+          (onViewReport)="onViewIncomingCalls($event)"
+          [callsPerHour]="incomingCalls"
+          [showCampaign]="false"
+          [searchingCallsPerHourData]="searchingCallsPerHourData">
+        </calls-per-hour-criteria>
+      </div>
+    </div>
+  </div>
+  <div class="col-lg-9">
+    <div class="ibox float-e-margins">
+      <div class="ibox-title">
+        <h5>Incoming Calls Report</h5>
+      </div>
+      <div class="ibox-content">
+        <!--total component data-->
+        <incoming-calls-data
+          [incomingCalls]="incomingCalls"
+          [searchingData]="searchingCallsPerHourData"
+          [visibleTable]="isTableVisible">
+        </incoming-calls-data>
+
+        <div *ngIf="searchingCallsPerHourData">
+          <waiting-backend></waiting-backend>
+          Getting incoming calls...
+        </div>
+        <div *ngIf="!searchingCallsPerHourData && !isTableVisible">Select a date and press "View report"</div>
+        <p *ngIf="incomingCalls && incomingCalls.length == 0 && !searchingCallsPerHourData && isTableVisible">No
+          incoming calls found</p>
+
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,312 @@
+Dos canvis d'estat
+Trucar 
+Penjar
+
+[1512472596496] [Sign in RESPONSE] 202
+
+[1512472604123] [EVENT] <message xmlns="jabber:client" from="pubsub.ibdc1-cce-fina01.ibkc.int" to="215194@ibdc1-cce-fina01.ibkc.int" id="/finesse/api/User/215194__215194@ibdc1-cce-fina01.ibkc.int__U8VP4"><event xmlns="http://jabber.org/protocol/pubsub#event"><items node="/finesse/api/User/215194"><item id="0b6afdb5-5870-4b69-b649-7e7a8c69c0c011279448"><notification xmlns="http://jabber.org/protocol/pubsub"><Update>
+  <data>
+    <user>
+      <dialogs>/finesse/api/User/215194/Dialogs</dialogs>
+      <extension>215194</extension>
+      <firstName>Coin</firstName>
+      <lastName>App</lastName>
+      <loginId>215194</loginId>
+      <loginName>coinapp</loginName>
+      <mediaType>1</mediaType>
+      <pendingState></pendingState>
+      <reasonCode>
+        <category>NOT_READY</category>
+        <code>26</code>
+        <forAll>false</forAll>
+        <id>48</id>
+        <label>Lunch</label>
+        <uri>/finesse/api/ReasonCode/48</uri>
+      </reasonCode>
+      <reasonCodeId>48</reasonCodeId>
+      <roles>
+        <role>Agent</role>
+      </roles>
+      <settings>
+        <wrapUpOnIncoming>REQUIRED</wrapUpOnIncoming>
+      </settings>
+      <state>NOT_READY</state>
+      <stateChangeTime>2017-12-05T11:16:43.925Z</stateChangeTime>
+      <teamId>5007</teamId>
+      <teamName>IBE_SAD</teamName>
+      <uri>/finesse/api/User/215194</uri>
+    </user>
+  </data>
+  <event>PUT</event>
+  <requestId></requestId>
+  <source>/finesse/api/User/215194</source>
+</Update></notification></item></items></event></message>
+
+[1512472604129] [MYEVENT] <Update>
+  <data>
+    <user>
+      <dialogs>/finesse/api/User/215194/Dialogs</dialogs>
+      <extension>215194</extension>
+      <firstName>Coin</firstName>
+      <lastName>App</lastName>
+      <loginId>215194</loginId>
+      <loginName>coinapp</loginName>
+      <mediaType>1</mediaType>
+      <pendingState></pendingState>
+      <reasonCode>
+        <category>NOT_READY</category>
+        <code>26</code>
+        <forAll>false</forAll>
+        <id>48</id>
+        <label>Lunch</label>
+        <uri>/finesse/api/ReasonCode/48</uri>
+      </reasonCode>
+      <reasonCodeId>48</reasonCodeId>
+      <roles>
+        <role>Agent</role>
+      </roles>
+      <settings>
+        <wrapUpOnIncoming>REQUIRED</wrapUpOnIncoming>
+      </settings>
+      <state>NOT_READY</state>
+      <stateChangeTime>2017-12-05T11:16:43.925Z</stateChangeTime>
+      <teamId>5007</teamId>
+      <teamName>IBE_SAD</teamName>
+      <uri>/finesse/api/User/215194</uri>
+    </user>
+  </data>
+  <event>PUT</event>
+  <requestId></requestId>
+  <source>/finesse/api/User/215194</source>
+</Update>
+
+[1512472610470] [EVENT] <message xmlns="jabber:client" from="pubsub.ibdc1-cce-fina01.ibkc.int" to="215194@ibdc1-cce-fina01.ibkc.int" id="/finesse/api/User/215194__215194@ibdc1-cce-fina01.ibkc.int__RG691"><event xmlns="http://jabber.org/protocol/pubsub#event"><items node="/finesse/api/User/215194"><item id="0b6afdb5-5870-4b69-b649-7e7a8c69c0c011279450"><notification xmlns="http://jabber.org/protocol/pubsub"><Update>
+  <data>
+    <user>
+      <dialogs>/finesse/api/User/215194/Dialogs</dialogs>
+      <extension>215194</extension>
+      <firstName>Coin</firstName>
+      <lastName>App</lastName>
+      <loginId>215194</loginId>
+      <loginName>coinapp</loginName>
+      <mediaType>1</mediaType>
+      <pendingState></pendingState>
+      <reasonCode>
+        <category>NOT_READY</category>
+        <code>66</code>
+        <forAll>true</forAll>
+        <id>45</id>
+        <label>NOT_RDY</label>
+        <uri>/finesse/api/ReasonCode/45</uri>
+      </reasonCode>
+      <reasonCodeId>45</reasonCodeId>
+      <roles>
+        <role>Agent</role>
+      </roles>
+      <settings>
+        <wrapUpOnIncoming>REQUIRED</wrapUpOnIncoming>
+      </settings>
+      <state>NOT_READY</state>
+      <stateChangeTime>2017-12-05T11:16:50.281Z</stateChangeTime>
+      <teamId>5007</teamId>
+      <teamName>IBE_SAD</teamName>
+      <uri>/finesse/api/User/215194</uri>
+    </user>
+  </data>
+  <event>PUT</event>
+  <requestId></requestId>
+  <source>/finesse/api/User/215194</source>
+</Update></notification></item></items></event></message>
+
+[1512472610485] [MYEVENT] <Update>
+  <data>
+    <user>
+      <dialogs>/finesse/api/User/215194/Dialogs</dialogs>
+      <extension>215194</extension>
+      <firstName>Coin</firstName>
+      <lastName>App</lastName>
+      <loginId>215194</loginId>
+      <loginName>coinapp</loginName>
+      <mediaType>1</mediaType>
+      <pendingState></pendingState>
+      <reasonCode>
+        <category>NOT_READY</category>
+        <code>66</code>
+        <forAll>true</forAll>
+        <id>45</id>
+        <label>NOT_RDY</label>
+        <uri>/finesse/api/ReasonCode/45</uri>
+      </reasonCode>
+      <reasonCodeId>45</reasonCodeId>
+      <roles>
+        <role>Agent</role>
+      </roles>
+      <settings>
+        <wrapUpOnIncoming>REQUIRED</wrapUpOnIncoming>
+      </settings>
+      <state>NOT_READY</state>
+      <stateChangeTime>2017-12-05T11:16:50.281Z</stateChangeTime>
+      <teamId>5007</teamId>
+      <teamName>IBE_SAD</teamName>
+      <uri>/finesse/api/User/215194</uri>
+    </user>
+  </data>
+  <event>PUT</event>
+  <requestId></requestId>
+  <source>/finesse/api/User/215194</source>
+</Update>
+
+[1512472629933] [EVENT] <message xmlns="jabber:client" from="pubsub.ibdc1-cce-fina01.ibkc.int" to="215194@ibdc1-cce-fina01.ibkc.int" id="/finesse/api/User/215194__215194@ibdc1-cce-fina01.ibkc.int__928M0"><event xmlns="http://jabber.org/protocol/pubsub#event"><items node="/finesse/api/User/215194"><item id="0b6afdb5-5870-4b69-b649-7e7a8c69c0c011279452"><notification xmlns="http://jabber.org/protocol/pubsub"><Update>
+  <data>
+    <user>
+      <dialogs>/finesse/api/User/215194/Dialogs</dialogs>
+      <extension>215194</extension>
+      <firstName>Coin</firstName>
+      <lastName>App</lastName>
+      <loginId>215194</loginId>
+      <loginName>coinapp</loginName>
+      <mediaType>1</mediaType>
+      <pendingState></pendingState>
+      <roles>
+        <role>Agent</role>
+      </roles>
+      <settings>
+        <wrapUpOnIncoming>REQUIRED</wrapUpOnIncoming>
+      </settings>
+      <state>TALKING</state>
+      <stateChangeTime>2017-12-05T11:17:09.745Z</stateChangeTime>
+      <teamId>5007</teamId>
+      <teamName>IBE_SAD</teamName>
+      <uri>/finesse/api/User/215194</uri>
+    </user>
+  </data>
+  <event>PUT</event>
+  <requestId></requestId>
+  <source>/finesse/api/User/215194</source>
+</Update></notification></item></items></event></message>
+
+[1512472629962] [MYEVENT] <Update>
+  <data>
+    <user>
+      <dialogs>/finesse/api/User/215194/Dialogs</dialogs>
+      <extension>215194</extension>
+      <firstName>Coin</firstName>
+      <lastName>App</lastName>
+      <loginId>215194</loginId>
+      <loginName>coinapp</loginName>
+      <mediaType>1</mediaType>
+      <pendingState></pendingState>
+      <roles>
+        <role>Agent</role>
+      </roles>
+      <settings>
+        <wrapUpOnIncoming>REQUIRED</wrapUpOnIncoming>
+      </settings>
+      <state>TALKING</state>
+      <stateChangeTime>2017-12-05T11:17:09.745Z</stateChangeTime>
+      <teamId>5007</teamId>
+      <teamName>IBE_SAD</teamName>
+      <uri>/finesse/api/User/215194</uri>
+    </user>
+  </data>
+  <event>PUT</event>
+  <requestId></requestId>
+  <source>/finesse/api/User/215194</source>
+</Update>
+
+[1512472630681] [EVENT] <message xmlns="jabber:client" from="pubsub.ibdc1-cce-fina01.ibkc.int" to="215194@ibdc1-cce-fina01.ibkc.int" id="/finesse/api/User/215194/Dialogs__215194@ibdc1-cce-fina01.ibkc.int__z5Jjn"><event xmlns="http://jabber.org/protocol/pubsub#event"><items node="/finesse/api/User/215194/Dialogs"><item id="0b6afdb5-5870-4b69-b649-7e7a8c69c0c011279454"><notification xmlns="http://jabber.org/protocol/pubsub"><Update><data><dialogs><Dialog><associatedDialogUri></associatedDialogUri><fromAddress>215194</fromAddress><id>54375298</id><mediaProperties><DNIS></DNIS><callType>AGENT_INSIDE</callType><dialedNumber></dialedNumber><outboundClassification></outboundClassification><callvariables><CallVariable><name>callVariable1</name><value></value></CallVariable><CallVariable><name>callVariable2</name><value></value></CallVariable><CallVariable><name>callVariable3</name><value></value></CallVariable><CallVariable><name>callVariable4</name><value></value></CallVariable><CallVariable><name>callVariable5</name><value></value></CallVariable><CallVariable><name>callVariable6</name><value></value></CallVariable><CallVariable><name>callVariable7</name><value></value></CallVariable><CallVariable><name>callVariable8</name><value></value></CallVariable><CallVariable><name>callVariable9</name><value></value></CallVariable><CallVariable><name>callVariable10</name><value></value></CallVariable></callvariables></mediaProperties><mediaType>Voice</mediaType><participants><Participant><actions><action>UPDATE_CALL_DATA</action><action>DROP</action></actions><mediaAddress>215194</mediaAddress><mediaAddressType>AGENT_DEVICE</mediaAddressType><startTime>2017-12-05T11:17:09.746Z</startTime><state>INITIATING</state><stateCause></stateCause><stateChangeTime>2017-12-05T11:17:09.746Z</stateChangeTime></Participant></participants><state>INITIATING</state><toAddress></toAddress><uri>/finesse/api/Dialog/54375298</uri></Dialog></dialogs></data><event>POST</event><requestId></requestId><source>/finesse/api/User/215194/Dialogs</source></Update></notification></item></items></event></message>
+
+[1512472630698] [MYEVENT] <Update><data><dialogs><Dialog><associatedDialogUri></associatedDialogUri><fromAddress>215194</fromAddress><id>54375298</id><mediaProperties><DNIS></DNIS><callType>AGENT_INSIDE</callType><dialedNumber></dialedNumber><outboundClassification></outboundClassification><callvariables><CallVariable><name>callVariable1</name><value></value></CallVariable><CallVariable><name>callVariable2</name><value></value></CallVariable><CallVariable><name>callVariable3</name><value></value></CallVariable><CallVariable><name>callVariable4</name><value></value></CallVariable><CallVariable><name>callVariable5</name><value></value></CallVariable><CallVariable><name>callVariable6</name><value></value></CallVariable><CallVariable><name>callVariable7</name><value></value></CallVariable><CallVariable><name>callVariable8</name><value></value></CallVariable><CallVariable><name>callVariable9</name><value></value></CallVariable><CallVariable><name>callVariable10</name><value></value></CallVariable></callvariables></mediaProperties><mediaType>Voice</mediaType><participants><Participant><actions><action>UPDATE_CALL_DATA</action><action>DROP</action></actions><mediaAddress>215194</mediaAddress><mediaAddressType>AGENT_DEVICE</mediaAddressType><startTime>2017-12-05T11:17:09.746Z</startTime><state>INITIATING</state><stateCause></stateCause><stateChangeTime>2017-12-05T11:17:09.746Z</stateChangeTime></Participant></participants><state>INITIATING</state><toAddress></toAddress><uri>/finesse/api/Dialog/54375298</uri></Dialog></dialogs></data><event>POST</event><requestId></requestId><source>/finesse/api/User/215194/Dialogs</source></Update>
+
+[1512472630728] [EVENT] <message xmlns="jabber:client" from="pubsub.ibdc1-cce-fina01.ibkc.int" to="215194@ibdc1-cce-fina01.ibkc.int" id="/finesse/api/User/215194/Dialogs__215194@ibdc1-cce-fina01.ibkc.int__orhni"><event xmlns="http://jabber.org/protocol/pubsub#event"><items node="/finesse/api/User/215194/Dialogs"><item id="0b6afdb5-5870-4b69-b649-7e7a8c69c0c011279455"><notification xmlns="http://jabber.org/protocol/pubsub"><Update><data><dialog><associatedDialogUri></associatedDialogUri><fromAddress>215194</fromAddress><id>54375298</id><mediaProperties><DNIS></DNIS><callType>AGENT_INSIDE</callType><dialedNumber>14696014194</dialedNumber><outboundClassification></outboundClassification><callvariables><CallVariable><name>callVariable1</name><value></value></CallVariable><CallVariable><name>callVariable2</name><value></value></CallVariable><CallVariable><name>callVariable3</name><value></value></CallVariable><CallVariable><name>callVariable4</name><value></value></CallVariable><CallVariable><name>callVariable5</name><value></value></CallVariable><CallVariable><name>callVariable6</name><value></value></CallVariable><CallVariable><name>callVariable7</name><value></value></CallVariable><CallVariable><name>callVariable8</name><value></value></CallVariable><CallVariable><name>callVariable9</name><value></value></CallVariable><CallVariable><name>callVariable10</name><value></value></CallVariable></callvariables></mediaProperties><mediaType>Voice</mediaType><participants><Participant><actions><action>UPDATE_CALL_DATA</action><action>DROP</action></actions><mediaAddress>215194</mediaAddress><mediaAddressType>AGENT_DEVICE</mediaAddressType><startTime>2017-12-05T11:17:09.746Z</startTime><state>INITIATING</state><stateCause></stateCause><stateChangeTime>2017-12-05T11:17:09.746Z</stateChangeTime></Participant></participants><state>INITIATING</state><toAddress>14696014194</toAddress><uri>/finesse/api/Dialog/54375298</uri></dialog></data><event>PUT</event><requestId></requestId><source>/finesse/api/Dialog/54375298</source></Update></notification></item></items></event></message>
+
+[1512472630742] [MYEVENT] <Update><data><dialog><associatedDialogUri></associatedDialogUri><fromAddress>215194</fromAddress><id>54375298</id><mediaProperties><DNIS></DNIS><callType>AGENT_INSIDE</callType><dialedNumber>14696014194</dialedNumber><outboundClassification></outboundClassification><callvariables><CallVariable><name>callVariable1</name><value></value></CallVariable><CallVariable><name>callVariable2</name><value></value></CallVariable><CallVariable><name>callVariable3</name><value></value></CallVariable><CallVariable><name>callVariable4</name><value></value></CallVariable><CallVariable><name>callVariable5</name><value></value></CallVariable><CallVariable><name>callVariable6</name><value></value></CallVariable><CallVariable><name>callVariable7</name><value></value></CallVariable><CallVariable><name>callVariable8</name><value></value></CallVariable><CallVariable><name>callVariable9</name><value></value></CallVariable><CallVariable><name>callVariable10</name><value></value></CallVariable></callvariables></mediaProperties><mediaType>Voice</mediaType><participants><Participant><actions><action>UPDATE_CALL_DATA</action><action>DROP</action></actions><mediaAddress>215194</mediaAddress><mediaAddressType>AGENT_DEVICE</mediaAddressType><startTime>2017-12-05T11:17:09.746Z</startTime><state>INITIATING</state><stateCause></stateCause><stateChangeTime>2017-12-05T11:17:09.746Z</stateChangeTime></Participant></participants><state>INITIATING</state><toAddress>14696014194</toAddress><uri>/finesse/api/Dialog/54375298</uri></dialog></data><event>PUT</event><requestId></requestId><source>/finesse/api/Dialog/54375298</source></Update>
+
+[1512472630770] [EVENT] <message xmlns="jabber:client" from="pubsub.ibdc1-cce-fina01.ibkc.int" to="215194@ibdc1-cce-fina01.ibkc.int" id="/finesse/api/User/215194/Dialogs__215194@ibdc1-cce-fina01.ibkc.int__Nj4kB"><event xmlns="http://jabber.org/protocol/pubsub#event"><items node="/finesse/api/User/215194/Dialogs"><item id="0b6afdb5-5870-4b69-b649-7e7a8c69c0c011279456"><notification xmlns="http://jabber.org/protocol/pubsub"><Update><data><dialog><associatedDialogUri></associatedDialogUri><fromAddress>215194</fromAddress><id>54375298</id><mediaProperties><DNIS></DNIS><callType>AGENT_INSIDE</callType><dialedNumber>14696014194</dialedNumber><outboundClassification></outboundClassification><callvariables><CallVariable><name>callVariable1</name><value></value></CallVariable><CallVariable><name>callVariable2</name><value></value></CallVariable><CallVariable><name>callVariable3</name><value></value></CallVariable><CallVariable><name>callVariable4</name><value></value></CallVariable><CallVariable><name>callVariable5</name><value></value></CallVariable><CallVariable><name>callVariable6</name><value></value></CallVariable><CallVariable><name>callVariable7</name><value></value></CallVariable><CallVariable><name>callVariable8</name><value></value></CallVariable><CallVariable><name>callVariable9</name><value></value></CallVariable><CallVariable><name>callVariable10</name><value></value></CallVariable></callvariables></mediaProperties><mediaType>Voice</mediaType><participants><Participant><actions><action>UPDATE_CALL_DATA</action><action>DROP</action></actions><mediaAddress>215194</mediaAddress><mediaAddressType>AGENT_DEVICE</mediaAddressType><startTime>2017-12-05T11:17:09.746Z</startTime><state>INITIATED</state><stateCause></stateCause><stateChangeTime>2017-12-05T11:17:09.747Z</stateChangeTime></Participant></participants><state>INITIATED</state><toAddress>14696014194</toAddress><uri>/finesse/api/Dialog/54375298</uri></dialog></data><event>PUT</event><requestId></requestId><source>/finesse/api/Dialog/54375298</source></Update></notification></item></items></event></message>
+
+[1512472630786] [MYEVENT] <Update><data><dialog><associatedDialogUri></associatedDialogUri><fromAddress>215194</fromAddress><id>54375298</id><mediaProperties><DNIS></DNIS><callType>AGENT_INSIDE</callType><dialedNumber>14696014194</dialedNumber><outboundClassification></outboundClassification><callvariables><CallVariable><name>callVariable1</name><value></value></CallVariable><CallVariable><name>callVariable2</name><value></value></CallVariable><CallVariable><name>callVariable3</name><value></value></CallVariable><CallVariable><name>callVariable4</name><value></value></CallVariable><CallVariable><name>callVariable5</name><value></value></CallVariable><CallVariable><name>callVariable6</name><value></value></CallVariable><CallVariable><name>callVariable7</name><value></value></CallVariable><CallVariable><name>callVariable8</name><value></value></CallVariable><CallVariable><name>callVariable9</name><value></value></CallVariable><CallVariable><name>callVariable10</name><value></value></CallVariable></callvariables></mediaProperties><mediaType>Voice</mediaType><participants><Participant><actions><action>UPDATE_CALL_DATA</action><action>DROP</action></actions><mediaAddress>215194</mediaAddress><mediaAddressType>AGENT_DEVICE</mediaAddressType><startTime>2017-12-05T11:17:09.746Z</startTime><state>INITIATED</state><stateCause></stateCause><stateChangeTime>2017-12-05T11:17:09.747Z</stateChangeTime></Participant></participants><state>INITIATED</state><toAddress>14696014194</toAddress><uri>/finesse/api/Dialog/54375298</uri></dialog></data><event>PUT</event><requestId></requestId><source>/finesse/api/Dialog/54375298</source></Update>
+
+[1512472632665] [EVENT] <message xmlns="jabber:client" from="pubsub.ibdc1-cce-fina01.ibkc.int" to="215194@ibdc1-cce-fina01.ibkc.int" id="/finesse/api/User/215194/Dialogs__215194@ibdc1-cce-fina01.ibkc.int__4EAP2"><event xmlns="http://jabber.org/protocol/pubsub#event"><items node="/finesse/api/User/215194/Dialogs"><item id="0b6afdb5-5870-4b69-b649-7e7a8c69c0c011279458"><notification xmlns="http://jabber.org/protocol/pubsub"><Update><data><dialog><associatedDialogUri></associatedDialogUri><fromAddress>215194</fromAddress><id>54375298</id><mediaProperties><DNIS></DNIS><callType>OUT</callType><dialedNumber>14696014194</dialedNumber><outboundClassification></outboundClassification><callvariables><CallVariable><name>callVariable1</name><value></value></CallVariable><CallVariable><name>callVariable2</name><value></value></CallVariable><CallVariable><name>callVariable3</name><value></value></CallVariable><CallVariable><name>callVariable4</name><value></value></CallVariable><CallVariable><name>callVariable5</name><value></value></CallVariable><CallVariable><name>callVariable6</name><value></value></CallVariable><CallVariable><name>callVariable7</name><value></value></CallVariable><CallVariable><name>callVariable8</name><value></value></CallVariable><CallVariable><name>callVariable9</name><value></value></CallVariable><CallVariable><name>callVariable10</name><value></value></CallVariable></callvariables></mediaProperties><mediaType>Voice</mediaType><participants><Participant><actions><action>UPDATE_CALL_DATA</action><action>DROP</action></actions><mediaAddress>215194</mediaAddress><mediaAddressType>AGENT_DEVICE</mediaAddressType><startTime>2017-12-05T11:17:09.746Z</startTime><state>INITIATED</state><stateCause></stateCause><stateChangeTime>2017-12-05T11:17:09.747Z</stateChangeTime></Participant></participants><state>INITIATED</state><toAddress>14696014194</toAddress><uri>/finesse/api/Dialog/54375298</uri></dialog></data><event>PUT</event><requestId></requestId><source>/finesse/api/Dialog/54375298</source></Update></notification></item></items></event></message>
+
+[1512472632685] [MYEVENT] <Update><data><dialog><associatedDialogUri></associatedDialogUri><fromAddress>215194</fromAddress><id>54375298</id><mediaProperties><DNIS></DNIS><callType>OUT</callType><dialedNumber>14696014194</dialedNumber><outboundClassification></outboundClassification><callvariables><CallVariable><name>callVariable1</name><value></value></CallVariable><CallVariable><name>callVariable2</name><value></value></CallVariable><CallVariable><name>callVariable3</name><value></value></CallVariable><CallVariable><name>callVariable4</name><value></value></CallVariable><CallVariable><name>callVariable5</name><value></value></CallVariable><CallVariable><name>callVariable6</name><value></value></CallVariable><CallVariable><name>callVariable7</name><value></value></CallVariable><CallVariable><name>callVariable8</name><value></value></CallVariable><CallVariable><name>callVariable9</name><value></value></CallVariable><CallVariable><name>callVariable10</name><value></value></CallVariable></callvariables></mediaProperties><mediaType>Voice</mediaType><participants><Participant><actions><action>UPDATE_CALL_DATA</action><action>DROP</action></actions><mediaAddress>215194</mediaAddress><mediaAddressType>AGENT_DEVICE</mediaAddressType><startTime>2017-12-05T11:17:09.746Z</startTime><state>INITIATED</state><stateCause></stateCause><stateChangeTime>2017-12-05T11:17:09.747Z</stateChangeTime></Participant></participants><state>INITIATED</state><toAddress>14696014194</toAddress><uri>/finesse/api/Dialog/54375298</uri></dialog></data><event>PUT</event><requestId></requestId><source>/finesse/api/Dialog/54375298</source></Update>
+
+[1512472639668] [EVENT] <message xmlns="jabber:client" from="pubsub.ibdc1-cce-fina01.ibkc.int" to="215194@ibdc1-cce-fina01.ibkc.int" id="/finesse/api/User/215194/Dialogs__215194@ibdc1-cce-fina01.ibkc.int__SB63B"><event xmlns="http://jabber.org/protocol/pubsub#event"><items node="/finesse/api/User/215194/Dialogs"><item id="0b6afdb5-5870-4b69-b649-7e7a8c69c0c011279459"><notification xmlns="http://jabber.org/protocol/pubsub"><Update><data><dialogs><Dialog><associatedDialogUri></associatedDialogUri><fromAddress>215194</fromAddress><id>54375298</id><mediaProperties><DNIS></DNIS><callType>OUT</callType><dialedNumber>14696014194</dialedNumber><outboundClassification></outboundClassification><callvariables><CallVariable><name>callVariable1</name><value></value></CallVariable><CallVariable><name>callVariable2</name><value></value></CallVariable><CallVariable><name>callVariable3</name><value></value></CallVariable><CallVariable><name>callVariable4</name><value></value></CallVariable><CallVariable><name>callVariable5</name><value></value></CallVariable><CallVariable><name>callVariable6</name><value></value></CallVariable><CallVariable><name>callVariable7</name><value></value></CallVariable><CallVariable><name>callVariable8</name><value></value></CallVariable><CallVariable><name>callVariable9</name><value></value></CallVariable><CallVariable><name>callVariable10</name><value></value></CallVariable></callvariables></mediaProperties><mediaType>Voice</mediaType><participants><Participant><actions></actions><mediaAddress>215194</mediaAddress><mediaAddressType>AGENT_DEVICE</mediaAddressType><startTime>2017-12-05T11:17:09.746Z</startTime><state>DROPPED</state><stateCause></stateCause><stateChangeTime>2017-12-05T11:17:19.477Z</stateChangeTime></Participant></participants><state>INITIATED</state><toAddress>14696014194</toAddress><uri>/finesse/api/Dialog/54375298</uri></Dialog></dialogs></data><event>DELETE</event><requestId></requestId><source>/finesse/api/User/215194/Dialogs</source></Update></notification></item></items></event></message>
+
+[1512472639693] [MYEVENT] <Update><data><dialogs><Dialog><associatedDialogUri></associatedDialogUri><fromAddress>215194</fromAddress><id>54375298</id><mediaProperties><DNIS></DNIS><callType>OUT</callType><dialedNumber>14696014194</dialedNumber><outboundClassification></outboundClassification><callvariables><CallVariable><name>callVariable1</name><value></value></CallVariable><CallVariable><name>callVariable2</name><value></value></CallVariable><CallVariable><name>callVariable3</name><value></value></CallVariable><CallVariable><name>callVariable4</name><value></value></CallVariable><CallVariable><name>callVariable5</name><value></value></CallVariable><CallVariable><name>callVariable6</name><value></value></CallVariable><CallVariable><name>callVariable7</name><value></value></CallVariable><CallVariable><name>callVariable8</name><value></value></CallVariable><CallVariable><name>callVariable9</name><value></value></CallVariable><CallVariable><name>callVariable10</name><value></value></CallVariable></callvariables></mediaProperties><mediaType>Voice</mediaType><participants><Participant><actions></actions><mediaAddress>215194</mediaAddress><mediaAddressType>AGENT_DEVICE</mediaAddressType><startTime>2017-12-05T11:17:09.746Z</startTime><state>DROPPED</state><stateCause></stateCause><stateChangeTime>2017-12-05T11:17:19.477Z</stateChangeTime></Participant></participants><state>INITIATED</state><toAddress>14696014194</toAddress><uri>/finesse/api/Dialog/54375298</uri></Dialog></dialogs></data><event>DELETE</event><requestId></requestId><source>/finesse/api/User/215194/Dialogs</source></Update>
+
+[1512472639960] [EVENT] <message xmlns="jabber:client" from="pubsub.ibdc1-cce-fina01.ibkc.int" to="215194@ibdc1-cce-fina01.ibkc.int" id="/finesse/api/User/215194__215194@ibdc1-cce-fina01.ibkc.int__kLTs4"><event xmlns="http://jabber.org/protocol/pubsub#event"><items node="/finesse/api/User/215194"><item id="0b6afdb5-5870-4b69-b649-7e7a8c69c0c011279460"><notification xmlns="http://jabber.org/protocol/pubsub"><Update>
+  <data>
+    <user>
+      <dialogs>/finesse/api/User/215194/Dialogs</dialogs>
+      <extension>215194</extension>
+      <firstName>Coin</firstName>
+      <lastName>App</lastName>
+      <loginId>215194</loginId>
+      <loginName>coinapp</loginName>
+      <mediaType>1</mediaType>
+      <pendingState></pendingState>
+      <reasonCode>
+        <category>NOT_READY</category>
+        <code>66</code>
+        <forAll>true</forAll>
+        <id>45</id>
+        <label>NOT_RDY</label>
+        <uri>/finesse/api/ReasonCode/45</uri>
+      </reasonCode>
+      <reasonCodeId>45</reasonCodeId>
+      <roles>
+        <role>Agent</role>
+      </roles>
+      <settings>
+        <wrapUpOnIncoming>REQUIRED</wrapUpOnIncoming>
+      </settings>
+      <state>NOT_READY</state>
+      <stateChangeTime>2017-12-05T11:17:19.478Z</stateChangeTime>
+      <teamId>5007</teamId>
+      <teamName>IBE_SAD</teamName>
+      <uri>/finesse/api/User/215194</uri>
+    </user>
+  </data>
+  <event>PUT</event>
+  <requestId></requestId>
+  <source>/finesse/api/User/215194</source>
+</Update></notification></item></items></event></message>
+
+[1512472639980] [MYEVENT] <Update>
+  <data>
+    <user>
+      <dialogs>/finesse/api/User/215194/Dialogs</dialogs>
+      <extension>215194</extension>
+      <firstName>Coin</firstName>
+      <lastName>App</lastName>
+      <loginId>215194</loginId>
+      <loginName>coinapp</loginName>
+      <mediaType>1</mediaType>
+      <pendingState></pendingState>
+      <reasonCode>
+        <category>NOT_READY</category>
+        <code>66</code>
+        <forAll>true</forAll>
+        <id>45</id>
+        <label>NOT_RDY</label>
+        <uri>/finesse/api/ReasonCode/45</uri>
+      </reasonCode>
+      <reasonCodeId>45</reasonCodeId>
+      <roles>
+        <role>Agent</role>
+      </roles>
+      <settings>
+        <wrapUpOnIncoming>REQUIRED</wrapUpOnIncoming>
+      </settings>
+      <state>NOT_READY</state>
+      <stateChangeTime>2017-12-05T11:17:19.478Z</stateChangeTime>
+      <teamId>5007</teamId>
+      <teamName>IBE_SAD</teamName>
+      <uri>/finesse/api/User/215194</uri>
+    </user>
+  </data>
+  <event>PUT</event>
+  <requestId></requestId>
+  <source>/finesse/api/User/215194</source>
+</Update>
+

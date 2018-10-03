@@ -1,0 +1,88 @@
+<div *ngIf="records && !searching">
+  <div class='table-responsive stripped-table'>
+    <table class='table'>
+      <thead>
+      <tr>
+        <th></th>
+        <th class="right">Total</th>
+        <th class="right">Contact</th>
+        <th class="right">Payment received</th>
+        <th class="right">Promises</th>
+        <th class="right">Contact %</th>
+        <th class="right">Promise to contact %</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let pr of records">
+        <th>{{pr.campaignName}}</th>
+        <td class="right">{{pr.total}}</td>
+        <td class="right">{{pr.contact}}</td>
+        <td class="right">{{pr.paymentReceived}}</td>
+        <td class="right">{{pr.promises}}</td>
+        <td class="right">{{pr.contactPercentage | coinPercentage}}</td>
+        <td class="right">{{pr.promiseToContactPercentage | coinPercentage}}</td>
+      </tr>
+      <tr>
+        <th></th>
+        <th class="right">{{sum(fldTotal)}}</th>
+        <th class="right">{{sum(fldContact)}}</th>
+        <th class="right">{{sum(fldPaymentReceived)}}</th>
+        <th class="right">{{sum(fldPromises)}}</th>
+        <th class="right">{{avg(fldContactPercentage) | coinPercentage}}</th>
+        <th class="right">{{avg(promiseToContactPercentage) | coinPercentage}}</th>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+<div *ngIf="!records && !searching">Select a date range and press "View report"</div>
+<div *ngIf="searching"><waiting-backend></waiting-backend> Retrieving report data...</div>
+
+
+<!--<div class='table-responsive stripped-table'>-->
+  <!--<table class='table'>-->
+    <!--<thead>-->
+    <!--<tr>-->
+      <!--<th>User</th>-->
+      <!--<th class="right">Outbound</th>-->
+      <!--<th class="right">H. worked</th>-->
+      <!--<th class="right">Avg calls/hour</th>-->
+      <!--<th class="right">Contact</th>-->
+      <!--<th class="right">Promises</th>-->
+      <!--<th class="right">Payment rcvd.</th>-->
+      <!--<th class="right">Inbound</th>-->
+      <!--<th class="right">Contact %</th>-->
+      <!--<th class="right">Promise to contact %</th>-->
+      <!--<th class="right">Total</th>-->
+    <!--</tr>-->
+    <!--</thead>-->
+    <!--<tbody>-->
+    <!--<tr *ngFor="let pr of records">-->
+      <!--<td>{{pr.userCode}}</td>-->
+      <!--<td class="right">{{pr.outboundCalls}}</td>-->
+      <!--<td class="right">{{pr.hoursWorked | coinFixedNumber}}</td>-->
+      <!--<td class="right">{{pr.averageCallsPerHour | coinFixedNumber}}</td>-->
+      <!--<td class="right">{{pr.contact}}</td>-->
+      <!--<td class="right">{{pr.promises}}</td>-->
+      <!--<td class="right">{{pr.paymentReceived}}</td>-->
+      <!--<td class="right">{{pr.incomingCalls}}</td>-->
+      <!--<td class="right">{{pr.contactPercentage | coinPercentage}}</td>-->
+      <!--<td class="right">{{pr.promiseToContactPercentage | coinPercentage}}</td>-->
+      <!--<td class="right">{{pr.totalCalls}}</td>-->
+    <!--</tr>-->
+    <!--<tr>-->
+      <!--<th>Average</th>-->
+      <!--<th class="right">{{average(avgOutbound) | coinFixedNumber}}</th>-->
+      <!--<th class="right">{{average(avgHoursWorked) | coinFixedNumber}}</th>-->
+      <!--<th class="right">{{average(avgAverageCallsPerHour) | coinFixedNumber}}</th>-->
+      <!--<th class="right">{{average(avgContact) | coinFixedNumber}}</th>-->
+      <!--<th class="right">{{average(avgPromises) | coinFixedNumber}}</th>-->
+      <!--<th class="right">{{average(abgPaymentReceived) | coinFixedNumber}}</th>-->
+      <!--<th class="right">{{average(avgIncomingCalls) | coinFixedNumber}}</th>-->
+      <!--<th class="right">{{average(avgContactPercentage) | coinPercentage}}</th>-->
+      <!--<th class="right">{{average(avgPromiseToContactPercentage) | coinPercentage}}</th>-->
+      <!--<th class="right">{{average(avgTotalCalls) | coinFixedNumber}}</th>-->
+    <!--</tr>-->
+    <!--</tbody>-->
+  <!--</table>-->
+<!--</div>-->

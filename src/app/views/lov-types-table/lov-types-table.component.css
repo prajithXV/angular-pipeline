@@ -1,0 +1,61 @@
+
+.fas{
+  cursor: pointer;
+}
+
+.edit:hover, .orange{
+  color: orange;
+}
+
+.redo:hover{
+  color: green;
+}
+
+.white{
+  background-color: white !important;
+}
+
+.container{
+  width: 60%;
+  display: block;
+  margin: 0 auto;
+}
+
+.clearOrange{
+  background-color: #fff4e0 !important;
+  opacity: 1 !important;
+}
+
+.trash:hover{
+  color: black;
+}
+
+.disabled, .disabled:hover{
+  color: grey;
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+.col-container{
+  display: table;
+  width: 100%;
+}
+
+
+.title3{
+  font-size: 12pt;
+  padding-top: 15px;
+  padding-left: 15px;
+}
+
+.title{
+  margin-bottom: 30px;
+}
+
+
+.title2{
+  font-size: 12pt;
+  padding-top: 15px;
+  padding-left: 0;
+}
+

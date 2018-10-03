@@ -1,0 +1,134 @@
+<form class="form-horizontal">
+  <div class="form-group">
+    <label for="at" class="control-label" [class.col-lg-3]="!isInManageProcess" [class.align]="isInManageProcess" [class.col-lg-2]="isInManageProcess">{{attribute.name}}
+      <i [title]="(attribute.isArray ? 'Multiple ' : 'Single ') + attribute.typeString" class="fa fa-info-circle"></i><span *ngIf="isMandatory && isInManageProcess" class="text-danger">*</span>
+    </label>
+    <div [class.col-lg-4]="!isInManageProcess" [class.col-lg-5]="isInManageProcess">
+      <!-- STRING -->
+      <div *ngIf="attribute.type == AttTypes.string" class="input-group">
+        <input id="at" name="at" [(ngModel)]="valInput" class="form-control" placeholder="Text"/>
+        <span class="input-group-btn">
+          <button
+            class="btn"
+            [class.btn-success]="valInput.trim().length > 0"
+            [class.btn-white]="valInput.trim().length == 0"
+            type="submit"
+            (click)="addValue()"
+            [disabled]="valInput.trim().length == 0">
+            <strong><i class="fa fa-plus"></i></strong>
+          </button>
+        </span>
+      </div>
+
+      <!--LOV-->
+      <div *ngIf="attribute.type == AttTypes.lov" class="input-group">
+        <select class="form-control m-b" [(ngModel)]="listOfValueSelected" name="lovType" title="lov" (change)="ListOfValueSelected(listOfValueSelected)">
+          <option *ngFor="let l of listOfValues " [ngValue]="l">{{l.name}}</option>
+          <option [ngValue]=null> Select a value </option>
+        </select>
+
+        <span *ngIf="hasDescription(listOfValueSelected)" class="text-success">
+          {{listOfValueSelected?.description}}
+        </span>
+
+        <span class="input-group-btn" [class.lovButton]="hasDescription(listOfValueSelected)">
+          <button
+            class="btn"
+            [class.btn-white]="listOfValueSelected == null"
+            [class.btn-success]="listOfValueSelected!=null"
+            type="submit"
+            (click)="addLovValue()"
+            [disabled]="listOfValueSelected == null">
+            <strong><i class="fa fa-plus"></i></strong>
+          </button>
+        </span>
+      </div>
+
+
+      <!-- NUMBER -->
+      <div *ngIf="attribute.type == AttTypes.number" class="input-group">
+        <coin-number-input
+          #numberInput
+          id="at"
+          name="at"
+          placeholder="Number"
+          [class.has-error]="numberHasErrors()"
+          [showErrors]="false"
+          [continuosEvaluation]="true"
+          [mandatory]="false"
+        ></coin-number-input>
+        <span class="input-group-btn">
+          <button
+            class="btn"
+            [class.btn-success]="numberCanAddValue()"
+            [class.btn-white]="numberIsEmpty()"
+            [class.btn-danger]="numberHasErrors()"
+            type="submit"
+            (click)="addNumberValue()"
+            [disabled]="!numberCanAddValue()">
+            <strong><i class="fa fa-plus"></i></strong>
+          </button>
+        </span>
+      </div>
+      <!-- DATE and DATETIME -->
+      <div *ngIf="attribute.type == AttTypes.date"  class="input-group">
+        <date-picker
+          #dateInput
+          [selectedMoment]="null"
+          [continuosEvaluation]="continuosEvaluation"
+          [upCalendar]="true"
+          [showErrors]="false"
+          [mandatory]="false"
+          [class.has-error]="dateInput.hasErrors()">
+        </date-picker>
+        <span class="input-group-btn">
+          <button
+            class="btn btn-success"
+            [class.btn-success]="dateCanAddValue()"
+            [class.btn-white]="dateIsEmpty()"
+            [class.btn-danger]="dateHasErrors()"
+            type="submit"
+            (click)="addDateValue()"
+            [disabled]="!dateCanAddValue()"
+          >
+            <strong><i class="fa fa-plus"></i></strong>
+          </button>
+        </span>
+      </div>
+
+      <div *ngIf="attribute.type == AttTypes.datetime"  class="input-group">
+        <date-picker
+          #dateInput
+          [placeHolderDate]="'MM/DD/YYYY HH:mm'"
+          [continuosEvaluation]="true"
+          [selectedMoment]="null"
+          [upCalendar]="true"
+          [pickerType]="'both'"
+          [showErrors]="false"
+          [mandatory]="false"
+          [class.has-error]="dateInput.hasErrors()">
+        </date-picker>
+        <span class="input-group-btn">
+          <button
+            class="btn btn-success"
+            [class.btn-success]="dateCanAddValue()"
+            [class.btn-white]="dateIsEmpty()"
+            [class.btn-danger]="dateHasErrors()"
+            type="submit"
+            (click)="addDateValue()"
+            [disabled]="!dateCanAddValue()">
+            <strong><i class="fa fa-plus"></i></strong>
+          </button>
+        </span>
+      </div>
+
+    </div>
+    <div class="col-lg-5">
+      <div *ngIf="!values?.length" style="margin-top:7px;">not defined</div>
+      <button *ngFor="let v of values" (click)="removeValue(v)" class="btn btn-default btn-sm"
+              style="margin-right:5px;">
+        {{v}} <i class="fa fa-times text-danger" style="margin-left:2px;"></i>
+      </button>
+    </div>
+  </div>
+</form>

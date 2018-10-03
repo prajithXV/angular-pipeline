@@ -1,0 +1,27 @@
+<!--<div *ngIf="agents && agents.length > 0">-->
+<div *ngIf="statuses && tokens && campaigns">
+  <div class='table-responsive'>
+    <table class='table'>
+      <thead>
+      <tr>
+        <th></th>
+        <th *ngFor="let cp of campaigns" class="right">{{cp.name}}</th>
+        <th class="right"><strong>TOTAL</strong></th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let st of statuses">
+        <th>{{st.name}}</th>
+        <td *ngFor="let cp of campaigns" class="right">{{getCount(cp.code, st.code)}}</td>
+        <td class="right"><strong>{{getTotalByStatus(st.code)}}</strong></td>
+      </tr>
+      <tr>
+        <th><strong>TOTAL</strong></th>
+        <td *ngFor="let cp of campaigns" class="right"><strong>{{getTotalByCampaign(cp.code)}}</strong></td>
+        <td class="right"><strong>{{getGrandTotal()}}</strong></td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+<div *ngIf="!statuses || !tokens || !campaigns"><waiting-backend></waiting-backend> Loading statistics...</div>

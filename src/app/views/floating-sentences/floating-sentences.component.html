@@ -1,0 +1,77 @@
+<!--<div-->
+  <!--class="floating"-->
+  <!--ngDraggable-->
+  <!--[handle]="dragHandle"-->
+  <!--mwlResizable-->
+  <!--[enableGhostResize]="true"-->
+  <!--[resizeEdges]="{bottom: true, right: true, top: true, left: true}"-->
+  <!--(resizeEnd)="onResizeEnd($event)"-->
+<!--&gt;-->
+<div
+  class="floating"
+  ngDraggable
+  [handle]="dragHandle"
+>
+  <div class="ibox float-e-margins">
+    <div class="ibox-title" #dragHandle>
+      <h5>Standard sentences</h5>
+      <span class="pull-right"><i class="fa fa-times" (click)="hide()"></i></span>
+    </div>
+    <div class="ibox-content">
+      <h4 (click)="collapsable1.toggle()">Greeting <i class="fa fa-chevron-down"></i></h4>
+      <div #collapsable1="bs-collapse" [collapse]="false"
+           class="card card-block card-header">
+        <div class="well well-lg">
+          <ul>
+            <li>
+              This is <span class="placeholder">[agent’s name]</span> from Iberiabank.
+            </li>
+            <li>
+              This call may be recorded or monitored for quality and training purposes. I am trying to reach <span class="placeholder">[borrower’s name]</span>.
+            </li>
+            <li>
+              Please verify your address.
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <h4 (click)="collapsable2.toggle()">Negotiation <i class="fa fa-chevron-down"></i></h4>
+      <div #collapsable2="bs-collapse" [collapse]="false"
+           class="card card-block card-header">
+        <div class="well well-lg">
+          <ul>
+            <li>
+              Your monthly payment came due <span class="placeholder">[date]</span> and we have not received it.
+            </li>
+            <li>
+              How would you like to take care of it? I can set up your payment over the phone today.
+            </li>
+            <li>
+              Can you tell me the reason the payment is late <span class="placeholder">[RFD]</span>?
+            </li>
+            <li>
+              Verify if hardship is short term or long term if appropriate transfer to SPOC as needed.
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <h4 (click)="collapsable3.toggle()">Closing <i class="fa fa-chevron-down"></i></h4>
+      <div #collapsable3="bs-collapse" [collapse]="false"
+           class="card card-block card-header">
+        <div class="well well-lg">
+          <ul>
+            <li>
+              I have a promise for <span class="placeholder">[repeat promise]</span>.
+            </li>
+            <li>
+              Thank you have a nice day.
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+

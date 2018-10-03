@@ -1,0 +1,122 @@
+
+/*panel box*/
+div.floating  {
+  position:fixed;
+  top: 100px;
+  left: 100px;
+  width: 25%;
+  background-color: white;
+  z-index: 10000;
+  -webkit-box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.3);
+  -moz-box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.3);
+  box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.3);
+  border-radius:5px;
+  border: 1px solid #dbdee0;
+}
+
+mwlResizable {
+  box-sizing: border-box;
+}
+
+div.floating .ibox-content {
+  padding: 15px
+}
+
+div.floating{
+  width: 29%;
+}
+
+.ibox-title{
+  border-color: transparent;
+  border-width: 0px 0 0;
+  border-radius: 5px;
+}
+
+div.floating .fa-times {
+  cursor:pointer;
+}
+
+li .placeholder {
+  font-weight: bold;
+  font-style:italic;
+}
+
+
+.well,.well-lg{
+  padding: 0!important;
+}
+
+.well{
+  border: none;
+  background-color: white;
+  box-shadow: none;
+}
+
+/*title panel*/
+.title{
+  height: 25px;
+  display: inline-block;
+}
+
+h5{
+  color: #111111;
+}
+
+
+/*table filters*/
+
+.table-separate {
+  padding: 0;
+  font-size: 11pt;
+  color: #111111;
+  border-collapse: separate;
+
+}
+
+tr{
+  border: 1px solid #111111 !important;
+  background-color: #e7eaec;
+  border-radius: 0.5em;
+  display: table;
+  width: 100%;
+  margin-bottom: 5px;
+  cursor: pointer;
+}
+
+
+tr:hover{
+  border: 1px solid #f8ac59 !important;
+  background-color: white;
+}
+
+td.sentencesTable, td.keyTable{
+  border: none  !important;
+ }
+
+td.keyTable{
+  font-size: 6pt;
+  vertical-align: middle;
+  padding: 9px;
+}
+
+td.sentencesTable{
+  padding: 5px;
+  width: 86%;
+}
+
+
+/*media query*/
+
+@media screen and (width:1375px)  {
+  div.floating{
+    width: 35%;
+  }
+
+  .table-separate{
+    font-size: 10pt;
+  }
+
+  td.sentencesTable{
+    padding: 7px;
+  }
+}

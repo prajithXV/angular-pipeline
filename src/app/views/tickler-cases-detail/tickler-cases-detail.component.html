@@ -1,0 +1,149 @@
+<div class="container" *ngIf="!searchingProcessCase && currentProcessCase">
+  <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+    <div class="font-bold display-div font">
+      <span class="col-lg-4 col-md-4 col-sm-4 col-xs-4 align no-padding-left over-flow" title="Name">Name <i class="fa fa-male"></i> :</span>
+      <span class="col-lg-8 col-md-7 col-sm-7 col-xs-7 font-bold text-danger">{{account?.customer?.mainContact?.completeName}}<waiting-backend *ngIf="!account?.customer"></waiting-backend></span>
+    </div>
+    <div class="font-bold display-div font">
+      <span class="col-lg-4 col-md-4 col-sm-4 col-xs-4 align no-padding-left over-flow" title="Account">Account <i class="fa fa-file-text-o"></i> :</span>
+      <span class="col-lg-8 col-md-7 col-sm-7 col-xs-7 font-bold text-success">{{currentProcessCase?.accountId}}</span>
+    </div>
+    <div class="clearfix"></div>
+    <div class="font-bold display-div font">
+      <span class="col-lg-4 col-md-4 col-sm-4 col-xs-4 align no-padding-left over-flow" title="CIFNO"><span class="label label-info">CIF No</span></span>
+      <span class="col-lg-8 col-md-7 col-sm-7 col-xs-7 font-normal">{{currentProcessCase?.cifId}}</span>
+    </div>
+    <div class="clearfix"></div>
+    <div class="font-bold display-div font">
+      <span class="col-lg-4 col-md-4 col-sm-4 col-xs-4 align no-padding-left over-flow" title="Process Code">Process:</span>
+      <span class="col-lg-8 col-md-7 col-sm-7 col-xs-7 font-bold text" *ngIf="!searchingProcesses">{{process?.processName}}</span>
+      <span class="col-lg-8 col-md-7 col-sm-7 col-xs-7 font-bold" *ngIf="searchingProcesses"><waiting-backend></waiting-backend></span>
+    </div>
+
+    <div class="clearfix"></div>
+    <div class="font-bold display-div font">
+      <span class="col-lg-4 col-md-4 col-sm-4 col-xs-4 align no-padding-left over-flow" title="Status">Status:</span>
+      <span class="col-lg-8 col-md-7 col-sm-7 col-xs-7 font-normal">{{currentProcessCase?.statusCode}}</span>
+    </div>
+
+    <div class="clearfix"></div>
+    <div class="font-bold display-div font">
+      <span class="col-lg-4 col-md-4 col-sm-4 col-xs-4 align no-padding-left over-flow" title="Description">Description <i class="far fa-sticky-note"></i> :</span>
+      <span class="col-lg-8 col-md-7 col-sm-7 col-xs-7 font-normal">{{currentProcessCase?.caseDescription}}</span>
+    </div>
+    <div class="clearfix"></div>
+  </div>
+
+
+  <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+    <div class="font-bold display-div font">
+      <span class="col-lg-4 col-md-4 col-sm-4 col-xs-4 align no-padding-left over-flow" title="Assigned user">Assigned user <i class="fa fa-male"></i> :</span>
+      <span class="col-lg-8 col-md-7 col-sm-7 col-xs-7 font-bold userText" *ngIf="!searchingUsers">{{currentAgent?.firstName}} {{currentAgent?.lastName}}</span>
+      <span class="col-lg-8 col-md-7 col-sm-7 col-xs-7 font-bold" *ngIf="searchingUsers"><waiting-backend></waiting-backend></span>
+    </div>
+
+    <div class="clearfix"></div>
+    <div class="font-bold display-div font">
+      <span class="col-lg-4 col-md-4 col-sm-4 col-xs-4 align no-padding-left over-flow" title="Created date">Created date <i class="fas fa-calendar-alt"></i> :</span>
+      <span class="col-lg-8 col-md-7 col-sm-7 col-xs-7 font-normal">{{currentProcessCase?.createdDate | coinDateTransform: "STD_DATE"}}</span>
+    </div>
+    <div class="clearfix"></div>
+    <div class="font-bold display-div font">
+      <span class="col-lg-4 col-md-4 col-sm-4 col-xs-4 col-md-4 col-sm-4 col-xs-4 align no-padding-left over-flow" title="Created by">Created by <i class="fa fa-male"></i> :</span>
+      <span class="col-lg-8 col-md-7 col-sm-7 col-xs-7 font-normal" *ngIf="!searchingUsers">{{currentAgentCreatedBy?.firstName}} {{currentAgentCreatedBy?.lastName}}</span>
+      <span class="col-lg-8 col-md-7 col-sm-7 col-xs-7 font-normal" *ngIf="searchingUsers"><waiting-backend></waiting-backend></span>
+    </div>
+    <div class="clearfix"></div>
+    <div class="font-bold display-div font">
+      <span class="col-lg-4 col-md-4 col-sm-4 col-xs-4 over-flow align no-padding-left over-flow" title="Follow up due date">Follow up due <i class="fas fa-calendar-alt"></i> :</span>
+      <span class="col-lg-8 col-md-7 col-sm-7 col-xs-7 font-bold text-danger">{{currentProcessCase?.followUpDueDate | coinDateTransform: "STD_DATE" }}</span>
+    </div>
+  </div>
+
+  <div class="clearfix padding-block"></div>
+<ng-container *ngIf="!searchingAccountAdditionalInfo && !searchingAccountLoanInfo && !searchingAccountInfo">
+  <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+    <div class="font-bold display-div font">
+      <span class="col-lg-4 col-md-4 col-sm-4 col-xs-4 align no-padding-left over-flow" title="Collateral information">Collateral information:</span>
+      <span class="col-lg-8 col-md-7 col-sm-7 col-xs-7 font-normal">{{account?.loan?.collateralInformation}}</span>
+    </div>
+
+    <div class="clearfix"></div>
+    <div class="font-bold display-div font">
+      <span class="col-lg-4 col-md-4 col-sm-4 col-xs-4 align no-padding-left over-flow" title="Due date">Due date <i class="fas fa-calendar-alt"></i> :</span>
+      <span class="col-lg-8 col-md-7 col-sm-7 col-xs-7 font-normal">{{account?.collection?.dueDate | coinDateTransform: "STD_DATE"}}</span>
+    </div>
+    <div class="clearfix"></div>
+    <div class="font-bold display-div font">
+      <span class="col-lg-4 col-md-4 col-sm-4 col-xs-4 align no-padding-left over-flow" title="Fico Score">Fico score <i class="far fa-credit-card"></i> :</span>
+      <span class="col-lg-8 col-md-7 col-sm-7 col-xs-7 font-normal">{{account?.additionalInfo?.ficoScore}}</span>
+    </div>
+    <div class="clearfix"></div>
+    <div class="font-bold display-div font">
+      <span class="col-lg-4 col-md-4 col-sm-4 col-xs-4 align no-padding-left over-flow" title="Last payment date">Last payment date <i class="fas fa-calendar-alt"></i> :</span>
+      <span class="col-lg-8 col-md-7 col-sm-7 col-xs-7 font-normal">{{account?.collection?.paymentDate | coinDateTransform: "STD_DATE"}}</span>
+    </div>
+    <div class="clearfix"></div>
+    <div class="font-bold display-div font">
+      <span class="col-lg-4 col-md-4 col-sm-4 col-xs-4 align no-padding-left over-flow" title="Loan Type">Loan type:</span>
+      <span class="col-lg-8 col-md-7 col-sm-7 col-xs-7 font-normal">{{account?.loan?.loanType}}</span>
+    </div>
+    <div class="clearfix"></div>
+    <div class="font-bold display-div font">
+      <span class="col-lg-4 col-md-4 col-sm-4 col-xs-4 align no-padding-left over-flow" title="Maturity date">Maturity date <i class="fas fa-calendar-alt"></i> :</span>
+      <span class="col-lg-8 col-md-7 col-sm-7 col-xs-7 font-normal">{{account?.collection?.maturityDate | coinDateTransform: "STD_DATE"}}</span>
+    </div>
+    <div class="clearfix"></div>
+    <div class="font-bold display-div font">
+      <span class="col-lg-4 col-md-4 col-sm-4 col-xs-4 align no-padding-left over-flow" title="Number of extension">No. of extension:</span>
+      <span class="col-lg-8 col-md-7 col-sm-7 col-xs-7 font-normal">{{account?.collection?.numberOfExtensionsLTD}}</span>
+    </div>
+  </div>
+
+  <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+    <div class="clearfix"></div>
+    <div class="font-bold display-div font">
+      <span class="col-lg-4 col-md-4 col-sm-4 col-xs-4 align no-padding-left over-flow" title="Open date">Open date <i class="fas fa-calendar-alt"></i> :</span>
+      <span class="col-lg-8 col-md-7 col-sm-7 col-xs-7 font-normal">{{account?.loan?.loanDate | coinDateTransform: "STD_DATE"}}</span>
+    </div>
+    <div class="clearfix"></div>
+    <div class="font-bold display-div font">
+      <span class="col-lg-4 col-md-4 col-sm-4 col-xs-4 align no-padding-left over-flow" title="Original loan amount">Original loan amount:</span>
+      <span class="col-lg-8 col-md-7 col-sm-7 col-xs-7 font-normal">{{account?.collection?.origLoanAmount}}</span>
+    </div>
+    <div class="clearfix"></div>
+    <div class="font-bold display-div font">
+      <span class="col-lg-4 col-md-4 col-sm-4 col-xs-4 align no-padding-left over-flow" title="Past due days"><span class="label label-danger">Past due days</span></span>
+      <span class="col-lg-8 font-normal">{{account?.collection?.daysPastDue}}</span>
+    </div>
+    <div class="clearfix"></div>
+    <div class="font-bold display-div font">
+      <span class="col-lg-4 col-md-4 col-sm-4 col-xs-4 align no-padding-left over-flow" title="Previous extension date">Previous extension date <i class="fas fa-calendar-alt"></i> :</span>
+      <span class="col-lg-8 col-md-7 col-sm-7 col-xs-7 font-normal">{{account?.collection?.dateOfLastExtension | coinDateTransform: "STD_DATE"}}</span>
+    </div>
+
+    <div class="clearfix"></div>
+    <div class="font-bold display-div font">
+      <span class="col-lg-4 col-md-4 col-sm-4 col-xs-4 align no-padding-left over-flow" title="Principal balance"><span class="label label-gold">Principal balance</span></span>
+      <span class="col-lg-8 col-md-7 col-sm-7 col-xs-7 font-normal">{{account?.loan?.currentBalance | coinCurrency}}</span>
+    </div>
+
+    <div class="clearfix"></div>
+    <div class="font-bold display-div font">
+      <span class="col-lg-4 col-md-4 col-sm-4 col-xs-4 align no-padding-left over-flow" title="YTD DQ counter">YTD DQ counter:</span>
+      <span class="col-lg-8 col-md-7 col-sm-7 col-xs-7 font-normal">{{account?.collection?.pastDue30YTD}}</span>
+    </div>
+
+  </div>
+</ng-container>
+  <div class="clearfix"></div>
+
+</div>
+
+<div *ngIf="searchingProcessCase || searchingAccountInfo || searchingAccountLoanInfo || searchingAccountAdditionalInfo">
+  <waiting-backend></waiting-backend>
+  Searching...
+</div>
+
+
+<div *ngIf="!searchingProcessCase && !currentProcessCase">No data found.</div>

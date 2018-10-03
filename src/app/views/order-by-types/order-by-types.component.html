@@ -1,0 +1,31 @@
+<!--Order-->
+<div>
+  <select title="Order"
+          [(ngModel)]="currentList?.sortOrder.sortType"
+          [disabled]="searchingClOrderByTypes || campaignListOrderByTypes?.length == 0"
+          class="form-control m-b">
+    <option *ngFor="let o of campaignListOrderByTypes" [ngValue]="o.code">{{o.name}}</option>
+  </select>
+
+  <div class="form-style col-padding1">
+    <input
+      [(ngModel)]="currentList?.sortOrder.isDesc"
+      [value]="false"
+      type="radio"
+      name="Order"
+      [checked]="currentList?.sortOrder.isDesc == false"
+    />
+    <p class="notes"><label class="font-normal"> Ascending</label></p>
+
+  </div>
+
+  <div class="form-style col-padding2">
+    <input
+      [(ngModel)]="currentList?.sortOrder.isDesc"
+      [value]="true"
+      type="radio"
+      name="Order"
+    />
+    <p class="notes"><label class="font-normal"> Descending</label></p>
+  </div>
+</div>

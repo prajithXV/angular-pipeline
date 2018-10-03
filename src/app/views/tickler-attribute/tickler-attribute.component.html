@@ -1,0 +1,25 @@
+<div class="row">
+  <div class="col-lg-12">
+    <div class="ibox float-e-margins">
+      <div class="ibox-title">
+        <h5>Tickler Attribute</h5>
+      </div>
+      <div class="ibox-content">
+        <div>
+          <tickler-attribute-table
+            [ticklerAttributes]="ticklerAttributes"
+            [searchingTicklerAttributes]="searchingTicklerAttributes"
+            (onNewTicklerAttribute)="refreshTicklerAttributes()"
+            (onUpdateTicklerAttribute)="refreshTicklerAttributes()">
+          </tickler-attribute-table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+

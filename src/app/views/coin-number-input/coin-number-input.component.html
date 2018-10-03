@@ -1,0 +1,10 @@
+<input
+  class="form-control"
+  (blur)="refreshErrors()"
+  [ngModel]="numStr"
+  (ngModelChange)="valueChange($event)"
+  [name]="name"
+  [disabled]="disabled"
+  [placeholder]="placeholder"/>
+<coin-number-input-errors *ngIf="showErrors" [host]="this"></coin-number-input-errors>
+

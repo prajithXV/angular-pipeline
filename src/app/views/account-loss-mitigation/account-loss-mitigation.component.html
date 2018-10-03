@@ -1,0 +1,26 @@
+<div class="row">
+  <div class="col-lg-6">
+    <dl class="dl-horizontal">
+      <dt>Fore closure flag:</dt>
+      <dd>{{accountLoss?.foreclosureFlag}}</dd>
+      <dt>Ticklers:</dt>
+      <dd>{{accountLoss?.ticklers}}</dd>
+      <dt>Action codes:</dt>
+      <dd>{{accountLoss?.actionCodes}}</dd>
+      <dt>Restructured debt flag:</dt>
+      <dd>{{accountLoss?.restructuredDebtFlag}}</dd>
+    </dl>
+  </div>
+  <div class="col-lg-6">
+    <dl class="dl-horizontal">
+      <dt>Foreclosure date:</dt>
+      <dd>{{accountLoss?.foreclosureDate | coinDateTransform: "STD_DATE":"MM/DD/YYYY hh:mm:ss A"}}</dd>
+      <dt>Tickler dates:</dt>
+      <dd>{{accountLoss?.ticklerDates}}</dd>
+      <dt>Action status:</dt>
+      <dd>{{accountLoss?.actionStatus}}</dd>
+      <dt>Restructured date:</dt>
+      <dd>{{accountLoss?.restructuredDate | coinDateTransform: "STD_DATE":"MM/DD/YYYY hh:mm:ss A"}}</dd>
+    </dl>
+  </div>
+</div>

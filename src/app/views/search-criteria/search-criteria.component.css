@@ -1,0 +1,59 @@
+#search-params ul{
+  display: block;
+  background-color: #F9F9F9 !important;
+  margin-bottom: 0;
+  padding: 15px;
+  font-size: 10pt;
+  border-radius: 0.25em;
+}
+
+#search-params ul li{
+  display: inline-block;
+  font-weight: 700;
+  margin-right: 10px;
+}
+
+#search-params ul li i{
+  cursor: pointer;
+}
+
+
+#search-params ul li i:hover{
+  color: black;
+  font-size: 11pt;
+}
+
+div#search-params{
+  cursor: pointer;
+}
+
+
+.col-padding{
+  padding-top: 25px;
+}
+
+.search{
+  background-color: #F9F9F9; padding: 5px; font-size: 12pt;
+  cursor: pointer;
+}
+
+.search:hover{
+ font-size: 13pt;
+  color: black;
+}
+
+#collapseFilter2{
+  text-align: right;
+  padding-top: 15px;
+  padding-bottom: 15px;
+  cursor: pointer;
+}
+
+.form-control {
+  width: 100%;
+}
+
+.buttons{
+   position: relative;
+   bottom: -31px;
+ }

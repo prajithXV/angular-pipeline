@@ -1,0 +1,32 @@
+.notes{
+  display: inline-block;
+}
+
+
+.col-padding{
+  padding-top: 15px;
+}
+
+.col-paddings{
+  padding: 20px 15px;
+}
+
+.box{
+  box-shadow: 0 4px 26px -7px rgba(0,0,0,0.75);
+  -webkit-box-shadow: 0 4px 26px -7px rgba(0,0,0,0.75);
+  -moz-box-shadow: 0 4px 26px -7px rgba(0,0,0,0.75);
+}
+
+.container{
+  width: 80%!important;
+  padding-top: 15px;
+  padding-bottom: 15px;
+}
+
+.no-resize{
+  resize: none;
+}
+
+.help-block{
+  color: #ED5565 !important;
+}

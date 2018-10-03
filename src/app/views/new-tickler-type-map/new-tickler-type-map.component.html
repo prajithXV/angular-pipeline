@@ -1,0 +1,32 @@
+<div *ngIf="!waitingResponse">
+    <div class="col-lg-12">
+      <!--combo: tickler attributes-->
+      <div class="form-group">
+        <label>Name</label>
+        <div *ngIf="ticklerTypes?.length > 0">
+          <select [disabled]="waitingToAdd || pendentTicklerTypes?.length == 0 || !isTicklerTypeCore()" [(ngModel)]="ticklerTypeSelected" name="typeName" title="" class="attributes form-control m-b">
+            <!--Important: ngValue: att (all object)-->
+            <option *ngFor="let tt of pendentTicklerTypes;" [ngValue]="tt">{{tt.ticklerName}}</option>
+          </select>
+          <i *ngIf="!waitingToAdd" [class.disabled]="pendentTicklerTypes?.length == 0 || !isTicklerTypeCore()" class="green fas fa-plus-circle pull-right" (click)="addTicklerTypeMap()"></i>
+          <div *ngIf="waitingToAdd" class="waiting pull-right right"><waiting-backend></waiting-backend></div>
+        </div>
+      </div>
+      <!--tickler attributes map-->
+      <div *ngIf="isTicklerTypeCore()">
+        <p *ngIf="ticklerTypesMap?.length > 0"><strong>Current maps</strong></p>
+        <div *ngIf="ticklerTypesMap?.length > 0" class="titles col-padding col-lg-9 col-xs-9"><strong>Target</strong></div>
+      <ng-container *ngFor="let ttm of coreTicklerTypesMap">
+        <div class="list col-lg-12 col-xs-12">
+          <div class="col-padding col-lg-9 col-xs-9">{{ttm.ticklerToName}}</div>
+          <div *ngIf="!isWaiting(ttm)" class="col-padding-trash col-lg-2 col-xs-2"><i class="fas fa-trash-alt pull-right" (click)="deleteTicklerTypeMap(ttm)"></i></div>
+          <div *ngIf="isWaiting(ttm)" class="col-padding-trash col-padding-trash2 col-lg-2 col-md-2 col-sm-2 col-xs-2"><waiting-backend></waiting-backend></div>
+        </div>
+      </ng-container>
+      </div>
+    </div>
+  </div>
+<div *ngIf="waitingResponse"><waiting-backend></waiting-backend> getting tickler types map...</div>
+<div *ngIf="ticklerTypesMap?.length == 0 && !waitingResponse" class="col-lg-12"> <p><strong>Current maps</strong></p><span>No data found.</span></div>
+<div *ngIf="!isTicklerTypeCore() && !waitingResponse && ticklerTypesMap?.length != 0" class="col-lg-12"> <p><strong>Current maps</strong></p><span>No data found.</span></div>
+

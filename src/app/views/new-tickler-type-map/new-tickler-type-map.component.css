@@ -1,0 +1,50 @@
+.list{
+  font-size: 11pt;
+  display: block;
+  background-color: #FFFFFF;
+  padding: 6px 0 12px;
+}
+
+.fas{
+  cursor: pointer;
+}
+
+.fas.fa-plus-circle, .waiting{
+  padding-top: 10px;
+}
+
+.green{
+  color: #1ab394;
+}
+
+
+.col-padding{
+  padding-left: 0 !important;
+}
+
+.col-padding-trash{
+  padding-right: 0 !important;
+  padding-left: 0 !important;
+  text-align: right;
+  display: block;
+}
+
+i.fas.fa-trash-alt:hover{
+  color: black;
+}
+
+.attributes{
+  width: 92%!important;
+  display: inline-block;
+}
+
+.disabled{
+  color: grey;
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+
+.titles{
+  text-decoration: underline;
+}

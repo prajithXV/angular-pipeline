@@ -1,0 +1,13 @@
+.new-size{
+  width: 161.13px;
+}
+
+/*@media (min-width: 1200px){*/
+  /*.col-lg-4 {*/
+    /*width: 36.333333% !important;*/
+  /*}*/
+/*}*/
+
+.inline{
+  display: inline-block;
+}

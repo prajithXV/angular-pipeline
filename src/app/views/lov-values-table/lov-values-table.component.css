@@ -1,0 +1,38 @@
+
+.fas{
+  cursor: pointer;
+}
+
+.edit:hover, .orange{
+  color: orange;
+}
+
+
+.white{
+  background-color: white !important;
+}
+
+.container{
+  width: 90%;
+  display: block;
+  margin: 0 auto;
+}
+
+.clearOrange{
+  background-color: #fff4e0 !important;
+  opacity: 1 !important;
+}
+
+.trash:hover{
+  color: black;
+}
+
+.title{
+  margin-left: 28px;
+}
+
+.container-content{
+  display: block;
+  margin: 0 auto;
+  width: 81%;
+}

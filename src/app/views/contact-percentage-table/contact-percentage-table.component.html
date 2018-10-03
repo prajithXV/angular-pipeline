@@ -1,0 +1,20 @@
+<!--Table component: total and average: boolean to show average or total in its table-->
+<div class="table-responsive" *ngIf="visibleTable && table.length!=0">
+  <table class="table table-striped">
+    <thead>
+    <tr>
+      <th style="">Hour</th>
+      <th style="">Campaign name</th>
+      <th style="" >Percentage</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let ac of table">
+      <td>{{ac.campaign.hour}}</td>
+      <td>{{ac.name}}</td>
+      <td>{{ac.campaign.ContactPercentage}}</td>
+    </tr>
+    </tbody>
+  </table>
+</div>
+

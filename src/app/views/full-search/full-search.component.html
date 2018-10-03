@@ -1,0 +1,60 @@
+<div class="row">
+  <div class="col-lg-12">
+    <!--NEXT CALL -->
+    <div class="ibox">
+      <div class="ibox-title">
+        <h5>Search</h5>
+      </div>
+      <div class="ibox-content">
+        <div class="row">
+          <div class="col-lg-12">
+            <ngb-tabset #tab class="white" (tabChange)="onTabChange($event)">
+              <ngb-tab id="campaignProcessing">
+                <ng-template ngbTabTitle><span>Campaign processing</span></ng-template>
+                <ng-template ngbTabContent>
+                  <next-call #nextCall
+                    [campaigns]="campaigns"
+                    [statuses]="statuses"
+                    [currentServiceParams]="currentServiceParams"
+                    [campaignCode]="campaignCode"
+                    [searchingCampaignListAccounts]="searchingCampaignListAccounts"
+                    (onViewCL)="onClickViewCl($event)">
+                  </next-call>
+                </ng-template>
+              </ngb-tab>
+              <ngb-tab id="accountSearch">
+                <ng-template ngbTabTitle><span>Customers and accounts</span></ng-template>
+                <ng-template ngbTabContent>
+                  <!-- SEARCH -->
+                  <search-criteria
+                    [accountTypes]="accountTypes"
+                    [currentAccountServiceParams]="currentAccountServiceParams"
+                    [searchingCustomer]="searchingCustomer"
+                    (onSearch)="onClickSearch($event)">
+                  </search-criteria>
+                </ng-template>
+              </ngb-tab>
+
+              <ngb-tab id="ticklerProcesses" *ngIf="canShowTicklerProcesses()">
+                <ng-template ngbTabTitle> <span>Tickler processes</span>
+                </ng-template>
+                <ng-template ngbTabContent>
+                  <!---->
+                  <search-case-criteria
+                    [followUpDues]="followUpDues"
+                    [statuses]="processStatuses"
+                    [currentCasesServiceParams]="currentCasesServiceParams"
+                    [processes]="processes"
+                    [searchingProcessCases]="searchingProcessCases"
+                    (onSearch)="onClickSearchProcessCases($event)">
+                  </search-case-criteria>
+
+                </ng-template>
+              </ngb-tab>
+            </ngb-tabset>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,288 @@
+<!--Popover Customer Consents-->
+<ng-template #popCustomerContent>
+  <customer-consent [customerConsents]="customerConsentsFilter" [waitingResponse]="waitingResponse" [customer]="customer"></customer-consent>
+</ng-template>
+
+<div class="row" *ngIf="!searching">
+  <div class="col-lg-6">
+    <dl class="dl-horizontal">
+      <dt>Name <i class="fa fa-male"></i> :</dt>
+      <dd><strong><span class="text-danger">{{customer?.mainContact?.completeName}}</span></strong></dd>
+      <dt>Account number <i class="fa fa-file-text-o"></i> :</dt>
+      <dd><strong><span class="text-success">{{account?.accountId}}</span></strong></dd>
+      <dt>Address <i class="fa fa-address-card-o" aria-hidden="true"></i> :</dt>
+      <dd>{{customer?.mainAddress?.streetAddress1}}</dd>
+      <dt><i class="fa fa-address-card-o" aria-hidden="true"></i> :</dt>
+      <dd>{{customer?.mainAddress?.streetAddress2}}</dd>
+      <dt><i class="fa fa-address-card-o" aria-hidden="true"></i> :</dt>
+      <dd>{{customer?.mainAddress?.streetAddress3}}</dd>
+      <!--<dt>City <i class="fa fa-address-card-o" aria-hidden="true"></i> :</dt>-->
+      <!--<dd>{{customer?.mainAddress?.city}}</dd>-->
+      <!--<dt>State <i class="fa fa-address-card-o" aria-hidden="true"></i> :</dt>-->
+      <!--<dd>{{customer?.mainAddress?.stateCode}}</dd>-->
+      <!--<dt>Zip Code <i class="fa fa-address-card-o" aria-hidden="true"></i> :</dt>-->
+      <!--<dd>{{customer?.mainAddrecollss?.postalCode}}</dd>-->
+      <dt *ngIf="account?.accountType == 'L'">Language <i class="fa fa-flag" aria-hidden="true"></i> :</dt>
+      <dd *ngIf="account?.accountType == 'L'">{{account?.collection?.languageCode}}</dd>
+    </dl>
+  </div>
+  <div class="col-lg-6">
+    <dl class="dl-horizontal">
+      <!--<dt>Loan #:</dt>-->
+      <!--<dd><a class="text-navy"><strong>¿?</strong></a></dd>-->
+      <!--telephone-->
+      <div *ngFor="let ph of customer?.phones">
+        <a *ngIf="ph.isLandline() || hasCustomerConsent(ph.number)" [class.no-decoration]="hasMaxCallsMadeToday(ph)">
+          <dt><span (click)="call(ph)">{{ph | telephoneType}} <i class="fa fa-phone"></i></span>
+            <i *ngIf="consentsForNumber(ph.number).length > 0"
+               class="fa fa-info-circle"
+               title="View history"
+               [popover]="popCustomerContent"
+               outsideClick="false"
+               triggers="mouseenter: mouseleave"
+               (mouseenter)="setConsentsforNumber(ph.number)"
+               placement="top">
+            </i>
+
+            :</dt>
+          <dd><strong [class.max-calls]="hasMaxCallsMadeToday(ph)">
+            <span (click)="call(ph)">{{ph | telephoneNumber }}</span>
+              </strong>
+            <span *ngIf="hasMaxCallsMadeToday(ph)" title="{{ph.callsMadeToday}} calls so far today"><i class="fa fa-exclamation" aria-hidden="true" style="margin-left: 5px;"></i></span>
+            <span *ngIf="!ph.isLandline()" class="edit" [ngClass]="{'text-danger': hasCustomerConsent(ph.number) == null,
+           'black': hasCustomerConsent(ph.number) == false || hasCustomerConsent(ph.number) == true }" (click)="openModal(content)"><i
+              class="edit fas fa-edit"></i></span>
+
+          </dd>
+        </a>
+        <div *ngIf="!ph.isLandline() && !hasCustomerConsent(ph.number)">
+          <dt>{{ph | telephoneType}} <i class="fa fa-mobile-phone"></i>
+            <i *ngIf="consentsForNumber(ph.number).length > 0"
+               class="fa fa-info-circle"
+               title="View history"
+               [popover]="popCustomerContent"
+               outsideClick="false"
+               triggers="mouseenter: mouseleave"
+               (mouseenter)="setConsentsforNumber(ph.number)"
+               placement="top">
+            </i>
+
+            :</dt>
+          <dd class="font-bold" [ngClass]="{'text-danger': hasCustomerConsent(ph.number) == null,
+           'black': hasCustomerConsent(ph.number) == false ,'max-calls': hasMaxCallsMadeToday(ph)}">{{ph | telephoneNumber }}
+
+            <span *ngIf="hasMaxCallsMadeToday(ph)" title="{{ph.callsMadeToday}} calls so far today"><i class="fa fa-exclamation" aria-hidden="true" style="margin-left: 5px;"></i></span>
+
+
+            <span [ngClass]="{'text-danger': hasCustomerConsent(ph.number) == null,
+           'black': hasCustomerConsent(ph.number) == false || hasCustomerConsent(ph.number) == true}" class="edit" (click)="openModal(content)"><i
+              class="edit fas fa-edit"></i></span>
+          </dd>
+        </div>
+
+
+        <!--Modal (click on edit button)-->
+        <ng-template #content let-c="close" let-d="dismiss">
+          <div class="modal-header">
+            <h4 class="modal-title">Autodial consent for phone number: <span class="text-success margin"> {{ph | telephoneNumber}}</span></h4>
+            <button type="button" class="close no-outline" aria-label="Close" (click)="d('Cross click')">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <p>Did customer agree to give an autodial consent?</p>
+            <div class="form-group text">
+              <div>
+                <label class="control-label">Note</label>
+              </div>
+              <!--Notes-->
+              <textarea
+                [(ngModel)]="model.note"
+                class="form-control notes-form no-resize"
+                placeholder="Add note"
+                rows="3"
+                maxlength="250">
+          </textarea>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="pull-left btn btn-primary" (click)="changeConsent(model, true, ph.number); c('Close click')">Customer agreed</button>
+            <button type="button" class="pull-left btn btn-danger" (click)="changeConsent(model, false, ph.number); c('Close click')">Customer denied</button>
+            <button type="button" class=" pull-right btn btn-outline-dark" (click)="c('Close click')">Cancel</button>
+          </div>
+        </ng-template>
+      </div>
+
+      <!--cifno-->
+      <dt><span class="label label-info pull-right">CIF No</span></dt>
+      <dd>{{customer?.cifNo}}</dd>
+      <dt><span class="label label-warning pull-right">Brw SSN</span></dt>
+      <dd *ngIf="!searchingSSN">{{customer?.socialSecurityNumber}}</dd>
+      <dd *ngIf="searchingSSN">
+        <waiting-backend></waiting-backend>
+      </dd>
+      <ng-container *ngFor="let m of customer?.eMails; let ind = index;">
+        <dt><span *ngIf="ind == 0">eMail </span><i class="far fa-envelope"></i> :</dt>
+        <dd class="overflowMail"><a href="mailto:{{m}}" target="_top">{{m}}</a></dd>
+      </ng-container>
+      <dt *ngIf="account?.accountType == 'L'">Loan date | Term:</dt>
+      <dd *ngIf="account?.accountType == 'L'">{{account?.loan?.loanDate | coinDateTransform:"STD_DATE":"MM/DD/YYYY hh:mm:ss A"}} |
+        {{account?.loan?.loanTerm}}
+      </dd>
+    </dl>
+
+  </div>
+</div>
+
+<div class="row" *ngIf="searching">
+  <div class="col-lg-6">
+    <waiting-backend></waiting-backend>
+    Searching for customer details...<br/><br/>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-lg-6" *ngIf="account?.accountType!='D'">
+    <dl class="dl-horizontal">
+      <dt>Days late:</dt>
+      <dd>{{account?.collection?.daysPastDue}}</dd>
+      <dt>Current balance:</dt>
+      <dd>{{account?.loan?.currentBalance | coinCurrency}}</dd>
+      <dt>Principal due:</dt>
+      <dd>{{account?.collection?.principalAmountDue | coinCurrency}}</dd>
+      <dt>Principal past due:</dt>
+      <dd>{{account?.collection?.principalPastDue | coinCurrency}}</dd>
+      <!--<dt>Next Day:</dt>-->
+      <!--<dd>¿?</dd>-->
+      <dt>Rate:</dt>
+      <dd>{{account?.loan?.rate}}</dd>
+      <dt>Escrow due:</dt>
+      <dd>{{account?.loan?.escrowAmountDue | coinCurrency}}</dd>
+      <dt>Last promised date:</dt>
+      <dd>{{account?.collection?.promiseDate | coinDateTransform: "STD_DATE":"YYYY/MM/DD"}}</dd>
+      <dt>Payment amt:</dt>
+      <dd>{{account?.collection?.paymentAmount | coinCurrency}}</dd>
+      <dt>Other charges:</dt>
+      <dd>{{account?.collection?.otherCharges | coinCurrency}}</dd>
+    </dl>
+  </div>
+
+
+
+
+
+
+  <div class="col-lg-6" *ngIf="account?.accountType!='D'">
+    <dl class="dl-horizontal">
+      <dt>Payments due #:</dt>
+      <dd>{{account?.collection?.paymentsDue}}</dd>
+      <dt>Last paid:</dt>
+      <dd>{{account?.collection?.paymentDate | coinDateTransform: "STD_DATE":"YYYY/MM/DD"}}</dd>
+      <dt>Current Pay off:</dt>
+      <dd>{{account?.loan?.currentPayOff | coinCurrency}}</dd>
+      <dt>Int due:</dt>
+      <dd>{{account?.collection?.interestDue}}</dd>
+      <dt>Last worked date:</dt>
+      <dd>{{account?.collection?.lastWorkDate | coinDateTransform: "STD_DATE":"YYYY/MM/DD"}}</dd>
+      <!--<dt>Susp/ Part Pay:</dt>-->
+      <!--<dd>¿?</dd>-->
+      <dt>Late charges:</dt>
+      <dd>{{account?.collection?.lateCharges | coinCurrency}}</dd>
+      <dt>Escrow balance:</dt>
+      <dd>{{account?.collection?.escrowBalance | coinCurrency}}</dd>
+      <!--<dt>Total Charges:</dt>-->
+      <!--<dd>¿?</dd>-->
+      <dt>EA PC flag:</dt>
+      <dd>{{account?.additionalInfo?.eaPcFlag}}</dd>
+    </dl>
+  </div>
+
+
+
+
+
+</div>
+
+<div class="row" *ngIf="!searchingAccountDepInfo">
+  <div class="col-lg-6" *ngIf="account?.accountType=='D'">
+    <dl class="dl-horizontal">
+      <dt>Current balance:</dt>
+      <dd>{{account?.accountDep?.curBal | coinCurrency}}</dd>
+      <dt>Available balance:</dt>
+      <dd>{{account?.accountDep?.avlBal | coinCurrency}}</dd>
+      <dt>Collected balance:</dt>
+      <dd>{{account?.accountDep?.colBal | coinCurrency}}</dd>
+      <dt>Date opened:</dt>
+      <dd>{{account?.accountDep?.openDate | coinDateTransform: "STD_DATE":"MM/DD/YYYY"}}</dd>
+      <dt>Date closed:</dt>
+      <dd>{{account?.accountDep?.closeDate| coinDateTransform: "STD_DATE":"MM/DD/YYYY"}}</dd>
+    </dl>
+  </div>
+
+  <div class="col-lg-6" *ngIf="account?.accountType=='D'">
+    <dl class="dl-horizontal">
+
+      <dt>Date last overdrawn:</dt>
+      <dd>{{account?.accountDep?.lastODDt | coinDateTransform: "STD_DATE":"MM/DD/YYYY"}}</dd>
+      <dt>Hold amount:</dt>
+      <dd>{{account?.accountDep?.hldAmt | coinCurrency}}</dd>
+      <dt>Last deposit date:</dt>
+      <dd>{{account?.accountDep?.lastDepDate | coinDateTransform: "STD_DATE":"MM/DD/YYYY"}}</dd>
+      <dt>Last deposit amount:</dt>
+      <dd>{{account?.accountDep?.lastDepAmt | coinCurrency}}</dd>
+    </dl>
+  </div>
+</div>
+<div class="row" *ngIf="!searchingAccountDepInfo">
+  <div class="col-lg-6" *ngIf="account?.accountType=='D'">
+    <dl class="dl-horizontal">
+
+      <dt>Days overdrawn:</dt>
+      <dd>{{account?.accountDep?.daysOverdrawn}}</dd>
+      <dt>Charge off date:</dt>
+      <dd>{{account?.accountDep?.chargeOffDate | coinDateTransform: "STD_DATE":"MM/DD/YYYY"}}</dd>
+      <dt>Amount charge off:</dt>
+      <dd>{{account?.accountDep?.amountChargedOff | coinCurrency}}</dd>
+      <dt>Items balance:</dt>
+      <dd>{{account?.accountDep?.itemsBalance | coinCurrency}}</dd>
+      <dt>NFS fees balance:</dt>
+      <dd>{{account?.accountDep?.nfsFeesBalance | coinCurrency}}</dd>
+      <dt>Svc charge balance:</dt>
+      <dd>{{account?.accountDep?.svcChargeBalance | coinCurrency}}</dd>
+      <dt>Fresh start ORIG BAL:</dt>
+      <dd>{{account?.accountDep?.fsOrigBal | coinCurrency}}</dd>
+    </dl>
+  </div>
+
+  <div class="col-lg-6" *ngIf="account?.accountType=='D'">
+    <dl class="dl-horizontal">
+      <dt>FS items bal:</dt>
+      <dd>{{account?.accountDep?.fsItemsBal | coinCurrency}}</dd>
+      <dt>FS date:</dt>
+      <dd>{{account?.accountDep?.fsDate | coinDateTransform: "STD_DATE":"MM/DD/YYYY"}}</dd>
+      <dt>FS last pay amt:</dt>
+      <dd>{{account?.accountDep?.fsLastPayAmt | coinCurrency}}</dd>
+      <dt>FS pay freq:</dt>
+      <dd>{{account?.accountDep?.fsPayFreq}}</dd>
+      <dt>FS pay amt:</dt>
+      <dd>{{account?.accountDep?.fsPayAmt | coinCurrency}}</dd>
+      <dt>FS next pay date:</dt>
+      <dd>{{account?.accountDep?.fsNextPayDate | coinDateTransform: "STD_DATE":"MM/DD/YYYY"}}</dd>
+      <dt>FS last pay date:</dt>
+      <dd>{{account?.accountDep?.fsLastPayDate | coinDateTransform: "STD_DATE":"MM/DD/YYYY"}}</dd>
+      <dt>FS partial pay amt:</dt>
+      <dd>{{account?.accountDep?.fsPartialPayAmt | coinCurrency}}</dd>
+      <!--<dt>ACH warehouse inquiry:</dt>-->
+      <!--<dd></dd>-->
+    </dl>
+  </div>
+
+
+</div>
+
+<div class="row" *ngIf="searchingAccountDepInfo && account?.accountDep">
+  <div class="col-lg-6">
+    <waiting-backend></waiting-backend>
+    Searching...<br/><br/>
+  </div>
+</div>

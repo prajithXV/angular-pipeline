@@ -1,0 +1,25 @@
+<div *ngIf="campaigns && campaigns.length > 0" class='table-responsive'>
+  <table class='table table-striped table-hover pointer-cursor'>
+    <thead>
+      <tr class="tableStyle">
+        <th></th>
+        <th style="">Name</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr
+        *ngFor="let cp of campaigns"
+        (click)="selectCampaign(cp)"
+        [class.ui-state-highlight]="cp.id == currentCampaign?.id">
+        <td style="width: 1%; text-align:left;"><i *ngIf="cp.id == currentCampaign?.id" class="fa fa-arrow-circle-right text-navy" style="font-size:1.2em;"></i></td>
+        <td>{{cp.name}}</td>
+        <!--<td>{{cp.plainAttributes}}</td>-->
+      </tr>
+    </tbody>
+  </table>
+</div>
+<p *ngIf="searching">
+  <waiting-backend></waiting-backend>
+  Getting campaigns...
+</p>
+<p *ngIf="campaigns && campaigns.length == 0">No campaigns found</p>

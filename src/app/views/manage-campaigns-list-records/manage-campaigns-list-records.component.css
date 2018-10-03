@@ -1,0 +1,68 @@
+.white{
+  background-color: white !important;
+}
+
+.tableStyle{
+  color: white;
+  background-color:#1ab394;
+}
+
+.tablePadding{
+  padding: 8px 20px 30px 20px !important;
+}
+
+
+.table.recordsTable{
+  margin-bottom: 0 !important;
+}
+
+
+.pointer-cursor{
+  cursor: pointer;
+}
+
+.box-padding{
+  padding: 15px 30px 15px 30px;
+}
+
+
+
+.separator{
+  margin-right: 14px;
+}
+
+iboxtools#ibox-tools div.ibox-tools{
+  float: right;
+  width: 2%;
+}
+
+
+div.col h5{
+ margin-top: 9px;
+}
+
+select.separator.select{
+  width: 29%;
+  display: inline-block;
+}
+
+paginator#paginator div.paginator{
+  text-align: left;
+}
+
+
+@media (max-width: 1200px){
+  select.separator.select{
+    width: 36%;
+  }
+}
+
+@media (max-width: 600px) {
+  div.col h5{
+    margin-top: 0;
+  }
+
+  manage-campaign-list-records .ibox-title{
+    padding-top: 0;
+  }
+}

@@ -1,0 +1,201 @@
+[{
+    "caseId": 912345,
+    "related": [{
+        "relatedId": 1,
+        "balance": 24545,
+        "type":"Student loan", 
+        "nameAcc": "Smith Fred",
+        "lastPaidDate": "June 15, 2017",
+        "accountNo": 25554545,
+        "lastPay": "Well Howell",
+        "overDue": 742
+      },
+      {
+        "relatedId":2,
+        "balance": 12456,
+        "type":"Auto",
+         "nameAcc": "Smith Fred",
+        "lastPaidDate": "June 12, 2015",
+        "accountNo": 465696465,
+        "lastPay": "Well Howell",
+        "overDue": 14
+      },
+      {
+        "relatedId": 3,
+        "balance": 4545,
+        "type":"Checking",
+         "nameAcc": "Smith Fred",
+        "lastPaidDate": " -- ",
+        "accountNo": 65467865,
+        "lastPay": "Well Howell",
+        "overDue": 0.0
+      },
+      {
+        "relatedId": 19,
+        "balance": 4545,
+        "type":"Savings",
+        "nameAcc": "Dan Attorney",
+        "lastPaidDate": " -- ",
+        "accountNo": 47694845,
+        "lastPay": "Well Howell",
+        "overDue": 0.00
+      } 
+    ]
+  },
+  {
+    "caseId": 912346,
+    "related": [{
+        "relatedId": 4,
+        "balance": 454,
+        "type":"checking", "nameAcc": "Co Dan Worker",
+        "lastPaidDate": "June 15, 2017",
+        "accountNo": 45525.4545,
+        "lastPay": "Well Howell",
+        "overDue": 25
+      },
+      {
+        "relatedId": 5,
+        "balance": 4546,
+        "type":"checking", "nameAcc": "CoSmith Fred",
+        "lastPaidDate": "June 15, 2017",
+        "accountNo": 455254545,
+        "lastPay": "Well Howell",
+        "overDue": 25
+      },
+      {
+        "relatedId": 6,
+        "balance": 4564,
+        "type":"checking", "nameAcc": "Tred Guarantor",
+        "lastPaidDate": "June 15, 2017",
+        "accountNo": 452274545,
+        "lastPay": "Well Howell",
+        "overDue": 25
+      }
+    ]
+  },
+  {
+    "caseId": 912347,
+    "related": [{
+        "relatedId": 7,
+        "balance": 456,
+        "type":"checking", "nameAcc": "Smith Fred",
+        "lastPaidDate": "June 15, 2017",
+        "accountNo": 7854545,
+        "lastPay": "Well Howell",
+        "overDue": 845
+      },
+      {
+        "relatedId": 8,
+        "balance": 45645,
+        "type":"Mortgages", "nameAcc": "Smith Fred",
+        "lastPaidDate": "June 15, 2017",
+        "accountNo": 75524545,
+        "lastPay": "Well Howell",
+        "overDue": 5242
+      },
+      {
+        "relatedId": 9,
+        "balance": 456,
+        "type":"Mortgages", "nameAcc": "Smith Fred",
+        "lastPaidDate": "June 15, 2017",
+        "accountNo": 755224545,
+        "lastPay": "Well Howell",
+        "overDue": 782
+      }
+    ]
+  },
+  {
+    "caseId": 912348,
+    "related": [{
+        "relatedId": 10,
+        "balance": 456,
+        "type":"Mortgages", "nameAcc": "Smith Fred",
+        "lastPaidDate": "June 15, 2017",
+        "accountNo": 7552255584545,
+        "lastPay": "Well Howell",
+        "overDue": 5847
+      },
+      {
+        "relatedId": 11,
+        "balance": 456453,
+        "type":"Mortgages", "nameAcc": "Smith Fred",
+        "lastPaidDate": "June 15, 2017",
+        "accountNo": 75224545,
+        "relatedDate": "July 28, 2015",
+        "overDue": 54
+      },
+      {
+        "relatedId": 12,
+        "balance": 434,
+        "type":"Mortgages", "nameAcc": "Smith Fred",
+        "lastPaidDate": "June 15, 2017",
+        "accountNo": 147854545,
+        "lastPay": "Well Howell",
+        "overDue": 58
+      }
+    ]
+  },
+  {
+    "caseId": 912349,
+    "related": [{
+        "relatedId": 13,
+        "balance": 7585,
+        "type":"Personal loan", "nameAcc": "Smith Fred",
+        "lastPaidDate": "June 15, 2017",
+        "accountNo": 147554545,
+        "lastPay": "Well Howell",
+        "overDue": 58
+      },
+      {
+        "relatedId": 14,
+        "balance": 7587,
+        "type":"Personal loan", "nameAcc": "Smith Fred",
+        "lastPaidDate": "June 15, 2017",
+        "accountNo": 14254545,
+        "lastPay": "Well Howell",
+        "overDue": 58
+      },
+      {
+        "relatedId": 15,
+        "balance": 17854,
+        "type":"Personal loan", "nameAcc": "Smith Fred",
+        "lastPaidDate": "June 15, 2017",
+        "accountNo": 4584545,
+        "lastPay": "Well Howell",
+        "overDue": 58
+      }
+    ]
+  },
+  {
+    "caseId": 912350,
+    "related": [{
+        "relatedId": 16,
+        "balance": 17545.12,
+        "type":"Personal loan",
+        "nameAcc": "Smith Fred",
+        "lastPaidDate": "May 15, 2016",
+        "accountNo": 26945405,
+        "lastPay": "Well Howell",
+        "overDue": 0.85
+      },
+      {
+        "relatedId": 17,
+        "balance": 7587.05,
+        "type":"Personal loan", "nameAcc": "Smith Fred",
+        "lastPaidDate": "June 15, 2017",
+        "accountNo": 26554545,
+        "lastPay": "Well Howell",
+        "overDue": 741.00
+      },
+      {
+        "relatedId": 18,
+        "balance": 7587,
+        "type":"Student loan", "nameAcc": "Debt Paul",
+        "lastPaidDate": "June 15, 2017",
+        "accountNo": 54554455,
+        "lastPay": "Well Howell",
+        "overDue": 755.12
+      }
+    ]
+  }
+]

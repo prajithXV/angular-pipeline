@@ -1,0 +1,45 @@
+.title{
+  height:20px;
+  margin-bottom: 15px;
+  font-weight: bold;
+  /*background-color: #373738;*/
+  color: black;
+  padding-bottom: 20px;
+  padding-top: 5px;
+  padding-left: 0;
+  padding-right: 0;
+}
+
+
+.title-height{
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+
+.body-height {
+  height: 51px;
+  overflow: auto;
+  white-space: initial;
+  padding-top: 15px;
+
+}
+
+.table-decoration{
+  border-top: 1px solid #e7eaec;
+  padding-bottom: 15px;
+}
+
+.col-margin{
+  border-bottom: 1px solid black;
+  margin-left: 10px;
+  margin-right: 10px;
+}
+
+/* white-space: nowrap; */
+
+
+.found-data{
+  padding: 20px;
+}
+
+

@@ -1,0 +1,73 @@
+<div class="row">
+  <div class="col-lg-3">
+    <div class="ibox float-e-margins">
+      <div class="ibox-title">
+        <h5>Calls Per Hour Criteria</h5>
+      </div>
+      <div class="ibox-content">
+        <!--Criteria component-->
+        <calls-per-hour-criteria
+          (onViewReport)="onViewCallsData($event)"
+          [campaigns]="campaigns"
+          [searchingCallsPerHourData]="searchingCallsPerHourData">
+        </calls-per-hour-criteria>
+      </div>
+    </div>
+  </div>
+  <div class="col-lg-9">
+    <!--First component: total-->
+    <div class="ibox float-e-margins">
+      <div class="ibox-title">
+        <h5>Calls Per Hour Total Report</h5>
+      </div>
+      <div class="ibox-content">
+        <!--Total component data-->
+        <calls-per-hour-data
+          [searchingData]="searchingCallsPerHourData"
+          [callsPerHour]="callsPerHour"
+          [visibleTable]="isTableVisible"
+          [campaigns]="campaigns"
+          [table]="table">
+        </calls-per-hour-data>
+
+        <div *ngIf="searchingCallsPerHourData">
+          <waiting-backend></waiting-backend>
+          Getting Calls per hour...
+        </div>
+        <div *ngIf="!searchingCallsPerHourData && !isTableVisible">Select a campaign and a date and press "View
+          report"
+        </div>
+        <p *ngIf="callsPerHour && callsPerHour.length == 0 && !searchingCallsPerHourData && isTableVisible">No calls per
+          hour found</p>
+
+      </div>
+    </div>
+    <!--Second component: average-->
+    <div class="ibox float-e-margins">
+      <div class="ibox-title">
+        <h5>Calls Per Hour Average Report</h5>
+      </div>
+      <div class="ibox-content">
+        <!--Average component data-->
+        <calls-per-hour-average-data
+          [table]="table"
+          [callsPerHour]="callsPerHour"
+          [searchingData]="searchingCallsPerHourData"
+          [visibleTable]="isTableVisible"
+          [campaigns]="campaigns">
+        </calls-per-hour-average-data>
+
+        <div *ngIf="searchingCallsPerHourData">
+          <waiting-backend></waiting-backend>
+          Getting Calls per hour...
+        </div>
+        <div *ngIf="!searchingCallsPerHourData && !isTableVisible">Select a campaign and a date and press "View
+          report"
+        </div>
+        <p *ngIf="callsPerHour && callsPerHour.length == 0 && !searchingCallsPerHourData && isTableVisible">No calls per
+          hour found</p>
+
+      </div>
+    </div>
+  </div>
+</div>

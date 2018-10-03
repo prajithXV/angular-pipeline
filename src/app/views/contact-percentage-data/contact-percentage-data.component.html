@@ -1,0 +1,37 @@
+<div>
+  <ngb-tabset>
+    <ngb-tab id="ContactPercentageGraphic">
+      <ng-template ngbTabTitle><span [popover]="popBasic" triggers="">Graphic</span></ng-template>
+      <ng-template ngbTabContent>
+        <p></p>
+        <div>
+          <!--graphic-->
+          <contact-percentage-new-graphic
+            [visibleTable]="visibleTable"
+            [searchingData]="searchingData"
+            [contactPercentage]="contactPercentage"
+            [campaigns]="campaigns">
+          </contact-percentage-new-graphic>
+        </div>
+      </ng-template>
+    </ngb-tab>
+
+    <!--Contact percentage table-->
+    <ngb-tab id="contactPercentageTable">
+      <ng-template ngbTabTitle><span [popover]="popBasic" triggers="">Table</span></ng-template>
+      <ng-template ngbTabContent>
+        <p></p>
+        <div>
+          <!--table-->
+          <contact-percentage-table
+            [table]="table"
+            [campaigns]="campaigns"
+            [searchingData]="searchingData"
+            [visibleTable]="visibleTable">
+          </contact-percentage-table>
+        </div>
+      </ng-template>
+    </ngb-tab>
+  </ngb-tabset>
+</div>
+

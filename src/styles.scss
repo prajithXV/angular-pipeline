@@ -1,0 +1,260 @@
+/* Import main Inspinia style */
+@import "assets/styles/style";
+@import "~ng-pick-datetime/assets/style/picker.min.css";
+
+//vars
+
+$isTab: true;
+$isNotTab: false;
+
+.owl-dt-calendar-table .owl-dt-calendar-cell-selected {
+  color: rgba(255,255,255,.85) !important;
+  background-color: #1ab394 !important;
+}
+
+.owl-dt-container{
+  font-size: 13px !important;
+}
+
+.showSpan{
+  display: inline-block !important;
+}
+
+.owl-dt-control-button-content{
+  color: #18a587 !important;
+}
+
+//side navbar css
+.nav-second-level li,
+.nav-third-level li {
+  border-bottom: none !important;
+}
+
+
+.sidebar-collapse , .sidebar-collapse .nav{
+  background:none;
+}
+
+.sidebar-collapse > .nav > li {
+  //border-bottom: 1px solid #37485b !important;
+  //border-bottom: 1px solid #3d556b !important;
+}
+
+.sidebar-collapse .nav > li > a:hover,
+.sidebar-collapse .nav > li > a:focus{
+
+  background:#293846;
+  color: white!important;
+  outline:0;
+}
+
+.nav > li.active {
+  border-left: none;
+}
+
+
+.nav > li.active > a {
+  color: #ffffff;
+}
+
+
+.sidebar-collapse .nav >li.active > a.sideActive{
+  color: white!important;
+  outline:0;
+  border-left: 4px solid #19aa8d;
+  background: #1c2730;
+}
+
+.sidebar-collapse .nav >li.active > a.mainActive{
+  border-left: 4px solid #19aa8d;
+}
+
+.sidebar-collapse .nav >li > a.sideActive {
+  background:#293846;
+}
+
+.sidebar-collapse .nav >li.active > a.sideActive:last-child,
+.sidebar-collapse .nav > li > a.sideActive:last-child{
+  padding-bottom: 10px;
+}
+
+
+.nav > li.active > a {
+  color: #ffffff;
+
+}
+
+.nav-second-level li:last-child {
+  margin-bottom: 0;
+
+}
+
+
+body:not(.fixed-sidebar):not(.canvas-menu).mini-navbar .nav li:hover > .nav-second-level, .mini-navbar .nav li:focus > .nav-second-level {
+  background:#293846;
+
+}
+
+
+
+.modal-backdrop.fade
+{
+  opacity: 0.5 !important;
+}
+.modal-open .modal
+{
+  opacity: 1 !important;
+}
+
+
+
+.modal.fade .modal-dialog {
+    -webkit-transform: translate(0,-50%);
+    -o-transform: translate(0,-50%);
+    transform: translate(0,-50%);
+    top: 50%;
+    margin: 0 auto;
+
+}
+
+
+.modal-header .close {
+  margin-top: -21px !important;
+}
+
+.no-resize{
+  resize: none;
+}
+
+
+/***table disabled****/
+
+.disabledTr{
+    color: grey;
+    opacity: 0.9;
+}
+
+
+/*******Tab styles*******/
+
+
+//additional cases (manage account cases tab)
+%aCases{
+  color: white;
+  background-color: #ed5565;
+  opacity: 0.4;
+}
+
+
+
+//Campaign processing class
+%white-color{
+  color: white;
+}
+
+%black-color{
+  color: black;
+}
+
+.black {
+  @extend %black-color;
+}
+
+
+//@mixin tabsStyle($color, $backgroundColor, $opacity, $isTab){
+//  @if($isTab == true){
+//    background-color: $backgroundColor;
+//    opacity: $opacity;
+//  }
+//  @else{
+//    background-color: $backgroundColor;
+//    color: $color;
+//  }
+//}
+
+@mixin tabsStyle($backgroundColor, $opacity){
+    background-color: $backgroundColor;
+    opacity: $opacity;
+  }
+
+
+.acSearch-disabled{
+  @include tabsStyle(#E1D89F, 0.6);
+  @extend %black-color;
+  //@include tabsStyle(white,rgba(28, 132, 198, 0.58), 1, false);
+}
+
+.acSearch-enabled{
+  @include tabsStyle(#E1D89F, 1);
+  @extend %black-color;
+  //@include tabsStyle(white,rgba(28, 132, 198, 0.91), 1, false);
+
+}
+
+.cProcessing-disabled{
+  @include tabsStyle(#F5E0B7, 0.6);
+  @extend %black-color;
+  //@include tabsStyle(white, #C99AC8, 1, false);
+}
+
+
+.cProcessing-enabled{
+  @include tabsStyle(#F5E0B7, 1);
+  @extend %black-color;
+  //@include tabsStyle(white, #854c92, 1, false);
+}
+
+.tProcesses-disabled{
+  @include tabsStyle(#FF9C6A, 0.6);
+  @extend %black-color;
+  //@include tabsStyle(white,rgba(35,198,200,0.49), 1, false);
+}
+
+.tProcesses-enabled{
+  @include tabsStyle(#FF9C6A, 1);
+  @extend %black-color;
+  //@include tabsStyle(white,rgb(35, 198, 200), 1, false);
+}
+
+
+.nav-tabs > li > a#additionalCases{
+  @extend %aCases;
+  @extend %white-color;
+}
+
+
+.nav-tabs > li > a#campaignProcessing{
+  @include tabsStyle(#F5E0B7, 0.6);
+  //@include tabsStyle(none, #854c92, 0.6, true);
+  //@extend %white-color;
+  @extend %black-color;
+}
+
+.nav-tabs > li > a#accountSearch{
+  @include tabsStyle(#E1D89F, 0.6);
+  //@include tabsStyle(none,rgba(28,132,198,0.91), 0.6, true);
+  @extend %black-color;
+  //@extend %white-color;
+}
+
+.nav-tabs > li > a#ticklerProcesses{
+  @include tabsStyle(#FF9C6A, 0.6);
+  //@include tabsStyle(none,rgb(35, 198, 200), 0.6, true );
+  @extend %black-color;
+  //@extend %white-color;
+}
+
+.nav-tabs .nav-item.show .nav-link, .nav-tabs a#campaignProcessing.nav-link:hover,
+.nav-tabs .nav-item.show .nav-link, .nav-tabs a#accountSearch.nav-link:hover,
+.nav-tabs .nav-item.show .nav-link, .nav-tabs a#ticklerProcesses.nav-link:hover,
+.nav-tabs .nav-item.show .nav-link, .nav-tabs a#additionalCases.nav-link:hover{
+  opacity: 0.5;
+}
+
+
+.nav-tabs .nav-item.show .nav-link, .nav-tabs a#campaignProcessing.nav-link.active,
+.nav-tabs .nav-item.show .nav-link, .nav-tabs a#accountSearch.nav-link.active,
+.nav-tabs .nav-item.show .nav-link, .nav-tabs a#ticklerProcesses.nav-link.active,
+.nav-tabs .nav-item.show .nav-link, .nav-tabs a#additionalCases.nav-link.active{
+  opacity: 1;
+}

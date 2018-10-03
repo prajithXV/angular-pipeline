@@ -1,0 +1,27 @@
+<div class="middle-box text-center loginscreen  animated fadeInDown">
+  <div>
+
+    <div>
+      <h5 class="logo-name login-logo"><img alt="Iberia Bank" style="width:300px;" src="assets/images/logologin.png"></h5>
+    </div>
+    <h3>Welcome to Collections Optimization Application</h3>
+
+    <form role="form">
+      <div class="form-group">
+        <input autofocus type="email" [(ngModel)]="user" class="form-control" placeholder="Username" required="true" name="username">
+      </div>
+      <div class="form-group">
+        <input type="password" [(ngModel)]="pwd" class="form-control" placeholder="Password" required="true" name="password">
+      </div>
+      <div class="form-group">
+        <input [(ngModel)]="ciscoUser" [disabled]="disableExt" class="form-control" placeholder="Finesse User" name="ciscoUser">
+      </div>
+      <div class="form-group">
+        <input [(ngModel)]="ext" [disabled]="disableExt" class="form-control" placeholder="Extension" name="extension">
+      </div>
+      <button type="submit" [disabled]="disableLogin()" (click)="login()" class="btn btn-primary block full-width m-b">Login <waiting-backend *ngIf="waitingResponse"></waiting-backend></button>
+    </form>
+    <p class="m-t"><small>V {{env.version}} <span *ngIf="env.build">-- Build:{{env.evironmentCode}}-{{env.build}}</span></small></p>
+    <p *ngIf="sneakMock.mocked" class="m-t" style="font-size:2em; color:red;"><strong>YOU ARE USING A MOCKED BACKEND</strong></p>
+  </div>
+</div>

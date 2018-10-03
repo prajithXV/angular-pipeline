@@ -1,0 +1,53 @@
+.display-div{
+  display: block;
+}
+
+
+.text{
+  color: #e87900;
+}
+
+.label.label-info{
+  font-size: 9px !important;
+  padding-top: 1px !important;
+  padding-bottom: 1px !important;
+}
+
+
+.userText{
+  color: #00A878;
+}
+
+
+.label-gold{
+  background-color: #B88D37;
+  color: white;
+}
+
+.font{
+  font-size: 10pt;
+  line-height: 16pt;
+}
+
+.padding-block{
+  padding-bottom: 20px;
+}
+
+.margin{
+  margin-left: 5px;
+}
+
+.align{
+  text-align: right !important;
+}
+
+.no-padding-left{
+  padding-left: 0 !important;
+}
+
+.container{
+  width: 100% !important;
+  padding-bottom: 15px !important;
+  padding-top: 15px!important;
+  /*box-shadow: -2px 9px 38px -15px rgba(0,0,0,0.75);*/
+}

@@ -1,0 +1,73 @@
+<div *ngIf="searchingProcessCases" class="search">
+  <waiting-backend></waiting-backend>
+  Searching...
+</div>
+<div *ngIf="!searchingProcessCases && !ticklerProcessCases">Use the filters on the left to search a process case.</div>
+<p *ngIf="ticklerProcessCases && ticklerProcessCases.length == 0 && !searchingProcessCases">No data found.</p>
+<div *ngIf="ticklerProcessCases && ticklerProcessCases.length > 0 && !searchingProcessCases">
+
+  <!--cases table-->
+  <div class="table-responsive">
+    <!--<paginator *ngIf="!isInRelatedInfo" [data]="ticklerProcessCases"-->
+               <!--[pagination]="pagination"-->
+               <!--(onPageChange)="incPage($event)">-->
+    <!--</paginator>-->
+
+    <table class="processCases table table-hover">
+      <thead>
+      <tr>
+        <th></th>
+        <th>Case</th>
+        <th *ngIf="!isInRelatedInfo">Account</th>
+        <th *ngIf="!isInRelatedInfo">CIFNO</th>
+        <th *ngIf="!isInRelatedInfo">Customer</th>
+        <th>Last tickler</th>
+        <th>Assigned user</th>
+        <th>Description</th>
+        <th>Process code</th>
+        <th>Status</th>
+        <th>Created by</th>
+        <th>Created on</th>
+        <th *ngIf="!isInRelatedInfo"
+          class="cursor"
+          (click)="sortTable('followUpDueDate')">
+          Follow up due
+          <header-sorter
+            [currentSortType]="sort.sortType"
+            [field]="'followUpDueDate'"
+            [isDesc]="sort.isDesc">
+          </header-sorter>
+        </th>
+
+        <th *ngIf="isInRelatedInfo"> Follow up due</th>
+
+      </tr>
+      </thead>
+      <tbody class="pointer-cursor">
+      <tr *ngFor="let tc of ticklerProcessCases"
+          (click)="searchProcessCaseTickler(tc)"
+          [class.ui-state-highlight]="tc.id == processCase?.id">
+        <td><i *ngIf="tc.id == processCase?.id" class="fa fa-arrow-circle-right text-navy" style="font-size:1.2em;"></i>
+        </td>
+        <td>{{tc.id}}</td>
+        <td *ngIf="!isInRelatedInfo">{{tc.accountId}}</td>
+        <td *ngIf="!isInRelatedInfo">{{tc.cifId}}</td>
+        <td *ngIf="!isInRelatedInfo">{{tc.contactName}}</td>
+        <td>{{tc.lastTicklerName}}</td>
+        <td>{{tc.assignedUser}}</td>
+        <td>{{tc.caseDescription}}</td>
+        <td>{{tc.processCode}}</td>
+        <td>{{tc.statusCode}}</td>
+        <td>{{tc.createdBy}}</td>
+        <td>{{tc.createdDate | coinDateTransform: "STD_DATE"}}</td>
+        <td>{{tc.followUpDueDate | coinDateTransform: "STD_DATE"}}</td>
+        <td *ngIf="canShowGoButton">
+        <button class="buttonGo btn btn-xs btn-primary" (click)="goToManageCase(tc)">Go</button>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+

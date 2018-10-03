@@ -1,0 +1,18 @@
+label{
+  width: 100%;
+}
+
+
+.form-control, .single-line{
+  width: 100%;
+}
+
+
+div.form-group{
+  width: 103%;
+}
+
+
+button{
+  float: right;
+}

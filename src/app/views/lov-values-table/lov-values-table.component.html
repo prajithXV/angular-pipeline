@@ -1,0 +1,79 @@
+<!--New button-->
+<!--<div *ngIf="!searchingLovValues">-->
+  <!--<button class="btn btn-sm btn-primary" [disabled]="isCreating || searchingLovValues || currentLovType?.isDynamic" (click)="showLovValues(true)">-->
+    <!--<i class="fa fa-file-o"></i> New-->
+  <!--</button>-->
+<!--</div>-->
+
+<div *ngIf="searchingLovValues" class="search">
+  <waiting-backend></waiting-backend>
+  Searching...
+</div>
+<p *ngIf="lovValues && lovValues?.length == 0 && !searchingLovValues && !isCreatingLovValues" style="margin-top: 10px;">No data found.</p>
+
+<div class="table" *ngIf="isCreatingLovValues">
+  <hr style="margin-top: 27px;"/>
+  <!--NEW-->
+  <div class="container-content">
+    <div class="">
+      <h2 class="title text-success">New LOV value</h2>
+      <p></p>
+      <new-lov-value
+        [hasToAddLovValue]="true"
+        [currentLovType]="currentLovType"
+        (onAddLovValue)="newLovValue($event)"
+        (onCancelLovValue)="showLovValues(false)"
+        manageLovValueText="Add">
+      </new-lov-value>
+    </div>
+  </div>
+</div>
+
+<!--table-->
+<div *ngIf="!isCreatingLovValues && !searchingLovValues && lovValues?.length > 0 && lovValues">
+  <div class="table-responsive">
+    <table class="table table-striped">
+      <thead>
+      <tr>
+        <th>Value</th>
+        <th>Name</th>
+        <th>Description</th>
+        <th class="text-center">Active</th>
+      </tr>
+      </thead>
+      <tbody>
+      <ng-container *ngFor="let lv of lovValues">
+        <tr [class.clearOrange]="isLovValueVisible(lv)" [class.disabledTr]="!lv.isActive">
+          <td>{{lv.valueCode}}</td>
+          <td>{{lv.valueName}}</td>
+          <td>{{lv.valueDescription}}</td>
+          <td class="text-center"><semaphore [value]="lv.isActive"></semaphore></td>
+          <!--edit button-->
+          <td>
+            <i  *ngIf="!currentLovType?.isDynamic" class="edit fas fa-edit" [class.orange]="isLovValueVisible(lv)"
+               (click)="editLovValue(lv)"></i>
+          </td>
+          <!--Update-->
+        <tr class="white" *ngIf="isLovValueVisible(lv)">
+        <!--<tr class="white">-->
+          <td colspan="15">
+            <div class="table">
+              <table class="table">
+                <new-lov-value
+                  [hasToAddLovValue]="false"
+                  [currentLovType]="currentLovType"
+                  [currentLovValue]="lv"
+                  (onUpdateLovValue)="onUpdate()"
+                  (onCancelLovValue)="onCancelUpdate(lv)"
+                  manageLovValueText="Save">
+                </new-lov-value>
+              </table>
+            </div>
+          </td>
+        </tr>
+      </ng-container>
+      </tbody>
+    </table>
+  </div>
+</div>
+

@@ -1,0 +1,27 @@
+<div *ngIf="agent">
+  <div class='table-responsive'>
+    <table class='table table-striped'>
+      <thead>
+      <tr>
+        <th style="width:10%;"></th>
+        <th></th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let cp of campaigns">
+        <td class="centered">
+          <span *ngIf="agent.hasCampaign(cp) === null">?</span>
+          <span *ngIf="agent.hasCampaign(cp) && agent.getCampaign(cp).hasPendingOperation"><waiting-backend></waiting-backend></span>
+          <a *ngIf="agent.hasCampaign(cp) && !agent.getCampaign(cp).hasPendingOperation" (click)="toggleCampaign(cp)">
+            <tick-cross [value]="true"></tick-cross>
+          </a>
+          <a *ngIf="agent.hasCampaign(cp) === false" (click)="toggleCampaign(cp)">
+            <tick-cross [value]="false"></tick-cross>
+          </a>
+        </td>
+        <td>{{cp.name}}</td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

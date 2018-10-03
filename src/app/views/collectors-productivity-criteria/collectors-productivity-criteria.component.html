@@ -1,0 +1,21 @@
+<div class="row">
+  <div class="col-lg-12">
+    <form (ngSubmit)="submit()">
+    <div class="form-group" [class.has-error]="fromDate.hasErrors()">
+      <label *ngIf="!showEndDate" for="from">Date</label>
+      <label *ngIf="showEndDate" for="from">From</label>
+      <date-picker #fromDate [max]="getToDate()" [mandatory]="true" [showErrors]="true" [continuosEvaluation]="false" id="from"></date-picker>
+    </div>
+    <div *ngIf="showEndDate" class="form-group" [class.has-error]="toDate.hasErrors()">
+      <label *ngIf="showEndDate" for="to">To</label>
+      <date-picker #toDate [min]="getFromDate()" [mandatory]="true" [continuosEvaluation]="false" [showErrors]="true" id="to"></date-picker>
+    </div>
+      <div class="form-group pull-right">
+        <button type="submit" class="collectorButton btn btn-sm btn-primary m-t-n-xs" [disabled]="!canSubmit() || searching">
+          View report <waiting-backend *ngIf="searching"></waiting-backend>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>
+

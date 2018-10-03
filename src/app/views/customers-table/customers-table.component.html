@@ -1,0 +1,47 @@
+<div *ngFor="let customer of customers; let last=last;">
+  <div class="row">
+    <div class="col-lg-6">
+      <dl class="dl-horizontal">
+        <dt>Name <i class="fa fa-male"></i> :</dt>
+        <dd><strong><span>{{customer?.mainContact?.completeName}}</span></strong></dd>
+        <dt><span class="label label-warning pull-right">Brw SSN</span></dt>
+        <dd>{{customer?.taxId}}</dd>
+      </dl>
+    </div>
+    <div class="col-lg-6">
+      <dl class="dl-horizontal">
+        <dt>Address <i class="fa fa-address-card-o" aria-hidden="true"></i> :</dt>
+        <dd>{{customer?.mainAddress?.streetAddress1}}</dd>
+        <dt *ngIf="customer?.mainAddress?.streetAddress2"><i class="fa fa-address-card-o" aria-hidden="true"></i> :</dt>
+        <dd *ngIf="customer?.mainAddress?.streetAddress2">{{customer?.mainAddress?.streetAddress2}}</dd>
+        <dt *ngIf="customer?.mainAddress?.streetAddress3"><i class="fa fa-address-card-o" aria-hidden="true"></i> :</dt>
+        <dd *ngIf="customer?.mainAddress?.streetAddress3">{{customer?.mainAddress?.streetAddress3}}</dd>
+        <dt><i class="fa fa-address-card-o" aria-hidden="true"></i> :</dt>
+        <dd>{{customer?.mainAddress?.city}} {{customer?.mainAddress?.stateCode}} {{customer?.mainAddress?.postalCode}}</dd>
+
+        <!--button get phone-->
+        <dt *ngIf="!customer.phones && !searchNumbers(customer)"><button class="btn btn-xs btn-primary phone" (click)="getPhone(customer)">Get phone numbers</button></dt>
+        <!--when click: show the telephones-->
+        <div *ngFor="let ph of customer?.phones">
+          <a *ngIf="ph.isLandline()" (click)="call(ph)">
+          <dt><span *ngIf="customer.phones">{{ph | telephoneType}} <i class="fa fa-phone"></i> :</span></dt>
+            <dd *ngIf="ph.number"><strong>{{ph | telephoneNumber }}</strong></dd>
+            <dd *ngIf="!ph.number" class="grey">Not phone found.</dd>
+
+          </a>
+          <div *ngIf="!ph.isLandline()">
+            <dt>{{ph | telephoneType}} <i class="fa fa-mobile-phone"></i> :</dt>
+            <dd *ngIf="ph.number">{{ph | telephoneNumber }}</dd>
+            <dd *ngIf="!ph.number">{{ph | telephoneNumber }}</dd>
+
+          </div>
+        </div>
+        <!--searching-->
+        <dd *ngIf="searchNumbers(customer)"><waiting-backend></waiting-backend>Searching phone numbers...</dd>
+      </dl>
+    </div>
+  </div>
+  <div *ngIf="!last" class="hr-line-dashed"></div>
+</div>
+<div *ngIf="customers?.length == 0">No co-borrowers found.</div>
+<div *ngIf="searching"><waiting-backend></waiting-backend> Searching...</div>

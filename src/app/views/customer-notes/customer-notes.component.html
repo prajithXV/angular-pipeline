@@ -1,0 +1,20 @@
+<div *ngIf="notes && notes.length > 0">
+  <div class='table-responsive'>
+    <table class='table table-striped'>
+      <thead>
+      <tr>
+        <th style="width: 80%">Message</th>
+        <th style="width: 20%"><i class="fa fa-calendar"></i> Date</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let note of notes">
+        <td>{{note.message}}</td>
+        <td>{{note.startDate | coinDateTransform:"STD_DATE":"MM/DD/YYYY hh:mm A"}}</td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+<div *ngIf="searching"><waiting-backend></waiting-backend> Searching...</div>
+<div *ngIf="notes?.length == 0">No previous contacts found.</div>

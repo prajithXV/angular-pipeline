@@ -1,0 +1,58 @@
+<div class="row border-bottom">
+  <nav class="navbar navbar-static-top white-bg" role="navigation" style="margin-bottom: 0">
+    <div class="navbar-header">
+      <a class="minimalize-styl-2 btn btn-primary " (click)="toggleNavigation()" title="Hide/show menu"><i class="fa fa-bars"></i> </a>
+
+      <ul (click)="redirectToList()" *ngIf="hasCurrentParams" id="redirectToList" class="list-unstyled" style="display: block; float: left">
+        <li style="display: inline-block">
+          <button class="btn btn-primary" title="Back to the current list">
+            <i class="fas fa-arrow-left"></i>
+            <span>Back to list</span>
+          </button>
+        </li>
+      </ul>
+
+    </div>
+
+    <ul class="nav navbar-top-links navbar-right">
+      <li><span class="m-r-sm">Hello <strong>{{loggedAgent()?.firstName}}</strong>!</span></li>
+      <top-call *ngIf="currentCall"></top-call>
+      <li>
+        <span class="m-r-sm">
+          Your current state is
+          <strong>{{loggedAgent()?.state | agentState}}</strong>.
+        </span>
+      </li>
+      <li class="dropdown" [class.open]="statusMenuOpened">
+        <a *ngIf="!changingState" (click)="openMenuStatus()" class="dropdown-toggle count-info">
+          <i class="fa fa-toggle-down"></i>
+        </a>
+        <waiting-backend *ngIf="changingState"></waiting-backend>
+        <ul class="dropdown-menu dropdown-alerts">
+          <li *ngFor="let st of states">
+            <a (click)="setState(st)">
+              <div>
+                <i class="fa fa-close fa-fw"></i> {{st | agentState}}
+              </div>
+            </a>
+          </li>
+          <li class="divider"></li>
+          <li>
+            <div class="text-center link-block">
+              <a (click)="closeMenuStatus()">
+                <strong>Don't change, just close <i class="fa fa-close fa-2"></i></strong>
+              </a>
+            </div>
+          </li>
+        </ul>
+      </li>
+      <li>
+        <a (click)="logout()">
+          <i class="fa fa-sign-out"></i> Log out
+        </a>
+      </li>
+    </ul>
+  </nav>
+</div>
+
+<floating-sentences *ngIf="showingSenteces" (onClose)="closeSentences()"></floating-sentences>
