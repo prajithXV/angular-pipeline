@@ -179,7 +179,7 @@ export class TicklerCasesTableComponent implements OnInit {
       this._temporalStateService.casesListInfoByAccount.currentCampaignRecordId = this.account.campaignRecordId;
     }
 
-    this._router.navigate([PublicUrls.process_case.url, processCase.id]);
+    this._router.navigate([PublicUrls.process_case.url, processCase.id, processCase.accountType]);
 
   }
 
