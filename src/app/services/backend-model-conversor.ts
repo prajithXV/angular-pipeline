@@ -495,6 +495,7 @@ export class BackendModelConversorService {
       let pc = new ProcessCase();
         pc.id = t.Id;
         pc.accountId = t.AccountId;
+        pc.accountType = t.AccountType;
         pc.cifId = t.CifId;
         pc.caseDescription = t.CaseDesc;
         pc.processCode = t.ProcessCd;

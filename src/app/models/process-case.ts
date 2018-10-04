@@ -2,6 +2,7 @@
 export class ProcessCase {
   private _id: number;
   private _accountId: string;
+  private _accountType: string;
   private _cifId: string;
   private _caseDescription: string;
   private _processCode: string;
@@ -13,11 +14,11 @@ export class ProcessCase {
   private _assignedGroup: string;
   private _contactFirstName: string;
   private _contactLastName: string;
-  private _lastTicklerName: string; //calculated field (tickler types)
+  private _lastTicklerName: string; //calculated field
 
 
   constructor(id?:number, accountId?:string, ciId?:string, caseDescription?:string, processCode?:string, statusCode?:string, followUpDueDate?:string,
-              createdBy?:string, createdDate?:string, assignedUser?:string, assignedGroup?:string, lastTicklerName?: string){
+              createdBy?:string, createdDate?:string, assignedUser?:string, assignedGroup?:string, lastTicklerName?: string, accountType?:string){
 
     this.id = id;
     this.accountId = accountId;
@@ -155,4 +156,13 @@ export class ProcessCase {
   set lastTicklerName(value: string){
     this._lastTicklerName = value;
   }
+
+  get accountType(): string {
+    return this._accountType;
+  }
+
+  set accountType(value: string){
+    this._accountType = value;
+  }
+
 }

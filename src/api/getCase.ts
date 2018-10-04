@@ -2,6 +2,7 @@ export const getCaseBody = [
   {
     "Id": 16,
     "AccountId": "6300104605",
+    "AccountType": "D",
     "CifId": "JAA1223",
     "CaseDesc": "sdfgsdfg",
     "ProcessCd": "SPOC",
@@ -19,6 +20,7 @@ export const getCaseBody = [
   {
     "Id": 17,
     "AccountId": "6300104605",
+    "AccountType": "L",
     "CifId": "JAA1223",
     "CaseDesc": "sdfgsdfg",
     "ProcessCd": "SPOC",
@@ -36,6 +38,7 @@ export const getCaseBody = [
   {
     "Id": 18,
     "AccountId": "6300104605",
+    "AccountType": "L",
     "CifId": "JAA1223",
     "CaseDesc": "sdfgsdfg",
     "ProcessCd": "SPOC",
