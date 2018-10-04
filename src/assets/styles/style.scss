@@ -83,6 +83,7 @@ $shadow: rgba(220,220,220,.65) 1px 3px 47px -4px inset;
 .over-flow{
   overflow: hidden;
   text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 .no-outline{
