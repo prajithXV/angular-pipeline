@@ -12,7 +12,10 @@ export const callRecordsBody =
       "CreatedDt": "2017-10-10T15:32:33.193",
       "CreatedBy": "Vsharapo",
       "LastName": "Sharapo",
-      "FirstName": "Vasiliy"
+      "FirstName": "Vasiliy",
+      "AccountNr": "15654654648",
+      "AccountType": "L",
+
     },
     {
       "CustomerId": "CAJ3394",
@@ -26,7 +29,9 @@ export const callRecordsBody =
       "CreatedDt": "2017-10-10T15:32:00.32",
       "CreatedBy": "Vsharapo",
       "LastName": "Sharapo",
-      "FirstName": "Vasiliy"
+      "FirstName": "Vasiliy",
+      "AccountNr": "15654654649",
+      "AccountType": "D",
     },
     {
       "CustomerId": "CAJ3394",
@@ -40,7 +45,9 @@ export const callRecordsBody =
       "CreatedDt": "2017-10-10T15:31:49.083",
       "CreatedBy": "Vsharapo",
       "LastName": "Sharapo",
-      "FirstName": "Vasiliy"
+      "FirstName": "Vasiliy",
+      "AccountNr": "15654654650",
+      "AccountType": "L",
     },
     {
       "CustomerId": "CAJ3394",
@@ -54,7 +61,9 @@ export const callRecordsBody =
       "CreatedDt": "2017-10-10T15:31:49.083",
       "CreatedBy": "Vsharapo",
       "LastName": "Sharapo",
-      "FirstName": "Vasiliy"
+      "FirstName": "Vasiliy",
+      "AccountNr": "15654654651",
+      "AccountType": "D",
     },
     {
       "CustomerId": "CAJ3394",
@@ -68,6 +77,8 @@ export const callRecordsBody =
       "CreatedDt": "2017-10-10T15:31:49.083",
       "CreatedBy": "Vsharapo",
       "LastName": "Sharapo",
-      "FirstName": "Vasiliy"
+      "FirstName": "Vasiliy",
+      "AccountNr": "15654654652",
+      "AccountType": "L",
     }
   ];
