@@ -496,6 +496,15 @@ export function fakeBackendFactory(backend: MockBackend, options: BaseRequestOpt
         })))
       }
 
+      //DELETE CASE TICKLER
+      else if (connection.request.url.indexOf('/tp/case_ticklers') >= 0 && connection.request.method === RequestMethod.Delete) {
+        console.log("FAK case tickler removed");
+        // connection.mockError({status: 400} as any as Error);
+        connection.mockRespond(new Response(new ResponseOptions({
+          status: 200
+        })));
+      }
+
       //ADD TICKLER PROCESS CASE
       else if (connection.request.url.indexOf('/tp/case_ticklers') >= 0 && connection.request.method === RequestMethod.Post) {
         console.log("FAK tickler process added");

@@ -6,6 +6,9 @@ import {TicklerType} from "../../models/tickler-types";
 import {DataService} from "../../services/data.service";
 import {TicklerAttribute} from "../../models/tickler-attribute";
 import {CampaignListAttribute} from "../../models/campaign-list-attribute";
+import {ModalDismissReasons, NgbModal} from "@ng-bootstrap/ng-bootstrap";
+import {UserFeedbackService} from "../../services/user-feedback.service";
+import {GlobalStateService} from "../../services/global-state.service";
 
 
 @Component({
@@ -23,11 +26,15 @@ export class ProcessCaseTicklerTableComponent implements OnInit {
   @Input() searchingCaseTicklers: boolean = false;
   @Input() hasToShowNewButton: boolean = true;
   @Output() onAddTicklerCase = new EventEmitter<TicklerCaseModel>();
+  @Output() onDeleteTicklerCase = new EventEmitter<ProcessCaseTickler>();
   @Output() onCancel = new EventEmitter<boolean>();
   @Input() isCreating: boolean = false;
   private ticklerAttributesVisibles = {};
+  private closeResult: string;
+  private waitingToRemove: boolean = false;
 
-  constructor(private _dataService:DataService) {
+  constructor(private _dataService:DataService, private modalService: NgbModal, private _userFeedbackService: UserFeedbackService,
+              private _globalStateService: GlobalStateService) {
   }
 
   ngOnChanges(changes) {
@@ -90,7 +97,43 @@ export class ProcessCaseTicklerTableComponent implements OnInit {
   private ticklerAttributeValues(processCaseTickler: ProcessCaseTickler, at: CampaignListAttribute): string {
     let att = processCaseTickler.attributes.find(atr => atr.code == at.code);
     return att.plainValues + " ";
+  }
 
+
+  deleteCaseTickler(caseTickler: ProcessCaseTickler) {
+
+    this.waitingToRemove = true;
+    this._dataService.deleteCaseTickler(caseTickler, this._globalStateService.loggedAgent).then(() => {
+
+      // this.ticklerTypeVisibles = {};
+      this.onDeleteTicklerCase.emit();
+      this.waitingToRemove = false;
+      this._userFeedbackService.handleSuccess("Tickler type removed");
+    }).catch(err => {
+      this._userFeedbackService.handleError("Error removing tickler type", err);
+      this.waitingToRemove = false;
+
+    });
+
+  }
+
+
+  openModal(content) {
+    this.modalService.open(content).result.then((result) => {
+      this.closeResult = `Closed with: ${result}`;
+    }, (reason) => {
+      this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
+    })
+  }
+
+  private getDismissReason(reason: any): string {
+    if (reason === ModalDismissReasons.ESC) {
+      return 'by pressing ESC';
+    } else if (reason === ModalDismissReasons.BACKDROP_CLICK) {
+      return 'by clicking on a backdrop';
+    } else {
+      return `with: ${reason}`;
+    }
   }
 
 }

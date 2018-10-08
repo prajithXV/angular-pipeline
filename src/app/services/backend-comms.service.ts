@@ -190,7 +190,9 @@ const urls = {
     url: "tp/case_ticklers",
     caseId: "CaseId",
     pageNr: "PageNr",
-    pageSize: "PageSize"
+    pageSize: "PageSize",
+    id: "Id",
+    DeletedBy: "DeletedBy"
   },
 
   ticklersMap: {
@@ -1981,6 +1983,29 @@ export class BackendCommsService {
       })
       .catch(this.handleError);
   }
+
+  //Delete case tickler
+  deleteCaseTickler(id: number, agent: string): Promise<number> {
+
+    let params = this.getParamsWithIETimestamp();
+    params.set(urls.processCaseTickler.id, id.toString());
+    params.set(urls.processCaseTickler.DeletedBy, agent);
+    let options = new RequestOptions({
+      search: params,
+      headers: this.getHeaderWithAuth()
+    });
+    options.headers.set(urls.general.headers.content.key, urls.general.headers.content.value);
+
+    return this._http.delete(BackendCommsService.getUrl(urls.processCaseTickler.url), options)
+      .toPromise()
+      .then(resp => {
+        console.log(resp);
+        return parseInt(resp.text());
+      })
+      .catch(this.handleError);
+  }
+
+
 
 
   //Remove tickler type
