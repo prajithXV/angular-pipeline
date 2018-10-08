@@ -27,6 +27,10 @@ export const getUserByCodeBody = [
       {
         "RoleCd": "TICKLER_VIEW",
         "RoleNm": "Tickler view"
+      },
+      {
+        "RoleCd": "TICKLER_DELETE",
+        "RoleNm": "Tickler delete"
       }
     ]
   }

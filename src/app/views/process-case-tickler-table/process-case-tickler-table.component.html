@@ -63,18 +63,18 @@
           </button>
         </td>
 
-        <td><i *ngIf="!waitingToRemove && isRecent" class="trash fas fa-trash-alt" (click)="openModal(content)"></i>
-        <waiting-backend *ngIf="waitingToRemove"></waiting-backend>
+        <td><i *ngIf="!isWaiting(ct) && isRecent && canDeleteCaseTickler" class="trash fas fa-trash-alt pointer" (click)="openModal(content)"></i>
+        <waiting-backend *ngIf="isWaiting(ct)"></waiting-backend>
         </td>
         <ng-template #content let-c="close" let-d="dismiss">
           <div class="modal-header">
-            <h4 class="modal-title">Remove tickler type</h4>
+            <h4 class="modal-title">Delete case</h4>
             <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
               <span aria-hidden="true">&times;</span>
             </button>
           </div>
           <div class="modal-body">
-            <p class="text">Are you sure you want to remove this case tickler ?</p>
+            <p class="text">Are you sure you want to delete this case?</p>
           </div>
           <div class="modal-footer">
             <button type="button" class="pull-left btn btn-danger" (click)="deleteCaseTickler(ct); c('Close click')">
@@ -83,7 +83,6 @@
             <button type="button" class=" pull-left btn btn-outline-dark" (click)="c('Close click')">Cancel</button>
           </div>
         </ng-template>
-
       </tr>
       <!--attributes-->
       <tr *ngIf="isTicklerAttributeVisible(ct)">

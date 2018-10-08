@@ -1984,7 +1984,7 @@ export class BackendCommsService {
       .catch(this.handleError);
   }
 
-  //Delete case tickler
+  //Delete case ticklergg
   deleteCaseTickler(id: number, agent: string): Promise<number> {
 
     let params = this.getParamsWithIETimestamp();

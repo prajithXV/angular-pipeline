@@ -9,6 +9,7 @@ import {CampaignListAttribute} from "../../models/campaign-list-attribute";
 import {ModalDismissReasons, NgbModal} from "@ng-bootstrap/ng-bootstrap";
 import {UserFeedbackService} from "../../services/user-feedback.service";
 import {GlobalStateService} from "../../services/global-state.service";
+import {ROLE_STANDARD_CODES} from "../../models/role";
 
 
 @Component({
@@ -31,7 +32,7 @@ export class ProcessCaseTicklerTableComponent implements OnInit {
   @Input() isCreating: boolean = false;
   private ticklerAttributesVisibles = {};
   private closeResult: string;
-  private waitingToRemove: boolean = false;
+  private waitingToRemove: number[] = [];
 
   constructor(private _dataService:DataService, private modalService: NgbModal, private _userFeedbackService: UserFeedbackService,
               private _globalStateService: GlobalStateService) {
@@ -101,20 +102,32 @@ export class ProcessCaseTicklerTableComponent implements OnInit {
 
 
   deleteCaseTickler(caseTickler: ProcessCaseTickler) {
-
-    this.waitingToRemove = true;
+    let index = null;
+    this.waitingToRemove.push(caseTickler.id);
     this._dataService.deleteCaseTickler(caseTickler, this._globalStateService.loggedAgent).then(() => {
-
-      // this.ticklerTypeVisibles = {};
-      this.onDeleteTicklerCase.emit();
-      this.waitingToRemove = false;
-      this._userFeedbackService.handleSuccess("Tickler type removed");
+      if (caseTickler.id) {
+        // remove index
+        index = this.waitingToRemove.indexOf(caseTickler.id);
+        this.waitingToRemove.splice(index, 1);
+      }
+      this.ticklerAttributesVisibles = {};
+      this.onDeleteTicklerCase.emit(caseTickler);
+      this._userFeedbackService.handleSuccess("Case tickler removed");
     }).catch(err => {
-      this._userFeedbackService.handleError("Error removing tickler type", err);
-      this.waitingToRemove = false;
+      this._userFeedbackService.handleError("Error removing case tickler", err);
+      this.waitingToRemove.splice(index, 1);
 
     });
+  }
 
+
+  //return index when waiting to remove
+  private isWaiting(caseTickler: ProcessCaseTickler) {
+    return this.waitingToRemove.indexOf(caseTickler.id) > -1
+  }
+
+  get canDeleteCaseTickler(){
+    return this._globalStateService.loggedAgentHasRoleCode(ROLE_STANDARD_CODES.TICKLER_DELETE)
   }
 
 
