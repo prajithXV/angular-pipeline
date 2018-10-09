@@ -896,6 +896,8 @@ export class BackendModelConversorService {
       callR.createdBy = cr.CreatedBy;
       callR.firstName = cr.FirstName;
       callR.lastName = cr.LastName;
+      callR.accountNumber = cr.AccountNr;
+      callR.accountType = cr.AccountType;
 
       ret.push(callR);
     }

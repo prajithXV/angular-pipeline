@@ -833,6 +833,10 @@ export class DataService {
     return this._backCommsService.updateLovValue(lovValue.id, model.valueCode, model.valueName, model.valueDescription, model.isActive, agent.account);
   }
 
+  deleteCaseTickler(caseTickler: ProcessCaseTickler, agent: Agent): Promise<number>{
+    return this._backCommsService.deleteCaseTickler(caseTickler.id, agent.account);
+  }
+
 
   private handleError(code: DSErrorCodes, message: string, severity: number, inner: any, errorStream?: Subject<UFNotification>) {
     // Create the UFNotification
