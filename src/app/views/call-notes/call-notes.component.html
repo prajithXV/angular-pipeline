@@ -1,0 +1,45 @@
+<div *ngIf="memoNotes && memoNotes?.length > 0">
+<ng-container>
+  <div class="feed-activity-list">
+    <div class="memo-notes-functions text-right">
+      <button class="btn btn-xs btn-primary"><i class="fa fa-file-o"></i> New</button>
+      <input (change)="refreshCallNotes()" class="by-account-checkbox"
+        value=""
+        type="checkbox"
+        name="by account"
+        title="by account"
+        checked
+      />
+    </div>
+
+    <div class="feed-element" *ngFor="let memoNote of memoNotes;">
+      <div class="media-body">
+        <div class="col-xs-8">
+          <ul class="list-unstyled">
+            <li>Customer <strong>{{memoNote.cifId}}</strong></li>
+          </ul>
+        </div>
+        <div class="col-xs-4" style="padding-right: 0;">
+          <ul class="list-unstyled">
+            <li>date <strong>{{memoNote.createdDate | coinDateTransform: "STD_DATE"}}</strong></li>
+            <li>account <strong>{{memoNote.accountId}} {{memoNote.accountType}}</strong></li>
+            <li>by <strong>{{memoNote.createdBy}}</strong></li>
+          </ul>
+        </div>
+
+        <div class="well" style="margin-top: 60px!important; padding: 10px 20px">
+          {{memoNote.note}}
+        </div>
+        <p></p>
+        <!--<div class="pull-right">-->
+          <!--<span class="label label-success">{{record.action}}</span>-->
+          <!--<span class="label label-info">{{record.contacted}}</span>-->
+          <!--<span class="label label-primary" [class.label-danger]="isFirstNoteCallLater(record, isFirst)">{{record.result}}</span>-->
+        <!--</div>-->
+      </div>
+    </div>
+  </div>
+</ng-container>
+</div>
+<div *ngIf="searchingCallNotes"><waiting-backend></waiting-backend> Searching...</div>
+<div *ngIf="!searchingCallNotes && memoNotes?.length == 0">No previous call records found.</div>

@@ -38,6 +38,7 @@ import {
 } from "../../services/temporal-state-service.service";
 import {ROLE_STANDARD_CODES} from "../../models/role";
 import {close} from "fs";
+import {MemoNote} from "../../models/memo-note";
 
 enum ResultsMode {
   NEW_CALL_RECORD,
@@ -132,6 +133,7 @@ export class ManageAccountComponent implements OnInit, OnDestroy, AfterViewInit 
   private isRefreshed: boolean = false;
   private additionalInfoSearched: boolean = false;
   private criteria: SearchTicklerCaseParams = new SearchTicklerCaseParams();
+  private searchingCallNotes: boolean = false;
   processCaseTicklers: ProcessCaseTickler[] = null;
   currentProcessCase: ProcessCase = null;
   ticklerTypes: TicklerType[] = null;
@@ -207,6 +209,7 @@ export class ManageAccountComponent implements OnInit, OnDestroy, AfterViewInit 
       this.searchingCoborrowers = true;
       this.searchingTodayContacts = true;
       this.searchingAccountDepInfo = true;
+      this.searchingCallNotes = true;
 
       // If an incoming call is in progress, select IC in nextcall
       let call = this._globalStateService.currentCall;
@@ -275,6 +278,11 @@ export class ManageAccountComponent implements OnInit, OnDestroy, AfterViewInit 
                   this.callLaterNotifyShowed = true;
                 }
               }
+
+              if(this.account.customer && this.account.customer.callNotes){
+                this.searchingCallNotes = false;
+              }
+
               if (this.account.customer && this.account.customer.coBorrowers) {
                 this.searchingCoborrowers = false;
               }
@@ -657,5 +665,14 @@ export class ManageAccountComponent implements OnInit, OnDestroy, AfterViewInit 
         event.preventDefault();
       }
     }
+  }
+
+  refreshCounters(notes: MemoNote[]) {
+    this.account.customer.callNotes = notes;
+  }
+
+
+  refreshSearching(searching: boolean) {
+    this.searchingCallNotes = searching;
   }
 }

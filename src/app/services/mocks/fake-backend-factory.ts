@@ -46,6 +46,7 @@ import {lovValuesBody1} from "../../../api/lov-values1";
 import {lovValuesBody2} from "../../../api/lov-values2";
 import {lovValuesBody3} from "../../../api/lov-values3";
 import {accInqDepBody} from "../../../api/accInq-cnDep";
+import {memoNotesBody} from "../../../api/memo-notes";
 
 let calling = false;
 
@@ -233,6 +234,16 @@ export function fakeBackendFactory(backend: MockBackend, options: BaseRequestOpt
         connection.mockRespond(new Response(new ResponseOptions({
           status: 200,
           body: callRecordsBody
+        })));
+      }
+
+      // CALLNOTES (MEMO NOTES)
+      else if (connection.request.url.indexOf('/callnotes') >= 0 && connection.request.method === RequestMethod.Get) {
+        console.log("FAK callnotes");
+        // connection.mockError({status: 500} as any as Error);
+        connection.mockRespond(new Response(new ResponseOptions({
+          status: 200,
+          body: memoNotesBody
         })));
       }
 

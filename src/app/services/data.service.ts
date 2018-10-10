@@ -63,7 +63,8 @@ export enum DSErrorCodes {
   no_account_history = 5,
   no_ssn = 6,
   no_alerts = 7,
-  no_previous_contacts = 8
+  no_previous_contacts = 8,
+  no_call_notes = 9
 }
 
 const DatePatern = 'yyyy-MM-dd';
@@ -298,6 +299,25 @@ export class DataService {
                       errorStream)
                   );
 
+                // Get call notes
+                let pagination = new Pagination(0, 20);
+                this._backCommsService.getCustomerCallNotes(acc.accountId, acc.accountType,pagination.currPage, pagination.pageSize, acc.customer.id)
+                  .then(callNotes => {
+                    acc.customer.resetCallNotes();
+                    for (let call of callNotes) {
+                      acc.customer.addCallNote(call);
+                    }
+                    ret.next(acc);
+                  })
+                  .catch(error =>
+                    this.handleError(
+                      DSErrorCodes.no_call_notes,
+                      "Error getting call notes",
+                      UFSeverity.warn,
+                      error,
+                      errorStream)
+                  );
+
                 // Get call records
                 this._backCommsService.getCustomerCallRecords(acc.customer.id)
                   .then(callRec => {
@@ -337,7 +357,12 @@ export class DataService {
                 // Get call records
                 this.loadCalls(acc, ret, errorStream);
               }, 50);
-            };
+
+              setTimeout(() => {
+                // Get call records
+                this.loadCallNotes(acc, ret, errorStream);
+              }, 50);
+            }
 
             ret.next(acc);
           })
@@ -374,6 +399,28 @@ export class DataService {
         this.handleError(
           DSErrorCodes.no_call_records,
           "Error getting call records",
+          UFSeverity.warn,
+          error,
+          errorStream)
+      );
+
+  }
+
+  loadCallNotes(acc: Account, ret: Subject<Account>, errorStream: Subject<UFNotification>) {
+    // Get call records
+    let pagination = new Pagination(0,20);
+    this._backCommsService.getCustomerCallNotes(acc.accountId, acc.accountType,pagination.currPage, pagination.currPage, acc.customer.id)
+      .then(callNotes => {
+        acc.customer.resetNotes();
+        for (let call of callNotes) {
+          acc.customer.addCallNote(call);
+        }
+        ret.next(acc);
+      })
+      .catch(error =>
+        this.handleError(
+          DSErrorCodes.no_call_notes,
+          "Error getting call notes",
           UFSeverity.warn,
           error,
           errorStream)

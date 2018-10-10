@@ -48,6 +48,7 @@ import {TelephonePipe} from "../pipes/telephone.pipe";
 import {Phone} from "../models/phone";
 import {LovType} from "../models/lov-types";
 import {LovValue} from "../models/lov-values";
+import {MemoNote} from "../models/memo-note";
 
 
 const urls = {
@@ -228,7 +229,15 @@ const urls = {
   listOfValues: {
     url: "dictionary/lov",
     lovCode: "LovCd"
-  }
+  },
+  callNotes: {
+    url: "callnotes",
+    accountId: "AccountId",
+    accountType: "AccountType",
+    customerId: "CifId",
+    pageNr: "PageNr",
+    pageSize: "PageSize",
+  },
 
 };
 
@@ -1214,6 +1223,32 @@ export class BackendCommsService {
           return new Promise<CallRecord[]>((resolve) => resolve([]));
         }
         return BackendModelConversorService.callRecords2CallRecords(resj);
+      })
+      .catch(this.handleError);
+  }
+
+  getCustomerCallNotes(accountId: string, accountType: string, pageNumber: number, pageSize: number, customerId?: string): Promise<MemoNote[]> {
+    // Set query params
+    let params = this.getParamsWithIETimestamp();
+    params.set(urls.callNotes.accountId, accountId);
+    params.set(urls.callNotes.accountType, accountType);
+    BackendCommsService.setNotEmptyParam(params, urls.callNotes.customerId, customerId);
+    params.set(urls.callNotes.pageNr, pageNumber.toString());
+    params.set(urls.callNotes.pageSize, pageSize.toString());
+    let options = new RequestOptions({
+      search: params,
+      headers: this.getHeaderWithAuth()
+    });
+    return this._http.get(BackendCommsService.getUrl(urls.callNotes.url), options)
+      .toPromise()
+      .then(resp => {
+        console.log(resp);
+        let resj = resp.json();
+        if (!resj || resj.length == 0) {
+          console.log("No call notes found");
+          return new Promise<MemoNote[]>((resolve) => resolve([]));
+        }
+        return BackendModelConversorService.callNotes(resj);
       })
       .catch(this.handleError);
   }

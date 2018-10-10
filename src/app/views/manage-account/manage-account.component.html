@@ -53,7 +53,11 @@
                   <span id="collection" [popover]="popCollection" placement="bottom" triggers="">Collection <notification-tab *ngIf="isNotifyActive()" [accountCol]="account?.collection"></notification-tab></span></ng-template>
                 <ng-template ngbTabContent>
                   <p></p>
-                  <account-collection [isMemo]="memoInText" (onHide)="showIcon(false)" [accountCol]="account?.collection"></account-collection>
+                  <account-collection
+                    [isMemo]="memoInText"
+                    [accountCol]="account?.collection"
+                    (onHide)="showIcon(false)">
+                  </account-collection>
                 </ng-template>
               </ngb-tab>
 
@@ -259,6 +263,18 @@
                 <ng-template ngbTabContent>
                   <p></p>
                   <customer-notes [searching]="searchingAlerts" [notes]="account?.customer?.alerts"></customer-notes>
+                </ng-template>
+              </ngb-tab>
+              <ngb-tab id="callNotes">
+                <ng-template ngbTabTitle><span [popover]="popAlerts" triggers="">Memo notes <tab-counter [data]="account?.customer?.callNotes" [searching]="searchingCallNotes"></tab-counter></span></ng-template>
+                <ng-template ngbTabContent>
+                  <p></p>
+                  <call-notes [account]="account"
+                              [memoNotes]="account?.customer?.callNotes"
+                              [searchingCallNotes]="searchingCallNotes"
+                              (refresh)="refreshCounters($event)"
+                              (refreshSearching)="refreshSearching($event)">
+                  </call-notes>
                 </ng-template>
               </ngb-tab>
             </ngb-tabset>
