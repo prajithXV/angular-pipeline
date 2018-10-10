@@ -35,8 +35,8 @@
       <!--<dd>{{accountCol?.reasonForDelinquency}}</dd>-->
       <dt>Charge-off amount:</dt>
       <dd>{{accountCol?.chargeOffAmount | coinCurrency}}</dd>
-      <!--<dt>Charge-off date:</dt>-->
-      <!--<dd>{{account?.accountDep?.chargeOffDate | coinDateTransform: "STD_DATE":"MM/DD/YYYY"}}</dd>-->
+      <dt>Charge-off date:</dt>
+      <dd>{{accountCol?.chargeOffDate | coinDateTransform: "STD_DATE":"MM/DD/YYYY"}}</dd>
       <dt>Reason for delinquency:</dt>
       <dd>{{accountCol?.previousBrokenPromise}}</dd>
       <dt class="interest-rate">Interest rate change date:</dt>
