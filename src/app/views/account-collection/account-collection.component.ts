@@ -9,6 +9,7 @@ import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 })
 export class AccountCollectionComponent implements OnInit {
   @Input() accountCol: AccountCollection;
+  @Input() account: Account;
   @Input() isMemo: boolean;
   @Output() onHide = new EventEmitter<boolean>();
 

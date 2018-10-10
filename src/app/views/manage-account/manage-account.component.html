@@ -53,7 +53,13 @@
                   <span id="collection" [popover]="popCollection" placement="bottom" triggers="">Collection <notification-tab *ngIf="isNotifyActive()" [accountCol]="account?.collection"></notification-tab></span></ng-template>
                 <ng-template ngbTabContent>
                   <p></p>
-                  <account-collection [isMemo]="memoInText" (onHide)="showIcon(false)" [accountCol]="account?.collection"></account-collection>
+                  <account-collection
+                    [isMemo]="memoInText"
+                    [accountCol]="account?.collection"
+                    [account]="account"
+                    (onHide)="showIcon(false)" >
+
+                  </account-collection>
                 </ng-template>
               </ngb-tab>
 
