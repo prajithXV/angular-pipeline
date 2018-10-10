@@ -31,7 +31,7 @@ describe('inspinia App', () => {
   });
 
   it('login navigation: not logged', () => {
-    // let EC = protractor.ExpectedConditions;
+    let EC = protractor.ExpectedConditions;
     page.navigateTo('/#/app/account/1123461/L/232');
     page.checkCurrentUrl('/#/app/login');
 
@@ -47,7 +47,8 @@ describe('inspinia App', () => {
     page.navigateTo('#/admin/lovs');
     page.checkCurrentUrl('/#/app/login');
 
-    // browser.wait(EC.visibilityOf(page.getUserInput()));
+    browser.wait(EC.visibilityOf(page.getUserInput()));
+
   });
 
 });

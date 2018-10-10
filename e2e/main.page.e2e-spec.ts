@@ -1,7 +1,7 @@
 import {LoginPage} from './login.page';
 import {MainPage} from "./main.page";
 
-describe('inspinia App', () => {
+fdescribe('inspinia App', () => {
   let loginPage: LoginPage;
   let mainPage: MainPage;
 
@@ -211,7 +211,6 @@ describe('inspinia App', () => {
 
   });
 
-
   it('Account search navigation', () => {
 
     mainPage.checkTab('#campaignProcessing', true);
@@ -222,7 +221,7 @@ describe('inspinia App', () => {
 
     mainPage.onClickTab('#accountSearch');
 
-    mainPage.checkForm(["", "", "", ""], [] );
+    mainPage.checkForm(["", "", "", ""], ["0: null"] );
 
     mainPage.checkTab('#campaignProcessing', false);
     mainPage.checkTab('#accountSearch', true);
@@ -253,7 +252,7 @@ describe('inspinia App', () => {
 
     mainPage.onClickTab('#accountSearch');
 
-    mainPage.checkForm(["", "", "", ""], [] );
+    mainPage.checkForm(["", "", "", ""], ["0: null"] );
 
     mainPage.checkTab('#campaignProcessing', false);
     mainPage.checkTab('#accountSearch', true);
@@ -266,12 +265,10 @@ describe('inspinia App', () => {
     //check
     mainPage.checkTablesData(['',"ABC1234",	"777778888",	"LUFFY D"	,"7703 SKYPIEA SK, 706154826, HYRULE, HY"], 'customer-summary',0);
 
-    mainPage.checkTablesData(['109','A','$0.00','Active','Primary','01','VENDOR', 'Go', ''], 'accounts-table', 0);
-    mainPage.checkTablesData(['1116',	'D', '$1,229,910.22',	'Dormant', 'Joint',	'MM',	'Money Market Account', 'Go', ''], 'accounts-table', 1);
-    mainPage.checkTablesData(['1123461',	'D',	'-$113,047.44',	'Dormant',	'Primary',	'N1',	'NOW Account', 'Go', ''], 'accounts-table', 2);
-    mainPage.checkTablesData(['9879879858',	'D',	'$0.00',	'Active',	'Primary',	'CC', 'Personal Checking Account', 'Go', ''], 'accounts-table', 3);
-    mainPage.checkTablesData(['1423',	'L',	'$142,943.00',	'Matured',	'Primary',	'02',	'Commercial Loan', 'Go', ''], 'accounts-table', 4);
-    mainPage.checkTablesData(['75001',	'T',	'$59,191.87',	'Active',	'Primary',	'30',	'Certificate of Deposit', 'Go', ''], 'accounts-table', 5);
+    mainPage.checkTablesData(['1116',	'D', '$1,229,910.22',	'Dormant', 'Joint',	'MM',	'Money Market Account', 'Go', ''], 'accounts-table', 0);
+    mainPage.checkTablesData(['1123461',	'D',	'-$113,047.44',	'Dormant',	'Primary',	'N1',	'NOW Account', 'Go', ''], 'accounts-table', 1);
+    mainPage.checkTablesData(['9879879858',	'D',	'$0.00',	'Active',	'Primary',	'CC', 'Personal Checking Account', 'Go', ''], 'accounts-table', 2);
+    mainPage.checkTablesData(['1423',	'L',	'$142,943.00',	'Matured',	'Primary',	'02',	'Commercial Loan', 'Go', ''], 'accounts-table', 3);
 
     mainPage.onClick('Go');
 
@@ -303,7 +300,7 @@ describe('inspinia App', () => {
 
     mainPage.onClickTab('#accountSearch');
 
-    mainPage.checkForm(["", "", "", ""], [] );
+    mainPage.checkForm(["", "", "", ""], ["0: null"] );
 
     mainPage.checkTab('#campaignProcessing', false);
     mainPage.checkTab('#accountSearch', true);
@@ -316,12 +313,10 @@ describe('inspinia App', () => {
     //check
     mainPage.checkTablesData(['',"ABC1234",	"777778888",	"LUFFY D"	,"7703 SKYPIEA SK, 706154826, HYRULE, HY"], 'customer-summary',0);
 
-    mainPage.checkTablesData(['109','A','$0.00','Active','Primary','01','VENDOR', 'Go', ''], 'accounts-table', 0);
-    mainPage.checkTablesData(['1116',	'D', '$1,229,910.22',	'Dormant', 'Joint',	'MM',	'Money Market Account', 'Go', ''], 'accounts-table', 1);
-    mainPage.checkTablesData(['1123461',	'D',	'-$113,047.44',	'Dormant',	'Primary',	'N1',	'NOW Account', 'Go', ''], 'accounts-table', 2);
-    mainPage.checkTablesData(['9879879858',	'D',	'$0.00',	'Active',	'Primary',	'CC', 'Personal Checking Account', 'Go', ''], 'accounts-table', 3);
-    mainPage.checkTablesData(['1423',	'L',	'$142,943.00',	'Matured',	'Primary',	'02',	'Commercial Loan', 'Go', ''], 'accounts-table', 4);
-    mainPage.checkTablesData(['75001',	'T',	'$59,191.87',	'Active',	'Primary',	'30',	'Certificate of Deposit', 'Go', ''], 'accounts-table', 5);
+    mainPage.checkTablesData(['1116',	'D', '$1,229,910.22',	'Dormant', 'Joint',	'MM',	'Money Market Account', 'Go', ''], 'accounts-table', 0);
+    mainPage.checkTablesData(['1123461',	'D',	'-$113,047.44',	'Dormant',	'Primary',	'N1',	'NOW Account', 'Go', ''], 'accounts-table', 1);
+    mainPage.checkTablesData(['9879879858',	'D',	'$0.00',	'Active',	'Primary',	'CC', 'Personal Checking Account', 'Go', ''], 'accounts-table', 2);
+    mainPage.checkTablesData(['1423',	'L',	'$142,943.00',	'Matured',	'Primary',	'02',	'Commercial Loan', 'Go', ''], 'accounts-table', 3);
 
     mainPage.onClick('Go');
 
@@ -466,7 +461,7 @@ describe('inspinia App', () => {
     mainPage.checkToggleFilter('#collapseFilter2', true);
 
 
-    mainPage.checkForm(['SSN', "", "", ""], []);
+    mainPage.checkForm(['SSN', "", "", "", ], ["0: null"]);
 
   });
 

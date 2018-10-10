@@ -47,6 +47,7 @@ export const accInqBody1423L = {
             queueingFlag: "# qf",
             historicalAttemptsCalls: 992,
             chargeOffAmount: "0.00",
+            chargeOffDate: "6/27/2018 12:00:00 AM",
             nonAccrualDate: "# non acc da",
             reasonForDelinquency: "# reas del",
             dateStampForRfD: "# date stmp",

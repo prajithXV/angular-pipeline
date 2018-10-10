@@ -837,6 +837,7 @@ export class BackendModelConversorService {
     ret.pastDue30YTD = src.pastDue30YTD;
     ret.maturityDate = src.maturityDate;
     ret.origLoanAmount = src.origLoanAmount;
+    ret.chargeOffDate = src.chargeOffDate;
     return ret;
   }
 
