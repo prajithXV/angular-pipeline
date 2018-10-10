@@ -1,7 +1,7 @@
 import {LoginPage} from './login.page';
 import {MainPage} from "./main.page";
 
-describe('inspinia App', () => {
+fdescribe('inspinia App', () => {
   let loginPage: LoginPage;
   let mainPage: MainPage;
 
@@ -211,7 +211,6 @@ describe('inspinia App', () => {
 
   });
 
-
   it('Account search navigation', () => {
 
     mainPage.checkTab('#campaignProcessing', true);
@@ -222,7 +221,7 @@ describe('inspinia App', () => {
 
     mainPage.onClickTab('#accountSearch');
 
-    mainPage.checkForm(["", "", "", ""], [] );
+    mainPage.checkForm(["", "", "", ""], ["0: null"] );
 
     mainPage.checkTab('#campaignProcessing', false);
     mainPage.checkTab('#accountSearch', true);
@@ -253,7 +252,7 @@ describe('inspinia App', () => {
 
     mainPage.onClickTab('#accountSearch');
 
-    mainPage.checkForm(["", "", "", ""], [] );
+    mainPage.checkForm(["", "", "", ""], ["0: null"] );
 
     mainPage.checkTab('#campaignProcessing', false);
     mainPage.checkTab('#accountSearch', true);
@@ -266,12 +265,10 @@ describe('inspinia App', () => {
     //check
     mainPage.checkTablesData(['',"ABC1234",	"777778888",	"LUFFY D"	,"7703 SKYPIEA SK, 706154826, HYRULE, HY"], 'customer-summary',0);
 
-    mainPage.checkTablesData(['109','A','$0.00','Active','Primary','01','VENDOR', 'Go', ''], 'accounts-table', 0);
-    mainPage.checkTablesData(['1116',	'D', '$1,229,910.22',	'Dormant', 'Joint',	'MM',	'Money Market Account', 'Go', ''], 'accounts-table', 1);
-    mainPage.checkTablesData(['1123461',	'D',	'-$113,047.44',	'Dormant',	'Primary',	'N1',	'NOW Account', 'Go', ''], 'accounts-table', 2);
-    mainPage.checkTablesData(['9879879858',	'D',	'$0.00',	'Active',	'Primary',	'CC', 'Personal Checking Account', 'Go', ''], 'accounts-table', 3);
-    mainPage.checkTablesData(['1423',	'L',	'$142,943.00',	'Matured',	'Primary',	'02',	'Commercial Loan', 'Go', ''], 'accounts-table', 4);
-    mainPage.checkTablesData(['75001',	'T',	'$59,191.87',	'Active',	'Primary',	'30',	'Certificate of Deposit', 'Go', ''], 'accounts-table', 5);
+    mainPage.checkTablesData(['1116',	'D', '$1,229,910.22',	'Dormant', 'Joint',	'MM',	'Money Market Account', 'Go', ''], 'accounts-table', 0);
+    mainPage.checkTablesData(['1123461',	'D',	'-$113,047.44',	'Dormant',	'Primary',	'N1',	'NOW Account', 'Go', ''], 'accounts-table', 1);
+    mainPage.checkTablesData(['9879879858',	'D',	'$0.00',	'Active',	'Primary',	'CC', 'Personal Checking Account', 'Go', ''], 'accounts-table', 2);
+    mainPage.checkTablesData(['1423',	'L',	'$142,943.00',	'Matured',	'Primary',	'02',	'Commercial Loan', 'Go', ''], 'accounts-table', 3);
 
     mainPage.onClick('Go');
 
@@ -303,7 +300,7 @@ describe('inspinia App', () => {
 
     mainPage.onClickTab('#accountSearch');
 
-    mainPage.checkForm(["", "", "", ""], [] );
+    mainPage.checkForm(["", "", "", ""], ["0: null"] );
 
     mainPage.checkTab('#campaignProcessing', false);
     mainPage.checkTab('#accountSearch', true);
@@ -316,12 +313,10 @@ describe('inspinia App', () => {
     //check
     mainPage.checkTablesData(['',"ABC1234",	"777778888",	"LUFFY D"	,"7703 SKYPIEA SK, 706154826, HYRULE, HY"], 'customer-summary',0);
 
-    mainPage.checkTablesData(['109','A','$0.00','Active','Primary','01','VENDOR', 'Go', ''], 'accounts-table', 0);
-    mainPage.checkTablesData(['1116',	'D', '$1,229,910.22',	'Dormant', 'Joint',	'MM',	'Money Market Account', 'Go', ''], 'accounts-table', 1);
-    mainPage.checkTablesData(['1123461',	'D',	'-$113,047.44',	'Dormant',	'Primary',	'N1',	'NOW Account', 'Go', ''], 'accounts-table', 2);
-    mainPage.checkTablesData(['9879879858',	'D',	'$0.00',	'Active',	'Primary',	'CC', 'Personal Checking Account', 'Go', ''], 'accounts-table', 3);
-    mainPage.checkTablesData(['1423',	'L',	'$142,943.00',	'Matured',	'Primary',	'02',	'Commercial Loan', 'Go', ''], 'accounts-table', 4);
-    mainPage.checkTablesData(['75001',	'T',	'$59,191.87',	'Active',	'Primary',	'30',	'Certificate of Deposit', 'Go', ''], 'accounts-table', 5);
+    mainPage.checkTablesData(['1116',	'D', '$1,229,910.22',	'Dormant', 'Joint',	'MM',	'Money Market Account', 'Go', ''], 'accounts-table', 0);
+    mainPage.checkTablesData(['1123461',	'D',	'-$113,047.44',	'Dormant',	'Primary',	'N1',	'NOW Account', 'Go', ''], 'accounts-table', 1);
+    mainPage.checkTablesData(['9879879858',	'D',	'$0.00',	'Active',	'Primary',	'CC', 'Personal Checking Account', 'Go', ''], 'accounts-table', 2);
+    mainPage.checkTablesData(['1423',	'L',	'$142,943.00',	'Matured',	'Primary',	'02',	'Commercial Loan', 'Go', ''], 'accounts-table', 3);
 
     mainPage.onClick('Go');
 
@@ -466,7 +461,7 @@ describe('inspinia App', () => {
     mainPage.checkToggleFilter('#collapseFilter2', true);
 
 
-    mainPage.checkForm(['SSN', "", "", ""], []);
+    mainPage.checkForm(['SSN', "", "", "", ], ["0: null", "0: null"]);
 
   });
 
@@ -497,12 +492,12 @@ describe('inspinia App', () => {
     mainPage.checkComponent('tickler-cases-table', true);
     mainPage.checkComponent('process-case-tickler-table', true);
 
-    mainPage.checkTablesData(['', '16','6300104605', 'JAA1223', 'eNavarre', 'sdfgsdfg', 'SPOC', 'CLOSED', 'vsharapo','03/23/2018','03/27/2018', 'Go'], 'tickler-cases-table', 0 );
-    mainPage.checkTablesData(['', '17','6300104605', 'JAA1223', 'eNavarre', 'sdfgsdfg', 'SPOC', 'NEW', 'vsharapo','03/23/2018','03/27/2018', 'Go'], 'tickler-cases-table', 1 );
-    mainPage.checkTablesData(['', '18','6300104605', 'JAA1223', 'eNavarre', 'sdfgsdfg', 'SPOC', 'CLOSED', 'vsharapo','03/23/2018','03/27/2018', 'Go'], 'tickler-cases-table', 2 );
+    mainPage.checkTablesData(["", "16", "6300104605", "D", "JAA1223", "FirstN LastN", "SPOC contact with customer", "eNavarre", "sdfgsdfg", "SPOC", "NEW", "vsharapo", "03/23/2018", "03/27/2018", "Go"], 'tickler-cases-table', 0 );
+    mainPage.checkTablesData(["", "17", "6300104605", "L", "JAA1223", "FirstN LastN", "SPOC contact with customer", "eNavarre", "sdfgsdfg", "SPOC", "NEW", "vsharapo", "03/23/2018", "03/27/2018", "Go"], 'tickler-cases-table', 1 );
+    mainPage.checkTablesData(["", "18", "6300104605", "L", "JAA1223", "FirstN LastN", "SPOC contact with customer", "eNavarre", "sdfgsdfg", "SPOC", "CLOSED", "vsharapo", "03/23/2018", "03/27/2018", "Go"], 'tickler-cases-table', 2 );
 
     mainPage.onClick('Go');
-    mainPage.checkCurrentUrl('/process/case/16');
+    mainPage.checkCurrentUrl('/process/case/16/D');
 
     mainPage.returnToMain();
 
@@ -541,9 +536,9 @@ describe('inspinia App', () => {
     mainPage.checkComponent('tickler-cases-table', true);
     mainPage.checkComponent('process-case-tickler-table', true);
 
-    mainPage.checkTablesData(['', '16','6300104605', 'JAA1223', 'eNavarre', 'sdfgsdfg', 'SPOC', 'CLOSED', 'vsharapo','03/23/2018','03/27/2018', 'Go'], 'tickler-cases-table', 0 );
-    mainPage.checkTablesData(['', '17','6300104605', 'JAA1223', 'eNavarre', 'sdfgsdfg', 'SPOC', 'NEW', 'vsharapo','03/23/2018','03/27/2018', 'Go'], 'tickler-cases-table', 1 );
-    mainPage.checkTablesData(['', '18','6300104605', 'JAA1223', 'eNavarre', 'sdfgsdfg', 'SPOC', 'CLOSED', 'vsharapo','03/23/2018','03/27/2018', 'Go'], 'tickler-cases-table', 2 );
+    mainPage.checkTablesData(["", "16", "6300104605", "D", "JAA1223", "FirstN LastN", "SPOC contact with customer", "eNavarre", "sdfgsdfg", "SPOC", "NEW", "vsharapo", "03/23/2018", "03/27/2018", "Go"], 'tickler-cases-table', 0 );
+    mainPage.checkTablesData(["", "17", "6300104605", "L", "JAA1223", "FirstN LastN", "SPOC contact with customer", "eNavarre", "sdfgsdfg", "SPOC", "NEW", "vsharapo", "03/23/2018", "03/27/2018", "Go"], 'tickler-cases-table', 1 );
+    mainPage.checkTablesData(["", "18", "6300104605", "L", "JAA1223", "FirstN LastN", "SPOC contact with customer", "eNavarre", "sdfgsdfg", "SPOC", "CLOSED", "vsharapo", "03/23/2018", "03/27/2018", "Go"], 'tickler-cases-table', 2 );
 
 
     mainPage.checkTablesData([], 'process-case-tickler-table', null,'Select a process case.');
@@ -565,9 +560,9 @@ describe('inspinia App', () => {
     mainPage.checkComponent('tickler-cases-table', true);
     mainPage.checkComponent('process-case-tickler-table', true);
 
-    mainPage.checkTablesData(['', '16','6300104605', 'JAA1223', 'eNavarre', 'sdfgsdfg', 'SPOC', 'CLOSED', 'vsharapo','03/23/2018','03/27/2018', 'Go'], 'tickler-cases-table', 0 );
-    mainPage.checkTablesData(['', '17','6300104605', 'JAA1223', 'eNavarre', 'sdfgsdfg', 'SPOC', 'NEW', 'vsharapo','03/23/2018','03/27/2018', 'Go'], 'tickler-cases-table', 1 );
-    mainPage.checkTablesData(['', '18','6300104605', 'JAA1223', 'eNavarre', 'sdfgsdfg', 'SPOC', 'CLOSED', 'vsharapo','03/23/2018','03/27/2018', 'Go'], 'tickler-cases-table', 2 );
+    mainPage.checkTablesData(["", "16", "6300104605", "D", "JAA1223", "FirstN LastN", "SPOC contact with customer", "eNavarre", "sdfgsdfg", "SPOC", "NEW", "vsharapo", "03/23/2018", "03/27/2018", "Go"], 'tickler-cases-table', 0 );
+    mainPage.checkTablesData(["", "17", "6300104605", "L", "JAA1223", "FirstN LastN", "SPOC contact with customer", "eNavarre", "sdfgsdfg", "SPOC", "NEW", "vsharapo", "03/23/2018", "03/27/2018", "Go"], 'tickler-cases-table', 1 );
+    mainPage.checkTablesData(["", "18", "6300104605", "L", "JAA1223", "FirstN LastN", "SPOC contact with customer", "eNavarre", "sdfgsdfg", "SPOC", "CLOSED", "vsharapo", "03/23/2018", "03/27/2018", "Go"], 'tickler-cases-table', 2 );
 
     mainPage.checkToggleFilter('#search-params', true);
 
@@ -602,18 +597,18 @@ describe('inspinia App', () => {
     mainPage.checkComponent('tickler-cases-table', true);
     mainPage.checkComponent('process-case-tickler-table', true);
 
-    mainPage.checkTablesData(['', '16','6300104605', 'JAA1223', 'eNavarre', 'sdfgsdfg', 'SPOC', 'CLOSED', 'vsharapo','03/23/2018','03/27/2018', 'Go'], 'tickler-cases-table', 0 );
-    mainPage.checkTablesData(['', '17','6300104605', 'JAA1223', 'eNavarre', 'sdfgsdfg', 'SPOC', 'NEW', 'vsharapo','03/23/2018','03/27/2018', 'Go'], 'tickler-cases-table', 1 );
-    mainPage.checkTablesData(['', '18','6300104605', 'JAA1223', 'eNavarre', 'sdfgsdfg', 'SPOC', 'CLOSED', 'vsharapo','03/23/2018','03/27/2018', 'Go'], 'tickler-cases-table', 2 );
+    mainPage.checkTablesData(["", "16", "6300104605", "D", "JAA1223", "FirstN LastN", "SPOC contact with customer", "eNavarre", "sdfgsdfg", "SPOC", "NEW", "vsharapo", "03/23/2018", "03/27/2018", "Go"], 'tickler-cases-table', 0 );
+    mainPage.checkTablesData(["", "17", "6300104605", "L", "JAA1223", "FirstN LastN", "SPOC contact with customer", "eNavarre", "sdfgsdfg", "SPOC", "NEW", "vsharapo", "03/23/2018", "03/27/2018", "Go"], 'tickler-cases-table', 1 );
+    mainPage.checkTablesData(["", "18", "6300104605", "L", "JAA1223", "FirstN LastN", "SPOC contact with customer", "eNavarre", "sdfgsdfg", "SPOC", "CLOSED", "vsharapo", "03/23/2018", "03/27/2018", "Go"], 'tickler-cases-table', 2 );
 
     mainPage.selectProcessCase('16');
 
-    mainPage.checkTablesData(['1', 'SPOC contact with customer', 'test','vsharapo', '04/19/2018 04:24 PM', ''],'process-case-tickler-table', 0);
-    mainPage.checkTablesData(['5', 'loss mit pkg info received', 'test','vsharapo', '04/12/2018 04:24 PM', ''],'process-case-tickler-table', 1);
-    mainPage.checkTablesData(['6', 'test', 'test','vsharapo', '03/19/2018 04:24 PM', ''],'process-case-tickler-table', 2);
-    mainPage.checkTablesData(['2', 'Loss mitigation package sent', 'test','vsharapo', '02/19/2018 04:24 PM', ''],'process-case-tickler-table', 3);
-    mainPage.checkTablesData(['3', 'loss mit pkg rec complete', 'test','vsharapo', '01/19/2018 04:24 PM', ''],'process-case-tickler-table', 4);
-    mainPage.checkTablesData(['4', 'loss mit pkg incomplete', 'test','vsharapo', '12/19/2017 04:24 PM', ''],'process-case-tickler-table', 5);
+    mainPage.checkTablesData(['1', 'SPOC contact with customer', 'test','vsharapo', '04/19/2018 04:24 PM', '', ''],'process-case-tickler-table', 0);
+    mainPage.checkTablesData(['5', 'loss mit pkg info received', 'test','vsharapo', '04/12/2018 04:24 PM', '', ''],'process-case-tickler-table', 1);
+    mainPage.checkTablesData(['6', 'test', 'test','vsharapo', '03/19/2018 04:24 PM', '', ''],'process-case-tickler-table', 2);
+    mainPage.checkTablesData(['2', 'Loss mitigation package sent', 'test','vsharapo', '02/19/2018 04:24 PM', '', ''],'process-case-tickler-table', 3);
+    mainPage.checkTablesData(['3', 'loss mit pkg rec complete', 'test','vsharapo', '01/19/2018 04:24 PM', '', ''],'process-case-tickler-table', 4);
+    mainPage.checkTablesData(['4', 'loss mit pkg incomplete', 'test','vsharapo', '12/19/2017 04:24 PM', '', ''],'process-case-tickler-table', 5);
 
   });
 
@@ -646,7 +641,7 @@ describe('inspinia App', () => {
     mainPage.checkComponent('tickler-cases-table', true);
     mainPage.checkComponent('process-case-tickler-table', true);
 
-    mainPage.selectProcessCase('16');
+    mainPage.selectProcessCase('18');
 
     mainPage.checkButtonEnabled('New', false);
     mainPage.onClick('New');
@@ -988,7 +983,7 @@ describe('inspinia App', () => {
 
   });
 
-  it('Tickler processes navigation: changing tabs with filter', () => {
+  fit('Tickler processes navigation: changing tabs with filter', () => {
 
     mainPage.checkTab('#campaignProcessing', true);
     mainPage.checkTab('#accountSearch', false);
@@ -1009,7 +1004,7 @@ describe('inspinia App', () => {
 
     mainPage.onClickTab('#accountSearch');
 
-    mainPage.checkForm(['', '', '', ''], []);
+    mainPage.checkForm(['', '', '', ''], ['0: null']);
 
     mainPage.checkComponent('campaign-list-accounts-table', true);
     mainPage.checkComponent('customer-summary', false);
@@ -1029,7 +1024,7 @@ describe('inspinia App', () => {
 
     mainPage.onCollapseFilter('#search-params');
 
-    mainPage.checkForm(['SSN', '', '', '',], []);
+    mainPage.checkForm(['SSN', '', '', '',], ['0: null', '0: null']);
 
     mainPage.onClickTab('#campaignProcessing');
 
@@ -1039,11 +1034,11 @@ describe('inspinia App', () => {
     mainPage.checkComponent('tickler-cases-table', false);
     mainPage.checkComponent('process-case-tickler-table', false);
 
-    mainPage.checkForm(["", "", ""], ["DIRECT", "0: null"] );
+    mainPage.checkForm(["", "", ""], ["DIRECT", "0: null", '0: null'] );
 
     mainPage.onClickTab('#ticklerProcesses');
 
-    mainPage.checkForm(['', '', '', ''], ['0: null', '0: null', '0: null']);
+    mainPage.checkForm(['', '', '', ''], ['0: null', '0: null', '0: null', "0: null"]);
 
     mainPage.checkComponent('campaign-list-accounts-table', false);
     mainPage.checkComponent('customer-summary', true);
@@ -1064,13 +1059,13 @@ describe('inspinia App', () => {
 
     mainPage.onClickTab('#accountSearch');
 
-    mainPage.checkForm(['', '', '', '',], []);
+    mainPage.checkForm(['', '', '', '',], ['0: null']);
 
     mainPage.onClickTab('#ticklerProcesses');
 
     mainPage.onCollapseFilter('#search-params');
 
-    mainPage.checkForm(['', '', '1234 cif', ''], ['0: null', '0: null', '1: DUE']);
+    mainPage.checkForm(['', '', '1234 cif', ''], ['0: null', '0: null', '0: null']);
 
     mainPage.checkComponent('campaign-list-accounts-table', false);
     mainPage.checkComponent('customer-summary', false);

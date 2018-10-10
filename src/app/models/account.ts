@@ -141,6 +141,7 @@ export class AccountCollection {
   private _pastDue30YTD: string;
   private _maturityDate: string;
   private _origLoanAmount: string;
+  private _chargeOffDate: string;
 
 
   constructor(previousBrokenPromise?: string, memoPostProPay?:string[], demandLetterFlag?: string, demandLetterDate?:string, paymentAmount?: number,
@@ -150,7 +151,7 @@ export class AccountCollection {
               loanStatus?: string, numberOfExtensionsYTD?: number, numberOfExtensionsLTD?: number, dateOfLastExtension?: string, lifePastDue?: string, queueingFlag?: string,
               delinquencyReason?: string, historicalAttemptsCalls?: string, chargeOffAmount?: number, nonAccrualDate?: string, reasonForDelinquency?: string, dateStampForRfD?: string,
               interestRateChangeDate?: string, endOfDrawDate?: string, pastDue10LTD?: string, pastDue30LTD?: string, pastDue60LTD?: string, pastDue90LTD?: string,languageCode?: string,
-              pastDue30YTD?:string, maturityDate?:string, origLoanAmount?:string){
+              pastDue30YTD?:string, maturityDate?:string, origLoanAmount?:string, chargeOffDate?:string){
 
     this.previousBrokenPromise = previousBrokenPromise;
     this.memoPostProPay = memoPostProPay;
@@ -196,6 +197,7 @@ export class AccountCollection {
     this.pastDue60LTD = pastDue60LTD;
     this.pastDue90LTD = pastDue90LTD;
     this.languageCode = languageCode;
+    this.chargeOffDate = chargeOffDate;
 
   }
 
@@ -582,6 +584,13 @@ export class AccountCollection {
 
   get origLoanAmount():string{
     return this._origLoanAmount;
+  }
+  get chargeOffDate(): string {
+    return this._chargeOffDate;
+  }
+
+  set chargeOffDate(value: string) {
+    this._chargeOffDate = value;
   }
 
 }
@@ -1763,6 +1772,7 @@ export class Account {
   resetHistory() {
     this._history = [];
   }
+
 
 
 }

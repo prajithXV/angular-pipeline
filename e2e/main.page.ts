@@ -133,7 +133,10 @@ export class MainPage {
   checkTablesData(array: Array<string>, tableName: string, index?: number, feedbackMessage?: string) {
     $$(tableName + ' tbody tr').then(arr => {
       if (arr.length != 0) {
-        let cellText = arr[index].all(by.tagName('td')).map(elm => elm.getText());
+        let cellText = arr[index].all(by.tagName('td')).map(elm => elm.getText()
+          .then((text =>{
+            return text.trim();
+          })));
         expect(cellText).toEqual(array);
       } else {
         expect($(tableName).getText()).toEqual(feedbackMessage);

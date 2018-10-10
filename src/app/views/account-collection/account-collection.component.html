@@ -33,11 +33,13 @@
       <!--<dd>{{accountCol?.lifePastDue}}</dd>-->
       <!--<dt>Delinquency Reason:</dt>-->
       <!--<dd>{{accountCol?.reasonForDelinquency}}</dd>-->
-      <dt>Charge Off amount:</dt>
+      <dt>Charge-off amount:</dt>
       <dd>{{accountCol?.chargeOffAmount | coinCurrency}}</dd>
+      <dt>Charge-off date:</dt>
+      <dd>{{accountCol?.chargeOffDate | coinDateTransform: "STD_DATE":"MM/DD/YYYY"}}</dd>
       <dt>Reason for delinquency:</dt>
       <dd>{{accountCol?.previousBrokenPromise}}</dd>
-      <dt>Interest rate change date:</dt>
+      <dt class="interest-rate">Interest rate change date:</dt>
       <dd>{{accountCol?.interestRateChangeDate}}</dd>
     </dl>
   </div>
@@ -87,8 +89,8 @@
       <dd>{{accountCol?.pastDue60LTD}}</dd>
       <dt>Past due 90 LTD:</dt>
       <dd>{{accountCol?.pastDue90LTD}}</dd>
-      <dt><span class="label" [class.memoLabel]="isMemo" >Memo post-pro pay:</span></dt>
-      <dd class="over-flow"><span *ngFor="let pro of accountCol?.memoPostProPay; let last = last;" title="{{pro}}"><b [class.red]="isMemo">{{pro}}</b><span *ngIf="!last" [class.red]="isMemo">, </span></span></dd>
+      <dt><span class="label" [class.memoLabel]="isMemo">Memo post-pro pay:</span></dt>
+      <dd class="over-flow"><span *ngFor="let pro of accountCol?.memoPostProPay; let last = last;"><b [class.red]="isMemo">{{pro}}</b><span *ngIf="!last" [class.red]="isMemo">, </span></span></dd>
     </dl>
   </div>
 </div>
