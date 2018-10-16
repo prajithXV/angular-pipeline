@@ -1,7 +1,7 @@
 import {LoginPage} from './login.page';
 import {MainPage} from "./main.page";
 
-fdescribe('inspinia App', () => {
+describe('inspinia App', () => {
   let loginPage: LoginPage;
   let mainPage: MainPage;
 
@@ -983,7 +983,7 @@ fdescribe('inspinia App', () => {
 
   });
 
-  fit('Tickler processes navigation: changing tabs with filter', () => {
+  it('Tickler processes navigation: changing tabs with filter', () => {
 
     mainPage.checkTab('#campaignProcessing', true);
     mainPage.checkTab('#accountSearch', false);
@@ -1047,7 +1047,8 @@ fdescribe('inspinia App', () => {
     mainPage.checkComponent('process-case-tickler-table', false);
 
     mainPage.writeOnInput('cifId', '1234 cif');
-    mainPage.changeSelectOptions('1: DUE');
+
+    mainPage.changeSelectOptions('4: DUE');
 
     mainPage.onClick('Search');
 
@@ -1065,7 +1066,7 @@ fdescribe('inspinia App', () => {
 
     mainPage.onCollapseFilter('#search-params');
 
-    mainPage.checkForm(['', '', '1234 cif', ''], ['0: null', '0: null', '0: null']);
+    mainPage.checkForm(['', '', '1234 cif', ''], ['0: null', '0: null', '1: DUE']);
 
     mainPage.checkComponent('campaign-list-accounts-table', false);
     mainPage.checkComponent('customer-summary', false);
