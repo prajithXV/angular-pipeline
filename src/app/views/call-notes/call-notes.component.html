@@ -1,8 +1,7 @@
-<div *ngIf="memoNotes && memoNotes?.length > 0">
-<ng-container>
+<!--<div >-->
   <div class="feed-activity-list">
-    <div class="memo-notes-functions text-right">
-      <button class="btn btn-xs btn-primary"><i class="fa fa-file-o"></i> New</button>
+    <div class="memo-notes-functions text-right" *ngIf="!isCreating">
+      <button class="btn btn-xs btn-primary" (click)="showNewCallNotes(true)"><i class="fa fa-file-o"></i> New</button>
       <input (change)="refreshCallNotes()" class="by-account-checkbox"
         value=""
         type="checkbox"
@@ -12,6 +11,15 @@
       />
     </div>
 
+    <ng-container *ngIf="isCreating">
+    <new-call-notes
+      [account]="account"
+      (onAdd)="refreshCallNotes()"
+      (onCancel)="showNewCallNotes($event)">
+    </new-call-notes>
+    </ng-container>
+
+<ng-container *ngIf="memoNotes && memoNotes?.length > 0 && !searchingCallNotes && !isCreating">
     <div class="feed-element" *ngFor="let memoNote of memoNotes;">
       <div class="media-body">
         <div class="col-xs-8">
@@ -31,15 +39,10 @@
           {{memoNote.note}}
         </div>
         <p></p>
-        <!--<div class="pull-right">-->
-          <!--<span class="label label-success">{{record.action}}</span>-->
-          <!--<span class="label label-info">{{record.contacted}}</span>-->
-          <!--<span class="label label-primary" [class.label-danger]="isFirstNoteCallLater(record, isFirst)">{{record.result}}</span>-->
-        <!--</div>-->
       </div>
     </div>
-  </div>
 </ng-container>
-</div>
+  </div>
+<!--</div>-->
 <div *ngIf="searchingCallNotes"><waiting-backend></waiting-backend> Searching...</div>
-<div *ngIf="!searchingCallNotes && memoNotes?.length == 0">No previous call records found.</div>
+<div *ngIf="!searchingCallNotes && memoNotes?.length == 0 && !isCreating">No previous call notes found.</div>

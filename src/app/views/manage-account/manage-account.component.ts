@@ -556,6 +556,16 @@ export class ManageAccountComponent implements OnInit, OnDestroy, AfterViewInit 
     this._newCalliBox = value;
   }
 
+  //refresh call notes counter
+  refreshCounters(notes: MemoNote[]) {
+    this.account.customer.callNotes = notes;
+  }
+
+  //refresh searching call notes
+  refreshSearching(searching: boolean) {
+    this.searchingCallNotes = searching;
+  }
+
   /*
   * function show notify icon --> parent
   * set the notify valor
@@ -667,12 +677,6 @@ export class ManageAccountComponent implements OnInit, OnDestroy, AfterViewInit 
     }
   }
 
-  refreshCounters(notes: MemoNote[]) {
-    this.account.customer.callNotes = notes;
-  }
 
 
-  refreshSearching(searching: boolean) {
-    this.searchingCallNotes = searching;
-  }
 }

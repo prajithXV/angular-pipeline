@@ -53,6 +53,8 @@ import {CampaignListOrderByType} from "../models/cl-order-by-type";
 import {LovType} from "../models/lov-types";
 import {LovValue} from "../models/lov-values";
 import {LovTypeModel} from "../models/lov-type-model";
+import {MemoNote} from "../models/memo-note";
+import {promise} from "selenium-webdriver";
 
 export enum DSErrorCodes {
   no_account = 0,
@@ -737,6 +739,10 @@ export class DataService {
       account.additionalInfo ? account.additionalInfo.eaPcFlag : null,
       accountStatus
     );
+  }
+
+  newCallNote(account: Account, memoNote: MemoNote, agent: Agent): Promise<boolean>{
+    return this._backCommsService.addCallNotes(account.accountId, account.accountType, account.customer.cifNo, memoNote.note, agent.account);
   }
 
   cancelCallRecord(agent:Agent, account: Account, cancelRecord: CancelRecordModel): Promise<boolean> {

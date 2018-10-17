@@ -1,0 +1,29 @@
+<div class="col-lg-12">
+
+  <!--description-->
+  <div class="form-group col-lg-12 no-padding">
+    <div>
+      <label class="control-label">Note</label>
+    </div>
+    <textarea
+      [(ngModel)]="model.note"
+      class="form-control notes-form no-resize"
+      placeholder="Enter your note"
+      rows="3"
+      maxlength="250">
+      </textarea>
+  </div>
+</div>
+
+<!--button-->
+<div class="col-lg-12">
+  <div class="form-group">
+    <button class="btn btn-sm btn-primary"
+            [disabled]="isWaiting"
+            (click)="addCallNote(model)">Add
+      <waiting-backend *ngIf="isWaiting"></waiting-backend>
+    </button>
+    <button class="btn btn-sm" (click)="cancel()">Cancel
+    </button>
+  </div>
+</div>
