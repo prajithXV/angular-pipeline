@@ -1,18 +1,27 @@
-.feed-element{
-  padding-top: 15px;
-}
-
 .memo-notes-functions{
   display: block;
   width: 100%;
+  padding-top: 15px;
 }
 
 button{
-  margin-right: 5px;
+  margin-right: 15px;
 }
 
 .by-account-checkbox{
   margin-top: 0;
   position: relative;
   top: 3px;
+}
+
+.feed-element{
+  display: inline-block;
+}
+
+.memo-info ul{
+  float: right;
+}
+
+.span{
+  padding-right: 5px;
 }

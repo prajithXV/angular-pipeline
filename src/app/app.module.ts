@@ -153,6 +153,7 @@ import { ValueEditionComponent } from './views/value-edition/value-edition.compo
 import { LovTypeToStringPipe } from './pipes/lov-type-to-string.pipe';
 import { FilterCodeToNamePipe } from './pipes/filter-code-to-name.pipe';
 import { CallNotesComponent } from './views/call-notes/call-notes.component';
+import { NewCallNotesComponent } from './views/new-call-notes/new-call-notes.component';
 
 
 
@@ -267,6 +268,7 @@ export const MY_MOMENT_FORMATS = {
     NewLovValueComponent,
     ValueEditionComponent,
     CallNotesComponent,
+    NewCallNotesComponent,
   ],
   imports: [
     BrowserModule,

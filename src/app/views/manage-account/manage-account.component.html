@@ -266,14 +266,17 @@
                 </ng-template>
               </ngb-tab>
               <ngb-tab id="callNotes">
-                <ng-template ngbTabTitle><span [popover]="popAlerts" triggers="">Memo notes <tab-counter [data]="account?.customer?.callNotes" [searching]="searchingCallNotes"></tab-counter></span></ng-template>
+                <ng-template ngbTabTitle>Memo notes <tab-counter [data]="account?.customer?.callNotes" [searching]="searchingCallNotes"></tab-counter></ng-template>
                 <ng-template ngbTabContent>
                   <p></p>
-                  <call-notes [account]="account"
-                              [memoNotes]="account?.customer?.callNotes"
-                              [searchingCallNotes]="searchingCallNotes"
-                              (refresh)="refreshCounters($event)"
-                              (refreshSearching)="refreshSearching($event)">
+                  <call-notes
+                    [isByAccount]="isByAccount"
+                    [account]="account"
+                    [memoNotes]="account?.customer?.callNotes"
+                    [searchingCallNotes]="searchingCallNotes"
+                    (refreshMemoNotes)="refreshCounters($event)"
+                    (refreshSearching)="refreshSearching($event)"
+                    (refreshChecked)="refreshChecked($event)">
                   </call-notes>
                 </ng-template>
               </ngb-tab>

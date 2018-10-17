@@ -13,7 +13,7 @@ export const memoNotesBody = [
     "CifId": "BCB6020",
     "AccountId": "6300113249",
     "AccountType": "D",
-    "Note": "test note2",
+    "Note": "test long note test long note test long note test long note test long note test long note test long note test long note",
     "CreatedBy": "vsharapo",
     "CreatedDt": "2018-11-16T15:47:22.967"
   },

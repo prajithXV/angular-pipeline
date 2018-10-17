@@ -1528,6 +1528,31 @@ export class BackendCommsService {
   }
 
 
+  //add case tickler
+  addCallNotes(accountId:string, accountType: string, cifId: string, note: string, createdBy: string): Promise<boolean> {
+    let body = {
+      AccountId: accountId,
+      AccountType: accountType,
+      CifId: cifId,
+      Note: note,
+      CreatedBy: createdBy,
+    };
+
+    console.log(body);
+    let options = new RequestOptions({
+      headers: this.getHeaderWithAuth()
+    });
+    options.headers.set(urls.general.headers.content.key, urls.general.headers.content.value);
+
+    return this._http.post(BackendCommsService.getUrl(urls.callNotes.url), body, options)
+      .toPromise()
+      .then(resp => {
+        console.log(resp);
+        return parseInt(resp.text());
+      })
+      .catch(this.handleError);
+  }
+
 
   addCustomerConsent(cifId: string, hasConsent: boolean, phoneNumber: string,note: string, createdBy: string): Promise<number> {
     let body = {

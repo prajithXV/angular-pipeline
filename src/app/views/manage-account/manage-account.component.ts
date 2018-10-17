@@ -39,6 +39,7 @@ import {
 import {ROLE_STANDARD_CODES} from "../../models/role";
 import {close} from "fs";
 import {MemoNote} from "../../models/memo-note";
+import {CallNotesComponent} from "../call-notes/call-notes.component";
 
 enum ResultsMode {
   NEW_CALL_RECORD,
@@ -90,6 +91,7 @@ export class ManageAccountComponent implements OnInit, OnDestroy, AfterViewInit 
   @ViewChild('tabSetAdditional') private _tsAdditional: NgbTabset;
   @ViewChild('additionalAccounts') private _additionalAccounts: AccountsTableComponent;
   @ViewChild('tabSetContacts') private _tsContacts: NgbTabset;
+  @ViewChild('callNotes') private _tCallNotes: CallNotesComponent;
 
   @Output() onClose = new EventEmitter<boolean>();
 
@@ -144,6 +146,7 @@ export class ManageAccountComponent implements OnInit, OnDestroy, AfterViewInit 
   private _hkSubscription: HotkeysSubscriber = new HotkeysSubscriber();
 
   isCampaignRecordCall: boolean = false;
+  private isByAccount: boolean = true;
 
   constructor(private _route: ActivatedRoute,
               private _router: Router,
@@ -269,6 +272,7 @@ export class ManageAccountComponent implements OnInit, OnDestroy, AfterViewInit 
               }
               if (this.account.customer && this.account.customer.callRecords) {
                 this.searchingCalls = false;
+                setTimeout(()=> this.setContactsTab(), 50);
                 if (
                   this.account.customer.callRecords.length > 0 &&
                   this.account.customer.callRecords[0].result === callLater &&
@@ -281,6 +285,7 @@ export class ManageAccountComponent implements OnInit, OnDestroy, AfterViewInit 
 
               if(this.account.customer && this.account.customer.callNotes){
                 this.searchingCallNotes = false;
+                this.isByAccount = true;
               }
 
               if (this.account.customer && this.account.customer.coBorrowers) {
@@ -392,6 +397,9 @@ export class ManageAccountComponent implements OnInit, OnDestroy, AfterViewInit 
 
   }
 
+  setContactsTab(){
+    this._tsContacts.select('contactsCalls');
+  }
 
   setCurrentTab() {
     if (this.processCases && this.processCases.length > 0 && this.hasNotAllClosedCases) {
@@ -448,6 +456,8 @@ export class ManageAccountComponent implements OnInit, OnDestroy, AfterViewInit 
     if (this._newCallComponent) {
       this._newCallComponent.resetForm(this.isIncomingCall);
     }
+
+
 
     // this.setCurrentTab(event);
     this.cdRef.detectChanges();
@@ -554,6 +564,20 @@ export class ManageAccountComponent implements OnInit, OnDestroy, AfterViewInit 
 
   set newCalliBox(value: IboxtoolsComponent) {
     this._newCalliBox = value;
+  }
+
+  //refresh call notes counter
+  refreshCounters(notes: MemoNote[]) {
+    this.account.customer.callNotes = notes;
+  }
+
+  //refresh searching call notes
+  refreshSearching(searching: boolean) {
+    this.searchingCallNotes = searching;
+  }
+
+  refreshChecked(isChecked: boolean){
+    this.isByAccount = isChecked;
   }
 
   /*
@@ -667,12 +691,6 @@ export class ManageAccountComponent implements OnInit, OnDestroy, AfterViewInit 
     }
   }
 
-  refreshCounters(notes: MemoNote[]) {
-    this.account.customer.callNotes = notes;
-  }
 
 
-  refreshSearching(searching: boolean) {
-    this.searchingCallNotes = searching;
-  }
 }

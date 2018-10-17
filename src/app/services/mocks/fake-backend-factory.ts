@@ -240,6 +240,7 @@ export function fakeBackendFactory(backend: MockBackend, options: BaseRequestOpt
       // CALLNOTES (MEMO NOTES)
       else if (connection.request.url.indexOf('/callnotes') >= 0 && connection.request.method === RequestMethod.Get) {
         console.log("FAK callnotes");
+        // connection.mockError({status: 400} as any as Error);
         // connection.mockError({status: 500} as any as Error);
         connection.mockRespond(new Response(new ResponseOptions({
           status: 200,
@@ -650,6 +651,15 @@ export function fakeBackendFactory(backend: MockBackend, options: BaseRequestOpt
         })))
       }
 
+
+      //ADD CALLNOTES
+      else if (connection.request.url.indexOf('/callnotes') >= 0 && connection.request.method === RequestMethod.Post) {
+        console.log("FAK new call notes added");
+        // connection.mockError({status: 400} as any as Error);
+        connection.mockRespond(new Response(new ResponseOptions({
+          status: 200
+        })));
+      }
 
       //ADD TICKLER ATTRIBUTE MAP
       else if (connection.request.url.indexOf('/tp/ticklers_atb_map') >= 0 && connection.request.method === RequestMethod.Post) {

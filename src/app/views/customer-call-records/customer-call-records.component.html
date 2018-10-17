@@ -1,11 +1,11 @@
 <div *ngIf="records && records.length > 0">
   <div class="feed-activity-list">
     <div class="feed-element" *ngFor="let record of records; let isFirst = first" [class.firstCall]="isFirstNoteCallLater(record, isFirst)">
-      <div class="media-body ">
+      <div class="media-body">
         <span class="pull-right">Contacted on <strong><span [title]="record.createdDate">{{record.createdDate | coinDateTransform}}</span></strong><br/>
 
-          <span>account <strong>{{record.accountNumber}} {{record.accountType}}</strong></span><br/>
-          by <strong>{{record.completeName}}</strong></span>
+          <span>Account <strong>{{record.accountNumber}} {{record.accountType}}</strong></span><br/>
+          By <strong>{{record.completeName}}</strong></span>
         <span *ngIf="record.promisedAmount || record.promisedDate">Promised <strong>{{record.promisedAmount | coinCurrency}}</strong> <span *ngIf="record.promisedDate">for <strong>{{record.promisedDate | coinDateTransform: "STD_DATE"}}</strong></span>.</span><br/>
         Next work date: <strong>{{record.nextWorkDate | coinDateTransform: "STD_DATE"}}</strong>.
         <div class="well" style="margin-top: 26px!important;">
