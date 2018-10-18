@@ -89,7 +89,6 @@ export class LovsPage {
     $$(tableName + ' tbody tr').then(arr => {
       let cellText = arr[index].all(by.tagName('td')).map(elm => elm.getText());
       let cellActive = arr[index].getAttribute('class');
-
       expect(cellText).toEqual(array);
       active ? expect(cellActive).not.toContain('disabledTr') : expect(cellActive).toContain('disabledTr');
     });
