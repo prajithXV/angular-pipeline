@@ -363,11 +363,6 @@ export class DataService {
                 // Get call records
                 this.loadCalls(acc, ret, errorStream);
               }, 50);
-
-              // setTimeout(() => {
-              //   // Get call records
-              //   this.loadCallNotes(acc, ret, errorStream);
-              // }, 50);
             }
 
             ret.next(acc);
@@ -409,28 +404,6 @@ export class DataService {
           error,
           errorStream)
       );
-
-  }
-
-  private loadCallNotes(acc: Account, ret: Subject<Account>, errorStream: Subject<UFNotification>): Observable<Account> {
-    // Get call records
-   this._backCommsService.getCustomerCallNotes(acc.accountId, acc.accountType,0, 20, acc.customer.id)
-      .then(callNotes => {
-        acc.customer.resetNotes();
-        for (let call of callNotes) {
-          acc.customer.addCallNote(call);
-        }
-        ret.next(acc);
-      })
-      .catch(error =>
-        this.handleError(
-          DSErrorCodes.no_call_notes,
-          "Error getting call notes",
-          UFSeverity.warn,
-          error,
-          errorStream)
-      );
-   return ret;
 
   }
 

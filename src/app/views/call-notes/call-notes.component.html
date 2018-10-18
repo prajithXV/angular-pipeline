@@ -1,27 +1,29 @@
-<!--<div >-->
-  <div class="feed-activity-list">
-    <div class="memo-notes-functions text-right" *ngIf="!isCreating">
-      <button class="btn btn-xs btn-primary" (click)="showNewCallNotes(true)"><i class="fa fa-file-o"></i> New note</button>
-      <input (change)="loadCallNotes(isByAccount)" class="by-account-checkbox"
-             [(ngModel)]="isByAccount"
-             [value]="isByAccount"
-             type="checkbox"
-             name="By CIF"
-             title="By CIF"
-             [checked]="isByAccount"
-      />
-      <span class="span">Filter by CIF No</span>
-    </div>
+<div class="feed-activity-list">
+  <div class="memo-notes-functions text-right" *ngIf="!isCreating">
+    <button class="btn btn-xs btn-primary" (click)="showNewCallNotes(true)"><i class="fa fa-file-o"></i> New note
+    </button>
+    <input (change)="loadCallNotes(isByAccount)" class="by-account-checkbox"
+           [(ngModel)]="isByAccount"
+           [value]="isByAccount"
+           type="checkbox"
+           name="By CIF"
+           title="By CIF"
+           [checked]="isByAccount"
+    />
+    <span class="span">Filter by CIF No</span>
+  </div>
 
-    <ng-container *ngIf="isCreating">
+  <!--NEW CALL NOTES-->
+  <ng-container *ngIf="isCreating">
     <new-call-notes
       [account]="account"
       (onAdd)="refreshCallNotes()"
       (onCancel)="showNewCallNotes($event)">
     </new-call-notes>
-    </ng-container>
+  </ng-container>
 
-<ng-container *ngIf="memoNotes && memoNotes?.length > 0 && !searchingCallNotes && !isCreating">
+  <!--MEMO NOTES-->
+  <ng-container *ngIf="memoNotes && memoNotes?.length > 0 && !searchingCallNotes && !isCreating">
     <div class="feed-element" *ngFor="let memoNote of memoNotes;">
       <div class="media-body">
         <div class="col-xs-8 no-padding">
@@ -43,8 +45,10 @@
         <p></p>
       </div>
     </div>
-</ng-container>
-  </div>
-<!--</div>-->
-<div *ngIf="searchingCallNotes"><waiting-backend></waiting-backend> Searching...</div>
+  </ng-container>
+</div>
+<div *ngIf="searchingCallNotes">
+  <waiting-backend></waiting-backend>
+  Searching...
+</div>
 <div *ngIf="!searchingCallNotes && memoNotes?.length == 0 && !isCreating">No previous call notes found.</div>
