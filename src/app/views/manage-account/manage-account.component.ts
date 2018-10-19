@@ -38,6 +38,8 @@ import {
 } from "../../services/temporal-state-service.service";
 import {ROLE_STANDARD_CODES} from "../../models/role";
 import {close} from "fs";
+import {MemoNote} from "../../models/memo-note";
+import {CallNotesComponent} from "../call-notes/call-notes.component";
 
 enum ResultsMode {
   NEW_CALL_RECORD,
@@ -89,6 +91,7 @@ export class ManageAccountComponent implements OnInit, OnDestroy, AfterViewInit 
   @ViewChild('tabSetAdditional') private _tsAdditional: NgbTabset;
   @ViewChild('additionalAccounts') private _additionalAccounts: AccountsTableComponent;
   @ViewChild('tabSetContacts') private _tsContacts: NgbTabset;
+  @ViewChild('callNotes') private _tCallNotes: CallNotesComponent;
 
   @Output() onClose = new EventEmitter<boolean>();
 
@@ -132,6 +135,7 @@ export class ManageAccountComponent implements OnInit, OnDestroy, AfterViewInit 
   private isRefreshed: boolean = false;
   private additionalInfoSearched: boolean = false;
   private criteria: SearchTicklerCaseParams = new SearchTicklerCaseParams();
+  private searchingCallNotes: boolean = false;
   processCaseTicklers: ProcessCaseTickler[] = null;
   currentProcessCase: ProcessCase = null;
   ticklerTypes: TicklerType[] = null;
@@ -142,6 +146,7 @@ export class ManageAccountComponent implements OnInit, OnDestroy, AfterViewInit 
   private _hkSubscription: HotkeysSubscriber = new HotkeysSubscriber();
 
   isCampaignRecordCall: boolean = false;
+  private isByAccount: boolean = true;
 
   constructor(private _route: ActivatedRoute,
               private _router: Router,
@@ -207,6 +212,7 @@ export class ManageAccountComponent implements OnInit, OnDestroy, AfterViewInit 
       this.searchingCoborrowers = true;
       this.searchingTodayContacts = true;
       this.searchingAccountDepInfo = true;
+      this.searchingCallNotes = true;
 
       // If an incoming call is in progress, select IC in nextcall
       let call = this._globalStateService.currentCall;
@@ -266,6 +272,7 @@ export class ManageAccountComponent implements OnInit, OnDestroy, AfterViewInit 
               }
               if (this.account.customer && this.account.customer.callRecords) {
                 this.searchingCalls = false;
+                setTimeout(()=> this.setContactsTab(), 50);
                 if (
                   this.account.customer.callRecords.length > 0 &&
                   this.account.customer.callRecords[0].result === callLater &&
@@ -275,6 +282,12 @@ export class ManageAccountComponent implements OnInit, OnDestroy, AfterViewInit 
                   this.callLaterNotifyShowed = true;
                 }
               }
+
+              if(this.account.customer && this.account.customer.callNotes){
+                this.searchingCallNotes = false;
+                this.isByAccount = true;
+              }
+
               if (this.account.customer && this.account.customer.coBorrowers) {
                 this.searchingCoborrowers = false;
               }
@@ -384,6 +397,9 @@ export class ManageAccountComponent implements OnInit, OnDestroy, AfterViewInit 
 
   }
 
+  setContactsTab(){
+    this._tsContacts.select('contactsCalls');
+  }
 
   setCurrentTab() {
     if (this.processCases && this.processCases.length > 0 && this.hasNotAllClosedCases) {
@@ -440,6 +456,8 @@ export class ManageAccountComponent implements OnInit, OnDestroy, AfterViewInit 
     if (this._newCallComponent) {
       this._newCallComponent.resetForm(this.isIncomingCall);
     }
+
+
 
     // this.setCurrentTab(event);
     this.cdRef.detectChanges();
@@ -547,6 +565,14 @@ export class ManageAccountComponent implements OnInit, OnDestroy, AfterViewInit 
   set newCalliBox(value: IboxtoolsComponent) {
     this._newCalliBox = value;
   }
+
+  //Refresh memo notes event  emiter
+  refreshMemoNoteValues(values: Object){
+    this.account.customer.callNotes = values['memoNotes'];
+    this.searchingCallNotes = values['isSearching'];
+    this.isByAccount = values['isChecked'];
+  }
+
 
   /*
   * function show notify icon --> parent
@@ -658,4 +684,7 @@ export class ManageAccountComponent implements OnInit, OnDestroy, AfterViewInit 
       }
     }
   }
+
+
+
 }

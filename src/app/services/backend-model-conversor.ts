@@ -40,6 +40,7 @@ import {CampaignListOrderByType} from "../models/cl-order-by-type";
 import {Code} from "../models/code";
 import {LovType} from "../models/lov-types";
 import {LovValue} from "../models/lov-values";
+import {MemoNote} from "../models/memo-note";
 
 const HOME_PHONE = "Home phone";
 const BUSINESS_PHONE = "Business phone";
@@ -901,6 +902,24 @@ export class BackendModelConversorService {
       callR.accountType = cr.AccountType;
 
       ret.push(callR);
+    }
+    return ret;
+  }
+
+  //memo notes
+  static callNotes(src): MemoNote[] {
+    let ret: MemoNote[] = [];
+    for (let cn of src) {
+      let memoNote = new MemoNote();
+      memoNote.id = cn.Id;
+      memoNote.accountId = cn.AccountId;
+      memoNote.accountType = cn.AccountType;
+      memoNote.cifId = cn.CifId;
+      memoNote.note = cn.Note;
+      memoNote.createdBy = cn.CreatedBy;
+      memoNote.createdDate = cn.CreatedDt;
+
+      ret.push(memoNote);
     }
     return ret;
   }
