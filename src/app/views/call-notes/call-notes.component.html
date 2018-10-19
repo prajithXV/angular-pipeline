@@ -1,0 +1,56 @@
+<div class="feed-activity-list">
+  <div class="memo-notes-functions text-right" *ngIf="!isCreating">
+    <button class="btn btn-xs btn-primary" (click)="showNewCallNotes(true)"><i class="fa fa-file-o"></i> New note
+    </button>
+    <div class="pull-left">
+      <input (change)="filterCallNotes(isByAccount)" class="by-account-checkbox"
+             [(ngModel)]="isByAccount"
+             [value]="isByAccount"
+             type="checkbox"
+             name="By CIF"
+             title="By CIF"
+             [checked]="isByAccount"
+      />
+      <span class="span">show related</span>
+    </div>
+  </div>
+
+  <!--NEW CALL NOTES-->
+  <ng-container *ngIf="isCreating">
+    <new-call-notes
+      [account]="account"
+      (onAdd)="refreshCallNotes()"
+      (onCancel)="showNewCallNotes($event)">
+    </new-call-notes>
+  </ng-container>
+
+  <!--MEMO NOTES-->
+  <ng-container *ngIf="memoNotes && memoNotes?.length > 0 && !searchingCallNotes && !isCreating">
+    <div class="feed-element" *ngFor="let memoNote of memoNotesWhenFilter;">
+      <div class="media-body">
+        <div class="col-xs-8 no-padding">
+          <ul class="list-unstyled">
+            <li>Account <strong>{{memoNote.accountId}} {{memoNote.accountType}}</strong></li>
+            <li>Customer <strong>{{memoNote.cifId}}</strong></li>
+          </ul>
+        </div>
+        <div class="col-xs-4 memo-info no-padding" style="padding-right: 0;">
+          <ul class="list-unstyled">
+            <li>Date <strong>{{memoNote.createdDate | coinDateTransform: "STD_DATE"}}</strong></li>
+            <li>By <strong>{{memoNote.createdBy}}</strong></li>
+          </ul>
+        </div>
+
+        <div class="well col-xs-12" style="padding: 10px 20px">
+          {{memoNote.note}}
+        </div>
+        <p></p>
+      </div>
+    </div>
+  </ng-container>
+</div>
+<div *ngIf="searchingCallNotes">
+  <waiting-backend></waiting-backend>
+  Searching...
+</div>
+<div *ngIf="!searchingCallNotes && memoNotes?.length == 0 && !isCreating">No previous call notes found.</div>

@@ -265,6 +265,19 @@
                   <customer-notes [searching]="searchingAlerts" [notes]="account?.customer?.alerts"></customer-notes>
                 </ng-template>
               </ngb-tab>
+              <ngb-tab id="callNotes">
+                <ng-template ngbTabTitle>Memo notes <tab-counter [data]="currentMemoNotes" [searching]="searchingCallNotes"></tab-counter></ng-template>
+                <ng-template ngbTabContent>
+                  <p></p>
+                  <call-notes
+                    [isByAccount]="isByAccount"
+                    [account]="account"
+                    [memoNotes]="account?.customer?.callNotes"
+                    [searchingCallNotes]="searchingCallNotes"
+                    (onRefresh)="refreshMemoNoteValues($event)">
+                  </call-notes>
+                </ng-template>
+              </ngb-tab>
             </ngb-tabset>
           </div>
         </div>

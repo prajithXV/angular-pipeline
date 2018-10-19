@@ -53,6 +53,8 @@ import {CampaignListOrderByType} from "../models/cl-order-by-type";
 import {LovType} from "../models/lov-types";
 import {LovValue} from "../models/lov-values";
 import {LovTypeModel} from "../models/lov-type-model";
+import {MemoNote} from "../models/memo-note";
+import {promise} from "selenium-webdriver";
 
 export enum DSErrorCodes {
   no_account = 0,
@@ -63,7 +65,8 @@ export enum DSErrorCodes {
   no_account_history = 5,
   no_ssn = 6,
   no_alerts = 7,
-  no_previous_contacts = 8
+  no_previous_contacts = 8,
+  no_call_notes = 9
 }
 
 const DatePatern = 'yyyy-MM-dd';
@@ -149,6 +152,11 @@ export class DataService {
 
     );
     return ret;
+  }
+
+
+  getCallNotes(acc: Account, customer?: Customer): Promise<MemoNote[]>{
+   return this._backCommsService.getCustomerCallNotes(acc.accountId, acc.accountType, 0,20, customer ? customer.cifNo : null);
   }
 
   getCompleteInfoForAccount(accountId: string, accountType: string, campaignRecordId: string, errorStream?: Subject<UFNotification>, mustToBeLoaded?:boolean): Observable<Account> {
@@ -298,6 +306,24 @@ export class DataService {
                       errorStream)
                   );
 
+                // Get call notes
+                this._backCommsService.getCustomerCallNotes(acc.accountId, acc.accountType,0, 20, acc.customer.id)
+                  .then(callNotes => {
+                    acc.customer.resetCallNotes();
+                    for (let call of callNotes) {
+                      acc.customer.addCallNote(call);
+                    }
+                    ret.next(acc);
+                  })
+                  .catch(error =>
+                    this.handleError(
+                      DSErrorCodes.no_call_notes,
+                      "Error getting call notes",
+                      UFSeverity.warn,
+                      error,
+                      errorStream)
+                  );
+
                 // Get call records
                 this._backCommsService.getCustomerCallRecords(acc.customer.id)
                   .then(callRec => {
@@ -337,7 +363,7 @@ export class DataService {
                 // Get call records
                 this.loadCalls(acc, ret, errorStream);
               }, 50);
-            };
+            }
 
             ret.next(acc);
           })
@@ -690,6 +716,10 @@ export class DataService {
       account.additionalInfo ? account.additionalInfo.eaPcFlag : null,
       accountStatus
     );
+  }
+
+  newCallNote(account: Account, memoNote: MemoNote, agent: Agent): Promise<boolean>{
+    return this._backCommsService.addCallNotes(account.accountId, account.accountType, account.customer.cifNo, memoNote.note, agent.account);
   }
 
   cancelCallRecord(agent:Agent, account: Account, cancelRecord: CancelRecordModel): Promise<boolean> {

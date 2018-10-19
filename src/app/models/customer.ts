@@ -4,9 +4,11 @@ import {Phone} from "./phone";
 import {Person} from "./person";
 import {Address} from "./address";
 import {CallRecord} from "./call-record";
+import {MemoNote} from "./memo-note";
 
 
 export class Customer {
+
   private _id: string;
   private _cifNo: string;
   private _taxId: string;
@@ -32,6 +34,7 @@ export class Customer {
   private _coBorrowers: Customer[] = null;
   private _todayContacts: number = null;
   private _hasConsent: boolean;
+  private _callNotes: MemoNote[] = null;
 
 
   constructor(id?: string, cifno?: string, taxId?: string, socialSecurityNumber?: string, mainContact?: Person, mainAddress?: Address,
@@ -283,13 +286,31 @@ export class Customer {
     this._coBorrowers = [];
   }
 
-
   get hasConsent(): boolean{
     return this._hasConsent;
   }
 
   set hasConsent(value: boolean){
     this._hasConsent = value;
+  }
+
+  get callNotes(): MemoNote[] {
+    return this._callNotes;
+  }
+
+  set callNotes(value: MemoNote[]) {
+    this._callNotes = value;
+  }
+
+  addCallNote(note: MemoNote) {
+    if (this._callNotes == null) {
+      this._callNotes = [];
+    }
+    this._callNotes.push(note);
+  }
+
+  resetCallNotes() {
+    this._callNotes = [];
   }
 
 }
