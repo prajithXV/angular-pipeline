@@ -566,19 +566,13 @@ export class ManageAccountComponent implements OnInit, OnDestroy, AfterViewInit 
     this._newCalliBox = value;
   }
 
-  //refresh call notes counter
-  refreshCounters(notes: MemoNote[]) {
-    this.account.customer.callNotes = notes;
+  //Refresh memo notes event  emiter
+  refreshMemoNoteValues(values: Object){
+    this.account.customer.callNotes = values['memoNotes'];
+    this.searchingCallNotes = values['isSearching'];
+    this.isByAccount = values['isChecked'];
   }
 
-  //refresh searching call notes
-  refreshSearching(searching: boolean) {
-    this.searchingCallNotes = searching;
-  }
-
-  refreshChecked(isChecked: boolean){
-    this.isByAccount = isChecked;
-  }
 
   /*
   * function show notify icon --> parent

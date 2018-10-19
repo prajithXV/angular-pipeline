@@ -274,9 +274,7 @@
                     [account]="account"
                     [memoNotes]="account?.customer?.callNotes"
                     [searchingCallNotes]="searchingCallNotes"
-                    (refreshMemoNotes)="refreshCounters($event)"
-                    (refreshSearching)="refreshSearching($event)"
-                    (refreshChecked)="refreshChecked($event)">
+                    (onRefresh)="refreshMemoNoteValues($event)">
                   </call-notes>
                 </ng-template>
               </ngb-tab>
