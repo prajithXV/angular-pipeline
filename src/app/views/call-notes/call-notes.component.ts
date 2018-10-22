@@ -26,10 +26,8 @@ export class CallNotesComponent implements OnInit, OnChanges {
   }
 
   ngOnInit() {
-    // this.memoNotes = this.memoNotes.slice(0);
     this.memoNotesWhenFilter = this.memoNotes;
     this.filterCallNotes(this.isByAccount);
-    // console.log(this.memoNotesWhenFilter ,"clone")
   }
 
   ngOnChanges(changes) {
@@ -46,36 +44,24 @@ export class CallNotesComponent implements OnInit, OnChanges {
   filterCallNotes(model: boolean){
     this.isByAccount = model;
     if(!this.isByAccount){
-      this.memoNotesWhenFilter = this.memoNotes.filter(e => (e.accountId === this.account.accountId) || (e.cifId === this.account.customer.cifNo));
+      this.memoNotesWhenFilter = this.memoNotes.filter(e => (e.accountId === this.account.accountId) || (e.cifId === this.account.customer.id));
     }else{
       this.memoNotesWhenFilter = this.memoNotes;
     }
     this.setValuesWhenRefresh(this.memoNotesWhenFilter, false, this.isByAccount);
-
-    console.log(this.memoNotes, "memonotes");
-    console.log(this.memoNotesWhenFilter, "memonotes");
   }
 
-  loadCallNotes(model: boolean) {
-    this.isByAccount = model;
-    //needs to emit the searching value to the parent
-    this.setValuesWhenRefresh(this.memoNotes, true, this.isByAccount);
+  loadCallNotes() {
     this.isCreating = false;
-    if (!this.isByAccount) {
-      this._dataService.getCallNotes(this.account).then(res => {
-        this.setValuesWhenRefresh(res, false, this.isByAccount);
-      }).catch(err => {
-        console.log(err);
-      })
-    } else {
+    //needs to emit the searching value to the parent
+    this.setValuesWhenRefresh(this.memoNotesWhenFilter, true, this.isByAccount);
       this._dataService.getCallNotes(this.account, this.account.customer).then(res => {
+        this.memoNotesWhenFilter = res;
         this.setValuesWhenRefresh(res, false, this.isByAccount);
       }).catch(err => {
         console.log(err);
       })
     }
-
-  }
 
   private setValuesWhenRefresh(memoNotes: MemoNote[], isSearching: boolean, isChecked: boolean){
     this.searchingCallNotes = isSearching;
@@ -84,7 +70,7 @@ export class CallNotesComponent implements OnInit, OnChanges {
   }
 
   refreshCallNotes() {
-    this.loadCallNotes(this.isByAccount);
+    this.loadCallNotes();
   }
 
 }

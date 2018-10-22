@@ -1227,12 +1227,12 @@ export class BackendCommsService {
       .catch(this.handleError);
   }
 
-  getCustomerCallNotes(accountId: string, accountType: string, pageNumber: number, pageSize: number, customerId?: string): Promise<MemoNote[]> {
+  getCustomerCallNotes(accountId: string, accountType: string, pageNumber: number, pageSize: number, customerId: string): Promise<MemoNote[]> {
     // Set query params
     let params = this.getParamsWithIETimestamp();
     params.set(urls.callNotes.accountId, accountId);
     params.set(urls.callNotes.accountType, accountType);
-    BackendCommsService.setNotEmptyParam(params, urls.callNotes.customerId, customerId);
+    params.set(urls.callNotes.customerId, customerId);
     params.set(urls.callNotes.pageNr, pageNumber.toString());
     params.set(urls.callNotes.pageSize, pageSize.toString());
     let options = new RequestOptions({
