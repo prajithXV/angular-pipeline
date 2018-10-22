@@ -54,4 +54,14 @@ export const memoNotesBody = [
     "CreatedBy": "vsharapo",
     "CreatedDt": "2018-10-17T15:47:22.967"
   },
+
+  {
+    "Id": 7,
+    "CifId": "L000010",
+    "AccountId": "1123461",
+    "AccountType": "D",
+    "Note": "test note7",
+    "CreatedBy": "vsharapo",
+    "CreatedDt": "2018-10-16T15:47:22.967"
+  },
 ];

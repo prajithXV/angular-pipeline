@@ -1,3 +1,5 @@
+import {Customer} from "./customer";
+
 export class MemoNote {
   private _id: number;
   private _cifId: string;
@@ -6,14 +8,16 @@ export class MemoNote {
   private _note: string;
   private _createdBy: string;
   private _createdDate: string;
+  private _customerName: string; //calculate
 
-  constructor(cif?, account?, accountType?, note?, createdBy?, createdData?) {
+  constructor(cif?, account?, accountType?, note?, createdBy?, createdData?,customerName?) {
     this.cifId = cif;
     this.accountId = account;
     this.accountType = accountType;
     this.note = note;
     this.createdBy = createdBy;
     this.createdDate = createdData;
+    this.customerName = customerName;
   }
 
   get id(): number {
@@ -67,9 +71,12 @@ export class MemoNote {
     this._createdDate = value;
   }
 
-  clone(arr: MemoNote[]){
-    return arr.slice(0);
+  get customerName(){
+    return this._customerName;
   }
 
+  set customerName(value: string){
+    this._customerName = value;
+  }
 
 }

@@ -30,8 +30,10 @@
       <div class="media-body">
         <div class="col-xs-8 no-padding">
           <ul class="list-unstyled">
-            <li>Account <strong>{{memoNote.accountId}} {{memoNote.accountType}}</strong></li>
-            <li>Customer <strong>{{memoNote.cifId}}</strong></li>
+            <li>Customer <strong *ngIf="hasSameCustomerId(memoNote)" class="text-danger">{{memoNote.customerName}}</strong>
+            <strong *ngIf="!hasSameCustomerId(memoNote)">{{memoNote.cifId}}</strong>
+            </li>
+            <li>Account <strong [class.text-success]="hasSameAccountId(memoNote)">{{memoNote.accountId}} {{memoNote.accountType}}</strong></li>
           </ul>
         </div>
         <div class="col-xs-4 memo-info no-padding" style="padding-right: 0;">

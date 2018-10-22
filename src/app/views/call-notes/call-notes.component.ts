@@ -44,11 +44,20 @@ export class CallNotesComponent implements OnInit, OnChanges {
   filterCallNotes(model: boolean){
     this.isByAccount = model;
     if(!this.isByAccount){
-      this.memoNotesWhenFilter = this.memoNotes.filter(e => (e.accountId === this.account.accountId) || (e.cifId === this.account.customer.id));
+      this.memoNotesWhenFilter = this.memoNotes.filter(e => this.hasSameAccountId(e) || this.hasSameCustomerId(e));
     }else{
       this.memoNotesWhenFilter = this.memoNotes;
     }
     this.setValuesWhenRefresh(this.memoNotesWhenFilter, false, this.isByAccount);
+  }
+
+  hasSameAccountId(e: MemoNote){
+   return e.accountId === this.account.accountId;
+  }
+
+  hasSameCustomerId(e: MemoNote){
+    e.customerName = this.account.customer.mainContact.completeName;
+    return e.cifId === this.account.customer.id;
   }
 
   loadCallNotes() {
@@ -57,7 +66,7 @@ export class CallNotesComponent implements OnInit, OnChanges {
     this.setValuesWhenRefresh(this.memoNotesWhenFilter, true, this.isByAccount);
       this._dataService.getCallNotes(this.account, this.account.customer).then(res => {
         this.memoNotesWhenFilter = res;
-        this.setValuesWhenRefresh(res, false, this.isByAccount);
+        this.setValuesWhenRefresh(res, false, true);
       }).catch(err => {
         console.log(err);
       })
@@ -66,7 +75,6 @@ export class CallNotesComponent implements OnInit, OnChanges {
   private setValuesWhenRefresh(memoNotes: MemoNote[], isSearching: boolean, isChecked: boolean){
     this.searchingCallNotes = isSearching;
     this.onRefresh.emit({memoNotes: memoNotes, isSearching: isSearching, isChecked: isChecked})
-
   }
 
   refreshCallNotes() {
