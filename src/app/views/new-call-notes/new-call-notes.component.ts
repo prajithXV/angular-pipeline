@@ -33,7 +33,7 @@ export class NewCallNotesComponent implements OnInit {
         this._userFeedbackService.handleSuccess("Call note added");
       }).catch(err=>{
         this.waitingToAdd = false;
-      this._userFeedbackService.handleError("error adding call note", err);
+      this._userFeedbackService.handleError("Error adding call note", err);
     })
   }
 

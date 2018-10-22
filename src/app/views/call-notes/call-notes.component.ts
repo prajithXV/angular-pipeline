@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Input, OnInit, Output, OnChanges} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {MemoNote} from "../../models/memo-note";
 import {DataService} from "../../services/data.service";
 import {Account} from "../../models/account";
@@ -8,7 +8,7 @@ import {Account} from "../../models/account";
   templateUrl: './call-notes.component.html',
   styleUrls: ['./call-notes.component.css']
 })
-export class CallNotesComponent implements OnInit, OnChanges {
+export class CallNotesComponent implements OnInit {
 
   @Input() memoNotes: MemoNote[] = null;
   @Input() account: Account = null;
@@ -30,12 +30,6 @@ export class CallNotesComponent implements OnInit, OnChanges {
     this.filterCallNotes(this.isByAccount);
   }
 
-  ngOnChanges(changes) {
-    if (changes.memoNotes) {
-      console.log(this.memoNotes);
-    }
-  }
-
   showNewCallNotes(value: boolean) {
     this.isCreating = value;
   }
@@ -44,18 +38,18 @@ export class CallNotesComponent implements OnInit, OnChanges {
   filterCallNotes(model: boolean){
     this.isByAccount = model;
     if(!this.isByAccount){
-      this.memoNotesWhenFilter = this.memoNotes.filter(e => this.hasSameAccountId(e) || this.hasSameCustomerId(e));
+      this.memoNotesWhenFilter = this.memoNotes.filter(e => this.hasSameAccountId(e) && this.hasSameCustomerId(e));
     }else{
       this.memoNotesWhenFilter = this.memoNotes;
     }
     this.setValuesWhenRefresh(this.memoNotesWhenFilter, false, this.isByAccount);
   }
 
-  hasSameAccountId(e: MemoNote){
+  hasSameAccountId(e: MemoNote): boolean{
    return e.accountId === this.account.accountId;
   }
 
-  hasSameCustomerId(e: MemoNote){
+  hasSameCustomerId(e: MemoNote): boolean{
     e.customerName = this.account.customer.mainContact.completeName;
     return e.cifId === this.account.customer.id;
   }
