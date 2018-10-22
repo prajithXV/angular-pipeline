@@ -255,6 +255,9 @@ export class ManageAccountComponent implements OnInit, OnDestroy, AfterViewInit 
                 // this.searchingAccountInfo = false;
                 //we pass as a input to the children and load on ngOnInit the function
                 this.memoInText = this.isMemoPostProPay();
+                if(this.account.loan){
+                  this.account.loan.maturityDate = this.account.collection.maturityDate;
+                }
               }
               if (this.account.history) {
                 this.searchingAccountHistory = false;

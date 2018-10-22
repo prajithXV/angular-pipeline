@@ -44,11 +44,11 @@ export class CallNotesComponent implements OnInit {
     this.setValuesWhenRefresh(this.memoNotesWhenFilter, false, this.isByAccount);
   }
 
-  hasSameAccountId(e: MemoNote): boolean{
+  hasSameAccountId(e: MemoNote): boolean {
    return e.accountId === this.account.accountId;
   }
 
-  hasSameCustomerId(e: MemoNote): boolean{
+  hasSameCustomerId(e: MemoNote): boolean {
     e.customerName = this.account.customer.mainContact.completeName;
     return e.cifId === this.account.customer.id;
   }
@@ -73,5 +73,4 @@ export class CallNotesComponent implements OnInit {
   refreshCallNotes() {
     this.loadCallNotes();
   }
-
 }

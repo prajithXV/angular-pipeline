@@ -618,11 +618,12 @@ export class AccountLoan {
   private _achAftFlag: string;
   private _mortgageBalance: number;
   private _mortgageBalanceUpdatedDate: string;
+  private _maturityDate: string;
 
   constructor(collateralInformation?: string, officer?: string, loanType?: string, currentBalance?: number, currentPayOff?: number, loanDate?: string,
               loanTerm?: string, rate?: string, ltv?: string, appraisedAmount?: number, lienPosition?: number, updatedAppraisal?: string, updatedAppraisalDate?: string,
               alertMessages?: string, collateralAddress?: string, escrowAmountDue?: number, escrowChangeDate?: string, specialMessages?: string, user1Id?: number,
-              achAftFlag?: string, mortgageBalance?: number, mortgageBalanceUpdatedDate?: string){
+              achAftFlag?: string, mortgageBalance?: number, mortgageBalanceUpdatedDate?: string, maturityDate?:string){
 
     this.collateralInformation = collateralInformation;
     this.officer = officer;
@@ -646,6 +647,7 @@ export class AccountLoan {
     this.achAftFlag = achAftFlag;
     this.mortgageBalance = mortgageBalance;
     this.mortgageBalanceUpdatedDate = mortgageBalanceUpdatedDate;
+    this.maturityDate = maturityDate;
   }
 
 
@@ -823,6 +825,13 @@ export class AccountLoan {
 
   set mortgageBalanceUpdatedDate(value: string) {
     this._mortgageBalanceUpdatedDate = value;
+  }
+  get maturityDate(): string {
+    return this._maturityDate;
+  }
+
+  set maturityDate(value: string) {
+    this._maturityDate = value;
   }
 }
 

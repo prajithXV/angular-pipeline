@@ -29,6 +29,8 @@
       <dd> {{accountLoan?.appraisedAmount | coinCurrency}}</dd>
       <dt>Updated appraisal:</dt>
       <dd> {{accountLoan?.updatedAppraisal}}</dd>
+      <dt>Maturity date:</dt>
+      <dd> {{accountLoan?.maturityDate | coinDateTransform: "STD_DATE"}}</dd>
     </dl>
   </div>
 </div>
