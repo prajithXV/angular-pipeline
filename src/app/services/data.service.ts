@@ -156,7 +156,7 @@ export class DataService {
 
 
   getCallNotes(acc: Account, customer?: Customer): Promise<MemoNote[]>{
-   return this._backCommsService.getCustomerCallNotes(acc.accountId, acc.accountType, 0,20, customer ? customer.cifNo : null);
+   return this._backCommsService.getCustomerCallNotes(acc.accountId, acc.accountType, 0,20, customer.id);
   }
 
   getCompleteInfoForAccount(accountId: string, accountType: string, campaignRecordId: string, errorStream?: Subject<UFNotification>, mustToBeLoaded?:boolean): Observable<Account> {
@@ -719,7 +719,7 @@ export class DataService {
   }
 
   newCallNote(account: Account, memoNote: MemoNote, agent: Agent): Promise<boolean>{
-    return this._backCommsService.addCallNotes(account.accountId, account.accountType, account.customer.cifNo, memoNote.note, agent.account);
+    return this._backCommsService.addCallNotes(account.accountId, account.accountType, account.customer.id, memoNote.note, agent.account);
   }
 
   cancelCallRecord(agent:Agent, account: Account, cancelRecord: CancelRecordModel): Promise<boolean> {
