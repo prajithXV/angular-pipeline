@@ -106,6 +106,8 @@ export class BackendModelConversorService {
     cust.mainContact = BackendModelConversorService.person2Person(src.personName);
 
     cust.employmentInfo = src.employmentInfo;
+    cust.birthDate = src.birthDt;
+
     if(src.consentFlg == null){
       cust.hasConsent = null;
     }else{

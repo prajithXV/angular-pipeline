@@ -2,6 +2,7 @@ export const custInqBody = {
     "cnCustomer": {
         "cnCustomerInfo": {
             "socialSecurityNumber": null,
+            "birthDt": "5/17/1972",
             "address": {
                 "streetAddr1": "5800 R ST",
                 "streetAddr2": null,
