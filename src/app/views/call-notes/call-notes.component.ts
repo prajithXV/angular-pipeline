@@ -34,7 +34,6 @@ export class CallNotesComponent implements OnInit {
     this.isCreating = value;
   }
 
-
   filterCallNotes(model: boolean){
     this.isByAccount = model;
     if(!this.isByAccount){
