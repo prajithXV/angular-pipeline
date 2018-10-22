@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Input, OnInit, Output, OnChanges} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {MemoNote} from "../../models/memo-note";
 import {DataService} from "../../services/data.service";
 import {Account} from "../../models/account";
@@ -8,7 +8,7 @@ import {Account} from "../../models/account";
   templateUrl: './call-notes.component.html',
   styleUrls: ['./call-notes.component.css']
 })
-export class CallNotesComponent implements OnInit, OnChanges {
+export class CallNotesComponent implements OnInit {
 
   @Input() memoNotes: MemoNote[] = null;
   @Input() account: Account = null;
@@ -28,12 +28,6 @@ export class CallNotesComponent implements OnInit, OnChanges {
   ngOnInit() {
     this.memoNotesWhenFilter = this.memoNotes;
     this.filterCallNotes(this.isByAccount);
-  }
-
-  ngOnChanges(changes) {
-    if (changes.memoNotes) {
-      console.log(this.memoNotes);
-    }
   }
 
   showNewCallNotes(value: boolean) {
