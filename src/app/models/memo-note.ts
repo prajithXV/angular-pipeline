@@ -1,5 +1,3 @@
-import {Customer} from "./customer";
-
 export class MemoNote {
   private _id: number;
   private _cifId: string;
@@ -10,51 +8,53 @@ export class MemoNote {
   private _createdDate: string;
   private _customerName: string; //calculate
 
-  constructor(cif?, account?, accountType?, note?, createdBy?, createdData?,customerName?) {
-    this.cifId = cif;
-    this.accountId = account;
-    this.accountType = accountType;
-    this.note = note;
-    this.createdBy = createdBy;
-    this.createdDate = createdData;
-    this.customerName = customerName;
+
+  constructor(id?: number, cifId?: string, accountId?: string, accountType?: string, note?: string, createdBy?: string, createdDate?: string, customerName?: string) {
+    this._id = id;
+    this._cifId = cifId;
+    this._accountId = accountId;
+    this._accountType = accountType;
+    this._note = note;
+    this._createdBy = createdBy;
+    this._createdDate = createdDate;
+    this._customerName = customerName;
   }
 
   get id(): number {
     return this._id;
   }
-
   set id(value: number) {
     this._id = value;
   }
+
   get cifId(): string {
     return this._cifId;
   }
-
   set cifId(value: string) {
     this._cifId = value;
   }
+
   get accountId(): string {
     return this._accountId;
   }
-
   set accountId(value: string) {
     this._accountId = value;
   }
+
   get accountType(): string {
     return this._accountType;
   }
-
   set accountType(value: string) {
     this._accountType = value;
   }
+
   get note(): string {
     return this._note;
   }
-
   set note(value: string) {
     this._note = value;
   }
+
   get createdBy(): string {
     return this._createdBy;
   }

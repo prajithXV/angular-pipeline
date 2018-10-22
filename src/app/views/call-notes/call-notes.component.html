@@ -10,6 +10,7 @@
              name="By CIF"
              title="By CIF"
              [checked]="isByAccount"
+             [disabled]="memoNotes?.length === 0"
       />
       <span class="span">show related</span>
     </div>
@@ -56,3 +57,4 @@
   Searching...
 </div>
 <div *ngIf="!searchingCallNotes && memoNotes?.length == 0 && !isCreating">No previous call notes found.</div>
+<div *ngIf="memoNotesWhenFilter?.length == 0 && !isCreating && !searchingCallNotes && memoNotes?.length > 0">No call notes found with this filter.</div>
