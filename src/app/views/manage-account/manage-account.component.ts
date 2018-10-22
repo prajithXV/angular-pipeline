@@ -289,7 +289,6 @@ export class ManageAccountComponent implements OnInit, OnDestroy, AfterViewInit 
                 this.searchingCallNotes = false;
                 this.isByAccount = true;
                 this.currentMemoNotes = this.account.customer.callNotes;
-
               }
 
               if (this.account.customer && this.account.customer.coBorrowers) {
@@ -570,7 +569,7 @@ export class ManageAccountComponent implements OnInit, OnDestroy, AfterViewInit 
     this._newCalliBox = value;
   }
 
-  //Refresh memo notes event  emiter
+  //Refresh memo notes event emitter
   refreshMemoNoteValues(values: Object){
     this.currentMemoNotes = values['memoNotes'];
     this.searchingCallNotes = values['isSearching'];
