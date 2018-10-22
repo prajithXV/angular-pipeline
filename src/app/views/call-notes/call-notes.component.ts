@@ -49,7 +49,6 @@ export class CallNotesComponent implements OnInit {
   }
 
   hasSameCustomerId(e: MemoNote): boolean {
-    e.customerName = this.account.customer.mainContact.completeName;
     return e.cifId === this.account.customer.id;
   }
 

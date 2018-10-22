@@ -6,9 +6,9 @@ export class MemoNote {
   private _note: string;
   private _createdBy: string;
   private _createdDate: string;
-  private _customerName: string; //calculate
-
-
+  private _customerName: string;
+  private _firstName: string;
+  private _lastName: string;
   constructor(id?: number, cifId?: string, accountId?: string, accountType?: string, note?: string, createdBy?: string, createdDate?: string, customerName?: string) {
     this._id = id;
     this._cifId = cifId;
@@ -17,12 +17,13 @@ export class MemoNote {
     this._note = note;
     this._createdBy = createdBy;
     this._createdDate = createdDate;
-    this._customerName = customerName;
   }
+
 
   get id(): number {
     return this._id;
   }
+
   set id(value: number) {
     this._id = value;
   }
@@ -58,7 +59,6 @@ export class MemoNote {
   get createdBy(): string {
     return this._createdBy;
   }
-
   set createdBy(value: string) {
     this._createdBy = value;
   }
@@ -71,12 +71,44 @@ export class MemoNote {
     this._createdDate = value;
   }
 
-  get customerName(){
+  get customerName(): string {
     return this._customerName;
   }
 
-  set customerName(value: string){
+  set customerName(value: string) {
     this._customerName = value;
+  }
+
+  get lastName(): string {
+    return this._lastName;
+  }
+
+  set lastName(value: string) {
+    this._lastName = value;
+  }
+  get firstName(): string {
+    return this._firstName;
+  }
+
+  set firstName(value: string) {
+    this._firstName = value;
+  }
+
+  get completeName() {
+    let ret = "";
+    if (this.firstName) {
+      ret += this.firstName;
+    }
+    if (this.firstName != "" && this.lastName != "") {
+      ret += ' ';
+    }
+    if (this.lastName) {
+      ret += this.lastName;
+    }
+    if (ret == "") {
+      ret = this.createdBy;
+    }
+    return ret;
   }
 
 }

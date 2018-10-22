@@ -920,6 +920,9 @@ export class BackendModelConversorService {
       memoNote.note = cn.Note;
       memoNote.createdBy = cn.CreatedBy;
       memoNote.createdDate = cn.CreatedDt;
+      memoNote.firstName = cn.FirstName;
+      memoNote.lastName = cn.LastName;
+      memoNote.customerName = cn.CustomerName;
 
       ret.push(memoNote);
     }
