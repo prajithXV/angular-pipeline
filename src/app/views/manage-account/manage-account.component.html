@@ -65,7 +65,9 @@
                 <ng-template ngbTabTitle><span [popover]="popLoan" triggers="">Loan</span></ng-template>
                 <ng-template ngbTabContent>
                   <p></p>
-                  <account-loan [accountLoan]="account?.loan"></account-loan>
+                  <account-loan
+                    [accountLoan]="account?.loan">
+                  </account-loan>
                 </ng-template>
               </ngb-tab>
 
@@ -266,7 +268,7 @@
                 </ng-template>
               </ngb-tab>
               <ngb-tab id="callNotes">
-                <ng-template ngbTabTitle>Memo notes <tab-counter [data]="account?.customer?.callNotes" [searching]="searchingCallNotes"></tab-counter></ng-template>
+                <ng-template ngbTabTitle>Memo notes <tab-counter [data]="currentMemoNotes" [searching]="searchingCallNotes"></tab-counter></ng-template>
                 <ng-template ngbTabContent>
                   <p></p>
                   <call-notes

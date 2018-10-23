@@ -19,48 +19,58 @@ export class CallNotesComponent implements OnInit {
   @Output() refreshChecked = new EventEmitter<boolean>();
   @Input() isByAccount: boolean = false;
   private isCreating: boolean = false;
+  memoNotesWhenFilter: MemoNote[] = null;
 
 
   constructor(private _dataService: DataService) {
   }
 
   ngOnInit() {
+    this.memoNotesWhenFilter = this.memoNotes;
+    this.filterCallNotes(this.isByAccount);
   }
 
   showNewCallNotes(value: boolean) {
     this.isCreating = value;
   }
 
-  loadCallNotes(model: boolean) {
+  filterCallNotes(model: boolean){
     this.isByAccount = model;
-    //needs to emit the searching value to the parent
-    this.setValuesWhenRefresh(this.memoNotes, true, this.isByAccount);
+    if(!this.isByAccount){
+      this.memoNotesWhenFilter = this.memoNotes.filter(e => this.hasSameAccountId(e) && this.hasSameCustomerId(e));
+    }else{
+      this.memoNotesWhenFilter = this.memoNotes;
+    }
+    this.setValuesWhenRefresh(this.memoNotesWhenFilter, false, this.isByAccount);
+  }
+
+  hasSameAccountId(e: MemoNote): boolean {
+   return e.accountId === this.account.accountId;
+  }
+
+  hasSameCustomerId(e: MemoNote): boolean {
+    return e.cifId === this.account.customer.id;
+  }
+
+  loadCallNotes(model: boolean) {
     this.isCreating = false;
-    if (!this.isByAccount) {
-      this._dataService.getCallNotes(this.account).then(res => {
-        this.setValuesWhenRefresh(res, false, this.isByAccount);
-      }).catch(err => {
-        console.log(err);
-      })
-    } else {
+    //needs to emit the searching value to the parent
+    this.setValuesWhenRefresh(this.memoNotesWhenFilter, true, this.isByAccount);
       this._dataService.getCallNotes(this.account, this.account.customer).then(res => {
-        this.setValuesWhenRefresh(res, false, this.isByAccount);
+        this.memoNotesWhenFilter = res;
+        this.setValuesWhenRefresh(res, false, model);
+        this.filterCallNotes(model);
       }).catch(err => {
         console.log(err);
       })
     }
 
-  }
-
   private setValuesWhenRefresh(memoNotes: MemoNote[], isSearching: boolean, isChecked: boolean){
-    this.memoNotes = memoNotes;
     this.searchingCallNotes = isSearching;
     this.onRefresh.emit({memoNotes: memoNotes, isSearching: isSearching, isChecked: isChecked})
-
   }
 
-  refreshCallNotes() {
-    this.loadCallNotes(this.isByAccount);
+  refreshCallNotes(model: boolean) {
+    this.loadCallNotes(model);
   }
-
 }

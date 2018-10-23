@@ -142,6 +142,8 @@ export class ManageAccountComponent implements OnInit, OnDestroy, AfterViewInit 
 
   keyCodes = Hotkeys;
 
+  currentMemoNotes: MemoNote[] = [];
+
   @ViewChildren(PopoverDirective) private _popovers: QueryList<PopoverDirective>;
   private _hkSubscription: HotkeysSubscriber = new HotkeysSubscriber();
 
@@ -253,6 +255,9 @@ export class ManageAccountComponent implements OnInit, OnDestroy, AfterViewInit 
                 // this.searchingAccountInfo = false;
                 //we pass as a input to the children and load on ngOnInit the function
                 this.memoInText = this.isMemoPostProPay();
+                if(this.account.loan){
+                  this.account.loan.maturityDate = this.account.collection.maturityDate;
+                }
               }
               if (this.account.history) {
                 this.searchingAccountHistory = false;
@@ -286,6 +291,7 @@ export class ManageAccountComponent implements OnInit, OnDestroy, AfterViewInit 
               if(this.account.customer && this.account.customer.callNotes){
                 this.searchingCallNotes = false;
                 this.isByAccount = true;
+                this.currentMemoNotes = this.account.customer.callNotes;
               }
 
               if (this.account.customer && this.account.customer.coBorrowers) {
@@ -566,9 +572,9 @@ export class ManageAccountComponent implements OnInit, OnDestroy, AfterViewInit 
     this._newCalliBox = value;
   }
 
-  //Refresh memo notes event  emiter
+  //Refresh memo notes event emitter
   refreshMemoNoteValues(values: Object){
-    this.account.customer.callNotes = values['memoNotes'];
+    this.currentMemoNotes = values['memoNotes'];
     this.searchingCallNotes = values['isSearching'];
     this.isByAccount = values['isChecked'];
   }

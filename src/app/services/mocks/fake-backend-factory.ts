@@ -172,6 +172,12 @@ export function fakeBackendFactory(backend: MockBackend, options: BaseRequestOpt
             body: accInqDepBody
           })));
           console.log("FAK ACCINQ D");
+        }else{
+          connection.mockRespond(new Response(new ResponseOptions({
+            status: 200,
+            body: accInqDepBody
+          })));
+          console.log("FAK ACCINQ");
         }
 
       }

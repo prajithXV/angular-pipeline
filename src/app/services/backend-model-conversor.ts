@@ -106,6 +106,8 @@ export class BackendModelConversorService {
     cust.mainContact = BackendModelConversorService.person2Person(src.personName);
 
     cust.employmentInfo = src.employmentInfo;
+    cust.birthDate = src.birthDt;
+
     if(src.consentFlg == null){
       cust.hasConsent = null;
     }else{
@@ -918,7 +920,11 @@ export class BackendModelConversorService {
       memoNote.note = cn.Note;
       memoNote.createdBy = cn.CreatedBy;
       memoNote.createdDate = cn.CreatedDt;
-
+      memoNote.firstName = cn.FirstName;
+      memoNote.lastName = cn.LastName;
+      memoNote.createdByFirstName = cn.CreatedByFN;
+      memoNote.createdByLastName = cn.CreatedByLN;
+      
       ret.push(memoNote);
     }
     return ret;
