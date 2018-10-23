@@ -52,13 +52,14 @@ export class CallNotesComponent implements OnInit {
     return e.cifId === this.account.customer.id;
   }
 
-  loadCallNotes() {
+  loadCallNotes(model: boolean) {
     this.isCreating = false;
     //needs to emit the searching value to the parent
     this.setValuesWhenRefresh(this.memoNotesWhenFilter, true, this.isByAccount);
       this._dataService.getCallNotes(this.account, this.account.customer).then(res => {
         this.memoNotesWhenFilter = res;
-        this.setValuesWhenRefresh(res, false, true);
+        this.setValuesWhenRefresh(res, false, model);
+        this.filterCallNotes(model);
       }).catch(err => {
         console.log(err);
       })
@@ -69,7 +70,7 @@ export class CallNotesComponent implements OnInit {
     this.onRefresh.emit({memoNotes: memoNotes, isSearching: isSearching, isChecked: isChecked})
   }
 
-  refreshCallNotes() {
-    this.loadCallNotes();
+  refreshCallNotes(model: boolean) {
+    this.loadCallNotes(model);
   }
 }
