@@ -1,24 +1,29 @@
 export class MemoNote {
   private _id: number;
   private _cifId: string;
+  private _firstName: string;
+  private _lastName: string;
   private _accountId: string;
   private _accountType: string;
   private _note: string;
   private _createdBy: string;
+  private _createdByFirstName: string;
+  private _createdByLastName: string;
   private _createdDate: string;
-  private _customerName: string;
-  private _firstName: string;
-  private _lastName: string;
-  constructor(id?: number, cifId?: string, accountId?: string, accountType?: string, note?: string, createdBy?: string, createdDate?: string, customerName?: string) {
+
+  constructor(id?: number, cifId?: string, firstName?: string, lastName?: string, accountId?: string, accountType?: string, note?: string, createdBy?: string, createdByFirstName?: string, createdByLastName?: string, createdDate?: string) {
     this._id = id;
     this._cifId = cifId;
+    this._firstName = firstName;
+    this._lastName = lastName;
     this._accountId = accountId;
     this._accountType = accountType;
     this._note = note;
     this._createdBy = createdBy;
+    this._createdByFirstName = createdByFirstName;
+    this._createdByLastName = createdByLastName;
     this._createdDate = createdDate;
   }
-
 
   get id(): number {
     return this._id;
@@ -31,13 +36,31 @@ export class MemoNote {
   get cifId(): string {
     return this._cifId;
   }
+
   set cifId(value: string) {
     this._cifId = value;
+  }
+
+  get firstName(): string {
+    return this._firstName;
+  }
+
+  set firstName(value: string) {
+    this._firstName = value;
+  }
+
+  get lastName(): string {
+    return this._lastName;
+  }
+
+  set lastName(value: string) {
+    this._lastName = value;
   }
 
   get accountId(): string {
     return this._accountId;
   }
+
   set accountId(value: string) {
     this._accountId = value;
   }
@@ -45,6 +68,7 @@ export class MemoNote {
   get accountType(): string {
     return this._accountType;
   }
+
   set accountType(value: string) {
     this._accountType = value;
   }
@@ -52,6 +76,7 @@ export class MemoNote {
   get note(): string {
     return this._note;
   }
+
   set note(value: string) {
     this._note = value;
   }
@@ -59,8 +84,25 @@ export class MemoNote {
   get createdBy(): string {
     return this._createdBy;
   }
+
   set createdBy(value: string) {
     this._createdBy = value;
+  }
+
+  get createdByFirstName(): string {
+    return this._createdByFirstName;
+  }
+
+  set createdByFirstName(value: string) {
+    this._createdByFirstName = value;
+  }
+
+  get createdByLastName(): string {
+    return this._createdByLastName;
+  }
+
+  set createdByLastName(value: string) {
+    this._createdByLastName = value;
   }
 
   get createdDate(): string {
@@ -71,44 +113,28 @@ export class MemoNote {
     this._createdDate = value;
   }
 
-  get customerName(): string {
-    return this._customerName;
-  }
 
-  set customerName(value: string) {
-    this._customerName = value;
-  }
-
-  get lastName(): string {
-    return this._lastName;
-  }
-
-  set lastName(value: string) {
-    this._lastName = value;
-  }
-  get firstName(): string {
-    return this._firstName;
-  }
-
-  set firstName(value: string) {
-    this._firstName = value;
-  }
-
-  get completeName() {
-    let ret = "";
-    if (this.firstName) {
-      ret += this.firstName;
-    }
-    if (this.firstName != "" && this.lastName != "") {
-      ret += ' ';
-    }
-    if (this.lastName) {
-      ret += this.lastName;
-    }
-    if (ret == "") {
-      ret = this.createdBy;
+  get completeCreatedByName() {
+    let ret = this.createdByFirstName ? this.createdByFirstName : "";
+    if (this.createdByLastName) {
+      if (this.createdByFirstName) {
+        ret += " ";
+      }
+      ret += this.createdByLastName;
     }
     return ret;
   }
+
+  get completeCustomerName() {
+    let ret = this.firstName ? this.firstName : "";
+    if (this.lastName) {
+      if (this.lastName) {
+        ret += " ";
+      }
+      ret += this.lastName;
+    }
+    return ret;
+  }
+
 
 }
