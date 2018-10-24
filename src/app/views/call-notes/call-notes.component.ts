@@ -57,7 +57,7 @@ export class CallNotesComponent implements OnInit {
     //needs to emit the searching value to the parent
     this.setValuesWhenRefresh(this.memoNotesWhenFilter, true, this.isByAccount);
       this._dataService.getCallNotes(this.account, this.account.customer).then(res => {
-        this.memoNotesWhenFilter = res;
+        this.memoNotes = res;
         this.setValuesWhenRefresh(res, false, model);
         this.filterCallNotes(model);
       }).catch(err => {
