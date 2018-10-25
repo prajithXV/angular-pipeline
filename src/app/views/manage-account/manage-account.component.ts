@@ -573,12 +573,24 @@ export class ManageAccountComponent implements OnInit, OnDestroy, AfterViewInit 
   }
 
   //Refresh memo notes event emitter
-  refreshMemoNoteValues(values: Object){
-    this.currentMemoNotes = values['memoNotes'];
-    this.searchingCallNotes = values['isSearching'];
-    this.isByAccount = values['isChecked'];
+  refreshMemoNotes(){
+    this.searchingCallNotes = true;
+      this._dataService.getCallNotes(this.account, this.account.customer).then(res => {
+        res.push(new MemoNote(1111, "L000010", 'pepe', 'C', "1123461"));
+        this.account.customer.callNotes = res;
+        this.cdRef.detectChanges();
+        this.searchingCallNotes = false;
+
+      }).catch(err => {
+        console.log(err);
+      })
   }
 
+
+  refreshMemoNotesFilter(values: {memoNotes, isChecked}){
+    this.currentMemoNotes = values.memoNotes;
+    this.isByAccount = values.isChecked;
+  }
 
   /*
   * function show notify icon --> parent

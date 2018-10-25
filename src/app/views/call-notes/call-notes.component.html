@@ -20,7 +20,7 @@
   <ng-container *ngIf="isCreating">
     <new-call-notes
       [account]="account"
-      (onAdd)="refreshCallNotes(isByAccount)"
+      (onAdd)="refreshCallNotes()"
       (onCancel)="showNewCallNotes($event)">
     </new-call-notes>
   </ng-container>
