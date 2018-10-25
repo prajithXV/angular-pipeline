@@ -20,7 +20,6 @@
       </label>
     </div>
   </div>
-
   <!--NEW CALL NOTES-->
   <ng-container *ngIf="isCreating">
     <new-call-notes
@@ -29,7 +28,6 @@
       (onCancel)="showNewCallNotes($event)">
     </new-call-notes>
   </ng-container>
-
   <!--MEMO NOTES-->
   <ng-container *ngIf="memoNotes && memoNotes?.length > 0 && !searchingCallNotes && !isCreating">
     <div class="feed-element" *ngFor="let memoNote of memoNotesWhenFilter;">
@@ -48,7 +46,6 @@
             <li>By <strong>{{memoNote.completeCreatedByName}}</strong></li>
           </ul>
         </div>
-
         <div class="well col-xs-12" style="padding: 10px 20px">
           {{memoNote.note}}
         </div>
@@ -61,10 +58,6 @@
   <waiting-backend></waiting-backend>
   Searching...
 </div>
-<div class="memo-notes-filter" *ngIf="!searchingCallNotes && memoNotes?.length == 0 && !isCreating">No previous call
-  notes found.
-</div>
+<div class="memo-notes-filter" *ngIf="!searchingCallNotes && memoNotes?.length == 0 && !isCreating">No data found.</div>
 <div class="memo-notes-filter"
-     *ngIf="memoNotesWhenFilter?.length == 0 && !isCreating && !searchingCallNotes && memoNotes?.length > 0">No call
-  notes found with this filter.
-</div>
+     *ngIf="memoNotesWhenFilter?.length == 0 && !isCreating && !searchingCallNotes && memoNotes?.length > 0">No data found.</div>
