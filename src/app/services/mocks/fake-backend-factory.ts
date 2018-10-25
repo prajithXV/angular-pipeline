@@ -470,7 +470,7 @@ export function fakeBackendFactory(backend: MockBackend, options: BaseRequestOpt
             })))
         }
 
-        if(connection.request.url.indexOf('AccountId') >=0 || connection.request.url.includes('PageNr')){
+        if(connection.request.url.indexOf('AccountId') >=0){
           connection.mockRespond(new Response(new ResponseOptions({
             status: 200,
             body: getCaseBody
