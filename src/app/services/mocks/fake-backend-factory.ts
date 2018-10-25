@@ -1,5 +1,5 @@
 import {MockBackend, MockConnection} from "@angular/http/testing";
-import {BaseRequestOptions, RequestMethod, ResponseOptions, Response, Http, ResponseType} from "@angular/http";
+import {BaseRequestOptions, Http, RequestMethod, Response, ResponseOptions} from "@angular/http";
 import {tokenBody} from "../../../api/token";
 import {custSrchBodyL11} from "../../../api/accSrch-custL11";
 import {accInqBody1423L} from "../../../api/accInq-cust1423L";
@@ -8,21 +8,16 @@ import {custSrchBody1Result} from "../../../api/custSrch-1result";
 import {custSrchBody2Results} from "../../../api/custSrch-2results";
 import {custSrchBodyResult} from "../../../api/msgsrch-custBCB6019";
 import {getNextAccountBody} from "../../../api/getNextAccount";
-import {
-  ciscoGetDialogEmpty, ciscoGetDialogInboundAlerting, ciscoGetDialogInboundSpeaking, ciscoGetDialogInboundWrapUp,
-  ciscoGetDialogOutboundCalling,
-  ciscoGetDialogOutboundSpeaking,
-  ciscoGetDialogOutboundWrapUp, ciscoGetDialogTelephonePickedup
-} from "../../../api/ciscoGetCurrCall";
+import {ciscoGetDialogEmpty, ciscoGetDialogInboundAlerting} from "../../../api/ciscoGetCurrCall";
 import {getCampaignsBody} from "../../../api/getCampaigns";
 import {ciscoGetUserBodyResultNotReady, ciscoGetUserBodyResultTalking} from "../../../api/cisco_get_user";
 import {callRecordsBody} from "../../../api/callRecords";
 import {getUserByCodeBody, getUsersBody} from "../../../api/users";
-import {accHistBody, accHistBodyEmpty} from "../../../api/accHistory";
+import {accHistBody} from "../../../api/accHistory";
 import {statBody} from "../../../api/stat";
 import {sneakMock} from "../../../environments/common-constants";
 import {collectorsProductivityBody} from "../../../api/getCollectorsProductivity";
-import {campaignListsBody, campaignsBody, campaignListRecordsBody} from "../../../api/campaigns";
+import {campaignListRecordsBody, campaignListsBody, campaignsBody} from "../../../api/campaigns";
 import {overallProductivityBody} from "../../../api/getOverallProductivity";
 import {campaignListStatsBody} from "../../../api/campaignListStats";
 import {getRolesBody} from "../../../api/getRoles";
@@ -33,7 +28,12 @@ import {contactPercentageReport} from "../../../api/reportCtctPctg";
 import {getCancelTypesBody} from "../../../api/getCancelTypes";
 import {getAccHistBody} from "../../../api/accHistoryGet";
 import {
-  getCasesBody, getCaseTicklersBody, getProcessesBody, getTicklerTypes, ticklerAttributeBody, ticklerAttributeMapBody,
+  getCasesBody,
+  getCaseTicklersBody,
+  getProcessesBody,
+  getTicklerTypes,
+  ticklerAttributeBody,
+  ticklerAttributeMapBody,
   ticklerTypeMapBody
 } from "../../../api/ticklers";
 import {getCaseBody} from "../../../api/getCase";
@@ -175,7 +175,7 @@ export function fakeBackendFactory(backend: MockBackend, options: BaseRequestOpt
         }else{
           connection.mockRespond(new Response(new ResponseOptions({
             status: 200,
-            body: accInqDepBody
+            body: accInqBody1423L
           })));
           console.log("FAK ACCINQ");
         }

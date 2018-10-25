@@ -1,8 +1,17 @@
-import {Account, AccountCollection, memoWord} from "../../models/account";
+import {Account, memoWord} from "../../models/account";
 
 import {
-  Component, OnInit, ViewEncapsulation, ViewChild, ViewChildren, QueryList,
-  OnDestroy, AfterViewInit, Input, Output, EventEmitter, ChangeDetectorRef
+  AfterViewInit,
+  ChangeDetectorRef,
+  Component,
+  EventEmitter,
+  OnDestroy,
+  OnInit,
+  Output,
+  QueryList,
+  ViewChild,
+  ViewChildren,
+  ViewEncapsulation
 } from '@angular/core';
 import {ActivatedRoute, ParamMap, Router} from "@angular/router";
 import {DataService} from "../../services/data.service";
@@ -13,31 +22,22 @@ import {UFSeverity} from "../../services/ufseverity";
 import {PublicUrls} from "../../routing-constants";
 import {IboxtoolsComponent} from "../../components/common/iboxtools/iboxtools.component";
 import {Phone, PhoneType} from "../../models/phone";
-import {ModalDismissReasons, NgbModal, NgbTabset, NgbTooltip} from "@ng-bootstrap/ng-bootstrap";
+import {NgbModal, NgbTabset} from "@ng-bootstrap/ng-bootstrap";
 import {PopoverDirective} from "ngx-bootstrap";
-import {Subscription} from "rxjs/Subscription";
 import {HotkeysSubscriber} from "../../general/hotkeys-subscriber";
 import {CancelRecordModel, NewCallRecordModel} from "../../models/new-call-record-model";
 import {CoinConstants} from "../../services/coin-constants";
 import {Call, CallType} from "../../models/call";
-import {callLater, CallRecord} from "../../models/call-record";
+import {callLater} from "../../models/call-record";
 import {CancelCampaignCallRecordReason} from "../../models/cancel-campaign-call-record-reason";
-import {Customer} from "../../models/customer";
 import {TicklerProcess} from "../../models/tickler-processes";
-import {ProcessCaseModel} from "../../models/process-case-model";
 import {AccountsTableComponent} from "../accounts-table/accounts-table.component";
 import {ProcessCase} from "../../models/process-case";
 import {SearchTicklerCaseParams} from "../../models/search-tickler-case-params";
-import {Pagination} from "../../models/pagination";
-import {SortOrder} from "../../models/sort-order";
 import {TicklerType} from "../../models/tickler-types";
 import {ProcessCaseTickler} from "../../models/process-case-tickler";
-import {
-  CasesListInfo, CasesListInfoByAccount,
-  TemporalStateServiceService
-} from "../../services/temporal-state-service.service";
+import {TemporalStateServiceService} from "../../services/temporal-state-service.service";
 import {ROLE_STANDARD_CODES} from "../../models/role";
-import {close} from "fs";
 import {MemoNote} from "../../models/memo-note";
 import {CallNotesComponent} from "../call-notes/call-notes.component";
 
@@ -236,7 +236,7 @@ export class ManageAccountComponent implements OnInit, OnDestroy, AfterViewInit 
               this.account = account;
               this.criteria.AccountId = this.account.accountId;
 
-              if(this.account && this.account.accountDep){
+              if (this.account && this.account.accountDep) {
                 this.searchingAccountDepInfo = false;
               }
 
@@ -247,7 +247,7 @@ export class ManageAccountComponent implements OnInit, OnDestroy, AfterViewInit 
                 this.searchingCustomer = false;
               }
 
-              if(this.account){
+              if (this.account) {
                 this.searchingAccountInfo = false;
               }
 
@@ -255,7 +255,7 @@ export class ManageAccountComponent implements OnInit, OnDestroy, AfterViewInit 
                 // this.searchingAccountInfo = false;
                 //we pass as a input to the children and load on ngOnInit the function
                 this.memoInText = this.isMemoPostProPay();
-                if(this.account.loan){
+                if (this.account.loan) {
                   this.account.loan.maturityDate = this.account.collection.maturityDate;
                 }
               }
@@ -277,7 +277,7 @@ export class ManageAccountComponent implements OnInit, OnDestroy, AfterViewInit 
               }
               if (this.account.customer && this.account.customer.callRecords) {
                 this.searchingCalls = false;
-                setTimeout(()=> this.setContactsTab(), 50);
+                setTimeout(() => this.setContactsTab(), 50);
                 if (
                   this.account.customer.callRecords.length > 0 &&
                   this.account.customer.callRecords[0].result === callLater &&
@@ -288,7 +288,7 @@ export class ManageAccountComponent implements OnInit, OnDestroy, AfterViewInit 
                 }
               }
 
-              if(this.account.customer && this.account.customer.callNotes){
+              if (this.account.customer && this.account.customer.callNotes) {
                 this.searchingCallNotes = false;
                 this.isByAccount = true;
                 this.currentMemoNotes = this.account.customer.callNotes;
@@ -301,7 +301,9 @@ export class ManageAccountComponent implements OnInit, OnDestroy, AfterViewInit 
               if (!this.searchingCustomer && !this.additionalInfoSearched) {
                 this.additionalInfoSearched = true;
                 // Set timeout to allow IE react
-                setTimeout(() => {this.loadAdditionalInitialInfo();}, 50);
+                setTimeout(() => {
+                  this.loadAdditionalInitialInfo();
+                }, 50);
               }
 
             } catch (error) {
@@ -323,8 +325,8 @@ export class ManageAccountComponent implements OnInit, OnDestroy, AfterViewInit 
   }
 
 
-  get isDepositAccountType(): boolean{
-    return this.account ? this.account.accountType == 'D': false;
+  get isDepositAccountType(): boolean {
+    return this.account ? this.account.accountType == 'D' : false;
   }
 
   private loadAdditionalInitialInfo() {
@@ -403,7 +405,7 @@ export class ManageAccountComponent implements OnInit, OnDestroy, AfterViewInit 
 
   }
 
-  setContactsTab(){
+  setContactsTab() {
     this._tsContacts.select('contactsCalls');
   }
 
@@ -423,7 +425,7 @@ export class ManageAccountComponent implements OnInit, OnDestroy, AfterViewInit 
   *
   * */
   get hasNotAllClosedCases(): boolean {
-   return this.processCases.map(st=>st.statusCode == closeStatusCode).indexOf(false) > -1;
+    return this.processCases.map(st => st.statusCode == closeStatusCode).indexOf(false) > -1;
   }
 
 
@@ -462,7 +464,6 @@ export class ManageAccountComponent implements OnInit, OnDestroy, AfterViewInit 
     if (this._newCallComponent) {
       this._newCallComponent.resetForm(this.isIncomingCall);
     }
-
 
 
     // this.setCurrentTab(event);
@@ -572,22 +573,20 @@ export class ManageAccountComponent implements OnInit, OnDestroy, AfterViewInit 
     this._newCalliBox = value;
   }
 
-  //Refresh memo notes event emitter
-  refreshMemoNotes(){
+  //Refresh memo notes when add a new note
+  refreshMemoNotes() {
     this.searchingCallNotes = true;
-      this._dataService.getCallNotes(this.account, this.account.customer).then(res => {
-        res.push(new MemoNote(1111, "L000010", 'pepe', 'C', "1123461"));
-        this.account.customer.callNotes = res;
-        this.cdRef.detectChanges();
-        this.searchingCallNotes = false;
-
-      }).catch(err => {
-        console.log(err);
-      })
+    this._dataService.getCallNotes(this.account, this.account.customer).then(res => {
+      this.account.customer.callNotes = res;
+      this.searchingCallNotes = false;
+      this.cdRef.detectChanges();
+    }).catch(err => {
+      console.log(err);
+    })
   }
 
-
-  refreshMemoNotesFilter(values: {memoNotes, isChecked}){
+  //refresh filter event emitter
+  refreshMemoNotesFilter(values: { memoNotes, isChecked }) {
     this.currentMemoNotes = values.memoNotes;
     this.isByAccount = values.isChecked;
   }
@@ -702,7 +701,6 @@ export class ManageAccountComponent implements OnInit, OnDestroy, AfterViewInit 
       }
     }
   }
-
 
 
 }

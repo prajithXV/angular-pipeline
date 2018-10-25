@@ -13,7 +13,7 @@ export class CallNotesComponent implements OnInit, OnChanges {
   @Input() account: Account = null;
   @Input() searchingCallNotes: boolean = false;
   @Output() refreshMemoNotes = new EventEmitter<MemoNote[]>();
-  @Output() onRefreshFilter = new EventEmitter<{memoNotes: MemoNote[], isChecked: boolean}>();
+  @Output() onRefreshFilter = new EventEmitter<{ memoNotes: MemoNote[], isChecked: boolean }>();
   @Output() onRefreshMemoNotes = new EventEmitter();
   @Output() refreshSearching = new EventEmitter<boolean>();
   @Output() refreshChecked = new EventEmitter<boolean>();
@@ -28,8 +28,8 @@ export class CallNotesComponent implements OnInit, OnChanges {
   ngOnInit() {
   }
 
-  ngOnChanges(changes){
-    if(changes && this.memoNotes && changes.memoNotes){
+  ngOnChanges(changes) {
+    if (changes && this.memoNotes && changes.memoNotes) {
       this.filterCallNotes(this.isByAccount);
     }
   }
@@ -38,18 +38,18 @@ export class CallNotesComponent implements OnInit, OnChanges {
     this.isCreating = value;
   }
 
-  filterCallNotes(isCheckedModel: boolean){
+  filterCallNotes(isCheckedModel: boolean) {
     this.isByAccount = isCheckedModel;
-    if(!this.isByAccount){
+    if (!this.isByAccount) {
       this.memoNotesWhenFilter = this.memoNotes.filter(e => this.hasSameAccountId(e) && this.hasSameCustomerId(e));
-    }else{
+    } else {
       this.memoNotesWhenFilter = this.memoNotes;
     }
     this.setValuesWhenRefresh(this.memoNotesWhenFilter, this.isByAccount);
   }
 
   hasSameAccountId(e: MemoNote): boolean {
-   return e.accountId === this.account.accountId;
+    return e.accountId === this.account.accountId;
   }
 
   hasSameCustomerId(e: MemoNote): boolean {
@@ -59,9 +59,9 @@ export class CallNotesComponent implements OnInit, OnChanges {
   loadCallNotes() {
     this.isCreating = false;
     this.onRefreshMemoNotes.emit();
-    }
+  }
 
-  private setValuesWhenRefresh(memoNotes: MemoNote[], isChecked: boolean){
+  private setValuesWhenRefresh(memoNotes: MemoNote[], isChecked: boolean) {
     this.onRefreshFilter.emit({memoNotes: memoNotes, isChecked: isChecked})
   }
 
