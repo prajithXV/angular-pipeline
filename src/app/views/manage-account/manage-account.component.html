@@ -268,7 +268,7 @@
                 </ng-template>
               </ngb-tab>
               <ngb-tab id="callNotes">
-                <ng-template ngbTabTitle>Memo notes <tab-counter [data]="currentMemoNotes" [searching]="searchingCallNotes"></tab-counter></ng-template>
+                <ng-template ngbTabTitle>Memo notes <tab-counter [data]="account?.customer?.callNotes" [searching]="searchingCallNotes"></tab-counter></ng-template>
                 <ng-template ngbTabContent>
                   <p></p>
                   <call-notes
@@ -276,7 +276,8 @@
                     [account]="account"
                     [memoNotes]="account?.customer?.callNotes"
                     [searchingCallNotes]="searchingCallNotes"
-                    (onRefresh)="refreshMemoNoteValues($event)">
+                    (onRefresh2)="refreshMemoNoteValues($event)"
+                    (onRefresh)="refreshMemoNotesFilter($event)">
                   </call-notes>
                 </ng-template>
               </ngb-tab>

@@ -13,7 +13,7 @@ import {UserFeedbackService} from "../../services/user-feedback.service";
 export class NewCallNotesComponent implements OnInit {
 
   @Input() account: Account = null;
-  @Output() onAdd = new EventEmitter<any>();
+  @Output() onAdd = new EventEmitter<MemoNote>();
   @Output() onCancel = new EventEmitter<boolean>();
   private waitingToAdd: boolean = false;
   model = new MemoNote();
@@ -29,7 +29,7 @@ export class NewCallNotesComponent implements OnInit {
     this._dataService.newCallNote(this.account, model, this._globalStateService.loggedAgent)
       .then(()=>{
         this.waitingToAdd = false;
-        this.onAdd.emit();
+        this.onAdd.emit(model);
         this._userFeedbackService.handleSuccess("Call note added");
       }).catch(err=>{
         this.waitingToAdd = false;

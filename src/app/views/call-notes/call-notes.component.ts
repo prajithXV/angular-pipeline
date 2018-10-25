@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {Component, EventEmitter, Input, OnChanges, OnInit, Output} from '@angular/core';
 import {MemoNote} from "../../models/memo-note";
 import {DataService} from "../../services/data.service";
 import {Account} from "../../models/account";
@@ -8,13 +8,14 @@ import {Account} from "../../models/account";
   templateUrl: './call-notes.component.html',
   styleUrls: ['./call-notes.component.css']
 })
-export class CallNotesComponent implements OnInit {
+export class CallNotesComponent implements OnInit, OnChanges {
 
   @Input() memoNotes: MemoNote[] = null;
   @Input() account: Account = null;
   @Input() searchingCallNotes: boolean = false;
   @Output() refreshMemoNotes = new EventEmitter<MemoNote[]>();
-  @Output() onRefresh = new EventEmitter<{memoNotes: MemoNote[], isSearching: boolean, isChecked: boolean}>();
+  @Output() onRefresh = new EventEmitter<{memoNotes: MemoNote[], isChecked: boolean}>();
+  @Output() onRefresh2 = new EventEmitter<boolean>();
   @Output() refreshSearching = new EventEmitter<boolean>();
   @Output() refreshChecked = new EventEmitter<boolean>();
   @Input() isByAccount: boolean = false;
@@ -26,8 +27,16 @@ export class CallNotesComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.memoNotesWhenFilter = this.memoNotes;
-    this.filterCallNotes(this.isByAccount);
+      // this.memoNotesWhenFilter = this.memoNotes;
+      // this.filterCallNotes(this.isByAccount);
+  }
+
+  ngOnChanges(changes){
+    if(changes && this.memoNotes && changes.memoNotes){
+      this.memoNotesWhenFilter = this.memoNotes;
+      this.filterCallNotes(this.isByAccount);
+    }
+    console.log(changes, "he cambiado");
   }
 
   showNewCallNotes(value: boolean) {
@@ -41,7 +50,7 @@ export class CallNotesComponent implements OnInit {
     }else{
       this.memoNotesWhenFilter = this.memoNotes;
     }
-    this.setValuesWhenRefresh(this.memoNotesWhenFilter, false, this.isByAccount);
+    this.setValuesWhenRefresh(this.memoNotesWhenFilter, this.isByAccount);
   }
 
   hasSameAccountId(e: MemoNote): boolean {
@@ -52,25 +61,26 @@ export class CallNotesComponent implements OnInit {
     return e.cifId === this.account.customer.id;
   }
 
-  loadCallNotes(model: boolean) {
+  loadCallNotes(isCheckedModel: boolean) {
     this.isCreating = false;
+    this.onRefresh2.emit(isCheckedModel);
     //needs to emit the searching value to the parent
-    this.setValuesWhenRefresh(this.memoNotesWhenFilter, true, this.isByAccount);
-      this._dataService.getCallNotes(this.account, this.account.customer).then(res => {
-        this.memoNotes = res;
-        this.setValuesWhenRefresh(res, false, model);
-        this.filterCallNotes(model);
-      }).catch(err => {
-        console.log(err);
-      })
+    // this.setValuesWhenRefresh(this.memoNotesWhenFilter, true, this.isByAccount);
+    //   this._dataService.getCallNotes(this.account, this.account.customer).then(res => {
+    //     this.memoNotes = res;
+    //     this.setValuesWhenRefresh(res, false, isCheckedModel);
+    //     this.filterCallNotes(isCheckedModel);
+    //     this.isAdded = true;
+    //   }).catch(err => {
+    //     console.log(err);
+    //   })
     }
 
-  private setValuesWhenRefresh(memoNotes: MemoNote[], isSearching: boolean, isChecked: boolean){
-    this.searchingCallNotes = isSearching;
-    this.onRefresh.emit({memoNotes: memoNotes, isSearching: isSearching, isChecked: isChecked})
+  private setValuesWhenRefresh(memoNotes: MemoNote[], isChecked: boolean){
+    this.onRefresh.emit({memoNotes: memoNotes, isChecked: isChecked})
   }
 
-  refreshCallNotes(model: boolean) {
-    this.loadCallNotes(model);
+  refreshCallNotes(isCheckedModel: boolean) {
+    this.loadCallNotes(isCheckedModel);
   }
 }
