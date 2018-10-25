@@ -463,12 +463,34 @@ export function fakeBackendFactory(backend: MockBackend, options: BaseRequestOpt
       //PROCESS CASE
       else if(connection.request.url.indexOf('/tp/cases')>=0 && connection.request.method === RequestMethod.Get){
         console.log("FAK tickler process case");
-        if(connection.request.url.indexOf('Id') >=0){
+        if(connection.request.url.indexOf('Id') >=0 && connection.request.url.includes('PageNr')){
             connection.mockRespond(new Response(new ResponseOptions({
               status: 200,
               body: getCaseBody
             })))
-        }else{
+        }
+
+        if(connection.request.url.indexOf('Id=16') >=0){
+          connection.mockRespond(new Response(new ResponseOptions({
+            status: 200,
+            body: getCaseBody.filter(res => res.Id === 16)
+          })))
+        }
+
+        if(connection.request.url.indexOf('Id=17') >=0){
+          connection.mockRespond(new Response(new ResponseOptions({
+            status: 200,
+            body: getCaseBody.filter(res => res.Id === 17)
+          })))
+        }
+
+        if(connection.request.url.indexOf('Id=18') >=0){
+          connection.mockRespond(new Response(new ResponseOptions({
+            status: 200,
+            body: getCaseBody.filter(res => res.Id === 18)
+          })))
+        }
+        else{
           // connection.mockError({status:400} as any Error);
           connection.mockRespond(new Response(new ResponseOptions({
             status:200,
