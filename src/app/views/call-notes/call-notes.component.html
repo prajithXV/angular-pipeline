@@ -1,30 +1,33 @@
 <div class="feed-activity-list">
   <div class="memo-notes-functions text-right" *ngIf="!isCreating">
-    <button class="btn btn-xs btn-primary" (click)="showNewCallNotes(true)"><i class="fa fa-file-o"></i> New note
+    <button class="btn btn-xs btn-primary"
+            [disabled]="searchingCallNotes"
+            (click)="showNewCallNotes(true)">
+      <i class="fa fa-file-o"></i> New note
     </button>
     <div class="pull-left">
-      <input (change)="filterCallNotes(isByAccount)" class="by-account-checkbox"
-             [(ngModel)]="isByAccount"
-             [value]="isByAccount"
-             type="checkbox"
-             name="By CIF"
-             title="By CIF"
-             [checked]="isByAccount"
-             [disabled]="memoNotes?.length === 0"
-      />
-      <span class="span">show related</span>
+      <label class="no-margins font-normal">
+        <input (change)="filterCallNotes(isByAccount)" class="by-account-checkbox"
+               [(ngModel)]="isByAccount"
+               [value]="isByAccount"
+               type="checkbox"
+               name="By CIF"
+               title="By CIF"
+               [checked]="isByAccount"
+               [disabled]="memoNotes?.length === 0 || searchingCallNotes"
+        />
+        <span class="span">show related</span>
+      </label>
     </div>
   </div>
-
   <!--NEW CALL NOTES-->
   <ng-container *ngIf="isCreating">
     <new-call-notes
       [account]="account"
-      (onAdd)="refreshCallNotes(isByAccount)"
+      (onAdd)="refreshCallNotes()"
       (onCancel)="showNewCallNotes($event)">
     </new-call-notes>
   </ng-container>
-
   <!--MEMO NOTES-->
   <ng-container *ngIf="memoNotes && memoNotes?.length > 0 && !searchingCallNotes && !isCreating">
     <div class="feed-element" *ngFor="let memoNote of memoNotesWhenFilter;">
@@ -43,7 +46,6 @@
             <li>By <strong>{{memoNote.completeCreatedByName}}</strong></li>
           </ul>
         </div>
-
         <div class="well col-xs-12" style="padding: 10px 20px">
           {{memoNote.note}}
         </div>
@@ -52,11 +54,10 @@
     </div>
   </ng-container>
 </div>
-<div *ngIf="searchingCallNotes">
+<div class="memo-notes-filter" *ngIf="searchingCallNotes">
   <waiting-backend></waiting-backend>
   Searching...
 </div>
-<div *ngIf="!searchingCallNotes && memoNotes?.length == 0 && !isCreating">No previous call notes found.</div>
-<div *ngIf="memoNotesWhenFilter?.length == 0 && !isCreating && !searchingCallNotes && memoNotes?.length > 0">No call
-  notes found with this filter.
-</div>
+<div class="memo-notes-filter" *ngIf="!searchingCallNotes && memoNotes?.length == 0 && !isCreating">No data found.</div>
+<div class="memo-notes-filter"
+     *ngIf="memoNotesWhenFilter?.length == 0 && !isCreating && !searchingCallNotes && memoNotes?.length > 0">No data found.</div>

@@ -112,7 +112,7 @@ describe('IncomingCallsTableComponent', () => {
    *
    * */
 
-    expect(td[0].innerText).toEqual('12');
+    expect(td[0].innerText.trim()).toEqual('12');
     expect(td[1].innerText).toEqual('1');
 
   });
@@ -165,10 +165,10 @@ describe('IncomingCallsTableComponent', () => {
    * </tr>
    *
    * */
-    expect(tr[0].children[0].innerText).toEqual('12');
+    expect(tr[0].children[0].innerText.trim()).toEqual('12');
     expect(tr[0].children[1].innerText).toEqual('1');
 
-    expect(tr[1].children[0].innerText).toEqual('10');
+    expect(tr[1].children[0].innerText.trim()).toEqual('10');
     expect(tr[1].children[1].innerText).toEqual('5');
 
   });
@@ -222,10 +222,10 @@ describe('IncomingCallsTableComponent', () => {
    *
    *
    * */
-    expect(tr[0].children[0].innerText).toEqual('12');
+    expect(tr[0].children[0].innerText.trim()).toEqual('12');
     expect(tr[0].children[1].innerText).toEqual('1');
 
-    expect(tr[1].children[0].innerText).toEqual('12');
+    expect(tr[1].children[0].innerText.trim()).toEqual('12');
     expect(tr[1].children[1].innerText).toEqual('5');
 
   });
@@ -288,13 +288,13 @@ describe('IncomingCallsTableComponent', () => {
    * </tr>
    *
    * */
-    expect(tr[0].children[0].innerText).toEqual('12');
+    expect(tr[0].children[0].innerText.trim()).toEqual('12');
     expect(tr[0].children[1].innerText).toEqual('1');
 
-    expect(tr[1].children[0].innerText).toEqual('9');
+    expect(tr[1].children[0].innerText.trim()).toEqual('9');
     expect(tr[1].children[1].innerText).toEqual('7');
 
-    expect(tr[2].children[0].innerText).toEqual('11');
+    expect(tr[2].children[0].innerText.trim()).toEqual('11');
     expect(tr[2].children[1].innerText).toEqual('8');
 
   });

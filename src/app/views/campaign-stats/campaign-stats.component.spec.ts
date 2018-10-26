@@ -1,6 +1,6 @@
 import {async, ComponentFixture, fakeAsync, TestBed, tick} from '@angular/core/testing';
 
-import { CampaignStatsComponent } from './campaign-stats.component';
+import {CampaignStatsComponent} from './campaign-stats.component';
 import {WaitingBackendComponent} from "../waiting-backend/waiting-backend.component";
 import {DataService} from "../../services/data.service";
 
@@ -17,7 +17,6 @@ import {By} from "@angular/platform-browser";
 import {CampaignStatsToken} from "../../models/campaign-stats-token";
 import {Code} from "../../models/code";
 import {Campaign} from "../../models/campaign";
-import {$$, by} from "protractor";
 
 
 describe('CampaignStatsComponent', () => {
@@ -93,8 +92,8 @@ describe('CampaignStatsComponent', () => {
 
 
   function checkHtmlData(cell: string, index?: number){
-    let cellText = fixture.debugElement.queryAll(By.css( 'tbody tr')).map(e=>e.nativeElement.innerText)[index];
-    expect(cellText).toEqual(cell);
+    let cellText = fixture.debugElement.queryAll(By.css( 'tbody tr')).map(e=>e.nativeElement.innerText.trim())[index];
+    expect(cellText).toEqual(cell.trim());
   }
 
   it('should be created', () => {
@@ -198,10 +197,10 @@ describe('CampaignStatsComponent', () => {
     * <thead>
       <tr>
         <th></th>
-        <th>Demo Campaign</th>
-        <th>Direct</th>
-        <th>Indirect</th>
-        <th>Real State</th>
+        <th>New</th>
+        <th>Locked</th>
+        <th>Done</th>
+        <th>Canceled</th>
         <th>TOTAL</th>
       </tr>
     *
@@ -209,47 +208,47 @@ describe('CampaignStatsComponent', () => {
     * </thead>
       <tbody>
       <tr>
-        <th>New</th>
+        <th>Demo Campaign</th>
         <td>20</td>
+        <td>-</td>
+        <td>-</td>
+        <td>10</td>
+        <td>30</td>
+      </tr>
+
+      <tr>
+        <th>Direct</th>
         <td>11</td>
-        <td>30</td>
-        <td>15</td>
-        <td>76</td>
-      </tr>
-
-      tr>
-        <th>Locked</th>
-        <td>-</td>
-        <td>-</td>
-        <td>5</td>
-        <td>30</td>
-        <td>35</td>
-      </tr>
-
-      tr>
-        <th>Done</th>
         <td>-</td>
         <td>8</td>
-        <td>0</td>
-        <td>7</td>
-        <td>15</td>
-      </tr>
-
-      tr>
-        <th>Canceled</th>
-        <td>10</td>
         <td>-</td>
-        <td>-</td>
-        <td>-</td>
-        <td>10</td>
-      </tr>
-
-      tr>
-        <th>TOTAL</th>
-        <td>30</td>
         <td>19</td>
-        <td>35</td>
+      </tr>
+
+      <tr>
+        <th>Indirect</th>
+        <td>30</td>
+        <td>5</td>
+        <td>0</td>
+        <td>-</td>
         <td>52</td>
+      </tr>
+
+      <tr>
+        <th>Real State</th>
+        <td>15</td>
+        <td>30</td>
+        <td>7</td>
+        <td>-</td>
+        <td>52</td>
+      </tr>
+
+      <tr>
+        <th>TOTAL</th>
+        <td>76</td>
+        <td>35</td>
+        <td>15</td>
+        <td>10</td>
         <td>136</td>
       </tr>
 
@@ -265,11 +264,11 @@ describe('CampaignStatsComponent', () => {
     *
     * */
 
-    checkHtmlData("New	20	11	30	15	76",  0);
-    checkHtmlData("Locked	-	-	5	30	35",  1);
-    checkHtmlData("Done	-	8	0	7	15",  2);
-    checkHtmlData("Canceled	10	-	-	-	10",  3);
-    checkHtmlData("TOTAL	30	19	35	52	136",  4);
+    checkHtmlData("Demo Campaign\t20\t-\t-\t10\t30",  0);
+    checkHtmlData("Direct\t11\t-\t8\t-\t19",  1);
+    checkHtmlData("Indirect\t30\t5\t0\t-\t35",  2);
+    checkHtmlData("Real State\t15\t30\t7\t-\t52",  3);
+    checkHtmlData("TOTAL\t76\t35\t15\t10\t136",  4);
 
   }));
 

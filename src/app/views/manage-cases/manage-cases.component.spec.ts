@@ -33,7 +33,7 @@ import {HeaderSorterComponent} from "../header-sorter/header-sorter.component";
 import {TemporalStateServiceService} from "../../services/temporal-state-service.service";
 import {FilterCodeToNamePipe} from "../../pipes/filter-code-to-name.pipe";
 
-describe('ManageCasesComponent', () => {
+fdescribe('ManageCasesComponent', () => {
   let component: ManageCasesComponent;
   let fixture: ComponentFixture<ManageCasesComponent>;
 

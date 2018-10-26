@@ -27,3 +27,7 @@ button{
   position: relative;
   top: 1px;
 }
+
+.memo-notes-filter{
+  padding-top: 10px;
+}
