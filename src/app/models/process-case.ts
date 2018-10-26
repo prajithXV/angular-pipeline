@@ -32,6 +32,7 @@ export class ProcessCase {
     this.assignedUser = assignedUser;
     this.assignedGroup = assignedGroup;
     this.lastTicklerName = lastTicklerName;
+    this.accountType = accountType;
 
 
   }

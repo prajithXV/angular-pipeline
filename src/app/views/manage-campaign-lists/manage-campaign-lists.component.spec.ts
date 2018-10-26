@@ -36,7 +36,7 @@ import {CampaignListAttribute} from "../../models/campaign-list-attribute";
 import {CampaignStatsToken} from "../../models/campaign-stats-token";
 
 
-fdescribe('ManageCampaignListsComponent', () => {
+describe('ManageCampaignListsComponent', () => {
   let component: ManageCampaignListsComponent;
   let fixture: ComponentFixture<ManageCampaignListsComponent>;
 
@@ -255,7 +255,7 @@ fdescribe('ManageCampaignListsComponent', () => {
 
 
 
-  fit('resolve the promise and click on "clone" button', fakeAsync(() => {
+  it('resolve the promise and click on "clone" button', fakeAsync(() => {
 
     setCampaignValues(
       new Campaign("DIRECT","Direct","user2",null,
