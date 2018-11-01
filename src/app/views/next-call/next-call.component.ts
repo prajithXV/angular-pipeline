@@ -144,7 +144,7 @@ export class NextCallComponent implements OnInit, OnDestroy {
   }
 
   private buttonDisabled() {
-    return !this.campaigns || this.campaigns.length == 0 || this.waitingResponse;
+    return !this.campaigns || this.campaigns.length == 0 || this.waitingResponse || !this.campaignCode;
   }
 
 

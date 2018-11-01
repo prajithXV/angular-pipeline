@@ -25,7 +25,7 @@
   </button>
 
   <button *ngIf="!canShowViewCL()" (click)="nextCall()" class="btn btn-block btn-primary"
-          [disabled]="campaigns?.length == 0 || waitingResponse" [popover]="popNext" triggers="">Next call
+          [disabled]="buttonDisabled()" [popover]="popNext" triggers="">Next call
     <waiting-backend *ngIf="waitingResponse"></waiting-backend>
   </button>
 
