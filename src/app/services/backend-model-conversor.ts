@@ -250,6 +250,7 @@ export class BackendModelConversorService {
       cp.id = c.Id;
       cp.campaignCode = c.CampaignCd;
       cp.campaignName = c.CampaignNm;
+      cp.campaignType = c.CampaignType;
       cp.campaignCode = c.CampaignId;
       cp.createdDate = c.CreatedDt;
       cp.createdBy = c.CreatedBy;

@@ -483,8 +483,8 @@ export class DataService {
 
 
   //Campaign list order by type
-  getClOrderByTypes(): Promise<CampaignListOrderByType[]>{
-    return this._backCommsService.getClOrderByTypes();
+  getClOrderByTypes(campaignType: string): Promise<CampaignListOrderByType[]>{
+    return this._backCommsService.getClOrderByTypes(campaignType);
   }
 
 
@@ -757,8 +757,8 @@ export class DataService {
   }
 
 
-  addOrderBy(campaignList: CampaignList, agent: Agent): Promise<number>{
-    return this._backCommsService.addOrderBy(agent.account, campaignList.id, campaignList.sortOrder.sortType, campaignList.sortOrder.isDesc);
+  addOrderBy(campaignList: CampaignList, agent: Agent, sortCode: string, ascending: boolean): Promise<number>{
+    return this._backCommsService.addOrderBy(agent.account, campaignList.id, sortCode, ascending);
   }
 
   //update status code

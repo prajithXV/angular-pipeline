@@ -219,7 +219,8 @@ const urls = {
   },
 
   campaignListOrderByTypes: {
-    url: "dictionary/cl_orderby_types"
+    url: "dictionary/cl_orderby_types",
+    campaignType: "CampaignType"
   },
 
   campaignListOrderBy: {
@@ -757,9 +758,10 @@ export class BackendCommsService {
 
   //Campaign list order by types
   //tickler types
-  getClOrderByTypes(): Promise<CampaignListOrderByType[]> {
+  getClOrderByTypes(campaignType: string): Promise<CampaignListOrderByType[]> {
     // Set query params
     let params = this.getParamsWithIETimestamp();
+    params.set(urls.campaignListOrderByTypes.campaignType, campaignType);
     let options = new RequestOptions({
       search: params,
       headers: this.getHeaderWithAuth()
@@ -1579,12 +1581,12 @@ export class BackendCommsService {
   }
 
 
-  addOrderBy(userCode: string, clId: number, column: string, order: boolean): Promise<number> {
+  addOrderBy(userCode: string, clId: number, column: string, ascending: boolean): Promise<number> {
     let body = {
       UserCd: userCode,
       CLID: clId,
       Column: column,
-      Order: this._booleanToStringOrderPipe.transform(order)
+      Order: this._booleanToStringOrderPipe.transform(!ascending)
     };
 
     console.log(body);
