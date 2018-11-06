@@ -923,6 +923,7 @@ export class BackendModelConversorService {
       memoNote.createdDate = cn.CreatedDt;
       memoNote.firstName = cn.FirstName;
       memoNote.lastName = cn.LastName;
+      memoNote.comName = cn.ComName;
       memoNote.createdByFirstName = cn.CreatedByFN;
       memoNote.createdByLastName = cn.CreatedByLN;
       

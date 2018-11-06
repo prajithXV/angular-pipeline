@@ -15,7 +15,7 @@ export class UFNotification {
 
 @Injectable()
 export class UserFeedbackService {
-  private _toastOptions = {positionClass: 'toast-top-left'/*, dismiss: 'click'*/};
+  private _toastOptions = {positionClass: 'toast-top-center' /*, dismiss: 'click'*/};
 
   constructor(private _toastr: ToastrService) {
   }

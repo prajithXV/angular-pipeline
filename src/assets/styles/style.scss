@@ -147,6 +147,11 @@ $shadow: rgba(220,220,220,.65) 1px 3px 47px -4px inset;
   }
 }
 
+// Overwrite of style from ngx-toastr
+.toast-top-center {
+  top: 12px;
+}
+
 
 
 

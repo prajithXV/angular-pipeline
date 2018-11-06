@@ -3,6 +3,7 @@ export class MemoNote {
   private _cifId: string;
   private _firstName: string;
   private _lastName: string;
+  private _comName: string;
   private _accountId: string;
   private _accountType: string;
   private _note: string;
@@ -11,7 +12,7 @@ export class MemoNote {
   private _createdByLastName: string;
   private _createdDate: string;
 
-  constructor(id?: number, cifId?: string, firstName?: string, lastName?: string, accountId?: string, accountType?: string, note?: string, createdBy?: string, createdByFirstName?: string, createdByLastName?: string, createdDate?: string) {
+  constructor(id?: number, cifId?: string, firstName?: string, lastName?: string, accountId?: string, accountType?: string, note?: string, createdBy?: string, createdByFirstName?: string, createdByLastName?: string, createdDate?: string, comName?: string) {
     this._id = id;
     this._cifId = cifId;
     this._firstName = firstName;
@@ -23,6 +24,7 @@ export class MemoNote {
     this._createdByFirstName = createdByFirstName;
     this._createdByLastName = createdByLastName;
     this._createdDate = createdDate;
+    this._comName = comName;
   }
 
   get id(): number {
@@ -55,6 +57,14 @@ export class MemoNote {
 
   set lastName(value: string) {
     this._lastName = value;
+  }
+
+  get comName(): string {
+    return this._comName;
+  }
+
+  set comName(value: string) {
+    this._comName = value;
   }
 
   get accountId(): string {
@@ -133,7 +143,7 @@ export class MemoNote {
       }
       ret += this.lastName;
     }
-    return ret;
+    return ret.length ? ret : this.comName;
   }
 
 
