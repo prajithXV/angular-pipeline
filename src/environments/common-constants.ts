@@ -2,7 +2,7 @@
 export const CommonConstants = {
   Version: "13",
   OfficialVersion: "13",
-  Build: 243
+  Build: 260
 };
 
 // Constants used in code

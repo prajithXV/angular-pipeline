@@ -7,7 +7,6 @@ import {environment} from "../../environments/environment";
 
 import {Injectable} from '@angular/core';
 import {Account, AccountHistoryEntry} from "../models/account";
-import {Http, RequestOptions, URLSearchParams, Headers} from "@angular/http";
 
 import 'rxjs/add/operator/toPromise';
 import {CustomerNote} from "../models/customer-note";
@@ -49,6 +48,9 @@ import {Phone} from "../models/phone";
 import {LovType} from "../models/lov-types";
 import {LovValue} from "../models/lov-values";
 import {MemoNote} from "../models/memo-note";
+import {HttpClient, HttpHeaders, HttpParams} from "@angular/common/http";
+import {forEach} from "@angular/router/src/utils/collection";
+import {promise} from "selenium-webdriver";
 
 
 const urls = {
@@ -73,7 +75,14 @@ const urls = {
   },
   custInq: {url: "custInq", customerId: "customerId"},
   acctSrch: {url: "acctSrch", customerId: "customerId", accountType: "accountType"},
-  custSrch: {url: "custsrch", taxId: "taxId", accountId: "accountId", phone: "phoneNr", email: "emailAddr", accountType: "accountType"},
+  custSrch: {
+    url: "custsrch",
+    taxId: "taxId",
+    accountId: "accountId",
+    phone: "phoneNr",
+    email: "emailAddr",
+    accountType: "accountType"
+  },
   custNotes: {
     url: "custmsg",
     customerId: "customerId",
@@ -107,7 +116,7 @@ const urls = {
   },
   campaignListLaunch: {url: "campaignlists/launch"},
   campaignListRecord: {url: "clrecords", statusCd: "statusCd", listId: "clid", pageNum: "pagenr", pageSize: "pagesize"},
-  campaignListAccount:{
+  campaignListAccount: {
     url: "claccounts",
     campaignCd: "CampaignCd",
     customerName: "CustomerName",
@@ -118,36 +127,36 @@ const urls = {
     pageSize: "PageSize"
 
   },
-  callsPersHour:{
-    url:"reports/calls_per_collector_by_hour",
+  callsPersHour: {
+    url: "reports/calls_per_collector_by_hour",
     campaignCd: "CampaignCd",
     startDt: "StartDt"
   },
-  incomingCalls:{
-    url:"reports/calls_incoming_by_hour",
+  incomingCalls: {
+    url: "reports/calls_incoming_by_hour",
     startDt: "StartDt"
   },
-  contactPercentage:{
-    url:"reports/contact_pct_by_hour",
+  contactPercentage: {
+    url: "reports/contact_pct_by_hour",
     campaignCd: "CampaignCd",
     startDt: "StartDt"
   },
 
-  campaignRecordHistory:{
-    url:"account/history",
+  campaignRecordHistory: {
+    url: "account/history",
     accountId: "AccountId",
   },
-  todayContact:{
-    url:"statistics/customer_calls_count",
+  todayContact: {
+    url: "statistics/customer_calls_count",
     customerId: "CustomerId",
     startDt: "startDt"
   },
-  accountContacts:{
-    url:"statistics/account_calls_count",
+  accountContacts: {
+    url: "statistics/account_calls_count",
     customerId: "AccountId",
     startDt: "StartDt"
   },
-  cancelReasons:{url:"dictionary/cancel_types"},
+  cancelReasons: {url: "dictionary/cancel_types"},
 
 
   lovTypes: {
@@ -162,17 +171,17 @@ const urls = {
     deletedBy: "DeletedBy"
   },
 
-  ticklerProcesses:{
-    url:"tp/processes"
+  ticklerProcesses: {
+    url: "tp/processes"
   },
 
-  ticklerTypes:{
+  ticklerTypes: {
     url: "tp/tickler_types",
     processId: "ProcessId",
     id: "Id"
   },
 
-  processCase:{
+  processCase: {
     url: "tp/cases",
     id: "Id",
     accountId: "AccountId",
@@ -187,7 +196,7 @@ const urls = {
 
 
   },
-  processCaseTickler:{
+  processCaseTickler: {
     url: "tp/case_ticklers",
     caseId: "CaseId",
     pageNr: "PageNr",
@@ -254,19 +263,17 @@ export class BackendCommsService {
   private _sessionToken = null;
   private _globalStateService: GlobalStateService = null;
 
-  constructor(
-    private _http: Http,
-    // Circular dependency! It will be injected in AppComponent
-    //private _globalStateService: GlobalStateService,
-    private _userFeedbackService: UserFeedbackService,
-    private _datePipe: DatePipe,
-    private _booleanToStringPipe: BooleanToStringPipe,
-    private _phonePipe: TelephonePipe,
-    private _consentPipe: ConsentPipeCorrectConversion,
-    private _booleanToStringOrderPipe: BooleanToStringOrderPipe,
-    private _booleanToStringOrderPipe2: BooleanToStringDuePipe
-  ) {
-    ufs =  this._userFeedbackService;
+  constructor(private _http: HttpClient,
+              // Circular dependency! It will be injected in AppComponent
+              //private _globalStateService: GlobalStateService,
+              private _userFeedbackService: UserFeedbackService,
+              private _datePipe: DatePipe,
+              private _booleanToStringPipe: BooleanToStringPipe,
+              private _phonePipe: TelephonePipe,
+              private _consentPipe: ConsentPipeCorrectConversion,
+              private _booleanToStringOrderPipe: BooleanToStringOrderPipe,
+              private _booleanToStringOrderPipe2: BooleanToStringDuePipe) {
+    ufs = this._userFeedbackService;
   }
 
   setGlobalStateService(g: GlobalStateService) {
@@ -274,27 +281,28 @@ export class BackendCommsService {
     gss = g;
   }
 
-  login(login: string, pwd: string): Promise<Agent> {
-    // Set headers
-    let header = {};
-    for (let h of urls.getToken.headers) {
-      header[h.key] = h.value;
-    }
+  loginHeader(): HttpHeaders {
+    let headers = new HttpHeaders();
+    urls.getToken.headers.forEach((h) => {
+      headers = headers.set(h.key, h.value);
+    });
+    return headers;
+  }
 
+  login(login: string, pwd: string): Promise<Agent> {
     let headerObj = {
-      headers: new Headers(header),
+      headers: this.loginHeader(),
     };
 
     // Set body
     let bodyurl = encodeURI(`grant_type=password&username=${login}&password=${pwd}`);
     // console.log(bodyurl);
 
-    return this._http.post(BackendCommsService.getSimpleUrl(urls.getToken.url), bodyurl, new RequestOptions(headerObj))
+    return this._http.post<any>(BackendCommsService.getSimpleUrl(urls.getToken.url), bodyurl, headerObj)
       .toPromise()
-      .then(resp => {
-        console.log(resp);
+      .then(resj => {
+        console.log(resj);
         // If no token received, error
-        let resj = resp.json();
         if (resj.access_token == undefined) {
           // TODO: errors with codes
           throw "No access token received";
@@ -312,18 +320,17 @@ export class BackendCommsService {
   completeAgentInfo(agent: Agent): Promise<Agent> {
     // Set query params
     let params = this.getParamsWithIETimestamp();
-    params.set(urls.users.userCd, agent.account);
-    let options = new RequestOptions({
-      search: params,
+    params = params.set(urls.users.userCd, agent.account);
+    let options = {
+      params: params,
       headers: this.getHeaderWithAuth()
-    });
+    };
 
     // Get the data
-    return this._http.get(BackendCommsService.getUrl(urls.users.url), options)
+    return this._http.get<any>(BackendCommsService.getUrl(urls.users.url), options)
       .toPromise()
-      .then(resp => {
-        let resj = resp.json();
-        if (!resj || resj.length == 0) {
+      .then(resj => {
+        if (!resj) {
           console.log("No user detail found");
         } else {
           BackendModelConversorService.completeAgentFromUser(agent, resj[0]);
@@ -331,22 +338,20 @@ export class BackendCommsService {
         return agent;
       })
       .catch(this.handleError);
-
   }
 
   getAgents(): Promise<Agent[]> {
     // Set query params
     let params = this.getParamsWithIETimestamp();
-    let options = new RequestOptions({
-      search: params,
+    let options = {
+      params: params,
       headers: this.getHeaderWithAuth()
-    });
+    };
 
     // Get the data
-    return this._http.get(BackendCommsService.getUrl(urls.users.url), options)
+    return this._http.get<any>(BackendCommsService.getUrl(urls.users.url), options)
       .toPromise()
-      .then(resp => {
-        let resj = resp.json();
+      .then(resj => {
         if (!resj || resj.length == 0) {
           console.log("No user details found");
         } else {
@@ -361,18 +366,17 @@ export class BackendCommsService {
   getAgentCampaigns(userCode: string): Promise<Campaign[]> {
     // Set query params
     let params = this.getParamsWithIETimestamp();
-    params.set(urls.userCampaigns.userCd, userCode);
-    let options = new RequestOptions({
-      search: params,
+    params = params.set(urls.userCampaigns.userCd, userCode);
+    let options = {
+      params: params,
       headers: this.getHeaderWithAuth()
-    });
+    };
 
     // Get the data
-    return this._http.get(BackendCommsService.getUrl(urls.userCampaigns.url), options)
+    return this._http.get<any>(BackendCommsService.getUrl(urls.userCampaigns.url), options)
       .toPromise()
-      .then(resp => {
-        console.log(resp);
-        let resj = resp.json();
+      .then(resj => {
+        console.log(resj);
         if (!resj || resj.length == 0) {
           return [];
         }
@@ -384,17 +388,16 @@ export class BackendCommsService {
   getRoles(): Promise<Role[]> {
     // Set query params
     let params = this.getParamsWithIETimestamp();
-    let options = new RequestOptions({
-      search: params,
+    let options = {
+      params: params,
       headers: this.getHeaderWithAuth()
-    });
+    };
 
     // Get the data
-    return this._http.get(BackendCommsService.getUrl(urls.roles.url), options)
+    return this._http.get<any>(BackendCommsService.getUrl(urls.roles.url), options)
       .toPromise()
-      .then(resp => {
-        console.log(resp);
-        let resj = resp.json();
+      .then(resj => {
+        console.log(resj);
         if (!resj || resj.length == 0) {
           return [];
         }
@@ -406,17 +409,16 @@ export class BackendCommsService {
   getCampaignCallRecordReasons(): Promise<CancelCampaignCallRecordReason[]> {
     // Set query params
     let params = this.getParamsWithIETimestamp();
-    let options = new RequestOptions({
-      search: params,
+    let options = {
+      params: params,
       headers: this.getHeaderWithAuth()
-    });
+    };
 
     // Get the data
-    return this._http.get(BackendCommsService.getUrl(urls.cancelReasons.url), options)
+    return this._http.get<any>(BackendCommsService.getUrl(urls.cancelReasons.url), options)
       .toPromise()
-      .then(resp => {
-        console.log(resp);
-        let resj = resp.json();
+      .then(resj => {
+        console.log(resj);
         if (!resj || resj.length == 0) {
           return [];
         }
@@ -426,23 +428,21 @@ export class BackendCommsService {
   }
 
 
-
   //tickler processes
   getCustomerConsent(cifId: string): Promise<CustomerConsent[]> {
     // Set query params
     let params = this.getParamsWithIETimestamp();
-    params.set(urls.customerConsent.cifId, cifId);
-    let options = new RequestOptions({
-      search: params,
+    params = params.set(urls.customerConsent.cifId, cifId);
+    let options = {
+      params: params,
       headers: this.getHeaderWithAuth()
-    });
+    };
 
     // Get the data
-    return this._http.get(BackendCommsService.getUrl(urls.customerConsent.url), options)
+    return this._http.get<any>(BackendCommsService.getUrl(urls.customerConsent.url), options)
       .toPromise()
-      .then(resp => {
-        console.log(resp);
-        let resj = resp.json();
+      .then(resj => {
+        console.log(resj);
         if (!resj || resj.length == 0) {
           return [];
         }
@@ -455,17 +455,16 @@ export class BackendCommsService {
   getLovTypes(): Promise<LovType[]> {
     // Set query params
     let params = this.getParamsWithIETimestamp();
-    let options = new RequestOptions({
-      search: params,
+    let options = {
+      params: params,
       headers: this.getHeaderWithAuth()
-    });
+    };
 
     // Get the data
-    return this._http.get(BackendCommsService.getUrl(urls.lovTypes.url), options)
+    return this._http.get<any>(BackendCommsService.getUrl(urls.lovTypes.url), options)
       .toPromise()
-      .then(resp => {
-        console.log(resp);
-        let resj = resp.json();
+      .then(resj => {
+        console.log(resj);
         if (!resj || resj.length == 0) {
           return [];
         }
@@ -475,23 +474,21 @@ export class BackendCommsService {
   }
 
 
-
   getLovValues(lovCd: string): Promise<LovValue[]> {
     // Set query params
     let params = this.getParamsWithIETimestamp();
-    params.set(urls.lovValues.lovCd, lovCd);
+    params = params.set(urls.lovValues.lovCd, lovCd);
 
-    let options = new RequestOptions({
-      search: params,
+    let options = {
+      params: params,
       headers: this.getHeaderWithAuth()
-    });
+    };
 
     // Get the data
-    return this._http.get(BackendCommsService.getUrl(urls.lovValues.url), options)
+    return this._http.get<any>(BackendCommsService.getUrl(urls.lovValues.url), options)
       .toPromise()
-      .then(resp => {
-        console.log(resp);
-        let resj = resp.json();
+      .then(resj => {
+        console.log(resj);
         if (!resj || resj.length == 0) {
           return [];
         }
@@ -505,17 +502,16 @@ export class BackendCommsService {
   getProcesses(): Promise<TicklerProcess[]> {
     // Set query params
     let params = this.getParamsWithIETimestamp();
-    let options = new RequestOptions({
-      search: params,
+    let options = {
+      params: params,
       headers: this.getHeaderWithAuth()
-    });
+    };
 
     // Get the data
-    return this._http.get(BackendCommsService.getUrl(urls.ticklerProcesses.url), options)
+    return this._http.get<any>(BackendCommsService.getUrl(urls.ticklerProcesses.url), options)
       .toPromise()
-      .then(resp => {
-        console.log(resp);
-        let resj = resp.json();
+      .then(resj => {
+        console.log(resj);
         if (!resj || resj.length == 0) {
           return [];
         }
@@ -529,19 +525,18 @@ export class BackendCommsService {
   getTicklerTypes(processId: number): Promise<TicklerType[]> {
     // Set query params
     let params = this.getParamsWithIETimestamp();
-      params.set(urls.ticklerTypes.processId, processId? processId.toString(): null);
+    params = params.set(urls.ticklerTypes.processId, processId ? processId.toString() : null);
 
-    let options = new RequestOptions({
-      search: params,
+    let options = {
+      params: params,
       headers: this.getHeaderWithAuth()
-    });
+    };
 
     // Get the data
-    return this._http.get(BackendCommsService.getUrl(urls.ticklerTypes.url), options)
+    return this._http.get<any>(BackendCommsService.getUrl(urls.ticklerTypes.url), options)
       .toPromise()
-      .then(resp => {
-        console.log(resp);
-        let resj = resp.json();
+      .then(resj => {
+        console.log(resj);
         if (!resj || resj.length == 0) {
           return [];
         }
@@ -554,18 +549,17 @@ export class BackendCommsService {
   getTicklerAttributesMap(ticklerTypeId: number): Promise<TicklerAttributeMap[]> {
     // Set query params
     let params = this.getParamsWithIETimestamp();
-    params.set(urls.ticklerAttributeMap.ticklerTypeId, ticklerTypeId.toString());
-    let options = new RequestOptions({
-      search: params,
+    params = params.set(urls.ticklerAttributeMap.ticklerTypeId, ticklerTypeId.toString());
+    let options = {
+      params: params,
       headers: this.getHeaderWithAuth()
-    });
+    };
 
     // Get the data
-    return this._http.get(BackendCommsService.getUrl(urls.ticklerAttributeMap.url), options)
+    return this._http.get<any>(BackendCommsService.getUrl(urls.ticklerAttributeMap.url), options)
       .toPromise()
-      .then(resp => {
-        console.log(resp);
-        let resj = resp.json();
+      .then(resj => {
+        console.log(resj);
         if (!resj || resj.length == 0) {
           return [];
         }
@@ -575,39 +569,37 @@ export class BackendCommsService {
   }
 
 
-
   //code
 
   //process case
-  getProcessCases(id: number, accountId: string, cifId: string, processCode: string, statusCode: string, assignedUser: string, followUpDueCode?: string, orderBy?: boolean, pageNumber?: number, pageSize?: number ): Promise<ProcessCase[]> {
+  getProcessCases(id: number, accountId: string, cifId: string, processCode: string, statusCode: string, assignedUser: string, followUpDueCode?: string, orderBy?: boolean, pageNumber?: number, pageSize?: number): Promise<ProcessCase[]> {
     // Set query params
     let params = this.getParamsWithIETimestamp();
-    if(id!=null){
-      BackendCommsService.setNotEmptyParam(params, urls.processCase.id, id.toString());
+    if (id != null) {
+      params = BackendCommsService.setNotEmptyParam(params, urls.processCase.id, id.toString());
     }
-    BackendCommsService.setNotEmptyParam(params, urls.processCase.accountId, accountId);
-    BackendCommsService.setNotEmptyParam(params, urls.processCase.cifId, cifId);
-    BackendCommsService.setNotEmptyParam(params, urls.processCase.processCode, processCode);
-    BackendCommsService.setNotEmptyParam(params, urls.processCase.statusCode, statusCode);
-    BackendCommsService.setNotEmptyParam(params, urls.processCase.assignedUser, assignedUser);
-    BackendCommsService.setNotEmptyParam(params, urls.processCase.followUpDueCode, followUpDueCode);
-    BackendCommsService.setNotEmptyParam(params, urls.processCase.orderBy, this._booleanToStringOrderPipe2.transform(orderBy));
-    if(pageNumber !=null || pageSize !=null){
-      BackendCommsService.setNotEmptyParam(params,urls.processCase.pageNr, pageNumber.toString());
-      BackendCommsService.setNotEmptyParam(params,urls.processCase.pageSize, pageSize.toString());
+    params = BackendCommsService.setNotEmptyParam(params, urls.processCase.accountId, accountId);
+    params = BackendCommsService.setNotEmptyParam(params, urls.processCase.cifId, cifId);
+    params = BackendCommsService.setNotEmptyParam(params, urls.processCase.processCode, processCode);
+    params = BackendCommsService.setNotEmptyParam(params, urls.processCase.statusCode, statusCode);
+    params = BackendCommsService.setNotEmptyParam(params, urls.processCase.assignedUser, assignedUser);
+    params = BackendCommsService.setNotEmptyParam(params, urls.processCase.followUpDueCode, followUpDueCode);
+    params = BackendCommsService.setNotEmptyParam(params, urls.processCase.orderBy, this._booleanToStringOrderPipe2.transform(orderBy));
+    if (pageNumber != null || pageSize != null) {
+      params = BackendCommsService.setNotEmptyParam(params, urls.processCase.pageNr, pageNumber.toString());
+      params = BackendCommsService.setNotEmptyParam(params, urls.processCase.pageSize, pageSize.toString());
     }
 
-    let options = new RequestOptions({
-      search: params,
+    let options = {
+      params: params,
       headers: this.getHeaderWithAuth()
-    });
+    };
 
     // Get the data
-    return this._http.get(BackendCommsService.getUrl(urls.processCase.url), options)
+    return this._http.get<any>(BackendCommsService.getUrl(urls.processCase.url), options)
       .toPromise()
-      .then(resp => {
-        console.log(resp);
-        let resj = resp.json();
+      .then(resj => {
+        console.log(resj);
         if (!resj || resj.length == 0) {
           return [];
         }
@@ -620,21 +612,20 @@ export class BackendCommsService {
   getCaseById(id: number): Promise<ProcessCase> {
     // Set query params
     let params = this.getParamsWithIETimestamp();
-    if(id!=null){
-      BackendCommsService.setNotEmptyParam(params, urls.processCase.id, id.toString());
+    if (id != null) {
+      params = BackendCommsService.setNotEmptyParam(params, urls.processCase.id, id.toString());
     }
-    let options = new RequestOptions({
-      search: params,
+    let options = {
+      params: params,
       headers: this.getHeaderWithAuth()
-    });
+    };
 
     // Get the data
-    return this._http.get(BackendCommsService.getUrl(urls.processCase.url), options)
+    return this._http.get<any>(BackendCommsService.getUrl(urls.processCase.url), options)
       .toPromise()
-      .then(resp => {
-        console.log(resp);
-        let resj = resp.json();
-        if (!resj || resj.length == 0) {
+      .then(resj => {
+        console.log(resj);
+        if (!resj) {
           return [];
         }
         return BackendModelConversorService.processCase(resj);
@@ -648,26 +639,25 @@ export class BackendCommsService {
     // Set query params
     let params = this.getParamsWithIETimestamp();
 
-    if(caseId != null){
-      params.set(urls.processCaseTickler.caseId, caseId.toString());
+    if (caseId != null) {
+      params = params.set(urls.processCaseTickler.caseId, caseId.toString());
     }
 
-    if(pageNumber!=null && pageSize!=null){
-      BackendCommsService.setNotEmptyParam(params,urls.processCaseTickler.pageNr, pageNumber.toString());
-      BackendCommsService.setNotEmptyParam(params,urls.processCaseTickler.pageSize, pageSize.toString());
+    if (pageNumber != null && pageSize != null) {
+      params = BackendCommsService.setNotEmptyParam(params, urls.processCaseTickler.pageNr, pageNumber.toString());
+      params = BackendCommsService.setNotEmptyParam(params, urls.processCaseTickler.pageSize, pageSize.toString());
     }
 
-    let options = new RequestOptions({
-      search: params,
+    let options = {
+      params: params,
       headers: this.getHeaderWithAuth()
-    });
+    };
 
     // Get the data
-    return this._http.get(BackendCommsService.getUrl(urls.processCaseTickler.url), options)
+    return this._http.get<any>(BackendCommsService.getUrl(urls.processCaseTickler.url), options)
       .toPromise()
-      .then(resp => {
-        console.log(resp);
-        let resj = resp.json();
+      .then(resj => {
+        console.log(resj);
         if (!resj || resj.length == 0) {
           return [];
         }
@@ -680,21 +670,20 @@ export class BackendCommsService {
   getTicklerTypesMap(ticklerFromId: number): Promise<TicklerTypeMap[]> {
     // Set query params
     let params = this.getParamsWithIETimestamp();
-    if(ticklerFromId != null){
-      params.set(urls.ticklersMap.ticklerFromId, ticklerFromId.toString());
+    if (ticklerFromId != null) {
+      params = params.set(urls.ticklersMap.ticklerFromId, ticklerFromId.toString());
     }
 
-    let options = new RequestOptions({
-      search: params,
+    let options = {
+      params: params,
       headers: this.getHeaderWithAuth()
-    });
+    };
 
     // Get the data
-    return this._http.get(BackendCommsService.getUrl(urls.ticklersMap.url), options)
+    return this._http.get<any>(BackendCommsService.getUrl(urls.ticklersMap.url), options)
       .toPromise()
-      .then(resp => {
-        console.log(resp);
-        let resj = resp.json();
+      .then(resj => {
+        console.log(resj);
         if (!resj || resj.length == 0) {
           return [];
         }
@@ -708,17 +697,16 @@ export class BackendCommsService {
   getTicklerAttributes(): Promise<TicklerAttribute[]> {
     // Set query params
     let params = this.getParamsWithIETimestamp();
-    let options = new RequestOptions({
-      search: params,
+    let options = {
+      params: params,
       headers: this.getHeaderWithAuth()
-    });
+    };
 
     // Get the data
-    return this._http.get(BackendCommsService.getUrl(urls.ticklerAttribute.url), options)
+    return this._http.get<any>(BackendCommsService.getUrl(urls.ticklerAttribute.url), options)
       .toPromise()
-      .then(resp => {
-        console.log(resp);
-        let resj = resp.json();
+      .then(resj => {
+        console.log(resj);
         if (!resj || resj.length == 0) {
           return [];
         }
@@ -728,25 +716,23 @@ export class BackendCommsService {
   }
 
 
-
   //listOfValues attributes
   getListOfValues(lovCode: string): Promise<Code[]> {
     // Set query params
     let params = this.getParamsWithIETimestamp();
     // params.set(urls.listOfValues.lovCode, lovCode);
-    BackendCommsService.setNotEmptyParam(params, urls.listOfValues.lovCode, lovCode);
+    params = BackendCommsService.setNotEmptyParam(params, urls.listOfValues.lovCode, lovCode);
 
-    let options = new RequestOptions({
-      search: params,
+    let options = {
+      params: params,
       headers: this.getHeaderWithAuth()
-    });
+    };
 
     // Get the data
-    return this._http.get(BackendCommsService.getUrl(urls.listOfValues.url), options)
+    return this._http.get<any>(BackendCommsService.getUrl(urls.listOfValues.url), options)
       .toPromise()
-      .then(resp => {
-        console.log(resp);
-        let resj = resp.json();
+      .then(resj => {
+        console.log(resj);
         if (!resj || resj.length == 0) {
           return [];
         }
@@ -761,18 +747,17 @@ export class BackendCommsService {
   getClOrderByTypes(campaignType: string): Promise<CampaignListOrderByType[]> {
     // Set query params
     let params = this.getParamsWithIETimestamp();
-    params.set(urls.campaignListOrderByTypes.campaignType, campaignType);
-    let options = new RequestOptions({
-      search: params,
+    params = params.set(urls.campaignListOrderByTypes.campaignType, campaignType);
+    let options = {
+      params: params,
       headers: this.getHeaderWithAuth()
-    });
+    };
 
     // Get the data
-    return this._http.get(BackendCommsService.getUrl(urls.campaignListOrderByTypes.url), options)
+    return this._http.get<any>(BackendCommsService.getUrl(urls.campaignListOrderByTypes.url), options)
       .toPromise()
-      .then(resp => {
-        console.log(resp);
-        let resj = resp.json();
+      .then(resj => {
+        console.log(resj);
         if (!resj || resj.length == 0) {
           return [];
         }
@@ -785,17 +770,16 @@ export class BackendCommsService {
   getCampaigns(): Promise<Campaign[]> {
     // Set query params
     let params = this.getParamsWithIETimestamp();
-    let options = new RequestOptions({
-      search: params,
+    let options = {
+      params: params,
       headers: this.getHeaderWithAuth()
-    });
+    };
 
     // Get the data
-    return this._http.get(BackendCommsService.getUrl(urls.campaigns.url), options)
+    return this._http.get<any>(BackendCommsService.getUrl(urls.campaigns.url), options)
       .toPromise()
-      .then(resp => {
-        console.log(resp);
-        let resj = resp.json();
+      .then(resj => {
+        console.log(resj);
         if (!resj || resj.length == 0) {
           return [];
         }
@@ -807,21 +791,20 @@ export class BackendCommsService {
   getCampaignLists(campaignCode: string, statusCode: string, pageNumber: number, pageSize: number): Promise<CampaignList[]> {
     // Set query params
     let params = this.getParamsWithIETimestamp();
-    params.set(urls.campaignList.campaignCd, campaignCode);
-    params.set(urls.campaignList.statusCd, statusCode);
-    params.set(urls.campaignList.pageNum, pageNumber.toString());
-    params.set(urls.campaignList.pageSize, pageSize.toString());
-    let options = new RequestOptions({
-      search: params,
+    params = params.set(urls.campaignList.campaignCd, campaignCode);
+    params = BackendCommsService.setNotEmptyParam(params, urls.campaignList.statusCd, statusCode);
+    params = params.set(urls.campaignList.pageNum, pageNumber.toString());
+    params = params.set(urls.campaignList.pageSize, pageSize.toString());
+    let options = {
+      params: params,
       headers: this.getHeaderWithAuth()
-    });
+    };
 
     // Get the data
-    return this._http.get(BackendCommsService.getUrl(urls.campaignList.url), options)
+    return this._http.get<any>(BackendCommsService.getUrl(urls.campaignList.url), options)
       .toPromise()
-      .then(resp => {
-        console.log(resp);
-        let resj = resp.json();
+      .then(resj => {
+        console.log(resj);
         if (!resj || resj.length == 0) {
           return [];
         }
@@ -832,30 +815,28 @@ export class BackendCommsService {
 
 
   //Get campaign list accounts
-  getCampaignListAccounts(campaignCode: string, customerName: string,accountId: string, cifId: string, statusCd:string, currPage: number, pageSize: number): Promise<CampaignListAccount[]>{
+  getCampaignListAccounts(campaignCode: string, customerName: string, accountId: string, cifId: string, statusCd: string, currPage: number, pageSize: number): Promise<CampaignListAccount[]> {
     //cache IE
     let params = this.getParamsWithIETimestamp();
-    params.set(urls.campaignListAccount.campaignCd, campaignCode);
-    BackendCommsService.setNotEmptyParam(params, urls.campaignListAccount.customerName, customerName);
-    BackendCommsService.setNotEmptyParam(params, urls.campaignListAccount.accountId, accountId);
-    BackendCommsService.setNotEmptyParam(params, urls.campaignListAccount.cifId, cifId);
-    BackendCommsService.setNotEmptyParam(params, urls.campaignListAccount.statusCd, statusCd);
-    params.set(urls.campaignListAccount.pageNr, currPage.toString());
-    params.set(urls.campaignListAccount.pageSize, pageSize.toString());
+    params = params.set(urls.campaignListAccount.campaignCd, campaignCode);
+    params = BackendCommsService.setNotEmptyParam(params, urls.campaignListAccount.customerName, customerName);
+    params = BackendCommsService.setNotEmptyParam(params, urls.campaignListAccount.accountId, accountId);
+    params = BackendCommsService.setNotEmptyParam(params, urls.campaignListAccount.cifId, cifId);
+    params = BackendCommsService.setNotEmptyParam(params, urls.campaignListAccount.statusCd, statusCd);
+    params = params.set(urls.campaignListAccount.pageNr, currPage.toString());
+    params = params.set(urls.campaignListAccount.pageSize, pageSize.toString());
     //options
-    let options = new RequestOptions({
-      search: params,
+    let options = {
+      params: params,
       headers: this.getHeaderWithAuth()
-    });
-    return this._http.get(BackendCommsService.getUrl(urls.campaignListAccount.url),options)
+    };
+    return this._http.get<any>(BackendCommsService.getUrl(urls.campaignListAccount.url), options)
       .toPromise()
-      .then(resp =>{
-        console.log(resp);
-        let resj = resp.json();
-        if(!resj||resj.length == 0){
+      .then(resj => {
+        console.log(resj);
+        if (!resj || resj.length == 0) {
           return [];
         }
-        console.log("resj valor",resj);
         return BackendModelConversorService.claccounts2CampaigListAccounts(resj);
 
       })
@@ -864,27 +845,23 @@ export class BackendCommsService {
 
 
   //calls pers hour
-
-  getCallsPersHour(campaignCode: string, startDate: Date):Promise<CallsPersHour[]>{
+  getCallsPersHour(campaignCode: string, startDate: Date): Promise<CallsPersHour[]> {
     let params = this.getParamsWithIETimestamp();
-    params.set(urls.callsPersHour.campaignCd, campaignCode);
-    // BackendCommsService.setNotEmptyParam(params,urls.callsPersHour.campaignCd, campaignCode);
-    params.set(urls.callsPersHour.startDt,this._datePipe.transform(startDate, DatePatern));
+    params = BackendCommsService.setNotEmptyParam(params, urls.callsPersHour.campaignCd, campaignCode);
+    params = params.set(urls.callsPersHour.startDt, this._datePipe.transform(startDate, DatePatern));
 
     //options
-    let options = new RequestOptions({
-      search: params,
+    let options = {
+      params: params,
       headers: this.getHeaderWithAuth()
-    });
-    return this._http.get(BackendCommsService.getUrl(urls.callsPersHour.url),options)
+    };
+    return this._http.get<any>(BackendCommsService.getUrl(urls.callsPersHour.url), options)
       .toPromise()
-      .then(resp=>{
-        console.log(resp);
-        let resj = resp.json();
-        if(!resp|| resj.length == 0){
+      .then(resj => {
+        console.log(resj);
+        if (!resj || resj.length == 0) {
           return [];
         }
-        console.log("calls per hour valor", resj);
         return BackendModelConversorService.callsPersHour(resj);
       })
       .catch(this.handleError);
@@ -893,21 +870,20 @@ export class BackendCommsService {
 
   //Incoming calls
 
-  getIncomingCalls(startDate: Date):Promise<IncomingCalls[]>{
+  getIncomingCalls(startDate: Date): Promise<IncomingCalls[]> {
     let params = this.getParamsWithIETimestamp();
-    params.set(urls.incomingCalls.startDt, this._datePipe.transform(startDate,DatePatern));
+    params = params.set(urls.incomingCalls.startDt, this._datePipe.transform(startDate, DatePatern));
 
     //options
-    let options = new RequestOptions({
-      search: params,
+    let options = {
+      params: params,
       headers: this.getHeaderWithAuth()
-    });
-    return this._http.get(BackendCommsService.getUrl(urls.incomingCalls.url),options)
+    };
+    return this._http.get<any>(BackendCommsService.getUrl(urls.incomingCalls.url), options)
       .toPromise()
-      .then(resp=>{
-        console.log(resp);
-        let resj = resp.json();
-        if(!resp || resj.length == 0){
+      .then(resj => {
+        console.log(resj);
+        if (!resj || resj.length == 0) {
           return [];
         }
         console.log("Incomings calls", resj);
@@ -918,26 +894,21 @@ export class BackendCommsService {
 
 
   //contact percentage
-
-  //calls pers hour
-
-  getContactPercentage(campaignCode: string, startDate: Date):Promise<ContactPercentage[]>{
+  getContactPercentage(campaignCode: string, startDate: Date): Promise<ContactPercentage[]> {
     let params = this.getParamsWithIETimestamp();
-    params.set(urls.contactPercentage.campaignCd, campaignCode);
-    // BackendCommsService.setNotEmptyParam(params,urls.callsPersHour.campaignCd, campaignCode);
-    params.set(urls.contactPercentage.startDt,this._datePipe.transform(startDate, DatePatern));
+    params =  BackendCommsService.setNotEmptyParam(params, urls.contactPercentage.campaignCd, campaignCode);
+    params = params.set(urls.contactPercentage.startDt, this._datePipe.transform(startDate, DatePatern));
 
     //options
-    let options = new RequestOptions({
-      search: params,
+    let options = {
+      params: params,
       headers: this.getHeaderWithAuth()
-    });
-    return this._http.get(BackendCommsService.getUrl(urls.contactPercentage.url),options)
+    };
+    return this._http.get<any>(BackendCommsService.getUrl(urls.contactPercentage.url), options)
       .toPromise()
-      .then(resp=>{
-        console.log(resp);
-        let resj = resp.json();
-        if(!resp|| resj.length == 0){
+      .then(resj => {
+        console.log(resj);
+        if (!resj || resj.length == 0) {
           return [];
         }
         console.log("contact percentage valor", resj);
@@ -948,22 +919,20 @@ export class BackendCommsService {
 
 
   //campaign record history
-  getCampaignRecordHistory(accountId: string, camp: CampaignListRecord):Promise<CampaignRecordHistory[]>{
+  getCampaignRecordHistory(accountId: string, camp: CampaignListRecord): Promise<CampaignRecordHistory[]> {
     let params = this.getParamsWithIETimestamp();
-    params.set(urls.campaignRecordHistory.accountId, accountId);
-    // BackendCommsService.setNotEmptyParam(params,urls.callsPersHour.campaignCd, campaignCode);
+    params = params.set(urls.campaignRecordHistory.accountId, accountId);
 
     //options
-    let options = new RequestOptions({
-      search: params,
+    let options = {
+      params: params,
       headers: this.getHeaderWithAuth()
-    });
-    return this._http.get(BackendCommsService.getUrl(urls.campaignRecordHistory.url),options)
+    };
+    return this._http.get<any>(BackendCommsService.getUrl(urls.campaignRecordHistory.url), options)
       .toPromise()
-      .then(resp=>{
-        console.log(resp);
-        let resj = resp.json();
-        if(!resp|| resj.length == 0){
+      .then(resj => {
+        console.log(resj);
+        if (!resj || resj.length == 0) {
           return [];
         }
         console.log("campaign record history valor", resj);
@@ -973,22 +942,20 @@ export class BackendCommsService {
   }
 
 
-
   getCampaignListStatistics(campaignListId: number, cpl: CampaignList): Promise<CampaignStatsToken[]> {
     // Set query params
     let params = this.getParamsWithIETimestamp();
-    params.set(urls.campaignListStat.campaingListId, campaignListId.toString());
-    let options = new RequestOptions({
-      search: params,
+    params = params.set(urls.campaignListStat.campaingListId, campaignListId.toString());
+    let options = {
+      params: params,
       headers: this.getHeaderWithAuth()
-    });
+    };
 
     // Get the data
-    return this._http.get(BackendCommsService.getUrl(urls.campaignListStat.url), options)
+    return this._http.get<any>(BackendCommsService.getUrl(urls.campaignListStat.url), options)
       .toPromise()
-      .then(resp => {
-        console.log(resp);
-        let resj = resp.json();
+      .then(resj => {
+        console.log(resj);
         if (!resj || resj.length == 0) {
           return [];
         }
@@ -1000,21 +967,20 @@ export class BackendCommsService {
   getCampaignListRecords(listId: number, statusCode: string, pageNumber: number, pageSize: number): Promise<CampaignListRecord[]> {
     // Set query params
     let params = this.getParamsWithIETimestamp();
-    params.set(urls.campaignListRecord.listId, listId.toString());
-    params.set(urls.campaignListRecord.statusCd, statusCode);
-    params.set(urls.campaignListRecord.pageNum, pageNumber.toString());
-    params.set(urls.campaignListRecord.pageSize, pageSize.toString());
-    let options = new RequestOptions({
-      search: params,
+    params = params.set(urls.campaignListRecord.listId, listId.toString());
+    params = BackendCommsService.setNotEmptyParam(params, urls.campaignListRecord.statusCd, statusCode);
+    params = params.set(urls.campaignListRecord.pageNum, pageNumber.toString());
+    params = params.set(urls.campaignListRecord.pageSize, pageSize.toString());
+    let options = {
+      params: params,
       headers: this.getHeaderWithAuth()
-    });
+    };
 
     // Get the data
-    return this._http.get(BackendCommsService.getUrl(urls.campaignListRecord.url), options)
+    return this._http.get<any>(BackendCommsService.getUrl(urls.campaignListRecord.url), options)
       .toPromise()
-      .then(resp => {
-        console.log(resp);
-        let resj = resp.json();
+      .then(resj => {
+        console.log(resj);
         if (!resj || resj.length == 0) {
           return [];
         }
@@ -1027,19 +993,18 @@ export class BackendCommsService {
   nextAccount(agent: string, campaign: string): Promise<Account> {
     // Set query params
     let params = this.getParamsWithIETimestamp();
-    params.set(urls.nextAccount.userCd, agent);
-    params.set(urls.nextAccount.campaignCd, campaign);
-    let options = new RequestOptions({
-      search: params,
+    params = params.set(urls.nextAccount.userCd, agent);
+    params = params.set(urls.nextAccount.campaignCd, campaign);
+    let options = {
+      params: params,
       headers: this.getHeaderWithAuth()
-    });
+    };
 
     // Get the data
-    return this._http.get(BackendCommsService.getUrl(urls.nextAccount.url), options)
+    return this._http.get<any>(BackendCommsService.getUrl(urls.nextAccount.url), options)
       .toPromise()
-      .then(resp => {
-        console.log(resp);
-        let resj = resp.json();
+      .then(resj => {
+        console.log(resj);
         if (!resj) {
           console.log("No account found");
           return new Promise<Account>((resolve) => resolve(null));
@@ -1052,32 +1017,33 @@ export class BackendCommsService {
   accountInquiry(accId: string, accType: string, srcAcc?: Account): Promise<Account> {
     // Set query params
     let params = this.getParamsWithIETimestamp();
-    params.set(urls.acctInq.accId, accId);
-    params.set(urls.acctInq.accType, accType);
-    let options = new RequestOptions({
-      search: params,
+    params = params.set(urls.acctInq.accId, accId);
+    params = params.set(urls.acctInq.accType, accType);
+    let options = {
+      params: params,
       headers: this.getHeaderWithAuth()
-    });
+    };
 
     // Get the data
-    return this._http.get(BackendCommsService.getUrl(urls.acctInq.url), options)
+    return this._http.get<any>(BackendCommsService.getUrl(urls.acctInq.url), options)
       .toPromise()
-      .then(resp => {
-        console.log(resp);
-        let resj = resp.json();
+      .then(resj => {
+        console.log(resj);
         if (!resj.cnAccount && !resj.cnAccountDep) {
           console.log("No account found");
           return null;
         }
 
-        if(resj.cnAccountDep){
+        if (resj.cnAccountDep) {
           return BackendModelConversorService.cnAccountDepAccount(resj.cnAccountDep, srcAcc);
 
-        }if(resj.cnAccount){
+        }
+        else if (resj.cnAccount) {
           return BackendModelConversorService.cnAccount2Account(resj.cnAccount, srcAcc);
         }
-
-        return BackendModelConversorService.cnAccount2Account(resj.cnAccount, srcAcc);
+        else{
+          return BackendModelConversorService.cnAccount2Account(resj.cnAccount, srcAcc);
+        }
 
       })
       .catch(this.handleError);
@@ -1087,16 +1053,15 @@ export class BackendCommsService {
     console.log(custId);
     // Set query params
     let params = this.getParamsWithIETimestamp();
-    params.set(urls.custInq.customerId, custId);
-    let options = new RequestOptions({
-      search: params,
+    params = params.set(urls.custInq.customerId, custId);
+    let options = {
+      params: params,
       headers: this.getHeaderWithAuth()
-    });
-    return this._http.get(BackendCommsService.getUrl(urls.custInq.url), options)
+    };
+    return this._http.get<any>(BackendCommsService.getUrl(urls.custInq.url), options)
       .toPromise()
-      .then(resp => {
-        console.log(resp);
-        let resj = resp.json();
+      .then(resj => {
+        console.log(resj);
         if (!resj.cnCustomer || !resj.cnCustomer.cnCustomerInfo) {
           console.log("No customer found");
           return null;
@@ -1108,17 +1073,16 @@ export class BackendCommsService {
 
   getCustomerAccounts(custId: string, accountType: string): Promise<Account[]> {
     let params = this.getParamsWithIETimestamp();
-    params.set(urls.acctSrch.customerId, custId);
-    BackendCommsService.setNotEmptyParam(params, urls.acctSrch.accountType, accountType);
-    let options = new RequestOptions({
-      search: params,
+    params = params.set(urls.acctSrch.customerId, custId);
+    params = BackendCommsService.setNotEmptyParam(params, urls.acctSrch.accountType, accountType);
+    let options = {
+      params: params,
       headers: this.getHeaderWithAuth()
-    });
-    return this._http.get(BackendCommsService.getUrl(urls.acctSrch.url), options)
+    };
+    return this._http.get<any>(BackendCommsService.getUrl(urls.acctSrch.url), options)
       .toPromise()
-      .then(resp => {
-        console.log(resp);
-        let resj = resp.json();
+      .then(resj => {
+        console.log(resj);
         if (!resj.cnAccountSrch || !resj.cnAccountSrch.accountList) {
           console.log("No accounts found");
           return new Promise<Account[]>((resolve) => resolve([]));
@@ -1129,22 +1093,22 @@ export class BackendCommsService {
   }
 
   // Task 5986: this method is obsolete
-  getCustomerContacts(custId: string, startDate : Date): Promise<number>{
+  getCustomerContacts(custId: string, startDate: Date): Promise<number> {
     //url
     let params = this.getParamsWithIETimestamp();
-    params.set(urls.todayContact.customerId, custId);
-    params.set(urls.todayContact.startDt,this._datePipe.transform(startDate, DatePatern));
+    params = params.set(urls.todayContact.customerId, custId);
+    params = params.set(urls.todayContact.startDt, this._datePipe.transform(startDate, DatePatern));
 
     //options
-    let options = new RequestOptions({
-      search: params,
+    let options = {
+      params: params,
       headers: this.getHeaderWithAuth()
-    });
-    return this._http.get(BackendCommsService.getUrl(urls.todayContact.url),options)
+    };
+    return this._http.get<any>(BackendCommsService.getUrl(urls.todayContact.url), options)
       .toPromise()
-      .then(resp => {
+      .then(resj => {
         try {
-          let ret = parseInt(resp.text());
+          let ret = parseInt(resj.toString());
           return isNaN(ret) ? 0 : ret;
         } catch (e) {
           return 0;
@@ -1153,22 +1117,22 @@ export class BackendCommsService {
       .catch(this.handleError);
   }
 
-  getAccountCalls(accId: string, startDate : Date): Promise<number>{
+  getAccountCalls(accId: string, startDate: Date): Promise<number> {
     //url
     let params = this.getParamsWithIETimestamp();
-    params.set(urls.accountContacts.customerId, accId);
-    params.set(urls.accountContacts.startDt, this._datePipe.transform(startDate, DatePatern));
+    params = params.set(urls.accountContacts.customerId, accId);
+    params = params.set(urls.accountContacts.startDt, this._datePipe.transform(startDate, DatePatern));
 
     //options
-    let options = new RequestOptions({
-      search: params,
+    let options = {
+      params: params,
       headers: this.getHeaderWithAuth()
-    });
-    return this._http.get(BackendCommsService.getUrl(urls.accountContacts.url),options)
+    };
+    return this._http.get<any>(BackendCommsService.getUrl(urls.accountContacts.url), options)
       .toPromise()
-      .then(resp => {
+      .then(resj => {
         try {
-          let ret = parseInt(resp.text());
+          let ret = parseInt(resj.toString());
           return isNaN(ret) ? 0 : ret;
         } catch (e) {
           return 0;
@@ -1179,17 +1143,16 @@ export class BackendCommsService {
 
   getAccountHistory(accId: string, accountType: string): Promise<AccountHistoryEntry[]> {
     let params = this.getParamsWithIETimestamp();
-    params.set(urls.acctHistSrch.accountId, accId);
-    params.set(urls.acctHistSrch.accountType, accountType);
-    let options = new RequestOptions({
-      search: params,
+    params = params.set(urls.acctHistSrch.accountId, accId);
+    params = params.set(urls.acctHistSrch.accountType, accountType);
+    let options = {
+      params: params,
       headers: this.getHeaderWithAuth()
-    });
-    return this._http.get(BackendCommsService.getUrl(urls.acctHistSrch.url), options)
+    };
+    return this._http.get<any>(BackendCommsService.getUrl(urls.acctHistSrch.url), options)
       .toPromise()
-      .then(resp => {
-        console.log(resp);
-        let resj = resp.json();
+      .then(resj => {
+        console.log(resj);
         if (!resj.cnAccountHistSrch || !resj.cnAccountHistSrch.accountHistList) {
           console.log("No history found");
           return new Promise<AccountHistoryEntry[]>((resolve) => resolve([]));
@@ -1210,16 +1173,15 @@ export class BackendCommsService {
   getCustomerCallRecords(custId: string): Promise<CallRecord[]> {
     // Set query params
     let params = this.getParamsWithIETimestamp();
-    params.set(urls.callRecords.customerId, custId);
-    let options = new RequestOptions({
-      search: params,
+    params = params.set(urls.callRecords.customerId, custId);
+    let options = {
+      params: params,
       headers: this.getHeaderWithAuth()
-    });
-    return this._http.get(BackendCommsService.getUrl(urls.callRecords.url), options)
+    };
+    return this._http.get<any>(BackendCommsService.getUrl(urls.callRecords.url), options)
       .toPromise()
-      .then(resp => {
-        console.log(resp);
-        let resj = resp.json();
+      .then(resj => {
+        console.log(resj);
         if (!resj || resj.length == 0) {
           console.log("No records found");
           return new Promise<CallRecord[]>((resolve) => resolve([]));
@@ -1232,20 +1194,19 @@ export class BackendCommsService {
   getCustomerCallNotes(accountId: string, accountType: string, pageNumber: number, pageSize: number, customerId: string): Promise<MemoNote[]> {
     // Set query params
     let params = this.getParamsWithIETimestamp();
-    params.set(urls.callNotes.accountId, accountId);
-    params.set(urls.callNotes.accountType, accountType);
-    params.set(urls.callNotes.customerId, customerId);
-    params.set(urls.callNotes.pageNr, pageNumber.toString());
-    params.set(urls.callNotes.pageSize, pageSize.toString());
-    let options = new RequestOptions({
-      search: params,
+    params = params.set(urls.callNotes.accountId, accountId);
+    params = params.set(urls.callNotes.accountType, accountType);
+    params = params.set(urls.callNotes.customerId, customerId);
+    params = params.set(urls.callNotes.pageNr, pageNumber.toString());
+    params = params.set(urls.callNotes.pageSize, pageSize.toString());
+    let options = {
+      params: params,
       headers: this.getHeaderWithAuth()
-    });
-    return this._http.get(BackendCommsService.getUrl(urls.callNotes.url), options)
+    };
+    return this._http.get<any>(BackendCommsService.getUrl(urls.callNotes.url), options)
       .toPromise()
-      .then(resp => {
-        console.log(resp);
-        let resj = resp.json();
+      .then(resj => {
+        console.log(resj);
         if (!resj || resj.length == 0) {
           console.log("No call notes found");
           return new Promise<MemoNote[]>((resolve) => resolve([]));
@@ -1258,15 +1219,14 @@ export class BackendCommsService {
   getCampaignStats(): Promise<CampaignStatsToken[]> {
     // Set query params
     let params = this.getParamsWithIETimestamp();
-    let options = new RequestOptions({
-      search: params,
+    let options = {
+      params: params,
       headers: this.getHeaderWithAuth()
-    });
-    return this._http.get(BackendCommsService.getUrl(urls.campaigStat.url), options)
+    };
+    return this._http.get<any>(BackendCommsService.getUrl(urls.campaigStat.url), options)
       .toPromise()
-      .then(resp => {
-        console.log(resp);
-        let resj = resp.json();
+      .then(resj => {
+        console.log(resj);
         if (!resj || resj.length == 0) {
           console.log("No stats found");
           return [];
@@ -1281,16 +1241,15 @@ export class BackendCommsService {
     // Set query params
     let params = this.getParamsWithIETimestamp();
     // TODO: format
-    params.set(urls.collectorsProductivity.startDt, this._datePipe.transform(from, DatePatern));
-    let options = new RequestOptions({
-      search: params,
+    params = params.set(urls.collectorsProductivity.startDt, this._datePipe.transform(from, DatePatern));
+    let options = {
+      params: params,
       headers: this.getHeaderWithAuth()
-    });
-    return this._http.get(BackendCommsService.getUrl(urls.collectorsProductivity.url), options)
+    };
+    return this._http.get<any>(BackendCommsService.getUrl(urls.collectorsProductivity.url), options)
       .toPromise()
-      .then(resp => {
-        console.log(resp);
-        let resj = resp.json();
+      .then(resj => {
+        console.log(resj);
         if (!resj || resj.length == 0) {
           console.log("No collectors productivity records found");
           return [];
@@ -1305,17 +1264,16 @@ export class BackendCommsService {
     // Set query params
     let params = this.getParamsWithIETimestamp();
     // TODO: format
-    params.set(urls.overallProductivity.startDt, this._datePipe.transform(from, DatePatern));
-    params.set(urls.overallProductivity.endDt, this._datePipe.transform(to, DatePatern));
-    let options = new RequestOptions({
-      search: params,
+    params = params.set(urls.overallProductivity.startDt, this._datePipe.transform(from, DatePatern));
+    params = params.set(urls.overallProductivity.endDt, this._datePipe.transform(to, DatePatern));
+    let options = {
+      params: params,
       headers: this.getHeaderWithAuth()
-    });
-    return this._http.get(BackendCommsService.getUrl(urls.overallProductivity.url), options)
+    };
+    return this._http.get<any>(BackendCommsService.getUrl(urls.overallProductivity.url), options)
       .toPromise()
-      .then(resp => {
-        console.log(resp);
-        let resj = resp.json();
+      .then(resj => {
+        console.log(resj);
         if (!resj || resj.length == 0) {
           console.log("No overall productivity records found");
           return [];
@@ -1329,22 +1287,21 @@ export class BackendCommsService {
   searchCustomer(criteria: SearchAccountCriteriaParams): Promise<Customer[]> {
     // Set query params
     let params = this.getParamsWithIETimestamp();
-    BackendCommsService.setNotEmptyParam(params, urls.custSrch.taxId, criteria.taxId);
-    BackendCommsService.setNotEmptyParam(params, urls.custSrch.accountId, criteria.accountId);
-    BackendCommsService.setNotEmptyParam(params, urls.custSrch.email, criteria.email);
-    BackendCommsService.setNotEmptyParam(params, urls.custSrch.phone, criteria.phoneNumber);
-    if(criteria.accountId){
-      BackendCommsService.setNotEmptyParam(params, urls.custSrch.accountType, criteria.accountType);
+    params = BackendCommsService.setNotEmptyParam(params, urls.custSrch.taxId, criteria.taxId);
+    params = BackendCommsService.setNotEmptyParam(params, urls.custSrch.accountId, criteria.accountId);
+    params = BackendCommsService.setNotEmptyParam(params, urls.custSrch.email, criteria.email);
+    params = BackendCommsService.setNotEmptyParam(params, urls.custSrch.phone, criteria.phoneNumber);
+    if (criteria.accountId) {
+      params = BackendCommsService.setNotEmptyParam(params, urls.custSrch.accountType, criteria.accountType);
     }
-    let options = new RequestOptions({
-      search: params,
+    let options = {
+      params: params,
       headers: this.getHeaderWithAuth()
-    });
-    return this._http.get(BackendCommsService.getUrl(urls.custSrch.url), options)
+    };
+    return this._http.get<any>(BackendCommsService.getUrl(urls.custSrch.url), options)
       .toPromise()
-      .then(resp => {
-        console.log(resp);
-        let resj = resp.json();
+      .then(resj => {
+        console.log(resj);
         if (!resj.cnCustomerSrch || !resj.cnCustomerSrch.customerList) {
           console.log("No customers found");
           return new Promise<Customer[]>((resolve) => resolve([]));
@@ -1358,8 +1315,8 @@ export class BackendCommsService {
                 customerId, /*callStartDate,*/ actionCode, contactedCode,
                 resultCode, statusCode, callNote, nextWorkDate, promisedDate, pomisedAmount,
                 callLaterDate, callLaterUser, callId,
-                callStartDate, callEndDate, phoneNumber, phoneType, autoDial, customerFirstName:string,
-                customerLastName:string, agent: string, agentGroup: string, campaignCode: string, collectionStatusCode:string,
+                callStartDate, callEndDate, phoneNumber, phoneType, autoDial, customerFirstName: string,
+                customerLastName: string, agent: string, agentGroup: string, campaignCode: string, collectionStatusCode: string,
                 lastPromiseDate: string, balance: number, daysPastDue: number,
                 extension: string, languageCode: string, eaPcFlag: string, accountStatusCode: string): Promise<boolean> {
     let body: any = {
@@ -1417,20 +1374,20 @@ export class BackendCommsService {
     }
 
     console.log(body);
-    let options = new RequestOptions({
+    let options = {
       headers: this.getHeaderWithAuth()
-    });
+    };
 
-    return this._http.post(BackendCommsService.getUrl(urls.addCallRecord.url), body, options)
+    return this._http.post<any>(BackendCommsService.getUrl(urls.addCallRecord.url), body, options)
       .toPromise()
-      .then(resp => {
-        console.log(resp);
+      .then(resj => {
+        console.log(resj);
         return true;
       })
       .catch(this.handleError);
   }
 
-  cancelCallRecord(agentCd: string, campaignRecordId: string, reasonCode: string, message:string, flag: boolean): Promise<boolean> {
+  cancelCallRecord(agentCd: string, campaignRecordId: string, reasonCode: string, message: string, flag: boolean): Promise<boolean> {
     let body: any = {
       UserCd: agentCd,
       CampaignRecordId: campaignRecordId,
@@ -1439,20 +1396,20 @@ export class BackendCommsService {
       CancelRelatedFlg: this._booleanToStringPipe.transform(flag)
     };
     console.log(body);
-    let options = new RequestOptions({
+    let options = {
       headers: this.getHeaderWithAuth()
-    });
+    };
     options.headers.set(urls.general.headers.content.key, urls.general.headers.content.value);
 
     return this._http.put(BackendCommsService.getUrl(urls.cancelRecord.url), body, options)
       .toPromise()
-      .then(resp => {
+      .then(resj => {
         return true;
       })
       .catch(this.handleError);
   }
 
-  createCampaignList(campaignCode: string, userCode: string, uploadId: number, attributes: {code: string, values: any[], isArray: boolean}[]): Promise<number> {
+  createCampaignList(campaignCode: string, userCode: string, uploadId: number, attributes: { code: string, values: any[], isArray: boolean }[]): Promise<number> {
     let body = {
       UserCd: userCode,
       UploadId: uploadId,
@@ -1462,22 +1419,22 @@ export class BackendCommsService {
       body[a.code] = a.isArray ? a.values : a.values[0];
     }
     console.log(body);
-    let options = new RequestOptions({
+    let options = {
       headers: this.getHeaderWithAuth()
-    });
+    };
     options.headers.set(urls.general.headers.content.key, urls.general.headers.content.value);
 
     return this._http.post(BackendCommsService.getUrl(urls.campaignList.url), body, options)
       .toPromise()
       .then(resp => {
         console.log(resp);
-        return parseInt(resp.text());
+        return parseInt(resp.toString());
       })
       .catch(this.handleError);
   }
 
   //create case tickler
-  createCaseTickler(accountId: string, cifId: string, processCode: string, caseDescription: string, createdBy:string, custFirstName: string, custLastName: string, accountType: string): Promise<number> {
+  createCaseTickler(accountId: string, cifId: string, processCode: string, caseDescription: string, createdBy: string, custFirstName: string, custLastName: string, accountType: string): Promise<number> {
     let body = {
       AccountId: accountId,
       CifId: cifId,
@@ -1490,22 +1447,22 @@ export class BackendCommsService {
     };
 
     console.log(body);
-    let options = new RequestOptions({
+    let options = {
       headers: this.getHeaderWithAuth()
-    });
+    };
     options.headers.set(urls.general.headers.content.key, urls.general.headers.content.value);
 
     return this._http.post(BackendCommsService.getUrl(urls.processCase.url), body, options)
       .toPromise()
       .then(resp => {
         console.log(resp);
-        return parseInt(resp.text());
+        return resp;
       })
       .catch(this.handleError);
   }
 
   //add case tickler
-  addCaseTickler(caseId: number, ticklerTypeCode: string, ticklerDescription: string, attributes, createdBy:string): Promise<number> {
+  addCaseTickler(caseId: number, ticklerTypeCode: string, ticklerDescription: string, attributes, createdBy: string): Promise<number> {
     let body = {
       CaseId: caseId,
       TicklerTypeCd: ticklerTypeCode,
@@ -1515,20 +1472,19 @@ export class BackendCommsService {
     };
 
     console.log(body);
-    let options = new RequestOptions({
+    let options = {
       headers: this.getHeaderWithAuth()
-    });
+    };
     options.headers.set(urls.general.headers.content.key, urls.general.headers.content.value);
 
     return this._http.post(BackendCommsService.getUrl(urls.processCaseTickler.url), body, options)
       .toPromise()
       .then(resp => {
         console.log(resp);
-        return parseInt(resp.text());
+        return resp;
       })
       .catch(this.handleError);
   }
-
 
   //add case tickler
   addCallNotes(accountId:string, accountType: string, cifId: string, note: string, createdBy: string): Promise<boolean> {
@@ -1541,20 +1497,18 @@ export class BackendCommsService {
     };
 
     console.log(body);
-    let options = new RequestOptions({
+    let options = {
       headers: this.getHeaderWithAuth()
-    });
-    options.headers.set(urls.general.headers.content.key, urls.general.headers.content.value);
+    };
+    options.headers = options.headers.set(urls.general.headers.content.key, urls.general.headers.content.value);
 
-    return this._http.post(BackendCommsService.getUrl(urls.callNotes.url), body, options)
+    return this._http.post<any>(BackendCommsService.getUrl(urls.callNotes.url), body, options)
       .toPromise()
       .then(resp => {
-        console.log(resp);
-        return parseInt(resp.text());
+        return true;
       })
       .catch(this.handleError);
   }
-
 
   addCustomerConsent(cifId: string, hasConsent: boolean, phoneNumber: string,note: string, createdBy: string): Promise<number> {
     let body = {
@@ -1566,16 +1520,16 @@ export class BackendCommsService {
     };
 
     console.log(body);
-    let options = new RequestOptions({
+    let options = {
       headers: this.getHeaderWithAuth()
-    });
+    };
     options.headers.set(urls.general.headers.content.key, urls.general.headers.content.value);
 
-    return this._http.post(BackendCommsService.getUrl(urls.customerConsent.url), body, options)
+    return this._http.post<any>(BackendCommsService.getUrl(urls.customerConsent.url), body, options)
       .toPromise()
       .then(resp => {
         console.log(resp);
-        return parseInt(resp.text());
+        return resp;
       })
       .catch(this.handleError);
   }
@@ -1590,16 +1544,16 @@ export class BackendCommsService {
     };
 
     console.log(body);
-    let options = new RequestOptions({
+    let options = {
       headers: this.getHeaderWithAuth()
-    });
+    };
     options.headers.set(urls.general.headers.content.key, urls.general.headers.content.value);
 
-    return this._http.post(BackendCommsService.getUrl(urls.campaignListOrderBy.url), body, options)
+    return this._http.post<any>(BackendCommsService.getUrl(urls.campaignListOrderBy.url), body, options)
       .toPromise()
       .then(resp => {
         console.log(resp);
-        return parseInt(resp.text());
+        return resp;
       })
       .catch(this.handleError);
   }
@@ -1613,35 +1567,33 @@ export class BackendCommsService {
     };
 
     console.log(body);
-    let options = new RequestOptions({
+    let options = {
       headers: this.getHeaderWithAuth()
-    });
+    };
     options.headers.set(urls.general.headers.content.key, urls.general.headers.content.value);
 
     return this._http.put(BackendCommsService.getUrl(urls.campaignList.url), body, options)
       .toPromise()
       .then(resp => {
         console.log(resp);
-        return parseInt(resp.text());
+        return resp;
       })
       .catch(this.handleError);
   }
 
 
   //new tickler type
-  newTicklerType(
-    processId: number,
-    ticklerCode: string,
-    ticklerName: string,
-    ticklerDescription: string,
-    actionRequired: boolean,
-    activeFlag: boolean,
-    isCloseable:boolean,
-    isCore:boolean,
-    orderByCode: number,
-    followUpDays: number,
-    createdBy:string
-  ): Promise<number> {
+  newTicklerType(processId: number,
+                 ticklerCode: string,
+                 ticklerName: string,
+                 ticklerDescription: string,
+                 actionRequired: boolean,
+                 activeFlag: boolean,
+                 isCloseable: boolean,
+                 isCore: boolean,
+                 orderByCode: number,
+                 followUpDays: number,
+                 createdBy: string): Promise<number> {
     let body = {
       ProcessId: processId,
       TicklerCd: ticklerCode,
@@ -1657,34 +1609,33 @@ export class BackendCommsService {
     };
 
     console.log(body);
-    let options = new RequestOptions({
+    let options = {
       headers: this.getHeaderWithAuth()
-    });
+    };
     options.headers.set(urls.general.headers.content.key, urls.general.headers.content.value);
 
-    return this._http.post(BackendCommsService.getUrl(urls.ticklerTypes.url), body, options)
+    return this._http.post<any>(BackendCommsService.getUrl(urls.ticklerTypes.url), body, options)
       .toPromise()
       .then(resp => {
         console.log(resp);
-        return parseInt(resp.text());
+        return resp;
       })
       .catch(this.handleError);
   }
 
 
   //update tickler type
- updateTicklerType(
-   id: number,
-   ticklerName: string,
-   ticklerDescription: string,
-   activeFlag: boolean,
-   actionRequired: boolean,
-   isCloseable: boolean,
-   isCore: boolean,
-   isBase:boolean,
-   orderByCode: number,
-   followUpDays: number,
-   modifiedBy:string): Promise<number> {
+  updateTicklerType(id: number,
+                    ticklerName: string,
+                    ticklerDescription: string,
+                    activeFlag: boolean,
+                    actionRequired: boolean,
+                    isCloseable: boolean,
+                    isCore: boolean,
+                    isBase: boolean,
+                    orderByCode: number,
+                    followUpDays: number,
+                    modifiedBy: string): Promise<number> {
     let body = {
       Id: id,
       TicklerNm: ticklerName,
@@ -1700,16 +1651,16 @@ export class BackendCommsService {
     };
 
     console.log(body);
-    let options = new RequestOptions({
+    let options = {
       headers: this.getHeaderWithAuth()
-    });
+    };
     options.headers.set(urls.general.headers.content.key, urls.general.headers.content.value);
 
-    return this._http.put(BackendCommsService.getUrl(urls.ticklerTypes.url), body, options)
+    return this._http.put<any>(BackendCommsService.getUrl(urls.ticklerTypes.url), body, options)
       .toPromise()
       .then(resp => {
         console.log(resp);
-        return parseInt(resp.text());
+        return resp;
       })
       .catch(this.handleError);
   }
@@ -1717,18 +1668,18 @@ export class BackendCommsService {
   //Remove tickler type
   removeTicklerType(id: number): Promise<number> {
     let params = this.getParamsWithIETimestamp();
-    params.set(urls.ticklerTypes.id, id.toString());
-    let options = new RequestOptions({
-      search: params,
+    params = params.set(urls.ticklerTypes.id, id.toString());
+    let options = {
+      params: params,
       headers: this.getHeaderWithAuth()
-    });
-    options.headers.set(urls.general.headers.content.key, urls.general.headers.content.value);
+    };
+    options.headers = options.headers.set(urls.general.headers.content.key, urls.general.headers.content.value);
 
     return this._http.delete(BackendCommsService.getUrl(urls.ticklerTypes.url), options)
       .toPromise()
       .then(resp => {
         console.log(resp);
-        return parseInt(resp.text());
+        return resp;
       })
       .catch(this.handleError);
   }
@@ -1745,22 +1696,22 @@ export class BackendCommsService {
     };
 
     console.log(body);
-    let options = new RequestOptions({
+    let options = {
       headers: this.getHeaderWithAuth()
-    });
+    };
     options.headers.set(urls.general.headers.content.key, urls.general.headers.content.value);
 
-    return this._http.post(BackendCommsService.getUrl(urls.lovTypes.url), body, options)
+    return this._http.post<any>(BackendCommsService.getUrl(urls.lovTypes.url), body, options)
       .toPromise()
       .then(resp => {
         console.log(resp);
-        return parseInt(resp.text());
+        return resp;
       })
       .catch(this.handleError);
   }
 
   //add lov value
-  addLovValue(lovId: number, valueCode: string, valueName: string, valueDescription: string, createdBy: string): Promise<number> {
+  addLovValue(lovId: number, valueCode: string, valueName: string, valueDescription: string, createdBy: string): Promise<boolean> {
     let body = {
       LovId: lovId,
       ValueCd: valueCode,
@@ -1770,16 +1721,15 @@ export class BackendCommsService {
     };
 
     console.log(body);
-    let options = new RequestOptions({
+    let options = {
       headers: this.getHeaderWithAuth()
-    });
+    };
     options.headers.set(urls.general.headers.content.key, urls.general.headers.content.value);
 
     return this._http.post(BackendCommsService.getUrl(urls.lovValues.url), body, options)
       .toPromise()
       .then(resp => {
-        console.log(resp);
-        return parseInt(resp.text());
+        return true;
       })
       .catch(this.handleError);
   }
@@ -1799,16 +1749,16 @@ export class BackendCommsService {
     };
 
     console.log(body);
-    let options = new RequestOptions({
+    let options = {
       headers: this.getHeaderWithAuth()
-    });
+    };
     options.headers.set(urls.general.headers.content.key, urls.general.headers.content.value);
 
-    return this._http.post(BackendCommsService.getUrl(urls.ticklerAttribute.url), body, options)
+    return this._http.post<any>(BackendCommsService.getUrl(urls.ticklerAttribute.url), body, options)
       .toPromise()
       .then(resp => {
         console.log(resp);
-        return parseInt(resp.text());
+        return resp;
       })
       .catch(this.handleError);
   }
@@ -1825,22 +1775,22 @@ export class BackendCommsService {
     };
 
     console.log(body);
-    let options = new RequestOptions({
+    let options = {
       headers: this.getHeaderWithAuth()
-    });
+    };
     options.headers.set(urls.general.headers.content.key, urls.general.headers.content.value);
 
     return this._http.put(BackendCommsService.getUrl(urls.ticklerAttribute.url), body, options)
       .toPromise()
       .then(resp => {
         console.log(resp);
-        return parseInt(resp.text());
+        return resp;
       })
       .catch(this.handleError);
   }
 
   //set data type
-  setCorrespondentDataType(dataType: string){
+  setCorrespondentDataType(dataType: string) {
     switch (dataType) {
       case "0":
         dataType = "STRING";
@@ -1863,7 +1813,7 @@ export class BackendCommsService {
     return dataType;
   }
 
-  addTicklerAttributeMap(ticklerTypeId: number, attributeTypeId: number,mandatoryFlag: boolean,createdBy: string): Promise<number> {
+  addTicklerAttributeMap(ticklerTypeId: number, attributeTypeId: number, mandatoryFlag: boolean, createdBy: string): Promise<number> {
     let body = {
       TicklerTypeId: ticklerTypeId,
       AttributeTypeId: attributeTypeId,
@@ -1872,21 +1822,21 @@ export class BackendCommsService {
     };
 
     console.log(body);
-    let options = new RequestOptions({
+    let options = {
       headers: this.getHeaderWithAuth()
-    });
+    };
     options.headers.set(urls.general.headers.content.key, urls.general.headers.content.value);
 
     return this._http.post(BackendCommsService.getUrl(urls.ticklerAttributeMap.url), body, options)
       .toPromise()
       .then(resp => {
         console.log(resp);
-        return parseInt(resp.text());
+        return resp;
       })
       .catch(this.handleError);
   }
 
-  updateLovType(id: number, lovCode: string, lovName: string, lovDescription: string, isActive: boolean, type: string, modifiedBy: string ): Promise<number> {
+  updateLovType(id: number, lovCode: string, lovName: string, lovDescription: string, isActive: boolean, type: string, modifiedBy: string): Promise<number> {
     let body = {
       Id: id,
       LovCd: lovCode,
@@ -1898,22 +1848,22 @@ export class BackendCommsService {
     };
 
     console.log(body);
-    let options = new RequestOptions({
+    let options = {
       headers: this.getHeaderWithAuth()
-    });
+    };
     options.headers.set(urls.general.headers.content.key, urls.general.headers.content.value);
 
     return this._http.put(BackendCommsService.getUrl(urls.lovTypes.url), body, options)
       .toPromise()
       .then(resp => {
         console.log(resp);
-        return parseInt(resp.text());
+        return resp;
       })
       .catch(this.handleError);
   }
 
   //update lov value
-  updateLovValue(id: number, valueCode: string, valueName: string, valueDescription: string, isActive: boolean, modifiedBy: string ): Promise<number> {
+  updateLovValue(id: number, valueCode: string, valueName: string, valueDescription: string, isActive: boolean, modifiedBy: string): Promise<number> {
     let body = {
       Id: id,
       ValueCd: valueCode,
@@ -1924,16 +1874,16 @@ export class BackendCommsService {
     };
 
     console.log(body);
-    let options = new RequestOptions({
+    let options = {
       headers: this.getHeaderWithAuth()
-    });
+    };
     options.headers.set(urls.general.headers.content.key, urls.general.headers.content.value);
 
     return this._http.put(BackendCommsService.getUrl(urls.lovValues.url), body, options)
       .toPromise()
       .then(resp => {
         console.log(resp);
-        return parseInt(resp.text());
+        return resp;
       })
       .catch(this.handleError);
   }
@@ -1946,16 +1896,16 @@ export class BackendCommsService {
     };
 
     console.log(body);
-    let options = new RequestOptions({
+    let options = {
       headers: this.getHeaderWithAuth()
-    });
+    };
     options.headers.set(urls.general.headers.content.key, urls.general.headers.content.value);
 
     return this._http.put(BackendCommsService.getUrl(urls.ticklerAttributeMap.url), body, options)
       .toPromise()
       .then(resp => {
         console.log(resp);
-        return parseInt(resp.text());
+        return resp;
       })
       .catch(this.handleError);
   }
@@ -1970,16 +1920,16 @@ export class BackendCommsService {
     };
 
     console.log(body);
-    let options = new RequestOptions({
+    let options = {
       headers: this.getHeaderWithAuth()
-    });
+    };
     options.headers.set(urls.general.headers.content.key, urls.general.headers.content.value);
 
     return this._http.post(BackendCommsService.getUrl(urls.ticklersMap.url), body, options)
       .toPromise()
       .then(resp => {
         console.log(resp);
-        return parseInt(resp.text());
+        return resp;
       })
       .catch(this.handleError);
   }
@@ -1987,19 +1937,19 @@ export class BackendCommsService {
   //delete lov type
   deleteLovType(id: number, deletedBy): Promise<number> {
     let params = this.getParamsWithIETimestamp();
-    params.set(urls.lovTypes.id, id.toString());
-    params.set(urls.lovValues.deletedBy, deletedBy);
-    let options = new RequestOptions({
-      search: params,
+    params = params.set(urls.lovTypes.id, id.toString());
+    params = params.set(urls.lovValues.deletedBy, deletedBy);
+    let options = {
+      params: params,
       headers: this.getHeaderWithAuth()
-    });
+    };
     options.headers.set(urls.general.headers.content.key, urls.general.headers.content.value);
 
     return this._http.delete(BackendCommsService.getUrl(urls.lovTypes.url), options)
       .toPromise()
       .then(resp => {
         console.log(resp);
-        return parseInt(resp.text());
+        return resp;
       })
       .catch(this.handleError);
   }
@@ -2008,19 +1958,19 @@ export class BackendCommsService {
   //delete lov type
   deleteLovValue(id: number, deletedBy: string): Promise<number> {
     let params = this.getParamsWithIETimestamp();
-    params.set(urls.lovValues.id, id.toString());
-    params.set(urls.lovValues.deletedBy, deletedBy);
-    let options = new RequestOptions({
-      search: params,
+    params = params.set(urls.lovValues.id, id.toString());
+    params = params.set(urls.lovValues.deletedBy, deletedBy);
+    let options = {
+      params: params,
       headers: this.getHeaderWithAuth()
-    });
+    };
     options.headers.set(urls.general.headers.content.key, urls.general.headers.content.value);
 
     return this._http.delete(BackendCommsService.getUrl(urls.lovValues.url), options)
       .toPromise()
       .then(resp => {
         console.log(resp);
-        return parseInt(resp.text());
+        return resp;
       })
       .catch(this.handleError);
   }
@@ -2030,65 +1980,60 @@ export class BackendCommsService {
   deleteTicklerAttributeMap(id: number): Promise<number> {
 
     let params = this.getParamsWithIETimestamp();
-    params.set(urls.ticklerAttributeMap.id, id.toString());
-    let options = new RequestOptions({
-      search: params,
+    params = params.set(urls.ticklerAttributeMap.id, id.toString());
+    let options = {
+      params: params,
       headers: this.getHeaderWithAuth()
-    });
+    };
     options.headers.set(urls.general.headers.content.key, urls.general.headers.content.value);
 
     return this._http.delete(BackendCommsService.getUrl(urls.ticklerAttributeMap.url), options)
       .toPromise()
       .then(resp => {
         console.log(resp);
-        return parseInt(resp.text());
+        return resp;
       })
       .catch(this.handleError);
   }
 
   //Delete case ticklergg
-  deleteCaseTickler(id: number, agent: string): Promise<number> {
+  deleteCaseTickler(id: number, agent: string): Promise<boolean> {
 
     let params = this.getParamsWithIETimestamp();
-    params.set(urls.processCaseTickler.id, id.toString());
-    params.set(urls.processCaseTickler.DeletedBy, agent);
-    let options = new RequestOptions({
-      search: params,
+    params = params.set(urls.processCaseTickler.id, id.toString());
+    params = params.set(urls.processCaseTickler.DeletedBy, agent);
+    let options = {
+      params: params,
       headers: this.getHeaderWithAuth()
-    });
-    options.headers.set(urls.general.headers.content.key, urls.general.headers.content.value);
+    };
+    options.headers = options.headers.set(urls.general.headers.content.key, urls.general.headers.content.value);
 
-    return this._http.delete(BackendCommsService.getUrl(urls.processCaseTickler.url), options)
+    return this._http.delete<any>(BackendCommsService.getUrl(urls.processCaseTickler.url), options)
       .toPromise()
       .then(resp => {
-        console.log(resp);
-        return parseInt(resp.text());
+        return true;
       })
       .catch(this.handleError);
   }
 
-
-
-
   //Remove tickler type
   deleteTicklerTypeMap(id: number): Promise<number> {
     let params = this.getParamsWithIETimestamp();
-    params.set(urls.ticklersMap.id, id.toString());
-    let options = new RequestOptions({
-      search: params,
+    params = params.set(urls.ticklersMap.id, id.toString());
+    let options = {
+      params: params,
       headers: this.getHeaderWithAuth()
-    });
+    };
     options.headers.set(urls.general.headers.content.key, urls.general.headers.content.value);
 
     return this._http.delete(BackendCommsService.getUrl(urls.ticklersMap.url), options)
       .toPromise()
       .then(resp => {
         console.log(resp);
-        return parseInt(resp.text());
+        return resp;
       })
       .catch(this.handleError);
   }
-
 
 
   launchCampaignList(campaignListId: number, userCode: string): Promise<boolean> {
@@ -2097,9 +2042,9 @@ export class BackendCommsService {
       campaignListId: campaignListId
     };
     console.log(body);
-    let options = new RequestOptions({
+    let options = {
       headers: this.getHeaderWithAuth()
-    });
+    };
     options.headers.set(urls.general.headers.content.key, urls.general.headers.content.value);
 
     return this._http.post(BackendCommsService.getUrl(urls.campaignListLaunch.url), body, options)
@@ -2118,9 +2063,9 @@ export class BackendCommsService {
       createdBy: requester
     };
     console.log(body);
-    let options = new RequestOptions({
+    let options = {
       headers: this.getHeaderWithAuth()
-    });
+    };
 
     return this._http.post(BackendCommsService.getUrl(urls.userCampaigns.url), body, options)
       .toPromise()
@@ -2139,9 +2084,9 @@ export class BackendCommsService {
       CreatedBy: requester
     };
     console.log(body);
-    let options = new RequestOptions({
+    let options = {
       headers: this.getHeaderWithAuth()
-    });
+    };
 
     return this._http.post(BackendCommsService.getUrl(urls.userRoles.url), body, options)
       .toPromise()
@@ -2152,28 +2097,28 @@ export class BackendCommsService {
       .catch(this.handleError);
   }
 
-  private static setNotEmptyParam(params: URLSearchParams, key: string, value: string) {
+  private static setNotEmptyParam(params: HttpParams, key: string, value: string): HttpParams {
     if (value && value.trim() != "") {
-      params.set(key, value.trim());
+      return params.set(key, value.trim());
     }
+    return params;
   }
 
   private getCustomerNotesByType(custId: string, accountId: string, accountType: string, type: string): Promise<CustomerNote[]> {
     // Set query params
     let params = this.getParamsWithIETimestamp();
-    params.set(urls.custNotes.customerId, custId);
-    params.set(urls.custNotes.accId, accountId);
-    params.set(urls.custNotes.accType, accountType);
-    params.set(urls.custNotes.msgType, type);
-    let options = new RequestOptions({
-      search: params,
+    params = params.set(urls.custNotes.customerId, custId);
+    params = params.set(urls.custNotes.accId, accountId);
+    params = params.set(urls.custNotes.accType, accountType);
+    params = params.set(urls.custNotes.msgType, type);
+    let options = {
+      params: params,
       headers: this.getHeaderWithAuth()
-    });
-    return this._http.get(BackendCommsService.getUrl(urls.custNotes.url), options)
+    };
+    return this._http.get<any>(BackendCommsService.getUrl(urls.custNotes.url), options)
       .toPromise()
-      .then(resp => {
-        console.log(resp);
-        let resj = resp.json();
+      .then(resj => {
+        console.log(resj);
         if (!resj.cnCustomerMsgSrch || !resj.cnCustomerMsgSrch.customerMsgList) {
           console.log("No notes found");
           return new Promise<CustomerNote[]>((resolve) => resolve([]));
@@ -2191,16 +2136,13 @@ export class BackendCommsService {
     return `${environment.serviceUrl}/${url}`;
   }
 
-  private getHeaderWithAuth() {
-    let header = {};
-    header[urls.general.authKey] = this._sessionToken;
-    return new Headers(header);
+  private getHeaderWithAuth(): HttpHeaders {
+    return new HttpHeaders().set(urls.general.authKey, this._sessionToken);
   }
 
-  private getParamsWithIETimestamp(): URLSearchParams {
-    let params = new URLSearchParams();
-    params.set(urls.general.tsIEKey, new Date().getTime().toString());
-    return params;
+  private getParamsWithIETimestamp(): HttpParams {
+    let params = new HttpParams();
+    return params.set(urls.general.tsIEKey, new Date().getTime().toString());
   }
 
   private handleError(error: any): Promise<any> {

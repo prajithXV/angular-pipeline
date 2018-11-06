@@ -807,7 +807,7 @@ export class DataService {
     return this._backCommsService.addLovType(model.lovCode,model.lovName, model.lovDescription, model.isActive, model.type ,agent.account)
   }
 
-  addLovValue(lovType: LovType, lovValue: LovValue, agent: Agent): Promise<number>{
+  addLovValue(lovType: LovType, lovValue: LovValue, agent: Agent): Promise<boolean>{
     return this._backCommsService.addLovValue(lovType.id, lovValue.valueCode, lovValue.valueName, lovValue.valueDescription, agent.account)
   }
 
@@ -863,7 +863,7 @@ export class DataService {
     return this._backCommsService.updateLovValue(lovValue.id, model.valueCode, model.valueName, model.valueDescription, model.isActive, agent.account);
   }
 
-  deleteCaseTickler(caseTickler: ProcessCaseTickler, agent: Agent): Promise<number>{
+  deleteCaseTickler(caseTickler: ProcessCaseTickler, agent: Agent): Promise<boolean>{
     return this._backCommsService.deleteCaseTickler(caseTickler.id, agent.account);
   }
 

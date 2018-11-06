@@ -1,11 +1,11 @@
 import {Injectable} from '@angular/core';
 import {environment} from "../../environments/environment";
-import {Http, RequestOptions, URLSearchParams, Headers} from "@angular/http";
 import {AgentState, AgentStateCode, AgentStateReasonCode} from "../models/agent";
 import {Call, CallType, CallState} from "app/models/call";
 import {Parser} from "xml2js";
 import {Observable} from 'rxjs/Observable';
 import {Subject} from "rxjs/Subject";
+import {HttpClient, HttpHeaders, HttpParams} from "@angular/common/http";
 
 declare let jabberwerx: any;
 
@@ -79,30 +79,32 @@ export class CiscoCommsService {
   private _jwClient: any = null;
 
 
-  constructor(private _http: Http) {
+  constructor(private _http: HttpClient) {
     console.log("Cisco comm service created");
   }
 
   getState(userId: string, tokenAuth: string): Promise<AgentState> {
     // Set query params
-    let options = new RequestOptions({
+    let options = {
       headers: CiscoCommsService.getHeaderWithAuth(tokenAuth),
-      search: CiscoCommsService.getParamsWithIETimestamp()
-    });
+      params: CiscoCommsService.getParamsWithIETimestamp()
+    };
 
+    console.log("Going to ask for state");
     // Get the data
-    return this._http.get(CiscoCommsService.getUserUrl(userId), options)
+    return this._http.get(CiscoCommsService.getUserUrl(userId), {...options, responseType: 'text'})
       .toPromise()
       .then(resp => {
+        console.log("Going to ask for state THEN");
         let parser = new Parser();
         let ret = new AgentState();
         try {
-          parser.parseString(resp.text(), (err, result) => {
+          parser.parseString(resp, (err, result) => {
             ret = this.extractState(result['User']);
           });
         } catch (error) {
           console.log("Error on Cisco getDialogs message: ");
-          console.log(resp.text());
+          console.log(resp);
           console.log(error);
         }
         return ret;
@@ -273,9 +275,9 @@ export class CiscoCommsService {
 
   setStatus(userId: string, extension: string, status: AgentState, tokenAuth: string): Promise<AgentState> {
     // Set query params
-    let options = new RequestOptions({
-      headers: CiscoCommsService.getHeaderWithAuth(tokenAuth)
-    });
+    let options = {
+      headers: CiscoCommsService.getHeaderWithAuth(tokenAuth).set("Content-type", "application/xml")
+    };
     options.headers.set(urls.general.contentKey, urls.general.contentValue);
     let body = `<User><state>${agentStatuses.find(s => s.coin == status.state).cisco}</state>`;
     if (status.reason != null) {
@@ -287,7 +289,7 @@ export class CiscoCommsService {
     body += "</User>";
     console.log(body);
 
-    return this._http.put(CiscoCommsService.getUserUrl(userId), body, options)
+    return this._http.put(CiscoCommsService.getUserUrl(userId), body, {...options, responseType: 'text'})
       .toPromise()
       .then(resp => {
         console.log(resp);
@@ -305,9 +307,9 @@ export class CiscoCommsService {
     to = environment.ciscoDialPrefix + to;
 
     // Set query params
-    let options = new RequestOptions({
-      headers: CiscoCommsService.getHeaderWithAuth(tokenAuth)
-    });
+    let options = {
+      headers: CiscoCommsService.getHeaderWithAuth(tokenAuth).set("Content-type", "application/xml")
+    };
     options.headers.set(urls.general.contentKey, urls.general.contentValue);
     let body = "<Dialog>";
     body += "<requestedAction>MAKE_CALL</requestedAction>";
@@ -316,7 +318,7 @@ export class CiscoCommsService {
     body += "</Dialog>";
     console.log(body);
 
-    return this._http.post(CiscoCommsService.getUserDialogsUrl(userId), body, options)
+    return this._http.post(CiscoCommsService.getUserDialogsUrl(userId), body, {...options, responseType: 'text'})
       .toPromise()
       .then(resp => {
         console.log(resp);
@@ -335,28 +337,28 @@ export class CiscoCommsService {
 
   getCurrentCall(userId: string, extension: string, tokenAuth: string): Promise<Call> {
     // Set query params
-    let options = new RequestOptions({
+    let options = {
       headers: CiscoCommsService.getHeaderWithAuth(tokenAuth),
-      search: CiscoCommsService.getParamsWithIETimestamp()
-    });
+      params: CiscoCommsService.getParamsWithIETimestamp()
+    };
 
     // Get the data
-    return this._http.get(CiscoCommsService.getUserDialogsUrl(userId), options)
+    return this._http.get(CiscoCommsService.getUserDialogsUrl(userId), {...options, responseType: 'text'})
       .toPromise()
       .then(resp => {
-        if (resp.text() == "<Dialogs/>") {
+        if (resp.toString() == "<Dialogs/>") {
           return null;
         }
 
         let call = new Call();
         let parser = new Parser();
         try {
-          parser.parseString(resp.text(), (err, result) => {
+          parser.parseString(resp.toString(), (err, result) => {
             call = this.extractCall(result['Dialogs']['Dialog'][0], extension);
           });
         } catch (error) {
           console.log("Error on Cisco getDialogs message: ");
-          console.log(resp.text());
+          console.log(resp.toString());
           console.log(error);
         }
 
@@ -418,9 +420,9 @@ export class CiscoCommsService {
 
   private actOnCall(fromExtension: string, callId: string, tokenAuth: string, action: string): Promise<boolean> {
     // Set query params
-    let options = new RequestOptions({
-      headers: CiscoCommsService.getHeaderWithAuth(tokenAuth)
-    });
+    let options = {
+      headers: CiscoCommsService.getHeaderWithAuth(tokenAuth).set("Content-type", "application/xml")
+    };
     options.headers.set(urls.general.contentKey, urls.general.contentValue);
     let body = "<Dialog>";
     body += `<requestedAction>${action}</requestedAction>`;
@@ -428,7 +430,7 @@ export class CiscoCommsService {
     body += "</Dialog>";
     console.log(body);
 
-    return this._http.put(CiscoCommsService.getDialogUrl(callId), body, options)
+    return this._http.put(CiscoCommsService.getDialogUrl(callId), body, {...options, responseType: 'text'})
       .toPromise()
       .then(resp => {
         console.log(resp);
@@ -450,15 +452,15 @@ export class CiscoCommsService {
   }
 
   private static getHeaderWithAuth(token: string) {
-    let header = {};
-    header[urls.general.authKey] = urls.general.authPrefix + token;
-    return new Headers(header);
+    // let header = {};
+    // header[urls.general.authKey] = urls.general.authPrefix + token;
+    return new HttpHeaders().set(urls.general.authKey, urls.general.authPrefix + token);
   }
 
-  private static getParamsWithIETimestamp(): URLSearchParams {
-    let params = new URLSearchParams();
-    params.set(urls.general.tsIEKey, new Date().getTime().toString());
-    return params;
+  private static getParamsWithIETimestamp(): HttpParams {
+    let params = new HttpParams();
+    return params.set(urls.general.tsIEKey, new Date().getTime().toString());
+
   }
 
   private static getSubscriptionUrl() {
