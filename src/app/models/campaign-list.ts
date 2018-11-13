@@ -8,6 +8,7 @@ export class CampaignList {
   private _id: number;
   private _campaignCode: string;
   private _campaignName: string;
+  private _campaignType: string;
   private _campaignId: number;
   private _createdDate: string;
   private _createdBy: string;
@@ -17,7 +18,6 @@ export class CampaignList {
   private _attributes: CampaignListAttribute[];
   private _stats: CampaignStatsToken[];
   private _orderedBy: string;
-  private _sortOrder: SortOrder;
 
 
   constructor(id?: number, campaignCode?: string, campaignName?: string, campaignId?: number, createDate?: string,
@@ -35,8 +35,6 @@ export class CampaignList {
     this.statistics = stats;
     this.attributes = attributes;
     this.orderedBy = orderedBy;
-    this.sortOrder = sortOrder;
-
   }
 
   get id(): number {
@@ -61,6 +59,14 @@ export class CampaignList {
 
   set campaignName(value: string) {
     this._campaignName = value;
+  }
+
+  get campaignType(): string {
+    return this._campaignType;
+  }
+
+  set campaignType(value: string) {
+    this._campaignType = value;
   }
 
   get campaignId(): number {
@@ -157,13 +163,4 @@ export class CampaignList {
   set orderedBy(value: string){
     this._orderedBy = value;
   }
-
-  get sortOrder(): SortOrder {
-    return this._sortOrder;
-  }
-
-  set sortOrder(value: SortOrder) {
-    this._sortOrder = value;
-  }
-
 }

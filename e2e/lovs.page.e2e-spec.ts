@@ -21,11 +21,11 @@ describe('inspinia App', () => {
 
     lovsPage.checkButtonEnabled('New', true);
 
-    lovsPage.checkTablesData(['CLOSE_CASE3','test closeable tickler type2', 'test closing', 'String', '', '', ''], false, 'lov-types-table', 0);
-    lovsPage.checkTablesData(['CLOSE_CASE4','test closeable tickler type3', 'test closing', 'Number', '', '', ''], true, 'lov-types-table', 1);
-    lovsPage.checkTablesData(['CLOSE_CASE1','test closeable tickler type4', 'test closing', 'Date', '', '', ''], false, 'lov-types-table', 2);
-    lovsPage.checkTablesData(['CLOSE_CASE5','test closeable tickler type5', 'test closing', 'Date and time', '', '', ''], false, 'lov-types-table', 3);
-    lovsPage.checkTablesData(['CLOSE_CASE6','test closeable tickler type6', 'test closing', 'String', '', '', ''], true, 'lov-types-table', 4);
+    lovsPage.checkTablesData(['CLOSE_CASE3','test closeable tickler type2', 'test closing1', 'String', '', '', ''], false, 'lov-types-table', 0);
+    lovsPage.checkTablesData(['CLOSE_CASE4','test closeable tickler type3', 'test closing2', 'Number', '', '', ''], true, 'lov-types-table', 1);
+    lovsPage.checkTablesData(['CLOSE_CASE1','test closeable tickler type4', 'test closing3', 'Date', '', '', ''], false, 'lov-types-table', 2);
+    lovsPage.checkTablesData(['CLOSE_CASE5','test closeable tickler type5', 'test closing4', 'Date', '', '', ''], false, 'lov-types-table', 3);
+    lovsPage.checkTablesData(['CLOSE_CASE6','test closeable tickler type6', 'test closing5', 'String', '', '', ''], true, 'lov-types-table', 4);
 
   });
 
@@ -122,15 +122,13 @@ describe('inspinia App', () => {
 
     lovsPage.onClick('', null,'i','edit fas fa-edit');
 
-    lovsPage.checkForm(['CLOSE_CASE3', 'test closeable tickler type2'], ['0: 0'], [null], ['test closing']);
+    lovsPage.checkForm(['CLOSE_CASE3', 'test closeable tickler type2'], ['0: 0'], [null], ['test closing1']);
 
     lovsPage.onClick('', null,'i','edit fas fa-edit');
-
     lovsPage.onClick('', null,'i','edit fas fa-edit orange');
     browser.wait(EC.visibilityOf(lovsPage.getButton('', null,'i','edit fas fa-edit orange')));
 
-    lovsPage.checkForm(['CLOSE_CASE4', 'test closeable tickler type3'], ['1: 1'], ['true'], ['test closing']);
-
+    lovsPage.checkForm(['CLOSE_CASE4', 'test closeable tickler type3'], ['1: 1'], ['true'], ['test closing2']);
   });
 
   it('LOVs navigation: edit - General (SAVE)', () => {
@@ -143,7 +141,7 @@ describe('inspinia App', () => {
 
     lovsPage.onClick('', null,'i','edit fas fa-edit');
 
-    lovsPage.checkForm(['CLOSE_CASE3', 'test closeable tickler type2'], ['0: 0'], [null], ['test closing']);
+    lovsPage.checkForm(['CLOSE_CASE3', 'test closeable tickler type2'], ['0: 0'], [null], ['test closing1']);
 
     lovsPage.onClick('Save');
 
@@ -190,7 +188,7 @@ describe('inspinia App', () => {
     lovsPage.onClick('', null,'i','edit fas fa-edit ng-star-inserted');
 
     lovsPage.checkForm(['CLOSE_CASE3', 'test closeable tickler type2', 'V4.2 code', 'Value 4.2 name'], ['0: 0'],
-      [null, 'true'], ['test closing', 'Desc value 4.2' ]);
+      [null, 'true'], ['test closing1', 'Desc value 4.2' ]);
 
 
     lovsPage.checkButtonEnabled('Save', true, 1);
@@ -210,7 +208,7 @@ describe('inspinia App', () => {
     lovsPage.onClick('', null,'i','edit fas fa-edit ng-star-inserted');
 
     lovsPage.checkForm(['CLOSE_CASE3', 'test closeable tickler type2', 'V4.2 code', 'Value 4.2 name'], ['0: 0'],
-      [null, 'true'], ['test closing', 'Desc value 4.2' ]);
+      [null, 'true'], ['test closing1', 'Desc value 4.2' ]);
 
 
     lovsPage.checkButtonEnabled('Save', true, 1);

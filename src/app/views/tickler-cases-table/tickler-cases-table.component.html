@@ -19,6 +19,7 @@
         <th></th>
         <th>Case</th>
         <th *ngIf="!isInRelatedInfo">Account</th>
+        <th>Account type</th>
         <th *ngIf="!isInRelatedInfo">CIFNO</th>
         <th *ngIf="!isInRelatedInfo">Customer</th>
         <th>Last tickler</th>
@@ -51,6 +52,7 @@
         </td>
         <td>{{tc.id}}</td>
         <td *ngIf="!isInRelatedInfo">{{tc.accountId}}</td>
+        <td class="text-center">{{tc.accountType}}</td>
         <td *ngIf="!isInRelatedInfo">{{tc.cifId}}</td>
         <td *ngIf="!isInRelatedInfo">{{tc.contactName}}</td>
         <td>{{tc.lastTicklerName}}</td>

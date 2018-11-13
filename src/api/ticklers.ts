@@ -252,6 +252,7 @@ export const getCasesBody = [
   {
     "Id": 15,
     "AccountId": "6300104605",
+    "AccountType": "L",
     "CifId": "JAA1223",
     "CaseDesc": "sdfgsdfg",
     "ProcessCd": "SPOC",
@@ -267,6 +268,7 @@ export const getCasesBody = [
   {
     "Id": 16,
     "AccountId": "7343338",
+    "AccountType": "D",
     "CifId": "DAJ2332",
     "CaseDesc": "another test from UI",
     "ProcessCd": "SPOC",
@@ -282,6 +284,7 @@ export const getCasesBody = [
   {
     "Id": 13,
     "AccountId": "6900299733",
+    "AccountType": "L",
     "CifId": "CCB4430",
     "CaseDesc": "test from UI",
     "ProcessCd": "SPAC",
@@ -297,6 +300,7 @@ export const getCasesBody = [
   {
     "Id": 11,
     "AccountId": "7347198",
+    "AccountType": "D",
     "CifId": "LAJ0601",
     "CaseDesc": "LAJ0601 73..198",
     "ProcessCd": "SPIC",
@@ -312,6 +316,7 @@ export const getCasesBody = [
   {
     "Id": 12,
     "AccountId": "6900578185",
+    "AccountType": "L",
     "CifId": "AAA0207",
     "CaseDesc": "S 185 AAA",
     "ProcessCd": "SPEC",
@@ -327,6 +332,7 @@ export const getCasesBody = [
   {
     "Id": 10,
     "AccountId": "6900391506",
+    "AccountType": "L",
     "CifId": "JAA1223",
     "CaseDesc": "SPOC WAE4863  6900391506 ",
     "ProcessCd": "SPOC",
@@ -342,6 +348,7 @@ export const getCasesBody = [
   {
     "Id": 8,
     "AccountId": "6300104605",
+    "AccountType": "D",
     "CifId": "JAA1223",
     "CaseDesc": "Extension and JAA1223  6300104605 ",
     "ProcessCd": "EXTENSION",
@@ -357,6 +364,7 @@ export const getCasesBody = [
   {
     "Id": 6,
     "AccountId": "6900536068",
+    "AccountType": "L",
     "CifId": "F322613",
     "CaseDesc": "SPOC comment for 6900536068 / F322613 ",
     "ProcessCd": "SPOC",
@@ -372,6 +380,7 @@ export const getCasesBody = [
   {
     "Id": 14,
     "AccountId": "6900538585",
+    "AccountType": "D",
     "CifId": "JAE2890",
     "CaseDesc": "My first case ",
     "ProcessCd": "SPOC",
@@ -387,6 +396,7 @@ export const getCasesBody = [
   {
     "Id": 7,
     "AccountId": "100023420545",
+    "AccountType": "D",
     "CifId": "HCC0897",
     "CaseDesc": "test",
     "ProcessCd": "SPOC",
@@ -402,6 +412,7 @@ export const getCasesBody = [
   {
     "Id": 2,
     "AccountId": "100023420545",
+    "AccountType": "D",
     "CifId": "HCC0897",
     "CaseDesc": "Test tickler case",
     "ProcessCd": "SPOC",

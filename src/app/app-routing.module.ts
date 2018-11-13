@@ -58,7 +58,7 @@ const routes: Routes = [
 
     children: [
       // {path: UrlComponents.cases, component: ManageCasesComponent},
-      {path: `${UrlComponents.case}/:${PublicUrls.process_case.caseId}`, component: ManageCaseComponent},
+      {path: `${UrlComponents.case}/:${PublicUrls.process_case.caseId}/:${PublicUrls.process_case.accountType}`, component: ManageCaseComponent},
     ]
   },
   // ADMIN

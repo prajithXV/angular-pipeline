@@ -14,7 +14,10 @@ import {CampaignListOrderByType} from "../../models/cl-order-by-type";
 import {SortOrder} from "../../models/sort-order";
 import {ModalDismissReasons, NgbModal} from "@ng-bootstrap/ng-bootstrap";
 
-
+export class CLOrder {
+  code: string;
+  ascending: boolean;
+}
 
 @Component({
   selector: 'manage-campaign-lists',
@@ -22,10 +25,6 @@ import {ModalDismissReasons, NgbModal} from "@ng-bootstrap/ng-bootstrap";
   styleUrls: ['./manage-campaign-lists.component.css'],
   encapsulation: ViewEncapsulation.None
 })
-
-
-
-
 export class ManageCampaignListsComponent implements OnInit, OnChanges {
   @Input() campaign: Campaign;
   @Input() currentList: CampaignList = null;
@@ -59,6 +58,8 @@ export class ManageCampaignListsComponent implements OnInit, OnChanges {
   private waitForLaunch = false;
   private closeResult: string = "";
 
+  private currentOrder: CLOrder = null;
+
   constructor(private _dataService: DataService,
               private _globalStateService: GlobalStateService,
               private _userFeedbackService: UserFeedbackService,
@@ -87,7 +88,6 @@ export class ManageCampaignListsComponent implements OnInit, OnChanges {
     if (changes.campaign) {
       if (this.campaign) {
         this.pagination.currPage = 0;
-        this.loadClOrderByTypes();
         this.loadCampaignLists();
       } else {
         this.lists = null;
@@ -96,9 +96,13 @@ export class ManageCampaignListsComponent implements OnInit, OnChanges {
     }
   }
 
-  loadClOrderByTypes(){
+  loadClOrderByTypes(campaignType: string){
+    this.campaignListOrderByTypes = [];
     this.searchingClOrderByTypes = true;
-    this._dataService.getClOrderByTypes().then(res=>{
+    this._dataService.getClOrderByTypes(campaignType).then(res=>{
+      if (res.length > 0) {
+        this.currentOrder.code = res[0].code;
+      }
       this.campaignListOrderByTypes = res;
       this.searchingClOrderByTypes = false;
     }).catch(err=>{
@@ -115,11 +119,6 @@ export class ManageCampaignListsComponent implements OnInit, OnChanges {
     this._dataService.getCampaignLists(this.campaign, this.selectedStatus, this.pagination)
       .then(cp => {
         this.lists = cp;
-        for (let i in this.lists) {
-          this.lists[i].sortOrder = new SortOrder();
-          this.lists[i].sortOrder.sortType = this.campaignListOrderByTypes.length != 0 ? this.campaignListOrderByTypes[0].code : "" ;
-          this.lists[i].sortOrder.isDesc = false;
-        }
         this.searching = false;
       })
       // TODO errors
@@ -139,8 +138,6 @@ export class ManageCampaignListsComponent implements OnInit, OnChanges {
     this.onHoverSelection.emit(c);
   }
 
-
-
   private statusChange() {
     this.loadCampaignLists();
     // Unselect the current campaign
@@ -148,6 +145,14 @@ export class ManageCampaignListsComponent implements OnInit, OnChanges {
     this.onListSelection.emit(null);
   }
 
+  openOrderModal(cpl: CampaignList, content) {
+    // Set new Order
+    this.currentOrder = {code: "", ascending: true};
+    // Open modal
+    this.openModal(content);
+    // Load order codes in parallel
+    this.loadClOrderByTypes(cpl.campaignType);
+  }
 
   openModal(content){
     this.modalService.open(content).result.then((result) => {
@@ -158,7 +163,7 @@ export class ManageCampaignListsComponent implements OnInit, OnChanges {
   }
 
   saveOrder(campaignList: CampaignList){
-    this._dataService.addOrderBy(campaignList, this._globalStateService.loggedAgent).then(()=>{
+    this._dataService.addOrderBy(campaignList, this._globalStateService.loggedAgent, this.currentOrder.code, this.currentOrder.ascending).then(()=>{
       this._userFeedbackService.handleSuccess("New order added");
       this.loadCampaignLists();
       this.onRefreshCampaignListRecords.emit(campaignList);

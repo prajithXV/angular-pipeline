@@ -18,5 +18,4 @@ export const environment = {
   version: CommonConstants.OfficialVersion,
   build: null, //CommonConstants.Build,
   evironmentCode: 'T'
-
 };

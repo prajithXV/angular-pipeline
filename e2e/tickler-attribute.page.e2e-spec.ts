@@ -1,7 +1,6 @@
 import {LoginPage} from "./login.page";
 import {TicklerAttributePage} from "./tickler-attribute.page";
 import {NavPage} from "./nav.page";
-import {browser} from "protractor";
 
 describe('inspinia App', () => {
   let loginPage: LoginPage;
@@ -28,7 +27,7 @@ describe('inspinia App', () => {
       true, 'tickler-attribute-table', 0);
 
 
-    ticklerAttributePage.checkTablesData(['2', 'TEST3', 'Test3', 'test', 'List of values (CLOSE_CASE3)', '', '','vsharapo','03/30/2018', 'vsharapo', '03/30/2018', ''],
+    ticklerAttributePage.checkTablesData(['2', 'TEST3', 'Test3', 'test', 'LOV', '', '','vsharapo','03/30/2018', 'vsharapo', '03/30/2018', ''],
       true, 'tickler-attribute-table', 1);
 
     ticklerAttributePage.checkTablesData(['6', 'TEST9', 'Test9', 'test', 'Date and time', '', '','vsharapo','03/30/2018', 'vsharapo', '03/30/2018', ''],
@@ -37,22 +36,21 @@ describe('inspinia App', () => {
     ticklerAttributePage.checkTablesData(['5', 'TEST5', 'Test5', 'test', 'Date', '', '','vsharapo','03/30/2018', 'vsharapo', '03/30/2018', ''],
       true, 'tickler-attribute-table', 3);
 
-    ticklerAttributePage.checkTablesData(['4', 'TEST4', 'Test4', 'test', 'List of values (CLOSE_CASE4)', '', '','vsharapo','03/30/2018', 'vsharapo', '03/30/2018', ''],
+    ticklerAttributePage.checkTablesData(['4', 'TEST4', 'Test4', 'test', 'LOV', '', '','vsharapo','03/30/2018', 'vsharapo', '03/30/2018', ''],
       true, 'tickler-attribute-table', 4);
 
 
     ticklerAttributePage.checkTablesData(['7', 'TEST6', 'Test6', 'test', 'Number', '', '','vsharapo','03/30/2018', 'vsharapo', '03/30/2018', ''],
       true, 'tickler-attribute-table', 5);
 
-    ticklerAttributePage.checkTablesData(['8', 'TEST7', 'Test7', 'test', 'List of values (CLOSE_CASE1)', '', '','vsharapo','03/30/2018', 'vsharapo', '03/30/2018', ''],
+    ticklerAttributePage.checkTablesData(['8', 'TEST7', 'Test7', 'test', 'LOV', '', '','vsharapo','03/30/2018', 'vsharapo', '03/30/2018', ''],
       true, 'tickler-attribute-table', 6);
 
-    ticklerAttributePage.checkTablesData(['9', 'TEST8', 'Test8', 'test', 'List of values (CLOSE_CASE6)', '', '','vsharapo','03/30/2018', 'vsharapo', '03/30/2018', ''],
+    ticklerAttributePage.checkTablesData(['9', 'TEST8', 'Test8', 'test', 'LOV', '', '','vsharapo','03/30/2018', 'vsharapo', '03/30/2018', ''],
       true, 'tickler-attribute-table', 7);
 
     ticklerAttributePage.checkTablesData(['10', 'TEST10', 'Test10', 'test', 'Date and time', '', '','vsharapo','03/30/2018', 'vsharapo', '03/30/2018', ''],
       false, 'tickler-attribute-table', 8);
-
   });
 
   it('Attributes navigation: add tickler attribute - not lov type, not write on mandatory fields ', () => {

@@ -53,6 +53,8 @@ import {CampaignListOrderByType} from "../models/cl-order-by-type";
 import {LovType} from "../models/lov-types";
 import {LovValue} from "../models/lov-values";
 import {LovTypeModel} from "../models/lov-type-model";
+import {MemoNote} from "../models/memo-note";
+import {promise} from "selenium-webdriver";
 
 export enum DSErrorCodes {
   no_account = 0,
@@ -63,7 +65,8 @@ export enum DSErrorCodes {
   no_account_history = 5,
   no_ssn = 6,
   no_alerts = 7,
-  no_previous_contacts = 8
+  no_previous_contacts = 8,
+  no_call_notes = 9
 }
 
 const DatePatern = 'yyyy-MM-dd';
@@ -149,6 +152,11 @@ export class DataService {
 
     );
     return ret;
+  }
+
+
+  getCallNotes(acc: Account, customer?: Customer): Promise<MemoNote[]>{
+   return this._backCommsService.getCustomerCallNotes(acc.accountId, acc.accountType, 0,20, customer.id);
   }
 
   getCompleteInfoForAccount(accountId: string, accountType: string, campaignRecordId: string, errorStream?: Subject<UFNotification>, mustToBeLoaded?:boolean): Observable<Account> {
@@ -298,6 +306,24 @@ export class DataService {
                       errorStream)
                   );
 
+                // Get call notes
+                this._backCommsService.getCustomerCallNotes(acc.accountId, acc.accountType,0, 20, acc.customer.id)
+                  .then(callNotes => {
+                    acc.customer.resetCallNotes();
+                    for (let call of callNotes) {
+                      acc.customer.addCallNote(call);
+                    }
+                    ret.next(acc);
+                  })
+                  .catch(error =>
+                    this.handleError(
+                      DSErrorCodes.no_call_notes,
+                      "Error getting call notes",
+                      UFSeverity.warn,
+                      error,
+                      errorStream)
+                  );
+
                 // Get call records
                 this._backCommsService.getCustomerCallRecords(acc.customer.id)
                   .then(callRec => {
@@ -337,7 +363,7 @@ export class DataService {
                 // Get call records
                 this.loadCalls(acc, ret, errorStream);
               }, 50);
-            };
+            }
 
             ret.next(acc);
           })
@@ -457,8 +483,8 @@ export class DataService {
 
 
   //Campaign list order by type
-  getClOrderByTypes(): Promise<CampaignListOrderByType[]>{
-    return this._backCommsService.getClOrderByTypes();
+  getClOrderByTypes(campaignType: string): Promise<CampaignListOrderByType[]>{
+    return this._backCommsService.getClOrderByTypes(campaignType);
   }
 
 
@@ -692,6 +718,10 @@ export class DataService {
     );
   }
 
+  newCallNote(account: Account, memoNote: MemoNote, agent: Agent): Promise<boolean>{
+    return this._backCommsService.addCallNotes(account.accountId, account.accountType, account.customer.id, memoNote.note, agent.account);
+  }
+
   cancelCallRecord(agent:Agent, account: Account, cancelRecord: CancelRecordModel): Promise<boolean> {
     return this._backCommsService.cancelCallRecord(agent.account, account.campaignRecordId, cancelRecord.reason.code, cancelRecord.message, cancelRecord.flag);
   }
@@ -713,7 +743,8 @@ export class DataService {
       model.caseDescription,
       agent.account,
       customer.mainContact ? customer.mainContact.firstName : null,
-      customer.mainContact ? customer.mainContact.lastName : null
+      customer.mainContact ? customer.mainContact.lastName : null,
+      account.accountType
     );
   }
 
@@ -726,8 +757,8 @@ export class DataService {
   }
 
 
-  addOrderBy(campaignList: CampaignList, agent: Agent): Promise<number>{
-    return this._backCommsService.addOrderBy(agent.account, campaignList.id, campaignList.sortOrder.sortType, campaignList.sortOrder.isDesc);
+  addOrderBy(campaignList: CampaignList, agent: Agent, sortCode: string, ascending: boolean): Promise<number>{
+    return this._backCommsService.addOrderBy(agent.account, campaignList.id, sortCode, ascending);
   }
 
   //update status code
@@ -776,7 +807,7 @@ export class DataService {
     return this._backCommsService.addLovType(model.lovCode,model.lovName, model.lovDescription, model.isActive, model.type ,agent.account)
   }
 
-  addLovValue(lovType: LovType, lovValue: LovValue, agent: Agent): Promise<number>{
+  addLovValue(lovType: LovType, lovValue: LovValue, agent: Agent): Promise<boolean>{
     return this._backCommsService.addLovValue(lovType.id, lovValue.valueCode, lovValue.valueName, lovValue.valueDescription, agent.account)
   }
 
@@ -830,6 +861,10 @@ export class DataService {
 
   updateLovValue(lovValue: LovValue, model: LovValue, agent: Agent): Promise<number>{
     return this._backCommsService.updateLovValue(lovValue.id, model.valueCode, model.valueName, model.valueDescription, model.isActive, agent.account);
+  }
+
+  deleteCaseTickler(caseTickler: ProcessCaseTickler, agent: Agent): Promise<boolean>{
+    return this._backCommsService.deleteCaseTickler(caseTickler.id, agent.account);
   }
 
 

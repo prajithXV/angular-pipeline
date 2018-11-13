@@ -16,11 +16,13 @@ export class TicklerCasesDetailComponent implements OnInit {
   @Input() process: TicklerProcess = null;
   @Input() account: Account = null;
   @Input() searchingProcessCase: boolean = false;
+  @Input() searchingAccountDep: boolean = false;
   @Input() searchingAccountInfo: boolean = false;
   @Input() searchingAccountAdditionalInfo: boolean = false;
   @Input() searchingAccountLoanInfo: boolean = false;
   @Input() searchingUsers: boolean = false;
   @Input() searchingProcesses: boolean = false;
+  @Input() searchingCustomers: boolean = false;
 
 
   constructor() { }

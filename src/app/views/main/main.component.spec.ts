@@ -462,7 +462,7 @@ describe('MainComponent', () => {
     onClickFilter(false, false);
 
     onClickGoButton("tickler-cases-table");
-    checkRouter(["/process/case", 1]);
+    checkRouter(["/process/case", 1, "L"]);
     onClickTab(1);
     onClickTab(2);
     onInit();
@@ -484,7 +484,7 @@ describe('MainComponent', () => {
     onClickFilter(false, false);
 
     onClickGoButton("tickler-cases-table");
-    checkRouter(["/process/case", 1]);
+    checkRouter(["/process/case", 1, "L"]);
     onClickTab(1);
     onClickTab(2);
     onInit();

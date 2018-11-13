@@ -40,6 +40,7 @@ import {CampaignListOrderByType} from "../models/cl-order-by-type";
 import {Code} from "../models/code";
 import {LovType} from "../models/lov-types";
 import {LovValue} from "../models/lov-values";
+import {MemoNote} from "../models/memo-note";
 
 const HOME_PHONE = "Home phone";
 const BUSINESS_PHONE = "Business phone";
@@ -105,6 +106,8 @@ export class BackendModelConversorService {
     cust.mainContact = BackendModelConversorService.person2Person(src.personName);
 
     cust.employmentInfo = src.employmentInfo;
+    cust.birthDate = src.birthDt;
+
     if(src.consentFlg == null){
       cust.hasConsent = null;
     }else{
@@ -247,6 +250,7 @@ export class BackendModelConversorService {
       cp.id = c.Id;
       cp.campaignCode = c.CampaignCd;
       cp.campaignName = c.CampaignNm;
+      cp.campaignType = c.CampaignType;
       cp.campaignCode = c.CampaignId;
       cp.createdDate = c.CreatedDt;
       cp.createdBy = c.CreatedBy;
@@ -495,6 +499,7 @@ export class BackendModelConversorService {
       let pc = new ProcessCase();
         pc.id = t.Id;
         pc.accountId = t.AccountId;
+        pc.accountType = t.AccountType;
         pc.cifId = t.CifId;
         pc.caseDescription = t.CaseDesc;
         pc.processCode = t.ProcessCd;
@@ -836,6 +841,7 @@ export class BackendModelConversorService {
     ret.pastDue30YTD = src.pastDue30YTD;
     ret.maturityDate = src.maturityDate;
     ret.origLoanAmount = src.origLoanAmount;
+    ret.chargeOffDate = src.chargeOffDate;
     return ret;
   }
 
@@ -895,8 +901,33 @@ export class BackendModelConversorService {
       callR.createdBy = cr.CreatedBy;
       callR.firstName = cr.FirstName;
       callR.lastName = cr.LastName;
+      callR.accountNumber = cr.AccountId;
+      callR.accountType = cr.AccountType;
 
       ret.push(callR);
+    }
+    return ret;
+  }
+
+  //memo notes
+  static callNotes(src): MemoNote[] {
+    let ret: MemoNote[] = [];
+    for (let cn of src) {
+      let memoNote = new MemoNote();
+      memoNote.id = cn.Id;
+      memoNote.accountId = cn.AccountId;
+      memoNote.accountType = cn.AccountType;
+      memoNote.cifId = cn.CifId;
+      memoNote.note = cn.Note;
+      memoNote.createdBy = cn.CreatedBy;
+      memoNote.createdDate = cn.CreatedDt;
+      memoNote.firstName = cn.FirstName;
+      memoNote.lastName = cn.LastName;
+      memoNote.comName = cn.ComName;
+      memoNote.createdByFirstName = cn.CreatedByFN;
+      memoNote.createdByLastName = cn.CreatedByLN;
+      
+      ret.push(memoNote);
     }
     return ret;
   }
