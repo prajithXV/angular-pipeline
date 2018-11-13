@@ -17,6 +17,9 @@
   color: white;
 }
 
+.trash:hover{
+  color: black;
+}
 
 
 .box-padding{

@@ -1,9 +1,8 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import {BaseRequestOptions, HttpModule} from '@angular/http';
 
-import {NgbActiveModal, NgbModule} from '@ng-bootstrap/ng-bootstrap';
+import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 
 import { AppComponent } from './app.component';
 import { ChartModule } from 'angular2-highcharts';
@@ -19,7 +18,6 @@ import {DataService} from "./services/data.service";
 import {GlobalStateService} from "./services/global-state.service";
 import {UserFeedbackService} from "./services/user-feedback.service";
 import {BackendCommsService} from "./services/backend-comms.service";
-import {MockBackendCommsService} from "./services/mocks/mock-backend-comms.service";
 import { LoginComponent } from './views/login/login.component';
 import { MainOptionsComponent } from './views/main-options/main-options.component';
 import { ManageAccountComponent } from './views/manage-account/manage-account.component';
@@ -32,12 +30,8 @@ import { AccountsTableComponent } from './views/accounts-table/accounts-table.co
 import {DatePipe, HashLocationStrategy, LocationStrategy} from "@angular/common";
 import { Location } from '@angular/common';
 
-import {ToastModule} from "ng2-toastr";
+import {ToastrModule} from "ngx-toastr";
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
-import {MockBackend} from "@angular/http/testing";
-import {fakeBackendFactory, fakeBackendProvider} from "./services/mocks/fake-backend-factory";
-import { WaitingBackendComponent } from './views/waiting-backend/waiting-backend.component';
-import {IboxtoolsComponent} from "./components/common/iboxtools/iboxtools.component";
 import {IboxtoolsModule} from "./components/common/iboxtools/iboxtools.module";
 import { CustomerDetailComponent } from './views/customer-detail/customer-detail.component';
 import { AccountCollectionComponent } from './views/account-collection/account-collection.component';
@@ -152,6 +146,10 @@ import { NewLovValueComponent } from './views/new-lov-value/new-lov-value.compon
 import { ValueEditionComponent } from './views/value-edition/value-edition.component';
 import { LovTypeToStringPipe } from './pipes/lov-type-to-string.pipe';
 import { FilterCodeToNamePipe } from './pipes/filter-code-to-name.pipe';
+import {HttpClientModule} from "@angular/common/http";
+import { CallNotesComponent } from './views/call-notes/call-notes.component';
+import { NewCallNotesComponent } from './views/new-call-notes/new-call-notes.component';
+import {fakeBackendProvider} from "./services/mocks/fake-backend-factory";
 
 
 
@@ -265,17 +263,19 @@ export const MY_MOMENT_FORMATS = {
     NewLovTypeComponent,
     NewLovValueComponent,
     ValueEditionComponent,
+    CallNotesComponent,
+    NewCallNotesComponent,
   ],
   imports: [
     BrowserModule,
     ChartModule.forRoot(require('highcharts')),
     FormsModule,
     NgbModule.forRoot(),
-    HttpModule,
+    HttpClientModule,
     LayoutsModule,
     AppRoutingModule,
     BrowserAnimationsModule,
-    ToastModule.forRoot(),
+    ToastrModule.forRoot(),
     IboxtoolsModule,
     PipesModule,
     PopoverModule.forRoot(),
@@ -292,6 +292,7 @@ export const MY_MOMENT_FORMATS = {
     BackendCommsService,
     // { provide: BackendCommsService, useClass: MockBackendCommsService },
     { provide: CiscoCommsService, useClass: MockCiscoCommsService },
+    // FakeBackendFactory,
     DataService,
     GlobalStateService,
     MenuStateService,
@@ -316,11 +317,8 @@ export const MY_MOMENT_FORMATS = {
     BooleanToStringDuePipe,
     LovTypeToStringPipe,
     FilterCodeToNamePipe
-    // {provide: HTTP_INTERCEPTORS, useClass: SessionLossInterceptor, multi: true}
     // providers used to create fake backend
-    // ,fakeBackendProvider,
-    // MockBackend,
-    // BaseRequestOptions
+    // ,fakeBackendProvider
   ],
 
   bootstrap: [AppComponent]

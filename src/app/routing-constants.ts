@@ -40,7 +40,8 @@ export const PublicUrls = {
   process_cases: {url: `/${UrlComponents.processPrefix}/${UrlComponents.cases}`},
   process_case: {
     url: `/${UrlComponents.processPrefix}/${UrlComponents.case}`,
-    caseId: 'caseId'
+    caseId: 'caseId',
+    accountType: 'accountType'
   },
   admin_stress: {url: `/${UrlComponents.adminPrefix}/${UrlComponents.stress}`},
   admin_users: {url: `/${UrlComponents.adminPrefix}/${UrlComponents.users}`},

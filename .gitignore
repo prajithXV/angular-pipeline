@@ -5,3 +5,5 @@ debug.log
 dist
 COIN-UI.iml
 coverage
+*.iml
+

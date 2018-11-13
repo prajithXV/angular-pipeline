@@ -43,10 +43,9 @@
       </td>
 
       <!--create process-->
-      <td *ngIf="canCreateCase() && ac.accountType!='D'">
+      <td *ngIf="canCreateCase()">
         <i class="create orange fas fa-plus-circle" title="Create case" (click)="open(content, ac)"></i>
       </td>
-      <td *ngIf="ac.accountType == 'D'"></td>
 
       <ng-template #content let-c="close" let-d="dismiss">
         <div class="modal-header">

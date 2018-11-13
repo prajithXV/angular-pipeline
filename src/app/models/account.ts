@@ -141,6 +141,7 @@ export class AccountCollection {
   private _pastDue30YTD: string;
   private _maturityDate: string;
   private _origLoanAmount: string;
+  private _chargeOffDate: string;
 
 
   constructor(previousBrokenPromise?: string, memoPostProPay?:string[], demandLetterFlag?: string, demandLetterDate?:string, paymentAmount?: number,
@@ -150,7 +151,7 @@ export class AccountCollection {
               loanStatus?: string, numberOfExtensionsYTD?: number, numberOfExtensionsLTD?: number, dateOfLastExtension?: string, lifePastDue?: string, queueingFlag?: string,
               delinquencyReason?: string, historicalAttemptsCalls?: string, chargeOffAmount?: number, nonAccrualDate?: string, reasonForDelinquency?: string, dateStampForRfD?: string,
               interestRateChangeDate?: string, endOfDrawDate?: string, pastDue10LTD?: string, pastDue30LTD?: string, pastDue60LTD?: string, pastDue90LTD?: string,languageCode?: string,
-              pastDue30YTD?:string, maturityDate?:string, origLoanAmount?:string){
+              pastDue30YTD?:string, maturityDate?:string, origLoanAmount?:string, chargeOffDate?:string){
 
     this.previousBrokenPromise = previousBrokenPromise;
     this.memoPostProPay = memoPostProPay;
@@ -196,6 +197,7 @@ export class AccountCollection {
     this.pastDue60LTD = pastDue60LTD;
     this.pastDue90LTD = pastDue90LTD;
     this.languageCode = languageCode;
+    this.chargeOffDate = chargeOffDate;
 
   }
 
@@ -583,6 +585,13 @@ export class AccountCollection {
   get origLoanAmount():string{
     return this._origLoanAmount;
   }
+  get chargeOffDate(): string {
+    return this._chargeOffDate;
+  }
+
+  set chargeOffDate(value: string) {
+    this._chargeOffDate = value;
+  }
 
 }
 
@@ -609,11 +618,12 @@ export class AccountLoan {
   private _achAftFlag: string;
   private _mortgageBalance: number;
   private _mortgageBalanceUpdatedDate: string;
+  private _maturityDate: string;
 
   constructor(collateralInformation?: string, officer?: string, loanType?: string, currentBalance?: number, currentPayOff?: number, loanDate?: string,
               loanTerm?: string, rate?: string, ltv?: string, appraisedAmount?: number, lienPosition?: number, updatedAppraisal?: string, updatedAppraisalDate?: string,
               alertMessages?: string, collateralAddress?: string, escrowAmountDue?: number, escrowChangeDate?: string, specialMessages?: string, user1Id?: number,
-              achAftFlag?: string, mortgageBalance?: number, mortgageBalanceUpdatedDate?: string){
+              achAftFlag?: string, mortgageBalance?: number, mortgageBalanceUpdatedDate?: string, maturityDate?:string){
 
     this.collateralInformation = collateralInformation;
     this.officer = officer;
@@ -637,6 +647,7 @@ export class AccountLoan {
     this.achAftFlag = achAftFlag;
     this.mortgageBalance = mortgageBalance;
     this.mortgageBalanceUpdatedDate = mortgageBalanceUpdatedDate;
+    this.maturityDate = maturityDate;
   }
 
 
@@ -814,6 +825,13 @@ export class AccountLoan {
 
   set mortgageBalanceUpdatedDate(value: string) {
     this._mortgageBalanceUpdatedDate = value;
+  }
+  get maturityDate(): string {
+    return this._maturityDate;
+  }
+
+  set maturityDate(value: string) {
+    this._maturityDate = value;
   }
 }
 
@@ -1763,6 +1781,7 @@ export class Account {
   resetHistory() {
     this._history = [];
   }
+
 
 
 }

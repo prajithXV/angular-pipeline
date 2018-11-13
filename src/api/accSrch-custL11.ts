@@ -26,7 +26,7 @@ export const custSrchBodyL11 = {
             {
                 customerId: "L000010",
                 accountId: "1123461",
-                accountType: "D",
+                accountType: "L",
                 prodCode: "N1",
                 prodDesc: "NOW Account",
                 amt: "-113047.44",

@@ -1,6 +1,18 @@
 import {$, $$, browser, by, element} from "protractor";
 
 
+/**
+ * To can debug on node 8:
+ * put on chrome --> chrome://inspect/#devices and click on inspect
+ *
+ * command on intellij:
+ * node --inspect-brk ./node_modules/protractor/bin/protractor ./protractor.conf.js (route where protractor.conj.js is)
+ *
+ * and put debugger on the code that we want to debug
+ *
+ * */
+
+
 export class MainPage {
 
   getButton(buttonText: string, iClass?: string) {
@@ -24,6 +36,7 @@ export class MainPage {
   }
 
   get selects() {
+    // $$('select').map(v => v.getAttribute('value')).then(t => console.log(t));
     return $$('select').map(v => v.getAttribute('value'));
   }
 
@@ -96,10 +109,14 @@ export class MainPage {
 
   changeSelectOptions(optionValue: string, optionName?: string) {
     if (!optionName) {
+      /*Need then to can do the console.log()
+      element.all(by.css('option[value="' + optionValue + '"]')).getText().then(t => console.log(t));
+      */
       element.all(by.css('option[value="' + optionValue + '"]')).click();
     } else {
       element.all(by.css('option[value="' + optionValue + '"]')).filter(i => {
         return i.getText().then(t => {
+          // console.log(t);
           return t == optionName;
         })
       }).first().click();
@@ -133,7 +150,10 @@ export class MainPage {
   checkTablesData(array: Array<string>, tableName: string, index?: number, feedbackMessage?: string) {
     $$(tableName + ' tbody tr').then(arr => {
       if (arr.length != 0) {
-        let cellText = arr[index].all(by.tagName('td')).map(elm => elm.getText());
+        let cellText = arr[index].all(by.tagName('td')).map(elm => elm.getText()
+          .then((text =>{
+            return text.trim();
+          })));
         expect(cellText).toEqual(array);
       } else {
         expect($(tableName).getText()).toEqual(feedbackMessage);

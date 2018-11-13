@@ -15,10 +15,13 @@ export class CallRecord {
   private _createdBy: string;
   private _firstName: string;
   private _lastName: string;
+  private _accountNumber: string;
+  private _accountType: string;
 
 
   constructor(customerId?: string, callNote?: string, nextWorkDate?: string, promisedAmount?: number, promisedDate?: string, contacted?: string,
-              action?: string, result?: string, createdDate?: string, createdBy?: string, firstName?: string, lastName?: string){
+              action?: string, result?: string, createdDate?: string, createdBy?: string, firstName?: string, lastName?: string, accountNumber?: string,
+              accountType?: string){
 
     this.customerId = customerId;
     this.callNote = callNote;
@@ -32,6 +35,8 @@ export class CallRecord {
     this.createdBy = createdBy;
     this.firstName = firstName;
     this.lastName = lastName;
+    this.accountNumber = accountNumber;
+    this.accountType = accountType;
   }
 
   get customerId(): string {
@@ -146,4 +151,22 @@ export class CallRecord {
     }
     return ret;
   }
+
+
+  get accountNumber(){
+    return this._accountNumber;
+  }
+
+  set accountNumber(value: string){
+    this._accountNumber = value;
+  }
+
+  get accountType(){
+    return this._accountType;
+  }
+
+  set accountType(value: string){
+    this._accountType = value;
+  }
+
 }

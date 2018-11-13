@@ -1,5 +1,4 @@
-import {Component, OnInit, ViewContainerRef} from '@angular/core';
-import {ToastsManager} from "ng2-toastr";
+import {Component, OnInit} from '@angular/core';
 import {BackendCommsService} from "app/services/backend-comms.service";
 import {GlobalStateService} from "./services/global-state.service";
 
@@ -12,13 +11,10 @@ import {GlobalStateService} from "./services/global-state.service";
 })
 export class AppComponent implements OnInit {
   constructor(
-    toastr: ToastsManager,
-    vcr: ViewContainerRef,
     private _globalStateService: GlobalStateService,
     private _backendCommsService: BackendCommsService
     )
   {
-    toastr.setRootViewContainerRef(vcr);
   }
 
   ngOnInit() {

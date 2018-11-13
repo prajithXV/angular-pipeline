@@ -9,12 +9,13 @@ import {
   cisco_set_not_ready, cisco_set_ready, cisco_set_reserved,
   cisco_set_talking, cisco_set_work, cisco_set_work_ready
 } from "./cisco-packets";
+import {HttpClient} from "@angular/common/http";
 
 @Injectable()
 export class MockCiscoCommsService extends CiscoCommsService{
   private _currentStatus: AgentState = null;
 
-  constructor(_http: Http) {super(_http);}
+  constructor(_http: HttpClient) {super(_http);}
 
   // getStatus(): Promise<number> {
   //   return new Promise<number>(succ =>

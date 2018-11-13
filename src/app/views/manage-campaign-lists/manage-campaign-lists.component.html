@@ -110,8 +110,9 @@
             <td>
               <span class="orderby-margin">{{cpl.orderedBy}}</span>
               <span *ngIf="cpl.id == currentHoverList?.id">
-            <i class="edit fas fa-edit" (click)="openModal(order)"></i>
-          </span></td>
+                <i class="edit fas fa-edit" (click)="openOrderModal(cpl, order)"></i>
+              </span>
+            </td>
             <td>
               <button (click)="toggleDetail(cpl); $event.stopPropagation()" class="btn btn-xs btn-white btnBorder">
                 <i class="fa" [class.fa-chevron-down]="!isDetailVisible(cpl)"
@@ -164,7 +165,7 @@
           </ng-template>
 
 
-          <!--Modal-->
+          <!--Order Modal-->
           <ng-template #order let-c="close" let-d="dismiss">
             <!--header-->
             <div class="modal-header">
@@ -178,19 +179,24 @@
               <!--order by types form-->
               <order-by-types
                 [campaignListOrderByTypes]="campaignListOrderByTypes"
-                [currentList]="cpl">
+                [order]="currentOrder">
               </order-by-types>
             </div>
             <!--footer-->
             <div class="modal-footer">
-              <button type="button" class="pull-left btn btn-primary" (click)="saveOrder(cpl); c('Close click')">
+              <button
+                [disabled]="!campaignListOrderByTypes || this.campaignListOrderByTypes.length == 0"
+                type="button" class="pull-left btn btn-primary"
+                (click)="saveOrder(cpl); c('Close click')"
+              >
                 Apply
+                <waiting-backend *ngIf="searchingClOrderByTypes"></waiting-backend>
               </button>
               <button type="button" class=" pull-left btn btn-outline-dark" (click)="c('Close click')">Cancel</button>
             </div>
           </ng-template>
 
-          <!--campaign list detal-->
+          <!--campaign list detail-->
           <tr class="no-hover"
               *ngIf="isDetailVisible(cpl)"
               (click)="selectList(cpl)">

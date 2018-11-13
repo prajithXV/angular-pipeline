@@ -64,6 +64,8 @@ import {HeaderSorterComponent} from "../header-sorter/header-sorter.component";
 import {NewTicklerCaseComponent} from "../new-tickler-case/new-tickler-case.component";
 import {CampaignAttributeEditionComponent} from "../campaign-attribute-edition/campaign-attribute-edition.component";
 import {CampaignListAttribute} from "../../models/campaign-list-attribute";
+import {CallNotesComponent} from "../call-notes/call-notes.component";
+import {NewCallNotesComponent} from "../new-call-notes/new-call-notes.component";
 
 
 describe('ManageAccountComponent', () => {
@@ -80,7 +82,7 @@ describe('ManageAccountComponent', () => {
                       AccountCollectionComponent, CustomerDetailComponent, CoinDateTransformPipe, CoinCurrencyPipe, CoinNumberInputComponent, CoinDateInputComponent, CoinNumberInputErrorsComponent,
                       NotificationTabComponent, CallRecordStandardSentencesComponent, TelephonePipe, CancelCallRecordComponent, DatepickerComponent, TelephoneTypePipe, NewProcessCaseComponent,
                       CustomerConsentComponent, ConsentPipe, TicklerCasesTableComponent, ProcessCaseTicklerTableComponent, PaginatorComponent, HeaderSorterComponent, NewTicklerCaseComponent,
-                      CampaignAttributeEditionComponent ],
+                      CampaignAttributeEditionComponent, CallNotesComponent, NewCallNotesComponent ],
 
       providers: [ {provide: DataService, useValue: dataServiceMock }, { provide: UserFeedbackService, useValue: userFeedbackMock }, DatePipe, { provide: GlobalStateService, useValue: globalStateServiceMock }, NgbModalStack,
                    NgbTabsetConfig, PopoverConfig, ComponentLoaderFactory, PositioningService, BooleanToStringPipe, BooleanToStringOrderPipe,
@@ -800,7 +802,7 @@ describe('ManageAccountComponent', () => {
 
     onClick(false, null, 'Go', 'button');
 
-    checkRouter(spyOnRouter, ["/process/case", 1]);
+    checkRouter(spyOnRouter, ["/process/case", 1, "L"]);
 
   }));
 

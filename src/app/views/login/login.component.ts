@@ -1,10 +1,8 @@
-import {Component, Input, OnInit, ViewContainerRef} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {GlobalStateService, GSSErrorCodes} from "../../services/global-state.service";
 import {Router} from "@angular/router";
 import {UFNotification, UserFeedbackService} from "../../services/user-feedback.service";
 import {UFSeverity} from "../../services/ufseverity";
-import {ToastsManager} from "ng2-toastr";
-import { DataService } from "app/services/data.service";
 import {environment} from "../../../environments/environment";
 import {PublicUrls} from "../../routing-constants";
 import {sneakMock} from "../../../environments/common-constants";

@@ -1,0 +1,97 @@
+export const memoNotesBody = [
+  {
+    "Id": 1,
+    "CifId": "L00010",
+    "AccountId": "1123461",
+    "AccountType": "L",
+    "FirstName":"Robert",
+    "LastName": "R",
+    "Note": "test note",
+    "CreatedBy": "vsharapo",
+    "CreatedByFN":"Vasily",
+    "CreatedByLN": "Sharapo",
+    "CreatedDt": "2018-10-16T15:47:22.967"
+  },
+  {
+    "Id": 2,
+    "CifId": "MSS0000",
+    "AccountId": "6300113249",
+    "AccountType": "D",
+    "FirstName": null,
+    "LastName": null,
+    "ComName": "This is a ComName",
+    "Note": "test long note test long note test long note test long note test long note test long note test long note test long note",
+    "CreatedBy": "vsharapo",
+    "CreatedByFN":"Vasily",
+    "CreatedByLN": "Sharapo",
+    "CreatedDt": "2018-11-16T15:47:22.967"
+  },
+  {
+    "Id": 3,
+    "CifId": "L531988",
+    "AccountId": "6300113250",
+    "AccountType": "L",
+    "FirstName":"",
+    "LastName": "",
+    "ComName": "ComName",
+    "Note": "test note3",
+    "CreatedBy": "vsharapo",
+    "CreatedByFN": "Vasily",
+    "CreatedByLN": "Sharapo",
+    "CreatedDt": "2018-12-16T15:47:22.967"
+  },
+  {
+    "Id": 4,
+    "CifId": "L000010",
+    "AccountId": "6300113251",
+    "AccountType": "D",
+    "FirstName":"Hak",
+    "LastName": "Storm",
+    "Note": "test note4",
+    "CreatedBy": "vsharapo",
+    "CreatedByFN":"Vasily",
+    "CreatedByLN": "Sharapo",
+    "CreatedDt": "2018-10-17T15:47:22.967"
+  },
+  {
+    "Id": 5,
+    "CifId": "L000010",
+    "AccountId": "6300113251",
+    "AccountType": "L",
+    "FirstName":"Chris",
+    "LastName": "E",
+    "Note": "test note5",
+    "CreatedBy": "vsharapo",
+    "CreatedByFN":"Vasily",
+    "CreatedByLN": "Sharapo",
+    "CreatedDt": "2018-10-17T15:47:22.967"
+  },
+
+  {
+    "Id": 6,
+    "CifId": "L531987",
+    "AccountId": "6300113251",
+    "AccountType": "D",
+    "FirstName":"Michael",
+    "LastName": "F",
+    "Note": "test note6",
+    "CreatedBy": "vsharapo",
+    "CreatedByFN":"Vasily",
+    "CreatedByLN": "Sharapo",
+    "CreatedDt": "2018-10-17T15:47:22.967"
+  },
+
+  {
+    "Id": 7,
+    "CifId": "L000010",
+    "AccountId": "1123461",
+    "AccountType": "D",
+    "FirstName":"Keanu",
+    "LastName": "R",
+    "Note": "test note7",
+    "CreatedBy": "vsharapo",
+    "CreatedByFN":"Vasily",
+    "CreatedByLN": "Sharapo",
+    "CreatedDt": "2018-10-16T15:47:22.967"
+  },
+];

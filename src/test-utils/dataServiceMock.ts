@@ -133,8 +133,8 @@ export const dataServiceMock = {
   ],
 
   processCases: [
-    new ProcessCase(1, "122", "123", "desc", "SPOC", "NEW", "2018-11-29T11:22:34.57", "Guts", "2018-11-27T11:22:34.57", "Isabeau"),
-    new ProcessCase(2, "123", "124", "desc2", "SPAC", "NEW", "2018-11-30T11:22:34.57", "Griffith", "2018-11-28T11:22:34.57", "Navarre"),
+    new ProcessCase(1, "122", "123", "desc", "SPOC", "NEW", "2018-11-29T11:22:34.57", "Guts", "2018-11-27T11:22:34.57", "Isabeau", "", "", "L"),
+    new ProcessCase(2, "123", "124", "desc2", "SPAC", "NEW", "2018-11-30T11:22:34.57", "Griffith", "2018-11-28T11:22:34.57", "Navarre", "", "", "D"),
   ],
 
   currentProcessCase:

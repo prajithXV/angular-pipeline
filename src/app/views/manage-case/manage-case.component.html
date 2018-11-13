@@ -20,7 +20,9 @@
               [searchingAccountLoanInfo]="searchingAccountLoanInfo"
               [currentProcessCase]="currentProcessCase"
               [searchingProcessCase]="searchingProcessCase"
+              [searchingAccountDep]="searchingAccountDep"
               [searchingProcesses]="searchingProcesses"
+              [searchingCustomers]="searchingCustomers"
               [account]="account">
             </tickler-cases-detail>
           </div>
@@ -54,10 +56,10 @@
 <div class="row">
   <div class="col-lg-12" *ngIf="currentProcessCase">
     <div class="ibox">
-      <div class="ibox-title col-lg-12 col-md-12 col-sm-12 col-xs-12">
+      <div class="ibox-title ticklers col-lg-12 col-md-12 col-sm-12 col-xs-12">
         <h5 class="col-lg-6 col-md-6 col-sm-6 col-xs-6">Ticklers</h5>
         <!--new button-->
-        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 text-right">
+        <div class="new-button col-lg-6 col-md-6 col-sm-6 col-xs-6 text-right">
           <button class="btn btn-sm btn-primary" [disabled]="isCreating || currentProcessCase.statusCode == 'CLOSED'"
                   (click)="onNewTickler()">
             <i class="fa fa-file-o"></i> New
@@ -75,7 +77,8 @@
               [processCaseTicklers]="processCaseTicklers"
               [searchingCaseTicklers]="searchingCaseTicklers"
               (onCancel)="onCancel()"
-              (onAddTicklerCase)="refreshCaseTicklers()">
+              (onAddTicklerCase)="refreshCaseTicklers()"
+              (onDeleteTicklerCase)="refreshCaseTicklers()">
             </process-case-tickler-table>
           </div>
         </div>

@@ -1,0 +1,63 @@
+<div class="feed-activity-list">
+  <div class="memo-notes-functions text-right" *ngIf="!isCreating">
+    <button class="btn btn-xs btn-primary"
+            [disabled]="searchingCallNotes"
+            (click)="showNewCallNotes(true)">
+      <i class="fa fa-file-o"></i> New note
+    </button>
+    <div class="pull-left">
+      <label class="no-margins font-normal">
+        <input (change)="filterCallNotes(isByAccount)" class="by-account-checkbox"
+               [(ngModel)]="isByAccount"
+               [value]="isByAccount"
+               type="checkbox"
+               name="By CIF"
+               title="By CIF"
+               [checked]="isByAccount"
+               [disabled]="memoNotes?.length === 0 || searchingCallNotes"
+        />
+        <span class="span">show related</span>
+      </label>
+    </div>
+  </div>
+  <!--NEW CALL NOTES-->
+  <ng-container *ngIf="isCreating">
+    <new-call-notes
+      [account]="account"
+      (onAdd)="refreshCallNotes()"
+      (onCancel)="showNewCallNotes($event)">
+    </new-call-notes>
+  </ng-container>
+  <!--MEMO NOTES-->
+  <ng-container *ngIf="memoNotes && memoNotes?.length > 0 && !searchingCallNotes && !isCreating">
+    <div class="feed-element" *ngFor="let memoNote of memoNotesWhenFilter;">
+      <div class="media-body">
+        <div class="col-xs-8 no-padding">
+          <ul class="list-unstyled">
+            <li>Customer <strong
+              [class.text-danger]="hasSameCustomerId(memoNote)">{{memoNote.completeCustomerName}}</strong></li>
+            <li>Account <strong [class.text-success]="hasSameAccountId(memoNote)">{{memoNote.accountId}}
+              {{memoNote.accountType}}</strong></li>
+          </ul>
+        </div>
+        <div class="col-xs-4 memo-info no-padding" style="padding-right: 0;">
+          <ul class="list-unstyled">
+            <li>Date <strong>{{memoNote.createdDate | coinDateTransform: "STD_DATE"}}</strong></li>
+            <li>By <strong>{{memoNote.completeCreatedByName}}</strong></li>
+          </ul>
+        </div>
+        <div class="well col-xs-12" style="padding: 10px 20px">
+          {{memoNote.note}}
+        </div>
+        <p></p>
+      </div>
+    </div>
+  </ng-container>
+</div>
+<div class="memo-notes-filter" *ngIf="searchingCallNotes">
+  <waiting-backend></waiting-backend>
+  Searching...
+</div>
+<div class="memo-notes-filter" *ngIf="!searchingCallNotes && memoNotes?.length == 0 && !isCreating">No data found.</div>
+<div class="memo-notes-filter"
+     *ngIf="memoNotesWhenFilter?.length == 0 && !isCreating && !searchingCallNotes && memoNotes?.length > 0">No data found.</div>

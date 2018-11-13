@@ -24,6 +24,7 @@
       <!--<dd>{{customer?.mainAddrecollss?.postalCode}}</dd>-->
       <dt *ngIf="account?.accountType == 'L'">Language <i class="fa fa-flag" aria-hidden="true"></i> :</dt>
       <dd *ngIf="account?.accountType == 'L'">{{account?.collection?.languageCode}}</dd>
+      <dt>Birth date:</dt><dd>{{customer?.birthDate}}</dd>
     </dl>
   </div>
   <div class="col-lg-6">

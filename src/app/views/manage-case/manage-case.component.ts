@@ -43,6 +43,9 @@ export class ManageCaseComponent implements OnInit {
   private filterProcesses: TicklerProcess = null;
   private searchingProcesses: boolean = false;
   private searchingCalls: boolean = false;
+  private searchingAccountDep: boolean = false;
+  private searchingCustomers: boolean = false;
+
 
 
   constructor(private _dataService: DataService,private _route: ActivatedRoute, private _userFeedbackService: UserFeedbackService) {
@@ -104,29 +107,47 @@ export class ManageCaseComponent implements OnInit {
   //loads all the necessary account information
   loadCompleteInformationAccount(processCase: ProcessCase){
     // Load the operational data
-    this.searchingAccountInfo = true;
     this.searchingCalls = true;
+    this.searchingCustomers = true;
     this.account = null;
 
+    if(processCase.accountType === CoinConstants.depositAccountType){
+      this.searchingAccountDep = true;
+    }else{
+      this.searchingAccountInfo = true;
+      this.searchingAccountAdditionalInfo = true;
+      this.searchingAccountLoanInfo = true;
+    }
+
     this._dataService
-      .getCompleteInfoForAccount(processCase? processCase.accountId: null, CoinConstants.defaultAccountType, CoinConstants.NoCampaignRecordId, null, false)
+      .getCompleteInfoForAccount(processCase? processCase.accountId: null, processCase ? processCase.accountType : null, CoinConstants.NoCampaignRecordId, null, false)
       .subscribe(account => {
           // avoid that an error influences other fields
           try {
             this.account = account;
 
-            if (this.account.collection) {
+            if (this.account && this.account.collection) {
               this.searchingAccountInfo = false;
             }
-            if (this.account.additionalInfo) {
+            if (this.account && this.account.additionalInfo) {
               this.searchingAccountAdditionalInfo = false;
             }
-            if (this.account.loan) {
+            if (this.account && this.account.loan) {
               this.searchingAccountLoanInfo = false;
             }
-            if (this.account.customer && this.account.customer.callRecords) {
+            if (this.account && this.account.customer && this.account.customer.callRecords) {
               this.searchingCalls = false;
             }
+
+            if (this.account && this.account.customer && this.account.customer.mainContact && this.account.customer.mainContact.completeName) {
+              this.searchingCustomers = false;
+            }
+
+            if(this.account && this.account.accountDep){
+              this.searchingAccountDep = false;
+            }
+
+
 
           } catch (error) {
             console.log("Error managing account", error);
@@ -139,6 +160,7 @@ export class ManageCaseComponent implements OnInit {
         }
         ,
         error => console.log("error"),
+
       );
   }
 
