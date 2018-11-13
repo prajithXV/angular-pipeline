@@ -318,7 +318,7 @@ export const MY_MOMENT_FORMATS = {
     LovTypeToStringPipe,
     FilterCodeToNamePipe
     // providers used to create fake backend
-    ,fakeBackendProvider
+    // ,fakeBackendProvider
   ],
 
   bootstrap: [AppComponent]
