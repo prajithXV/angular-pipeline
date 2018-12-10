@@ -41,11 +41,9 @@ import {Code} from "../models/code";
 import {LovType} from "../models/lov-types";
 import {LovValue} from "../models/lov-values";
 import {MemoNote} from "../models/memo-note";
-
-const HOME_PHONE = "Home phone";
-const BUSINESS_PHONE = "Business phone";
-const CELLULAR_PHONE = "Home cell phone";
-const LANDLINE_TYPE = "P";
+import {AddressVerification, VerificationStatus} from "../models/addressVerification";
+import {EmailListVerification} from "../models/emailListVerification";
+import {PhoneListVerification} from "../models/phoneListVerification";
 
 export class BackendModelConversorService {
 
@@ -68,7 +66,6 @@ export class BackendModelConversorService {
     return srcAcc;
   }
 
-
   static cnAccountDepAccount(src, srcAcc?: Account): Account {
     if (srcAcc == null) {
       srcAcc = new Account();
@@ -89,14 +86,18 @@ export class BackendModelConversorService {
 
     cust.mainAddress = BackendModelConversorService.address2Address(src.address);
 
-    for (let m of src.emailLst) {
-      if (m) {
-        cust.addeMail(m);
+    if (src.emailLst) {
+      for (let m of src.emailLst) {
+        if (m) {
+          cust.addEmail(m);
+        }
       }
     }
     cust.cifNo = src.cifNo;
-    for (let psrc of src.phoneLst) {
-      cust.addPhone(BackendModelConversorService.phone2Phone(psrc));
+    if (src.phoneLst) {
+      for (let psrc of src.phoneLst) {
+        cust.addPhone(BackendModelConversorService.phone2Phone(psrc));
+      }
     }
     cust.phoneLineType = src.phoneLineType;
     cust.languageIndicator = src.languageIndicator;
@@ -114,9 +115,84 @@ export class BackendModelConversorService {
       cust.hasConsent = src.consentFlg == "Y";
     }
 
+    if (src.addressVer) {
+      cust.lastAddressVerification = BackendModelConversorService.addressVer2AddressVerification(src.addressVer);
+    }
+
+    if (src.emailLstVer) {
+      cust.lastEmailVerification = BackendModelConversorService.emailLstVer2EmailListVerification(src.emailLstVer);
+    }
+
+    if (src.phoneLstVer) {
+      cust.lastPhoneVerification = BackendModelConversorService.phoneLstVer2PhoneListVerification(src.phoneLstVer);
+    }
+
     return cust;
   }
 
+  static addressVer2AddressVerification(av): AddressVerification {
+    const ret = new AddressVerification();
+    ret.oldAddress = BackendModelConversorService.address2Address(av);
+    ret.newAddress = BackendModelConversorService.address2Address({
+      streetAddr1: av.newStreetAddr1,
+      streetAddr2: av.newStreetAddr2,
+      streetAddr3: av.newStreetAddr3,
+      city: av.newCity,
+      stateCode: av.newStateCode,
+      postalCode: av.newPostalCode
+    });
+    ret.note = av.note;
+    ret.status = BackendModelConversorService.getVerificationStatus(av.statusFlg);
+    ret.createdDate = new Date(av.createdDt);
+    ret.createdBy = av.createdBy;
+    return ret;
+  }
+
+  static emailLstVer2EmailListVerification(ev): EmailListVerification {
+    const ret = new EmailListVerification();
+    ev.email.forEach(e => {
+      if (e) {
+        ret.addEmail(e);
+      }
+    });
+    ev.newEmail.forEach(ne => {
+      if (ne) {
+        ret.addNewEmail(ne);
+      }
+    });
+    ret.note = ev.note;
+    ret.status = BackendModelConversorService.getVerificationStatus(ev.statusFlg);
+    ret.createdDate = new Date(ev.createdDt);
+    ret.createdBy = ev.createdBy;
+    return ret;
+  }
+
+  static phoneLstVer2PhoneListVerification(pv): PhoneListVerification {
+    const ret = new PhoneListVerification();
+    pv.phone.forEach(p => {
+      if (p) {
+        ret.addPhone(new Phone(p.phoneNr, p.phoneType, p.phoneLineType));
+      }
+    });
+    pv.newPhone.forEach(np => {
+      if (np) {
+        ret.addNewPhone(new Phone(np.phoneNr, np.phoneType, np.phoneLineType));
+      }
+    });
+    ret.note = pv.note;
+    ret.status = BackendModelConversorService.getVerificationStatus(pv.statusFlg);
+    ret.createdDate = new Date(pv.createdDt);
+    ret.createdBy = pv.createdBy;
+    return ret;
+  }
+
+  static getVerificationStatus(value: string): VerificationStatus {
+    switch(value) {
+      case VerificationStatus.Verified: return VerificationStatus.Verified;
+      case VerificationStatus.Modify: return VerificationStatus.Modify;
+    }
+    return null;
+  }
 
   static customerConsents(cc): CustomerConsent[]{
     let ret: CustomerConsent[] = [];
@@ -926,7 +1002,7 @@ export class BackendModelConversorService {
       memoNote.comName = cn.ComName;
       memoNote.createdByFirstName = cn.CreatedByFN;
       memoNote.createdByLastName = cn.CreatedByLN;
-      
+
       ret.push(memoNote);
     }
     return ret;
@@ -1146,21 +1222,9 @@ export class BackendModelConversorService {
   private static phone2Phone(phone): Phone {
     let ret = new Phone();
     ret.number = phone.phoneNum;
-    switch (phone.phoneType) {
-      case HOME_PHONE:
-        ret.type = PhoneType.Home;
-        break;
-      case BUSINESS_PHONE:
-        ret.type = PhoneType.Business;
-        break;
-      case CELLULAR_PHONE:
-        ret.type = PhoneType.CellularHome;
-        break;
-      default:
-        ret.type = PhoneType.Unknown;
-    }
+    ret.type = phone.phoneType ? phone.phoneType : null;
     ret.typeDescription = phone.phoneType;
-    ret.lineType = phone.phoneLineType == LANDLINE_TYPE ? LineType.LandLine : LineType.Unknown;
+    ret.lineType = phone.phoneLineType ? phone.phoneLineType : null;
     ret.phoneLineTypeCode = phone.phoneLineType;
     ret.callsMadeToday = phone.callsMadeToday;
     return ret;

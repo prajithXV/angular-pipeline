@@ -55,6 +55,10 @@ import {LovValue} from "../models/lov-values";
 import {LovTypeModel} from "../models/lov-type-model";
 import {MemoNote} from "../models/memo-note";
 import {promise} from "selenium-webdriver";
+import {AddressVerification} from "../models/addressVerification";
+import {addressVerificationBody} from "../../api/addressVerification";
+import {EmailListVerification} from "../models/emailListVerification";
+import {PhoneListVerification} from "../models/phoneListVerification";
 
 export enum DSErrorCodes {
   no_account = 0,
@@ -821,7 +825,7 @@ export class DataService {
   }
 
   addTicklerAttributeMap(ticklerType: TicklerType, ticklerAttribute: TicklerAttribute, agent: Agent): Promise<number>{
-    return this._backCommsService.addTicklerAttributeMap(ticklerType.id, ticklerAttribute.id, ticklerAttribute.mandatoryFlag,agent.account);
+    return this._backCommsService.addTicklerAttributeMap(ticklerType.id, ticklerAttribute.id, ticklerAttribute.mandatoryFlag, agent.account);
   }
 
 
@@ -867,6 +871,65 @@ export class DataService {
     return this._backCommsService.deleteCaseTickler(caseTickler.id, agent.account);
   }
 
+
+  addAddressVerification(addressVerification: AddressVerification, customer: Customer, agent: Agent): Promise<number>{
+    return this._backCommsService.addAddressVerification(
+      customer.id,
+      addressVerification.oldAddress.streetAddress1,
+      addressVerification.oldAddress.streetAddress2,
+      addressVerification.oldAddress.streetAddress3,
+      addressVerification.oldAddress.city,
+      addressVerification.oldAddress.stateCode,
+      addressVerification.oldAddress.postalCode,
+      addressVerification.newAddress.streetAddress1,
+      addressVerification.newAddress.streetAddress2,
+      addressVerification.newAddress.streetAddress3,
+      addressVerification.newAddress.city,
+      addressVerification.newAddress.stateCode,
+      addressVerification.newAddress.postalCode,
+      addressVerification.note,
+      addressVerification.status,
+      agent.account
+    );
+  }
+
+  addEmailVerification(emailVerification: EmailListVerification, customer: Customer, agent: Agent): Promise<number>{
+    return this._backCommsService.addEmailVerification(
+      customer.id,
+      emailVerification.emails,
+      emailVerification.newEmails,
+      emailVerification.note,
+      emailVerification.status,
+      agent.account
+    );
+  }
+
+  addPhoneVerification(phoneVerification: PhoneListVerification, customer: Customer, agent: Agent): Promise<number>{
+    let phone: {phoneNr: string, phoneType: string, phoneLineType: string}[] = [];
+    phoneVerification.phones.forEach(p => {
+      phone.push({
+        phoneNr: p.number,
+        phoneType: p.type,
+        phoneLineType: p.lineType
+      });
+    });
+    let newPhone: {phoneNr: string, phoneType: string, phoneLineType: string}[] = [];
+    phoneVerification.newPhones.forEach(p => {
+      newPhone.push({
+        phoneNr: p.number,
+        phoneType: p.type,
+        phoneLineType: p.lineType
+      });
+    });
+    return this._backCommsService.addPhoneVerification(
+      customer.id,
+      phone,
+      newPhone,
+      phoneVerification.note,
+      phoneVerification.status,
+      agent.account
+    );
+  }
 
   private handleError(code: DSErrorCodes, message: string, severity: number, inner: any, errorStream?: Subject<UFNotification>) {
     // Create the UFNotification

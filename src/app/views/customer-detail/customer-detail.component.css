@@ -1,19 +1,4 @@
-.modal-footer{
-  border-top: none !important;
-  padding-right: 30px;
-  padding-left: 30px;
-}
-
-.modal-header{
-  padding-left: 30px;
-}
-
-.text{
-  padding-top: 15px;
-}
-
-
-:host /deep/ .popover{
+:host /deep/ .popover {
   color: #000;
   background: white;
   max-width: 400px;
@@ -22,68 +7,88 @@
 
 }
 
-
-.overflowMail{
+.overflowMail {
   overflow:hidden;
   white-space:nowrap;
   text-overflow: ellipsis
 }
 
-
-:host /deep/ .popover-content{
+:host /deep/ .popover-content {
   color: #000;
   background: white;
   padding: 0;
 }
 
-
 :host /deep/ .popover.top>.arrow:after {
   border-top-color: white;
 }
 
+:host /deep/ .popover.bottom>.arrow:after {
+  border-bottom-color: white;
+}
 
-.fa.fa-info-circle{
+.fa.fa-info-circle {
   cursor: auto !important;
 }
 
-.fa.fa-info-circle:hover{
+.fa.fa-info-circle:hover {
   color: black;
 }
 
-
-.edit{
+.edit, .option-icons {
   float: right;
   cursor: pointer;
   padding-top: 1px;
+  margin-right: 10px;
 }
 
-
-.edit:hover{
+.edit:hover {
   color: orange;
 }
 
-.black{
-  color: black;
+.option-icons:hover {
+  opacity: 0.5 !important;
 }
 
-.margin{
+.black {
+  color: #676a6c;
+}
+
+.margin {
   margin-left: 5px;
 }
 
-
-.max-calls{
+.max-calls {
   text-decoration: line-through;
   color: #676a6c !important;
   font-weight: 400 !important;
   cursor: auto;
 }
 
-.no-decoration{
+.no-decoration {
   color: #676a6c !important;
   font-weight: 400 !important;
   cursor: auto;
 }
 
-.no-strong{
+.no-strong {
   font-weight: 400 !important;
+}
+
+.green {
+  color: green;
+}
+
+.orange {
+  color: #f8ac59;
+}
+
+.red {
+  color: #ED5565;
+}
+
+.check-icon {
+  position: absolute;
+  margin-left: 17px;
+  margin-top: 2px;
 }

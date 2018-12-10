@@ -5,6 +5,9 @@ import {Person} from "./person";
 import {Address} from "./address";
 import {CallRecord} from "./call-record";
 import {MemoNote} from "./memo-note";
+import {AddressVerification, VerificationStatus} from "./addressVerification";
+import {EmailListVerification} from "./emailListVerification";
+import {PhoneListVerification} from "./phoneListVerification";
 
 
 export class Customer {
@@ -37,6 +40,10 @@ export class Customer {
   private _callNotes: MemoNote[] = null;
   private _birthDate: string = null;
 
+  private _lastAddressVerification: AddressVerification = null;
+  private _lastEmailVerification: EmailListVerification = null;
+  private _lastPhoneVerification: PhoneListVerification = null;
+
 
   constructor(id?: string, cifno?: string, taxId?: string, socialSecurityNumber?: string, mainContact?: Person, mainAddress?: Address,
               emailList?: string[], accountNumber?: string, phoneList?: Phone[], phoneLineType?: string, languageIndicator?: string,
@@ -62,8 +69,10 @@ export class Customer {
     this.alerts = alerts;
     this.callRecords = callRecords;
     this.coBorrowers = coBorrowers;
-    this.phones = phoneList;
     this.birthDate = birthDate;
+
+    this.emails = emailList ? emailList : [];
+    this.phones = phoneList ? phoneList : [];
 
   }
 
@@ -187,11 +196,15 @@ export class Customer {
     this._mainAddress = value;
   }
 
-  get eMails(): string[] {
+  get emails(): string[] {
     return this._emailList;
   }
 
-  addeMail(email: string) {
+  set emails(value: string[]) {
+    this._emailList = value;
+  }
+
+  addEmail(email: string) {
     if (this._emailList == null) {
       this._emailList = [];
     }
@@ -322,4 +335,114 @@ export class Customer {
   set birthDate(value: string) {
     this._birthDate = value;
   }
+
+  get lastAddressVerification(): AddressVerification {
+    return this._lastAddressVerification;
+  }
+
+  set lastAddressVerification(value: AddressVerification) {
+    this._lastAddressVerification = value;
+  }
+
+  get lastEmailVerification(): EmailListVerification {
+    return this._lastEmailVerification;
+  }
+
+  set lastEmailVerification(value: EmailListVerification) {
+    this._lastEmailVerification = value;
+  }
+
+  get lastPhoneVerification(): PhoneListVerification {
+    return this._lastPhoneVerification;
+  }
+
+  set lastPhoneVerification(value: PhoneListVerification) {
+    this._lastPhoneVerification = value;
+  }
+
+  /***** Functions to control the customer adresses verification ****/
+  hasValidAddressVerification(): boolean {
+    // The verification is valid for 30 days
+    return this.lastAddressVerification &&
+      this.lastAddressVerification.status == VerificationStatus.Verified &&
+      new Date().getTime() - this.lastAddressVerification.createdDate.getTime() < (30 * 24 * 60 * 60 * 1000);
+  }
+
+  needsAddressVerification(): boolean {
+    return !this.lastAddressVerification ||
+      (this.lastAddressVerification.status == VerificationStatus.Verified && !this.hasValidAddressVerification());
+  }
+
+  addressIsModifying(): boolean {
+    return this.lastAddressVerification && this.lastAddressVerification.status == VerificationStatus.Modify;
+  }
+
+  addressesAreEqual() {
+    return (
+      this.mainAddress.streetAddress1 === this.lastAddressVerification.newAddress.streetAddress1 &&
+      this.mainAddress.streetAddress2 === this.lastAddressVerification.newAddress.streetAddress2 &&
+      this.mainAddress.streetAddress3 === this.lastAddressVerification.newAddress.streetAddress3 &&
+      this.mainAddress.city === this.lastAddressVerification.newAddress.city &&
+      this.mainAddress.stateCode === this.lastAddressVerification.newAddress.stateCode &&
+      this.mainAddress.postalCode === this.lastAddressVerification.newAddress.postalCode
+    );
+  }
+  /***********************************************************************/
+
+  /***** Functions to control the customer phones verification ****/
+  hasValidPhoneVerification(): boolean {
+    // The verification is valid for 30 days
+    return this.lastPhoneVerification &&
+      this.lastPhoneVerification.status == VerificationStatus.Verified &&
+      new Date().getTime() - this.lastPhoneVerification.createdDate.getTime() < (30 * 24 * 60 * 60 * 1000);
+  }
+
+  phoneIsModifying(): boolean {
+    return this.lastPhoneVerification && this.lastPhoneVerification.status == VerificationStatus.Modify;
+  }
+
+  needsPhoneVerification(): boolean {
+    return (!this.lastPhoneVerification ||
+      (this.lastPhoneVerification.status == VerificationStatus.Verified && !this.hasValidPhoneVerification()));
+  }
+
+  phonesAreEqual() {
+    if (this.phones.length !== this.lastPhoneVerification.newPhones.length) return false;
+    for (let cp of this.phones) {
+      if (!this.lastPhoneVerification.newPhones.find(p => cp.number === p.number && cp.type === p.type)) return false;
+    }
+    return true;
+  }
+
+  phoneIsUnderCreation() {
+    return (!this.phones || this.phones.length == 0) &&
+      (!this.lastPhoneVerification || this.lastPhoneVerification.status == VerificationStatus.Verified);
+  }
+  /***********************************************************************/
+
+  /***** Functions to control the customer emails verification ****/
+  hasValidEmailVerification(): boolean {
+    // The verification is valid for 30 days
+    return this.lastEmailVerification &&
+      this.lastEmailVerification.status == VerificationStatus.Verified &&
+      new Date().getTime() - this.lastEmailVerification.createdDate.getTime() < (30 * 24 * 60 * 60 * 1000);
+  }
+
+  needsEmailVerification(): boolean {
+    return (!this.lastEmailVerification ||
+      (this.lastEmailVerification.status == VerificationStatus.Verified && !this.hasValidEmailVerification()));
+  }
+
+  emailIsModifying(): boolean {
+    return this.lastEmailVerification && this.lastEmailVerification.status == VerificationStatus.Modify;
+  }
+
+  emailsAreEqual() {
+    if (this.emails.length !== this.lastEmailVerification.newEmails.length) return false;
+    for (let ce of this.emails) {
+      if (this.lastEmailVerification.newEmails.indexOf(ce) < 0) return false;
+    }
+    return true;
+  }
+  /***********************************************************************/
 }

@@ -75,27 +75,17 @@
           </td>
           <td>
             <!--remove tickler type button-->
-            <i *ngIf="!waiting(t)" class="trash fas fa-trash-alt" (click)="openModal(content)"></i>
+            <i *ngIf="!waiting(t)" class="trash fas fa-trash-alt" (click)="openConfirmationModal(t)"></i>
             <waiting-backend *ngIf="waiting(t)"></waiting-backend>
           </td>
           <!--modal: Remove tickler type-->
-          <ng-template #content let-c="close" let-d="dismiss">
-            <div class="modal-header">
-              <h4 class="modal-title">Remove tickler type</h4>
-              <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
-                <span aria-hidden="true">&times;</span>
-              </button>
-            </div>
-            <div class="modal-body">
-              <p class="text">Are you sure you want to remove this tickler type?</p>
-            </div>
-            <div class="modal-footer">
-              <button type="button" class="pull-left btn btn-danger" (click)="removeTicklerType(t); c('Close click')">
-                Delete
-              </button>
-              <button type="button" class=" pull-left btn btn-outline-dark" (click)="c('Close click')">Cancel</button>
-            </div>
-          </ng-template>
+          <confirmation-modal
+            #confirmationModal
+            [title]="'Remove tickler type'"
+            [confirmationText]="'Are you sure you want to remove this tickler type?'"
+            [buttonText]="'Delete'"
+            (buttonFunction)="removeTicklerType($event.object)"
+          ></confirmation-modal>
         </tr>
 
         <tr *ngIf="isTicklerTypeVisible(t)">

@@ -4,8 +4,8 @@ import {TicklerProcess} from "../../models/tickler-processes";
 import {TicklerTypeModel} from "../../models/tickler-type-model";
 import {DataService} from "../../services/data.service";
 import {UserFeedbackService} from "../../services/user-feedback.service";
-import {ModalDismissReasons, NgbModal} from "@ng-bootstrap/ng-bootstrap";
 import {TicklerAttribute} from "../../models/tickler-attribute";
+import {ConfirmationModalComponent} from "../confirmation-modal/confirmation-modal.component";
 
 @Component({
   selector: 'tickler-types-table',
@@ -28,7 +28,9 @@ export class TicklerTypesTableComponent implements OnInit {
   private waitingToRemove: string[] = [];
   private ticklerTypeVisibles = {};
 
-  constructor(private _dataService: DataService, private  _userFeedbackService: UserFeedbackService, private modalService: NgbModal) {
+  @ViewChild('confirmationModal') private _confirmationModal: ConfirmationModalComponent;
+
+  constructor(private _dataService: DataService, private  _userFeedbackService: UserFeedbackService) {
   }
 
   ngOnInit() {
@@ -40,7 +42,6 @@ export class TicklerTypesTableComponent implements OnInit {
       // this.isCreating = false;
     }
   }
-
 
   showTicklerTypes(value: boolean) {
     this.onCancelTicklerType.emit(value);
@@ -64,15 +65,9 @@ export class TicklerTypesTableComponent implements OnInit {
     this.editTicklerType(ticklerType);
   }
 
-
-  openModal(content) {
-    this.modalService.open(content).result.then((result) => {
-      this.closeResult = `Closed with: ${result}`;
-    }, (reason) => {
-      this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
-    })
+  openConfirmationModal(ticklerType: TicklerType) {
+    this._confirmationModal.open(ticklerType);
   }
-
 
   private editTicklerType(ticklerType: TicklerType) {
     this.ticklerTypeVisibles["id" + ticklerType.id] = !this.ticklerTypeVisibles["id" + ticklerType.id];
@@ -81,7 +76,6 @@ export class TicklerTypesTableComponent implements OnInit {
   private isTicklerTypeVisible(ticklerType: TicklerType) {
     return this.ticklerTypeVisibles["id" + ticklerType.id];
   }
-
 
   //Remove
   removeTicklerType(ticklerType: TicklerType) {
@@ -105,22 +99,8 @@ export class TicklerTypesTableComponent implements OnInit {
 
   }
 
-
   //return index when waiting to remove
   private waiting(ticklerType: TicklerType) {
     return this.waitingToRemove.indexOf(ticklerType.id.toString()) > -1
   }
-
-
-  private getDismissReason(reason: any): string {
-    if (reason === ModalDismissReasons.ESC) {
-      return 'by pressing ESC';
-    } else if (reason === ModalDismissReasons.BACKDROP_CLICK) {
-      return 'by clicking on a backdrop';
-    } else {
-      return `with: ${reason}`;
-    }
-  }
-
-
 }

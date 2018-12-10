@@ -10,8 +10,8 @@ export const customerConsentsBody = [
   },
   {
     "Id": 4,
-    "CifId": "A1",
-    "PhoneNr": "6666666600",
+    "CifId": "AAJ5318",
+    "PhoneNr": "5556555069",
     "ConsentFlg":"Y",
     "Note": "test customer consent",
     "CreatedBy": "vsharapo",

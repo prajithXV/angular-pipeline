@@ -7,12 +7,6 @@ import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import { AppComponent } from './app.component';
 import { ChartModule } from 'angular2-highcharts';
 import { ChartsModule } from 'ng2-charts/ng2-charts';
-
-
-// App views
-
-
-// App modules/components
 import { LayoutsModule } from "./components/common/layouts/layouts.module";
 import {DataService} from "./services/data.service";
 import {GlobalStateService} from "./services/global-state.service";
@@ -48,8 +42,6 @@ import {NewCallRecordComponent} from './views/new-call-record/new-call-record.co
 import { CallManagementComponent } from './views/call-management/call-management.component';
 import { CoinDateInputComponent } from './views/coin-date-input/coin-date-input.component';
 import { CoinNumberInputComponent } from './views/coin-number-input/coin-number-input.component';
-// import {HTTP_INTERCEPTORS} from "@angular/common/http";
-// import {SessionLossInterceptor} from "./general/session-loss-interceptor";
 import { CustomerCallRecordsComponent } from './views/customer-call-records/customer-call-records.component';
 import { StressComponent } from './views/stress/stress.component';
 import { AccountHistoryComponent } from './views/account-history/account-history.component';
@@ -150,8 +142,14 @@ import {HttpClientModule} from "@angular/common/http";
 import { CallNotesComponent } from './views/call-notes/call-notes.component';
 import { NewCallNotesComponent } from './views/new-call-notes/new-call-notes.component';
 import {fakeBackendProvider} from "./services/mocks/fake-backend-factory";
-
-
+import { CustomerAddressModalComponent } from './views/customer-address-modal/customer-address-modal.component';
+import { AutodialConsentModalComponent } from './views/autodial-consent-modal/autodial-consent-modal.component';
+import { CustomerAddressDetailComponent } from './views/customer-address-detail/customer-address-detail.component';
+import { CustomerEmailModalComponent } from './views/customer-email-modal/customer-email-modal.component';
+import { CustomerEmailDetailComponent } from './views/customer-email-detail/customer-email-detail.component';
+import { CustomerPhoneModalComponent } from './views/customer-phone-modal/customer-phone-modal.component';
+import { CustomerPhoneDetailComponent } from './views/customer-phone-detail/customer-phone-detail.component';
+import { ConfirmationModalComponent } from './views/confirmation-modal/confirmation-modal.component';
 
 export const MY_MOMENT_FORMATS = {
   parseInput: 'L',
@@ -161,8 +159,6 @@ export const MY_MOMENT_FORMATS = {
   dateA11yLabel: 'LL',
   monthYearA11yLabel: 'MMMM YYYY',
 };
-
-
 
 @NgModule({
   declarations: [
@@ -265,6 +261,14 @@ export const MY_MOMENT_FORMATS = {
     ValueEditionComponent,
     CallNotesComponent,
     NewCallNotesComponent,
+    CustomerAddressModalComponent,
+    AutodialConsentModalComponent,
+    CustomerAddressDetailComponent,
+    CustomerEmailModalComponent,
+    CustomerEmailDetailComponent,
+    CustomerPhoneModalComponent,
+    CustomerPhoneDetailComponent,
+    ConfirmationModalComponent,
   ],
   imports: [
     BrowserModule,
@@ -318,7 +322,7 @@ export const MY_MOMENT_FORMATS = {
     LovTypeToStringPipe,
     FilterCodeToNamePipe
     // providers used to create fake backend
-    // ,fakeBackendProvider
+    ,fakeBackendProvider
   ],
 
   bootstrap: [AppComponent]

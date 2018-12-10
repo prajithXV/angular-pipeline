@@ -66,6 +66,7 @@ import {CampaignAttributeEditionComponent} from "../campaign-attribute-edition/c
 import {CampaignListAttribute} from "../../models/campaign-list-attribute";
 import {CallNotesComponent} from "../call-notes/call-notes.component";
 import {NewCallNotesComponent} from "../new-call-notes/new-call-notes.component";
+import {LineType, PhoneType} from "../../models/phone";
 
 
 describe('ManageAccountComponent', () => {
@@ -181,7 +182,7 @@ describe('ManageAccountComponent', () => {
 
   }
 
-  function checkBasicData(cName: string, cLastName: string, cCompleteName: string, address: string, pNumber: string, lineType: number, typeDescription: string, type: number,
+  function checkBasicData(cName: string, cLastName: string, cCompleteName: string, address: string, pNumber: string, lineType: LineType, typeDescription: string, type: PhoneType,
                           hasConsent: boolean, cifno: string, ssn: string, language: string, dPastDue: number, pAmountDue: number, pPastDue: number, paymentAmount: number,
                           lPromiseDate: string, otherCharges: number, lateCharges: number, escrowBalance: number, paymentsDue: number, interestDue: number, lWorkDate: string,
                           loanTerm: string, loanDate: string, loanRate: string, lBalance: number, lcurrentPayOff: number, addInfoEaPcFlag: string){
@@ -513,7 +514,7 @@ describe('ManageAccountComponent', () => {
 
     injectSpy(DataService, 'getCompleteInfoForAccount', dataServiceMock.account4, true);
     callsToFunctions(true, 1500);
-    checkBasicData("Nick","Furia","Nick Furia","SHIELD","777777777",0,"Business Phone",1,true,
+    checkBasicData("Nick","Furia","Nick Furia","SHIELD","777777777",LineType.Cellular, "Business Phone", PhoneType.Home, true,
                   "777","555555","#lCode",60,777,8888,777777,"#last prom date",6,5,
                   10,7,9999,"#last work date","#loan term","2/1/2001 12:00:00 AM","#loan rate",75,
                   45,"true");

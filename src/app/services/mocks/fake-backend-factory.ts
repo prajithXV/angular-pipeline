@@ -1,7 +1,7 @@
 import {tokenBody} from "../../../api/token";
 import {custSrchBodyL11} from "../../../api/accSrch-custL11";
 import {accInqBody1423L} from "../../../api/accInq-cust1423L";
-import {custInqBody} from "../../../api/custInq";
+import {custInqBody, custInqBodyPhLst} from "../../../api/custInq";
 import {custSrchBody1Result} from "../../../api/custSrch-1result";
 import {custSrchBody2Results} from "../../../api/custSrch-2results";
 import {custSrchBodyResult} from "../../../api/msgsrch-custBCB6019";
@@ -200,7 +200,8 @@ export class FakeBackendFactory implements HttpInterceptor {
         // connection.mockError({status: 500} as any as Error);
         return of(new HttpResponse({
           status: 200,
-          body: custInqBody
+          // body: custInqBody
+          body: custInqBodyPhLst
         }));
       }
 
@@ -764,6 +765,33 @@ export class FakeBackendFactory implements HttpInterceptor {
         }));
       }
 
+
+      //UPDATE ADDRESS VERIFICATION
+      else if (request.url.indexOf('/customer/address') >= 0 && request.method === "POST") {
+        console.log("FAK customer address modified/verified");
+        // connection.mockError({status: 400} as any as Error);
+        return of(new HttpResponse({
+          status: 200
+        }));
+      }
+
+      //UPDATE EMAIL VERIFICATION
+      else if (request.url.indexOf('/customer/email') >= 0 && request.method === "POST") {
+        console.log("FAK customer email modified/verified");
+        // connection.mockError({status: 400} as any as Error);
+        return of(new HttpResponse({
+          status: 200
+        }));
+      }
+
+      //UPDATE PHONE VERIFICATION
+      else if (request.url.indexOf('/customer/phone') >= 0 && request.method === "POST") {
+        console.log("FAK customer phone modified/verified");
+        // connection.mockError({status: 400} as any as Error);
+        return of(new HttpResponse({
+          status: 200
+        }));
+      }
 
       //GET CAMPAIGN LIST ORDER BY
 

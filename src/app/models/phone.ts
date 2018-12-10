@@ -1,16 +1,12 @@
-const landLineType = "P";
-
 export enum PhoneType {
-  Home,
-  Business,
-  CellularHome,
-  Unknown
+  Home = "Home Phone",
+  Business = "Business Phone",
+  CellularHome = "Home Cell Phone"
 }
 
 export enum LineType {
-  LandLine,
-  Cellular,
-  Unknown
+  LandLine = "P",
+  Cellular = "C"
 }
 
 export class Phone {
@@ -18,16 +14,18 @@ export class Phone {
   private _type: PhoneType;
   private _lineType: LineType;
   private _typeDescription: string;
-  // This is the code retrieved from JackHenry
   private _phoneLineTypeCode: string;
   private _callsMadeToday: number;
+  private _deleted: boolean;
 
   constructor(number?: string, type?: PhoneType, lineType?: LineType, typeDescription?: string, phoneLineTypeCode?: string, callsMadeToday?: number){
     this.number = number;
-    this.type = type;
-    this.lineType = lineType;
+    this.type = type ? type : null;
+    this.lineType = lineType ? lineType : null;
     this.typeDescription = typeDescription;
     this.phoneLineTypeCode = phoneLineTypeCode;
+
+    this._deleted = false;
   }
 
   get number(): string {
@@ -56,7 +54,6 @@ export class Phone {
 
   isLandline(): boolean {
     return this.lineType == LineType.LandLine;
-    // return true;
   }
 
   get typeDescription(): string {
@@ -81,5 +78,25 @@ export class Phone {
 
   set callsMadeToday(value: number){
     this._callsMadeToday = value;
+  }
+
+  get isDeleted() {
+    return this._deleted;
+  }
+
+  set isDeleted(value: boolean) {
+    this._deleted = value;
+  }
+
+  deletePhone() {
+    this._deleted = true;
+  }
+
+  isDirty(phone: Phone) {
+    return (this.number != phone.number || this.lineType != phone.lineType || this.type != phone.type || this.isDeleted);
+  }
+
+  clone(): Phone {
+    return new Phone(this.number, this.type, this.lineType, this.typeDescription, this.phoneLineTypeCode, this.callsMadeToday);
   }
 }

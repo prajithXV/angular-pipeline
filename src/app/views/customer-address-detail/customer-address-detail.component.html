@@ -1,0 +1,67 @@
+<div style="overflow:auto">
+  <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 title">
+    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 title-height"></div>
+    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 title-height">Current address</div>
+    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 title-height" style="padding-left: 4px">New address</div>
+  </div>
+  <div class="col-lg-12 table-decoration row-styles">
+    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 body-height subtitle">Address <i class="fa fa-address-card-o" aria-hidden="true"></i></div>
+    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 body-height">{{customer.mainAddress.streetAddress1}}</div>
+    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 body-height"
+         [class.different-field]="customer.mainAddress.streetAddress1 != customer.lastAddressVerification.newAddress.streetAddress1">
+      {{customer.lastAddressVerification.newAddress.streetAddress1}}
+    </div>
+  </div>
+  <div class="col-lg-12 row-styles">
+    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 body-height subtitle"><i class="fa fa-address-card-o" aria-hidden="true"></i></div>
+    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 body-height">{{customer.mainAddress.streetAddress2}}</div>
+    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 body-height"
+         [class.different-field]="customer.mainAddress.streetAddress2 != customer.lastAddressVerification.newAddress.streetAddress2">
+      {{customer.lastAddressVerification.newAddress.streetAddress2}}
+    </div>
+  </div>
+  <div class="col-lg-12 row-styles">
+    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 body-height subtitle"><i class="fa fa-address-card-o" aria-hidden="true"></i></div>
+    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 body-height">{{customer.mainAddress.streetAddress3}}</div>
+    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 body-height"
+         [class.different-field]="customer.mainAddress.streetAddress3 != customer.lastAddressVerification.newAddress.streetAddress3">
+      {{customer.lastAddressVerification.newAddress.streetAddress3}}
+    </div>
+  </div>
+  <div class="col-lg-12 row-styles">
+    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 body-height subtitle">City <i class="fa fa-building-o" aria-hidden="true"></i></div>
+    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 body-height">{{customer.mainAddress.city}}</div>
+    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 body-height"
+         [class.different-field]="customer.mainAddress.city != customer.lastAddressVerification.newAddress.city">
+      {{customer.lastAddressVerification.newAddress.city}}
+    </div>
+  </div>
+  <div class="col-lg-12 row-styles">
+    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 body-height subtitle">State code <i class="fa fa-flag-o" aria-hidden="true"></i></div>
+    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 body-height">{{customer.mainAddress.stateCode}}</div>
+    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 body-height"
+         [class.different-field]="customer.mainAddress.stateCode != customer.lastAddressVerification.newAddress.stateCode">
+      {{customer.lastAddressVerification.newAddress.stateCode}}
+    </div>
+  </div>
+  <div class="col-lg-12 row-styles">
+    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 body-height subtitle">Postal code <i class="fas fa-home"></i></div>
+    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 body-height">{{customer.mainAddress.postalCode}}</div>
+    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 body-height"
+         [class.different-field]="customer.mainAddress.postalCode != customer.lastAddressVerification.newAddress.postalCode">
+      {{customer.lastAddressVerification.newAddress.postalCode}}
+    </div>
+  </div>
+  <div class="col-lg-12 row-styles">
+    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 body-height subtitle">Note <i class="fa fa-sticky-note-o" aria-hidden="true"></i></div>
+    <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8 body-height">
+      <span>{{customer.lastAddressVerification.note}}</span>
+    </div>
+  </div>
+  <div class="col-lg-12 row-styles">
+    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 body-height subtitle">Date <i class="fa fa-calendar" aria-hidden="true"></i></div>
+    <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8 body-height">
+      <span>{{customer.lastAddressVerification.createdDate | coinDateTransform}}</span>
+    </div>
+  </div>
+</div>

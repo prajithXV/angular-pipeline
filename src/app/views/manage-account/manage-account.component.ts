@@ -85,6 +85,7 @@ export const closeStatusCode = "CLOSED";
 })
 export class ManageAccountComponent implements OnInit, OnDestroy, AfterViewInit {
   @ViewChild('newCall') private _newCalliBox: IboxtoolsComponent;
+  @ViewChild('customerData') private _customerData: IboxtoolsComponent;
   @ViewChild(NewCallRecordComponent) private _newCallComponent: NewCallRecordComponent;
 
   @ViewChild('tabSetAccount') private _tsAccount: NgbTabset;
@@ -112,6 +113,7 @@ export class ManageAccountComponent implements OnInit, OnDestroy, AfterViewInit 
   searchingCalls: boolean = true;
   searchingCoborrowers: boolean = false;
   searchingAccountDepInfo: boolean = false;
+  loadingCustomerData: boolean = true;
 
   private isAutoDial: boolean = false;
   private phoneUsed: Phone = null;
@@ -215,6 +217,7 @@ export class ManageAccountComponent implements OnInit, OnDestroy, AfterViewInit 
       this.searchingTodayContacts = true;
       this.searchingAccountDepInfo = true;
       this.searchingCallNotes = true;
+      this.loadingCustomerData = true;
 
       // If an incoming call is in progress, select IC in nextcall
       let call = this._globalStateService.currentCall;
@@ -296,6 +299,10 @@ export class ManageAccountComponent implements OnInit, OnDestroy, AfterViewInit 
 
               if (this.account.customer && this.account.customer.coBorrowers) {
                 this.searchingCoborrowers = false;
+              }
+
+              if (this.account.customer && this.account.customer.mainAddress) {
+                this.loadingCustomerData = false;
               }
 
               if (!this.searchingCustomer && !this.additionalInfoSearched) {
@@ -464,7 +471,8 @@ export class ManageAccountComponent implements OnInit, OnDestroy, AfterViewInit 
     if (this._newCallComponent) {
       this._newCallComponent.resetForm(this.isIncomingCall);
     }
-
+    // Initially closed
+    this._customerData.close();
 
     // this.setCurrentTab(event);
     this.cdRef.detectChanges();
@@ -684,7 +692,6 @@ export class ManageAccountComponent implements OnInit, OnDestroy, AfterViewInit 
         case Hotkeys.ctAlerts.code:
           this._tsContacts.select("contactsAlerts");
           break;
-
         case Hotkeys.toggleNewCall.code:
           if (this._newCalliBox.isOpen) {
             this.closeNewCall();
@@ -702,5 +709,17 @@ export class ManageAccountComponent implements OnInit, OnDestroy, AfterViewInit 
     }
   }
 
+  showNotValidVerification() {
+    return !this.loadingCustomerData && ((!this.account.customer.hasValidAddressVerification() && !this.account.customer.addressIsModifying()) ||
+      (!this.account.customer.hasValidPhoneVerification() && !this.account.customer.phoneIsModifying()) ||
+      (!this.account.customer.hasValidEmailVerification() && !this.account.customer.emailIsModifying()));
+  }
+
+  showNeedsVerification() {
+    return !this.loadingCustomerData && !this.showNotValidVerification() && (
+      (this.account.customer.addressIsModifying() && this.account.customer.addressesAreEqual()) ||
+      (this.account.customer.phoneIsModifying() && this.account.customer.phonesAreEqual()) ||
+      (this.account.customer.emailIsModifying() && this.account.customer.emailsAreEqual()));
+  }
 
 }

@@ -77,20 +77,9 @@ describe('CustomerDetailComponent', () => {
     fixture.detectChanges();
   }
 
-  function checkModal(isOpen: boolean){
-    expect(component.isOpen).toEqual(isOpen);
-
-  }
-
   function checkConsent(hasConsent: boolean){
     expect(component.customer.hasConsent).toEqual(hasConsent);
     expect(component.customer.hasConsent).toEqual(component.model.hasConsent);
-
-  }
-  function callsToFunctions(hasConsent: boolean){
-    component.changeConsent(component.model, hasConsent, "");
-    tick();
-    fixture.detectChanges();
   }
 
   function checkDataService(spy: any, hasConsent: boolean){
@@ -103,7 +92,6 @@ describe('CustomerDetailComponent', () => {
 
   }
 
-
   it('open modal consent', () => {
 
     injectSpy(DataService, "addCustomerConsent", 200, true);
@@ -111,36 +99,20 @@ describe('CustomerDetailComponent', () => {
 
     setValues(dataServiceMock.account8.customer, true);
 
-    //init: not open
-    checkModal(false);
-
     onClickEdit();
-
-    //when click: open
-    checkModal(true);
-
   });
 
 
   it('add customer denied consent: Success', fakeAsync(() => {
-
     //data
     let spy = injectSpy(DataService, "addCustomerConsent", 200,true);
     let spy2 = injectSpy(UserFeedbackService, "handleSuccess", 200, true);
 
     setValues(dataServiceMock.account8.customer, true);
 
-    checkModal(false);
     checkConsent(true);
 
     onClickEdit();
-
-    //modal open
-    checkModal(true);
-
-
-    //function calls
-    callsToFunctions(false);
 
     //arguments not null
     checkDataService(spy, false);
@@ -150,14 +122,10 @@ describe('CustomerDetailComponent', () => {
 
     //data consent changes
     checkConsent(false);
-
   }));
 
 
   it('add customer agreed consent: Success', fakeAsync(() => {
-
-    //data
-
     //data
     let spy = injectSpy(DataService, "addCustomerConsent", 200, true);
     let spy2 = injectSpy(UserFeedbackService, "handleSuccess", 200, true);
@@ -165,16 +133,9 @@ describe('CustomerDetailComponent', () => {
     setValues(dataServiceMock.account8.customer, false, false);
 
     //init not open, consent false
-    checkModal(false);
     checkConsent(false);
 
     onClickEdit();
-
-    //modal open
-    checkModal(true);
-
-    //function calls
-    callsToFunctions(true);
 
     //arguments not null
     checkDataService(spy, true);
@@ -184,13 +145,10 @@ describe('CustomerDetailComponent', () => {
 
     //consent changes
     checkConsent(true);
-
   }));
 
 
   it('add customer denied consent: Error', fakeAsync(() => {
-
-
     //data
     let spy = injectSpy(DataService, "addCustomerConsent", 400, false);
     let spy2 = injectSpy(UserFeedbackService, "handleError", 200, true);
@@ -198,18 +156,10 @@ describe('CustomerDetailComponent', () => {
     setValues(dataServiceMock.account8.customer, true);
 
     //modal init not open and consent true
-    checkModal(false);
     checkConsent(true);
     onClickEdit();
 
-    //modal open
-    checkModal(true);
-
-    //function calls
-    callsToFunctions(false);
-
     //arguments not null
-
     checkDataService(spy, false);
 
     //not resolve the promise
@@ -217,13 +167,10 @@ describe('CustomerDetailComponent', () => {
 
     //consent changes (these changes are doing before resolve the promise)
     checkConsent(false);
-
-
   }));
 
 
   it('add customer agreed consent: Error', fakeAsync(() => {
-
     //data
     let spy = injectSpy(DataService, "addCustomerConsent", 400, false);
     let spy2 = injectSpy(UserFeedbackService, "handleError", 200, true);
@@ -231,16 +178,9 @@ describe('CustomerDetailComponent', () => {
     setValues(dataServiceMock.account8.customer, false, false);
 
     //modal init not open and consent false
-    checkModal(false);
     checkConsent(false);
 
     onClickEdit();
-
-    //modal open
-    checkModal(true);
-
-    //function calls
-    callsToFunctions(true);
 
     checkDataService(spy, true);
 
@@ -249,7 +189,6 @@ describe('CustomerDetailComponent', () => {
 
     //consent changes (these changes are doing before resolve the promise)
     checkConsent(true);
-
   }));
 
 

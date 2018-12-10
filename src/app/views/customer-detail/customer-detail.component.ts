@@ -2,12 +2,10 @@ import {Component, EventEmitter, Input, OnInit, Output, ViewChild} from '@angula
 import {Customer} from "../../models/customer";
 import {Phone} from "../../models/phone";
 import {DataService} from "../../services/data.service";
-import {GlobalStateService} from "../../services/global-state.service";
 import {MakeCallEvent} from "../manage-account/manage-account.component";
-import {ModalDismissReasons, NgbModal, NgbPopoverConfig} from "@ng-bootstrap/ng-bootstrap";
 import {CustomerConsent} from "../../models/customer-consent";
-import {UserFeedbackService} from "../../services/user-feedback.service";
 import {CoinConstants} from "../../services/coin-constants";
+import {AutodialConsentModalComponent} from "../autodial-consent-modal/autodial-consent-modal.component";
 
 @Component({
   selector: 'customer-detail',
@@ -22,21 +20,19 @@ export class CustomerDetailComponent implements OnInit {
   @Input() searchingAccountDepInfo: boolean;
   @Output() onCall = new EventEmitter<MakeCallEvent>();
 
-  private closeResult: string;
-  private waitingResponse: boolean = false;
-  private isModalOpen: boolean = false;
+  waitingResponse: boolean = false;
 
   model: CustomerConsent = new CustomerConsent();
   customerConsents: CustomerConsent[];
   customerConsentsFilter: CustomerConsent[];
 
-  constructor(private modalService: NgbModal, private _dataService: DataService, private _globalStateService: GlobalStateService,
-              private _userFeedbackService: UserFeedbackService) { }
+  @ViewChild('autodialModal') private _autodialModal: AutodialConsentModalComponent;
+
+  constructor(private _dataService: DataService) { }
 
   ngOnInit() {
 
   }
-
 
   ngOnChanges(changes){
     if(changes.customer){
@@ -50,7 +46,6 @@ export class CustomerDetailComponent implements OnInit {
     event.isCoBorrower = false;
     this.onCall.emit(event);
   }
-
 
   //mostrar i info
   private consentsForNumber(phoneNr: string): CustomerConsent[] {
@@ -98,28 +93,6 @@ export class CustomerDetailComponent implements OnInit {
     return phone.callsMadeToday >= CoinConstants.maxCallsMade;
   }
 
-  //calls to addCustomerConsent and sets the value of the model (true/false) consent, notes.
-  changeConsent(model: CustomerConsent, consent: boolean, number: string){
-    model.hasConsent = consent;
-    model.phoneNumber = number;
-
-    this.customer.hasConsent = consent;
-
-    this._dataService.addCustomerConsent(this.customer, model, this._globalStateService.loggedAgent).then(()=>{
-      this.refreshCustomerConsents();
-      this._userFeedbackService.handleSuccess("New customer consent added");
-
-    }).catch(err=>{
-      this._userFeedbackService.handleError("Error adding new customer consent");
-      console.log(err);
-    })
-  }
-
-  //refresh customers when click on changeConsent (Grant/Revoke) button
-  refreshCustomerConsents(){
-    this.loadCustomerConsents();
-  }
-
   loadCustomerConsents(){
     this.waitingResponse = true;
     this.customerConsents = [];
@@ -134,34 +107,7 @@ export class CustomerDetailComponent implements OnInit {
     })
   }
 
-
-  openModal(content) {
-    this.isModalOpen = true;
-    this.modalService.open(content).result.then((result) => {
-      this.closeResult = `Closed with: ${result}`;
-      this.isModalOpen = false;
-    }, (reason) => {
-      this.closeResult = `Dismissed ${CustomerDetailComponent.getDismissReason(reason)}`;
-      this.isModalOpen = false;
-    })
+  openAutodialModal(phone: Phone) {
+    this._autodialModal.open(phone);
   }
-
-  get isOpen():boolean {
-    return this.isModalOpen;
-  }
-
-  set isOpen(value:boolean){
-    this.isModalOpen = value;
-  }
-
-  static getDismissReason(reason: any): string {
-    if (reason === ModalDismissReasons.ESC) {
-      return 'by pressing ESC';
-    } else if (reason === ModalDismissReasons.BACKDROP_CLICK) {
-      return 'by clicking on a backdrop';
-    } else {
-      return `with: ${reason}`;
-    }
-  }
-
 }
