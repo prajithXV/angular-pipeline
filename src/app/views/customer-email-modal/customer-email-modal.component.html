@@ -1,21 +1,23 @@
 <div class="row">
-  <div class="header">
+  <div class="header text-right">
     <label class="modal-title title text-danger" *ngIf="customer.needsEmailVerification() && customer.lastEmailVerification">
-      Customer eMails were last verified on {{customer.lastEmailVerification.createdDate | coinDateTransform}} and need a new verification.
+      Last verification: {{customer.lastEmailVerification.createdDate | coinDateTransform}}. New verification needed.
     </label>
     <label class="modal-title title text-danger" *ngIf="customer.needsEmailVerification() && !customer.lastEmailVerification">
-      Customer eMails have never been verified and need a verification.
+      Not verified.
     </label>
     <label class="modal-title title orange" *ngIf="isValidationOrigin()">
       Customer eMails modifications have been applied and need a verification.
     </label>
     <label class="modal-title title orange" *ngIf="isDiscardOrigin()">
-      Customer eMails modifications are in progress...
+      Modification in progress.
     </label>
-    <label class="modal-title title" *ngIf="customer.hasValidEmailVerification()">
-      Customer eMails were correctly verified on {{customer.lastEmailVerification.createdDate | coinDateTransform}}.
+    <label class="modal-title title text-info" *ngIf="customer.hasValidEmailVerification()">
+      Last verification: {{customer.lastEmailVerification.createdDate | coinDateTransform}}.
     </label>
   </div>
+</div>
+<div class="row">
   <div class="modal-body">
     <label *ngIf="!customerHasEmails()">
       Customer does not have eMails.
@@ -127,9 +129,9 @@
 
   <confirmation-modal
     #confirmationModal
-    [title]="'Discard emails modifications'"
-    [confirmationText]="'Are you sure you want to discard the emails modifications?'"
-    [buttonText]="'Discard emails'"
+    title="Discard email modification"
+    confirmationText="Are you sure you want to discard the email modification?"
+    buttonText="Discard"
     (buttonFunction)="discardModification()"
   ></confirmation-modal>
 </div>

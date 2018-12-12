@@ -1,23 +1,24 @@
 <div class="row">
-  <div class="header">
+  <div class="header text-right">
     <label class="modal-title title text-danger" *ngIf="customer.needsAddressVerification() && customer.lastAddressVerification">
-      Customer address was last verified on {{customer.lastAddressVerification.createdDate | coinDateTransform}} and needs a new verification.
+      Last verification: {{customer.lastAddressVerification.createdDate | coinDateTransform}}. New verification needed.
     </label>
     <label class="modal-title title text-danger" *ngIf="customer.needsAddressVerification() && !customer.lastAddressVerification">
-      Customer address has never been verified and needs a verification.
+      Not verified.
     </label>
     <label class="modal-title title orange" *ngIf="isValidationOrigin()">
       Customer address modifications have been applied and need a verification.
     </label>
     <label class="modal-title title orange" *ngIf="isDiscardOrigin()">
-      Customer address modifications are in progress...
+      Modification in progress.
     </label>
-    <label class="modal-title title" *ngIf="customer.hasValidAddressVerification()">
-      Customer address was correctly verified on {{customer.lastAddressVerification.createdDate | coinDateTransform}}.
+    <label class="modal-title title text-info" *ngIf="customer.hasValidAddressVerification()">
+      Last verification: {{customer.lastAddressVerification.createdDate | coinDateTransform}}.
     </label>
   </div>
+</div>
+<div class="row">
   <div class="modal-body">
-
     <!-- Modal when customer address needs verification and fields can be modified -->
     <div class="form-group data-container" *ngIf="customer.needsAddressVerification() || customer.hasValidAddressVerification()">
       <div class="col-lg-12 no-padding row-container">
@@ -89,9 +90,9 @@
 
   <confirmation-modal
     #confirmationModal
-    [title]="'Discard address modifications'"
-    [confirmationText]="'Are you sure you want to discard the address modifications?'"
-    [buttonText]="'Discard address'"
+    title="Discard address modification"
+    confirmationText="Are you sure you want to discard the address modification?"
+    buttonText="Discard"
     (buttonFunction)="discardModification()"
   ></confirmation-modal>
 </div>

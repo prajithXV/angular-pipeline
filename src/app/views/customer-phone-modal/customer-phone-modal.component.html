@@ -1,21 +1,23 @@
 <div class="row">
-  <div class="header">
+  <div class="header text-right">
     <label class="modal-title title text-danger" *ngIf="customer.needsPhoneVerification() && customer.lastPhoneVerification">
-      Customer phones were last verified on {{customer.lastPhoneVerification.createdDate | coinDateTransform}} and need a new verification.
+      Last verification: {{customer.lastPhoneVerification.createdDate | coinDateTransform}}. New verification needed.
     </label>
     <label class="modal-title title text-danger" *ngIf="customer.needsPhoneVerification() && !customer.lastPhoneVerification">
-      Customer phones have never been verified and need a verification.
+      Not verified.
     </label>
     <label class="modal-title title orange" *ngIf="isValidationOrigin()">
       Customer phones modifications have been applied and need a verification.
     </label>
     <label class="modal-title title orange" *ngIf="isDiscardOrigin()">
-      Customer phones modifications are in progress...
+      Modification in progress.
     </label>
-    <label class="modal-title title" *ngIf="customer.hasValidPhoneVerification()">
-      Customer phones were correctly verified on {{customer.lastPhoneVerification.createdDate | coinDateTransform}}.
+    <label class="modal-title title text-info" *ngIf="customer.hasValidPhoneVerification()">
+      Last verification: {{customer.lastPhoneVerification.createdDate | coinDateTransform}}.
     </label>
   </div>
+</div>
+<div class="row">
   <div class="modal-body">
     <label class="text-danger" *ngIf="!customerHasPhones()" style="padding-bottom: 10px;">
       Customer does not have phones, but must have at least one.
@@ -162,9 +164,9 @@
 
   <confirmation-modal
     #confirmationModal
-    [title]="'Discard phones modifications'"
-    [confirmationText]="'Are you sure you want to discard the phones modifications?'"
-    [buttonText]="'Discard phones'"
+    title="Discard phone modification"
+    confirmationText="Are you sure you want to discard the phone modification?"
+    buttonText="Discard"
     (buttonFunction)="discardModification()"
   ></confirmation-modal>
 </div>
