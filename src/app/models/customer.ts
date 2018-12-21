@@ -71,8 +71,8 @@ export class Customer {
     this.coBorrowers = coBorrowers;
     this.birthDate = birthDate;
 
-    this.emails = emailList ? emailList : [];
-    this.phones = phoneList ? phoneList : [];
+    this.emails = emailList;
+    this.phones = phoneList;
 
   }
 
@@ -211,6 +211,10 @@ export class Customer {
     this._emailList.push(email);
   }
 
+  setEmptyeMails() {
+    this._emailList = [];
+  }
+
   get phones(): Phone[] {
     return this._phoneList;
   }
@@ -224,6 +228,10 @@ export class Customer {
       this._phoneList = [];
     }
     this._phoneList.push(email);
+  }
+
+  setEmptyPhones() {
+    this._phoneList = [];
   }
 
   get accountNumber(): string {

@@ -86,18 +86,22 @@ export class BackendModelConversorService {
 
     cust.mainAddress = BackendModelConversorService.address2Address(src.address);
 
-    if (src.emailLst) {
+    if (src.emailLst && src.emailLst.length > 0) {
       for (let m of src.emailLst) {
         if (m) {
           cust.addEmail(m);
         }
       }
+    } else {
+      cust.setEmptyeMails();
     }
     cust.cifNo = src.cifNo;
-    if (src.phoneLst) {
+    if (src.phoneLst && src.phoneLst.length > 0) {
       for (let psrc of src.phoneLst) {
         cust.addPhone(BackendModelConversorService.phone2Phone(psrc));
       }
+    } else {
+      cust.setEmptyPhones();
     }
     cust.phoneLineType = src.phoneLineType;
     cust.languageIndicator = src.languageIndicator;
