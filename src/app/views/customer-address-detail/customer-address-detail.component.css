@@ -1,0 +1,42 @@
+.different-field {
+  color: #ED5565 !important;
+}
+
+.title {
+  height:20px;
+  margin-bottom: 15px;
+  font-weight: bold;
+  /*background-color: #373738;*/
+  color: black;
+  padding-bottom: 20px;
+  padding-top: 5px;
+  padding-left: 0;
+  padding-right: 0;
+}
+
+.title-height {
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+
+.body-height {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: initial;
+}
+
+.subtitle {
+  text-align: right;
+  font-weight: bold;
+}
+
+.table-decoration{
+  border-top: 1px solid #e7eaec;
+}
+
+.row-styles {
+  padding-top: 10px;
+  color: #676a6c;
+  display: flex;
+  align-items: center;
+}

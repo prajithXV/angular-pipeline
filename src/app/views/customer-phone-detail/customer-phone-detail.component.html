@@ -1,0 +1,122 @@
+<div style="overflow:auto">
+  <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 title text-left">
+    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 title-height">Current phones</div>
+    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 title-height" style="padding-left: 4px">New phones</div>
+  </div>
+  <!-- Equal phones -->
+  <div class="col-lg-12 row-styles" *ngFor="let phone of equalPhones; let idx = index;"
+       [class.table-decoration]="idx == 0" [class.row-format]="idx % 2 == 0">
+    <div class="col-lg-12 no-padding body-height">
+      <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 phone-type">
+        <div class="col-lg-10 col-md-10 col-sm-10 col-xs-10">
+          <label style="white-space: normal; margin-bottom: 0">{{ phone.current.type }}</label>
+        </div>
+        <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 line-type text-right">
+          <i *ngIf="phone.current.lineType != 'P'" class="fa fa-mobile-phone" title="Cellular"></i>
+          <i *ngIf="phone.current.lineType == 'P'" class="fa fa-phone" title="Landline"></i>
+        </div>
+      </div>
+      <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 body-height phone-type">
+        <div class="col-lg-10 col-md-10 col-sm-10 col-xs-10">
+          <label class="font-normal body-height" style="white-space: normal; margin-bottom: 0"
+                 [class.different-field]="phone.current.type != phone.newest.type">
+            {{ phone.newest.type }}
+          </label>
+        </div>
+        <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 line-type text-right"
+             [class.different-field]="phone.current.lineType != phone.newest.lineType">
+          <i *ngIf="phone.newest.lineType != 'P'" class="fa fa-mobile-phone" title="Cellular"></i>
+          <i *ngIf="phone.newest.lineType == 'P'" class="fa fa-phone" title="Landline"></i>
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-12 no-padding body-height">
+      <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6" style="padding-right: 5px;">
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 no-padding text-right">
+          <label>{{phone.current | telephoneNumber }}</label>
+        </div>
+      </div>
+      <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 phone-type">
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 no-padding-right"
+             [class.different-field]="phone.current.number != phone.newest.number">
+          <label class="font-normal">{{phone.newest | telephoneNumber }}</label>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Added phones -->
+  <div class="col-lg-12 row-styles" *ngFor="let phone of newPhones; let idx = index;"
+       [class.table-decoration]="equalPhones.length == 0 && idx == 0"
+       [class.row-format]="(equalPhones.length + idx) % 2 == 0">
+    <div class="col-lg-12 no-padding body-height">
+      <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 phone-type"></div>
+      <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 body-height phone-type">
+        <div class="col-lg-10 col-md-10 col-sm-10 col-xs-10">
+          <label class="font-normal body-height different-field" style="white-space: normal; margin-bottom: 0">
+            {{ phone.type }}
+          </label>
+        </div>
+        <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 line-type text-right different-field">
+          <i *ngIf="phone.lineType != 'P'" class="fa fa-mobile-phone" title="Cellular"></i>
+          <i *ngIf="phone.lineType == 'P'" class="fa fa-phone" title="Landline"></i>
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-12 no-padding body-height">
+      <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6" style="padding-right: 5px;">
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 no-padding text-right new-phone-txt">
+          <label>New phone</label>
+        </div>
+      </div>
+      <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 phone-type">
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 no-padding-right different-field">
+          <label class="font-normal">{{phone | telephoneNumber }}</label>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Deleted phones -->
+  <div class="col-lg-12 row-styles" *ngFor="let phone of obsoletePhones; let idx = index;"
+       [class.table-decoration]="equalPhones.length == 0 && newPhones.length == 0 && idx == 0"
+       [class.row-format]="(equalPhones.length + newPhones.length + idx) % 2 == 0">
+    <div class="col-lg-12 no-padding body-height">
+      <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 phone-type">
+        <div class="col-lg-10 col-md-10 col-sm-10 col-xs-10">
+          <label style="white-space: normal; margin-bottom: 0">{{ phone.type }}</label>
+        </div>
+        <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 line-type text-right">
+          <i *ngIf="phone.lineType != 'P'" class="fa fa-mobile-phone" title="Cellular"></i>
+          <i *ngIf="phone.lineType == 'P'" class="fa fa-phone" title="Landline"></i>
+        </div>
+      </div>
+      <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 body-height phone-type"></div>
+    </div>
+    <div class="col-lg-12 no-padding body-height">
+      <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6" style="padding-right: 5px;">
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 no-padding text-right">
+          <label>{{phone | telephoneNumber }}</label>
+        </div>
+      </div>
+      <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 phone-type">
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-danger text-center" style="font-style: italic">
+          <label>Deleted</label>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-lg-12 row-styles">
+    <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3 body-height subtitle">Note <i class="fa fa-sticky-note-o" aria-hidden="true"></i></div>
+    <div class="col-lg-9 col-md-9 col-sm-9 col-xs-9">
+      <span>{{customer.lastPhoneVerification.note}}</span>
+    </div>
+  </div>
+  <div class="col-lg-12 row-styles">
+    <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3 body-height subtitle">Date <i class="fa fa-calendar" aria-hidden="true"></i></div>
+    <div class="col-lg-9 col-md-9 col-sm-9 col-xs-9 body-height">
+      <span>{{customer.lastPhoneVerification.createdDate | coinDateTransform}}</span>
+    </div>
+  </div>
+</div>

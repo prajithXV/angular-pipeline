@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output, ViewChild} from '@angular/core';
 import {ProcessCaseTickler} from "../../models/process-case-tickler";
 import {ProcessCase} from "../../models/process-case";
 import {TicklerCaseModel} from "../../models/tickler-case-model";
@@ -6,10 +6,10 @@ import {TicklerType} from "../../models/tickler-types";
 import {DataService} from "../../services/data.service";
 import {TicklerAttribute} from "../../models/tickler-attribute";
 import {CampaignListAttribute} from "../../models/campaign-list-attribute";
-import {ModalDismissReasons, NgbModal} from "@ng-bootstrap/ng-bootstrap";
 import {UserFeedbackService} from "../../services/user-feedback.service";
 import {GlobalStateService} from "../../services/global-state.service";
 import {ROLE_STANDARD_CODES} from "../../models/role";
+import {ConfirmationModalComponent} from "../confirmation-modal/confirmation-modal.component";
 
 
 @Component({
@@ -34,7 +34,9 @@ export class ProcessCaseTicklerTableComponent implements OnInit {
   private closeResult: string;
   private waitingToRemove: number[] = [];
 
-  constructor(private _dataService:DataService, private modalService: NgbModal, private _userFeedbackService: UserFeedbackService,
+  @ViewChild('confirmationModal') private _confirmationModal: ConfirmationModalComponent;
+
+  constructor(private _dataService:DataService, private _userFeedbackService: UserFeedbackService,
               private _globalStateService: GlobalStateService) {
   }
 
@@ -45,15 +47,9 @@ export class ProcessCaseTicklerTableComponent implements OnInit {
     }
   }
 
-
   ngOnInit() {
     this.loadTicklerAttributes();
   }
-
-  //show or hide the table or the add case panel
-  // onNewTickler() {
-  //   this.isCreating = true;
-  // }
 
   onNewTicklerCancelled() {
     // this.isCreating = false;
@@ -73,8 +69,6 @@ export class ProcessCaseTicklerTableComponent implements OnInit {
       console.log("Error retrieving tickler attributes", err);
     })
   }
-
-
 
   private toogleAttributesDetail(processCaseTickler: ProcessCaseTickler) {
     this.ticklerAttributesVisibles["id" + processCaseTickler.id] = !this.ticklerAttributesVisibles["id" + processCaseTickler.id];
@@ -116,10 +110,8 @@ export class ProcessCaseTicklerTableComponent implements OnInit {
     }).catch(err => {
       this._userFeedbackService.handleError("Error removing case tickler", err);
       this.waitingToRemove.splice(index, 1);
-
     });
   }
-
 
   //return index when waiting to remove
   private isWaiting(caseTickler: ProcessCaseTickler) {
@@ -130,25 +122,9 @@ export class ProcessCaseTicklerTableComponent implements OnInit {
     return this._globalStateService.loggedAgentHasRoleCode(ROLE_STANDARD_CODES.TICKLER_DELETE)
   }
 
-
-  openModal(content) {
-    this.modalService.open(content).result.then((result) => {
-      this.closeResult = `Closed with: ${result}`;
-    }, (reason) => {
-      this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
-    })
+  openConfirmationModal(caseTickler: ProcessCaseTickler) {
+    this._confirmationModal.open(caseTickler);
   }
-
-  private getDismissReason(reason: any): string {
-    if (reason === ModalDismissReasons.ESC) {
-      return 'by pressing ESC';
-    } else if (reason === ModalDismissReasons.BACKDROP_CLICK) {
-      return 'by clicking on a backdrop';
-    } else {
-      return `with: ${reason}`;
-    }
-  }
-
 }
 
 

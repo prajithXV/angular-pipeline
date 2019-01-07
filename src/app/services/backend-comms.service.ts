@@ -44,7 +44,6 @@ import {BooleanToStringOrderPipe, BooleanToStringDuePipe} from "../pipes/boolean
 import {Code} from "../models/code";
 import {ConsentPipe, ConsentPipeCorrectConversion} from "../pipes/consent.pipe";
 import {TelephonePipe} from "../pipes/telephone.pipe";
-import {Phone} from "../models/phone";
 import {LovType} from "../models/lov-types";
 import {LovValue} from "../models/lov-values";
 import {MemoNote} from "../models/memo-note";
@@ -248,7 +247,15 @@ const urls = {
     pageNr: "PageNr",
     pageSize: "PageSize",
   },
-
+  addressVerification: {
+    url: "customer/address",
+  },
+  emailVerification: {
+    url: "customer/email",
+  },
+  phoneVerification: {
+    url: "customer/phone",
+  }
 };
 
 let ufs: UserFeedbackService = null;
@@ -2093,6 +2100,93 @@ export class BackendCommsService {
       .then(resp => {
         console.log(resp);
         return new Promise<boolean>((resolve) => resolve(true));
+      })
+      .catch(this.handleError);
+  }
+
+  addAddressVerification(cifId: string, streetAddr1: string, streetAddr2: string, streetAddr3: string, city: string, stateCode: string, postalCode: string,
+                         newStreetAddr1: string, newStreetAddr2: string, newStreetAddr3: string, newCity: string, newStateCode: string, newPostalCode: string,
+                         note: string, statusFlg: string, createdBy: string): Promise<number> {
+    let body = {
+      CifId: cifId,
+      StreetAddr1: streetAddr1,
+      StreetAddr2: streetAddr2,
+      StreetAddr3: streetAddr3,
+      City: city,
+      StateCode: stateCode,
+      PostalCode: postalCode,
+      NewStreetAddr1: newStreetAddr1,
+      NewStreetAddr2: newStreetAddr2,
+      NewStreetAddr3: newStreetAddr3,
+      NewCity: newCity,
+      NewStateCode: newStateCode,
+      NewPostalCode: newPostalCode,
+      Note: note,
+      StatusFlg: statusFlg,
+      CreatedBy: createdBy
+    };
+
+    console.log(body);
+    let options = {
+      headers: this.getHeaderWithAuth()
+    };
+    options.headers.set(urls.general.headers.content.key, urls.general.headers.content.value);
+
+    return this._http.post(BackendCommsService.getUrl(urls.addressVerification.url), body, options)
+      .toPromise()
+      .then(resp => {
+        console.log(resp);
+        return resp;
+      })
+      .catch(this.handleError);
+  }
+
+  addEmailVerification(cifId: string, email: string[], newEmail: string[], note: string, statusFlg: string, createdBy: string): Promise<number> {
+    let body = {
+      CifId: cifId,
+      Email: email,
+      NewEmail: newEmail,
+      Note: note,
+      StatusFlg: statusFlg,
+      CreatedBy: createdBy
+    };
+
+    console.log(body);
+    let options = {
+      headers: this.getHeaderWithAuth()
+    };
+    options.headers.set(urls.general.headers.content.key, urls.general.headers.content.value);
+
+    return this._http.post(BackendCommsService.getUrl(urls.emailVerification.url), body, options)
+      .toPromise()
+      .then(resp => {
+        console.log(resp);
+        return resp;
+      })
+      .catch(this.handleError);
+  }
+
+  addPhoneVerification(cifId: string, phone: Object[], newPhone: Object[], note: string, statusFlg: string, createdBy: string): Promise<number> {
+    let body = {
+      CifId: cifId,
+      Phone: phone,
+      NewPhone: newPhone,
+      Note: note,
+      StatusFlg: statusFlg,
+      CreatedBy: createdBy
+    };
+
+    console.log(body);
+    let options = {
+      headers: this.getHeaderWithAuth()
+    };
+    options.headers.set(urls.general.headers.content.key, urls.general.headers.content.value);
+
+    return this._http.post(BackendCommsService.getUrl(urls.phoneVerification.url), body, options)
+      .toPromise()
+      .then(resp => {
+        console.log(resp);
+        return resp;
       })
       .catch(this.handleError);
   }

@@ -4,7 +4,6 @@
   font-weight: bold;
   /*background: #4186b5;*/
   background: #ED5565;
-
 }
 
 div.ibox-tools{
@@ -28,8 +27,15 @@ div.ibox-tools i.fa{
   margin-right: 35px;
 }
 
-
 .red{
   color: #ED5565;
 }
 
+.padding-icon {
+  padding-left: 10px !important;
+  margin-right: 0 !important;
+}
+
+.size-icon {
+  font-size: 15px;
+}

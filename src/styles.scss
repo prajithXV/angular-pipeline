@@ -126,6 +126,19 @@ body:not(.fixed-sidebar):not(.canvas-menu).mini-navbar .nav li:hover > .nav-seco
   resize: none;
 }
 
+.modal-footer{
+  border-top: none !important;
+  padding-right: 30px;
+  padding-left: 30px;
+}
+
+.modal-header{
+  padding-left: 30px;
+}
+
+.text{
+  padding-top: 15px;
+}
 
 /***table disabled****/
 

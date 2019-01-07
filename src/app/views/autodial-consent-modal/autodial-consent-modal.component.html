@@ -1,0 +1,33 @@
+<ng-template #autodialModal let-c="close" let-d="dismiss">
+  <div class="modal-header">
+    <h4 class="modal-title">Autodial consent for phone number: <span class="text-success margin"> {{ph | telephoneNumber}}</span></h4>
+    <button type="button" class="close no-outline" aria-label="Close" [disabled]="isDisabled()" (click)="d('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <p>Did customer agree to give an autodial consent?</p>
+    <div class="form-group text">
+      <div>
+        <label class="control-label">Note</label>
+      </div>
+      <!--Notes-->
+      <textarea
+        [(ngModel)]="model.note"
+        class="form-control notes-form no-resize"
+        placeholder="Add note"
+        rows="3"
+        maxlength="250">
+      </textarea>
+    </div>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="pull-left btn btn-primary" [disabled]="isDisabled()" (click)="changeConsent(model, true, ph.number, c)">Customer agreed
+      <waiting-backend *ngIf="waitingConsentResponse"></waiting-backend>
+    </button>
+    <button type="button" class="pull-left btn btn-danger" [disabled]="isDisabled()" (click)="changeConsent(model, false, ph.number, c)">Customer denied
+      <waiting-backend *ngIf="waitingNoConsentResponse"></waiting-backend>
+    </button>
+    <button type="button" class="pull-right btn btn-outline-dark" [disabled]="isDisabled()" (click)="c('Close click')">Cancel</button>
+  </div>
+</ng-template>

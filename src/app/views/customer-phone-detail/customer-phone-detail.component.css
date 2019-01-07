@@ -1,0 +1,71 @@
+.different-field {
+  color: #ED5565 !important;
+}
+
+.title {
+  height:20px;
+  margin-bottom: 15px;
+  font-weight: bold;
+  /*background-color: #373738;*/
+  color: black;
+  padding-bottom: 20px;
+  padding-top: 5px;
+  padding-left: 0;
+  padding-right: 0;
+}
+
+.title-height {
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+
+.body-height {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.subtitle {
+  text-align: right;
+  font-weight: bold;
+}
+
+.table-decoration{
+  border-top: 1px solid #e7eaec;
+}
+
+.row-styles {
+  padding-top: 10px;
+  color: #676a6c;
+  align-items: center;
+}
+
+.row-format {
+  background-color: rgba(221, 221, 221, 0.28);
+  border-radius: 5px;
+}
+
+.phone-type {
+  padding-right: 5px;
+  display: flex;
+  align-items: center;
+}
+
+.line-type {
+  padding-right: 0;
+  vertical-align: middle;
+  display: inline-table;
+}
+
+.line-type i, .phone-type i {
+  font-size: 2em;
+}
+
+.no-padding-right {
+  padding-right: 0;
+}
+
+.new-phone-txt {
+  color: #18a689;
+  font-style: italic;
+}

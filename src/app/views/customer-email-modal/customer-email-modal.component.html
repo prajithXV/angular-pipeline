@@ -1,0 +1,137 @@
+<div class="row">
+  <div class="header text-right">
+    <label class="modal-title title text-danger" *ngIf="customer.needsEmailVerification() && customer.lastEmailVerification">
+      Last verification: {{customer.lastEmailVerification.createdDate | coinDateTransform}}. New verification needed.
+    </label>
+    <label class="modal-title title text-danger" *ngIf="customer.needsEmailVerification() && !customer.lastEmailVerification">
+      Not verified.
+    </label>
+    <label class="modal-title title orange" *ngIf="isValidationOrigin()">
+      Customer eMails modifications have been applied and need a verification.
+    </label>
+    <label class="modal-title title orange" *ngIf="isDiscardOrigin()">
+      Modification in progress.
+    </label>
+    <label class="modal-title title text-info" *ngIf="customer.hasValidEmailVerification()">
+      Last verification: {{customer.lastEmailVerification.createdDate | coinDateTransform}}.
+    </label>
+  </div>
+</div>
+<div class="row">
+  <div class="modal-body">
+    <label *ngIf="!customerHasEmails()">
+      Customer does not have eMails.
+    </label>
+    <!-- Modal when customer email needs verification and fields can be modified -->
+    <div class="form-group data-container" *ngIf="customer.needsEmailVerification() || customer.hasValidEmailVerification()">
+      <div class="col-lg-12 no-padding row-container" *ngFor="let email of customerEmails; let ind = index;">
+        <!-- Existing email that can be modifyed -->
+        <div *ngIf="email && !isNewEmail(ind)"
+             class="row-container" style="width: 100%; margin-right: 0">
+          <div class="col-lg-5 col-md-5 col-sm-5 col-xs-5 text-right">
+            <label>
+              <i class="far fa-envelope" aria-hidden="true"></i> :
+              <span>{{ customer.emails[ind] }}</span>
+            </label>
+          </div>
+          <div class="col-lg-5 col-md-5 col-sm-5 col-xs-5">
+            <input *ngIf="email && !email.isDeleted" type="text" [(ngModel)]="email.email" placeholder="eMail" class="form-control"
+                   [class.wrong-email]="!regExpEmail.test(email.email)">
+            <label *ngIf="!email || email.isDeleted" class="text-danger" style="font-style: italic">eMail deleted</label>
+          </div>
+          <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 no-padding" style="display: flex">
+            <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1">
+              <i *ngIf="email && isEmailDirty(ind) && !email.isDeleted" class="fa fa-undo text-danger option-icons" aria-hidden="true" (click)="restoreEmail(ind)"></i>
+            </div>
+            <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1">
+              <i *ngIf="email && !email.isDeleted" class="fas fa-trash-alt option-icons" aria-hidden="true" (click)="email.deleteEmail()"></i>
+              <i *ngIf="email && email.isDeleted" class="fa fa-undo text-danger option-icons" aria-hidden="true" (click)="restoreEmail(ind)"></i>
+            </div>
+          </div>
+        </div>
+        <!-- New email -->
+        <div *ngIf="email && isNewEmail(ind)" style="width: 100%;">
+          <div class="col-lg-12 no-padding row-container">
+            <div class="col-lg-5 col-md-5 col-sm-5 col-xs-5 text-right">
+              <label><i class="far fa-envelope" aria-hidden="true"></i> :
+                <span style="color: #18a689; font-style: italic">New email</span>
+              </label>
+            </div>
+            <div class="col-lg-5 col-md-5 col-sm-5 col-xs-5">
+              <input type="text" [(ngModel)]="email.email" placeholder="eMail" class="form-control"
+                     [class.wrong-email]="!regExpEmail.test(email.email)">
+            </div>
+            <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 no-padding" style="display: flex">
+              <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1"></div>
+              <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1">
+                <i class="fas fa-trash-alt option-icons" aria-hidden="true" (click)="removeNewEmail(ind)"></i>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- New email -->
+      <div class="col-lg-12 no-padding row-container" style="padding-right: 15px !important; height: auto">
+        <button class="new-field" [disabled]="isNewDisabled()" (click)="addNewEmailField()">Add eMail</button>
+      </div>
+
+      <!--Notes-->
+      <div class="col-lg-12 no-padding row-container" style="height: auto">
+        <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3 text-right"><label>Note <i class="fa fa-sticky-note-o" aria-hidden="true"></i> :</label></div>
+        <div class="col-lg-9 col-md-9 col-sm-9 col-xs-9">
+          <textarea
+            [(ngModel)]="verifiedEmail.note"
+            class="form-control notes-form no-resize"
+            placeholder="Add note"
+            rows="3"
+            maxlength="250">
+        </textarea>
+        </div>
+      </div>
+    </div>
+
+    <div class="form-group data-container" *ngIf="isComparisonModal()">
+      <customer-email-detail [customer]="customer"></customer-email-detail>
+    </div>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="pull-left btn btn-primary"
+            *ngIf="customer.needsEmailVerification()"
+            [disabled]="areEmailsDirty() || isDisabled() || !areEmailsInCorrectFormat()"
+            (click)="verifyJHEmail()">
+      <span *ngIf="customer.emails.length > 0">eMails are correct</span>
+      <span *ngIf="customer.emails.length == 0">Verify Customer has no eMails</span>
+      <waiting-backend *ngIf="waitingVerifyResponse"></waiting-backend>
+    </button>
+    <button type="button" class="pull-left btn btn-warning"
+            *ngIf="customer.needsEmailVerification() || customer.hasValidEmailVerification()"
+            [disabled]="!areEmailsDirty() || isDisabled() || !areEmailsInCorrectFormat()"
+            (click)="changeCustomerEmail()">
+      Change eMails
+      <waiting-backend *ngIf="waitingChangeResponse"></waiting-backend>
+    </button>
+    <button type="button" class="pull-left btn btn-primary"
+            *ngIf="isValidationOrigin()"
+            [disabled]="isDisabled()"
+            (click)="verifyJHEmail()">
+      JH eMails are correct
+      <waiting-backend *ngIf="waitingVerifyResponse"></waiting-backend>
+    </button>
+    <button type="button" class="pull-left btn btn-danger"
+            *ngIf="isDiscardOrigin()"
+            [disabled]="isDisabled()"
+            (click)="openConfirmationModal()">
+      Discard modification
+      <waiting-backend *ngIf="waitingDiscardResponse"></waiting-backend>
+    </button>
+  </div>
+
+  <confirmation-modal
+    #confirmationModal
+    title="Discard email modification"
+    confirmationText="Are you sure you want to discard the email modification?"
+    buttonText="Discard"
+    (buttonFunction)="discardModification()"
+  ></confirmation-modal>
+</div>

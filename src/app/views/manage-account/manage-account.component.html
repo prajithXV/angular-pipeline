@@ -232,6 +232,74 @@
 
     <div class="ibox">
       <div class="ibox-title">
+        <h5>Customer Data Verification</h5>
+        <i class="fas fa-exclamation-circle text-danger padding-icon size-icon"
+           *ngIf="showNotValidVerification()"></i>
+        <i class="fas fa-check-circle text-navy padding-icon size-icon"
+           *ngIf="showNeedsVerification()"></i>
+        <iboxtools #customerData></iboxtools>
+        <div *ngIf="loadingCustomerData" class="pull-right searchingContacts"><waiting-backend></waiting-backend> Loading...</div>
+      </div>
+      <div class="ibox-content">
+        <div class="row">
+          <div class="col-lg-12">
+            <ngb-tabset>
+              <ngb-tab>
+                <ng-template ngbTabTitle>
+                  <span [popover]="popBasic" triggers="">Address</span>
+                  <i class="fas fa-exclamation-circle text-danger padding-icon size-icon"
+                     *ngIf="!account?.customer?.hasValidAddressVerification() && !account?.customer?.addressIsModifying() && !loadingCustomerData"></i>
+                  <i class="fas fa-check-circle text-navy padding-icon size-icon"
+                     *ngIf="account?.customer?.addressIsModifying() && account?.customer?.addressesAreEqual() && !loadingCustomerData"></i>
+                  <i class="fas fa-clock text-warning padding-icon size-icon"
+                     *ngIf="account?.customer?.addressIsModifying() && !account?.customer?.addressesAreEqual() && !loadingCustomerData"></i>
+                  <waiting-backend class="padding-icon size-icon" *ngIf="loadingCustomerData"></waiting-backend>
+                </ng-template>
+                <ng-template ngbTabContent>
+                  <p></p>
+                  <customer-address-modal *ngIf="!loadingCustomerData" [customer]="account?.customer"></customer-address-modal>
+                </ng-template>
+              </ngb-tab>
+              <ngb-tab>
+                <ng-template ngbTabTitle>
+                  <span [popover]="popCollection" triggers="">Phone</span>
+                  <i class="fas fa-exclamation-circle text-danger padding-icon size-icon"
+                     *ngIf="!account?.customer?.hasValidPhoneVerification() && !account?.customer?.phoneIsModifying() && !loadingCustomerData"></i>
+                  <i class="fas fa-check-circle text-navy padding-icon size-icon"
+                     *ngIf="account?.customer?.phoneIsModifying() && account?.customer?.phonesAreEqual() && !loadingCustomerData"></i>
+                  <i class="fas fa-clock text-warning padding-icon size-icon"
+                     *ngIf="account?.customer?.phoneIsModifying() && !account?.customer?.phonesAreEqual() && !loadingCustomerData"></i>
+                  <waiting-backend class="padding-icon size-icon" *ngIf="loadingCustomerData"></waiting-backend>
+                </ng-template>
+                <ng-template ngbTabContent>
+                  <p></p>
+                  <customer-phone-modal *ngIf="!loadingCustomerData" [customer]="account?.customer"></customer-phone-modal>
+                </ng-template>
+              </ngb-tab>
+              <ngb-tab>
+                <ng-template ngbTabTitle>
+                  <span [popover]="popLoan" triggers="">eMail</span>
+                  <i class="fas fa-exclamation-circle text-danger padding-icon size-icon"
+                     *ngIf="!account?.customer?.hasValidEmailVerification() && !account?.customer?.emailIsModifying() && !loadingCustomerData"></i>
+                  <i class="fas fa-check-circle text-navy padding-icon size-icon"
+                     *ngIf="account?.customer?.emailIsModifying() && account?.customer?.emailsAreEqual() && !loadingCustomerData"></i>
+                  <i class="fas fa-clock text-warning padding-icon size-icon"
+                     *ngIf="account?.customer?.emailIsModifying() && !account?.customer?.emailsAreEqual() && !loadingCustomerData"></i>
+                  <waiting-backend class="padding-icon size-icon" *ngIf="loadingCustomerData"></waiting-backend>
+                </ng-template>
+                <ng-template ngbTabContent>
+                  <p></p>
+                  <customer-email-modal *ngIf="!loadingCustomerData" [customer]="account?.customer"></customer-email-modal>
+                </ng-template>
+              </ngb-tab>
+            </ngb-tabset>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="ibox">
+      <div class="ibox-title">
         <h5>Previous Contacts</h5>
         <iboxtools></iboxtools>
         <span *ngIf="!searchingTodayContacts" class="pull-right todayContacts" [class.red]="account?.customer?.todayContacts >= 6"> Attempts today:

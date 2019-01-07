@@ -1,16 +1,16 @@
 <!--header history-->
 <div *ngIf="!waitingResponse && customerConsents?.length >0" style="overflow: auto; max-height: 200px;">
-<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 title">
-<div class="col-lg-3 col-md-3 col-sm-3 col-xs-3 title-height">Consent</div>
-<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 title-height">Note</div>
-<div class="col-lg-3 col-md-3 col-sm-3 col-xs-3 title-height">Date</div>
-</div>
-<!--body history-->
-<div *ngFor="let c of customerConsents" class="col-lg-12 no-padding table-decoration">
-  <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3 body-height">{{c.hasConsent | consent}}</div>
-  <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 body-height">{{c.note}}</div>
-  <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3 body-height" title="{{c.createdDate | coinDateTransform}}">{{c.createdDate | coinDateTransform: "STD_DATE"}}</div>
-</div>
+  <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 title">
+    <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3 title-height">Consent</div>
+    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 title-height">Note</div>
+    <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3 title-height">Date</div>
+  </div>
+  <!--body history-->
+  <div *ngFor="let c of customerConsents" class="col-lg-12 no-padding table-decoration">
+    <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3 body-height">{{c.hasConsent | consent}}</div>
+    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 body-height">{{c.note}}</div>
+    <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3 body-height" title="{{c.createdDate | coinDateTransform}}">{{c.createdDate | coinDateTransform: "STD_DATE"}}</div>
+  </div>
 </div>
 
 <div *ngIf="waitingResponse" class="found-data text-center"><waiting-backend></waiting-backend> getting customer consents...</div>

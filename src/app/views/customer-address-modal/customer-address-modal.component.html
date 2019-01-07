@@ -1,0 +1,98 @@
+<div class="row">
+  <div class="header text-right">
+    <label class="modal-title title text-danger" *ngIf="customer.needsAddressVerification() && customer.lastAddressVerification">
+      Last verification: {{customer.lastAddressVerification.createdDate | coinDateTransform}}. New verification needed.
+    </label>
+    <label class="modal-title title text-danger" *ngIf="customer.needsAddressVerification() && !customer.lastAddressVerification">
+      Not verified.
+    </label>
+    <label class="modal-title title orange" *ngIf="isValidationOrigin()">
+      Customer address modifications have been applied and need a verification.
+    </label>
+    <label class="modal-title title orange" *ngIf="isDiscardOrigin()">
+      Modification in progress.
+    </label>
+    <label class="modal-title title text-info" *ngIf="customer.hasValidAddressVerification()">
+      Last verification: {{customer.lastAddressVerification.createdDate | coinDateTransform}}.
+    </label>
+  </div>
+</div>
+<div class="row">
+  <div class="modal-body">
+    <!-- Modal when customer address needs verification and fields can be modified -->
+    <div class="form-group data-container" *ngIf="customer.needsAddressVerification() || customer.hasValidAddressVerification()">
+      <div class="col-lg-12 no-padding row-container">
+        <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3 text-right"><label>Address <i class="fa fa-address-card-o" aria-hidden="true"></i> :</label></div>
+        <div class="col-lg-9 col-md-9 col-sm-9 col-xs-9"><input type="text" [(ngModel)]="customerAddresses.streetAddress1" placeholder="Address 1" class="form-control"></div>
+      </div>
+      <div class="col-lg-12 no-padding row-container">
+        <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3 text-right"><label><i class="fa fa-address-card-o" aria-hidden="true"></i> :</label></div>
+        <div class="col-lg-9 col-md-9 col-sm-9 col-xs-9"><input type="text" [(ngModel)]="customerAddresses.streetAddress2" placeholder="Address 2" class="form-control"></div>
+      </div>
+      <div class="col-lg-12 no-padding row-container">
+        <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3 text-right"><label><i class="fa fa-address-card-o" aria-hidden="true"></i> :</label></div>
+        <div class="col-lg-9 col-md-9 col-sm-9 col-xs-9"><input type="text" [(ngModel)]="customerAddresses.streetAddress3" placeholder="Address 3" class="form-control"></div>
+      </div>
+      <div class="col-lg-12 no-padding row-container">
+        <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3 text-right"><label>City <i class="fa fa-building-o" aria-hidden="true"></i> :</label></div>
+        <div class="col-lg-9 col-md-9 col-sm-9 col-xs-9"><input type="text" [(ngModel)]="customerAddresses.city" placeholder="City" class="form-control"></div>
+      </div>
+      <div class="col-lg-12 no-padding row-container">
+        <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3 text-right"><label>State code <i class="fa fa-flag-o" aria-hidden="true"></i> :</label></div>
+        <div class="col-lg-9 col-md-9 col-sm-9 col-xs-9"><input type="text" [(ngModel)]="customerAddresses.stateCode" placeholder="State code" class="form-control"></div>
+      </div>
+      <div class="col-lg-12 no-padding row-container">
+        <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3 text-right"><label>Postal code <i class="fas fa-home"></i> :</label></div>
+        <div class="col-lg-9 col-md-9 col-sm-9 col-xs-9"><input type="text" [(ngModel)]="customerAddresses.postalCode" placeholder="Postal code" class="form-control"></div>
+      </div>
+
+      <!--Notes-->
+      <div class="col-lg-12 no-padding row-container">
+        <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3 text-right"><label>Note <i class="fa fa-sticky-note-o" aria-hidden="true"></i> :</label></div>
+        <div class="col-lg-9 col-md-9 col-sm-9 col-xs-9">
+          <textarea
+            [(ngModel)]="verifiedAddress.note"
+            class="form-control notes-form no-resize"
+            placeholder="Add note"
+            rows="3"
+            maxlength="250">
+        </textarea>
+        </div>
+      </div>
+    </div>
+
+    <div class="form-group data-container" *ngIf="isComparisonModal()">
+      <customer-address-detail [customer]="customer"></customer-address-detail>
+    </div>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="pull-left btn btn-primary" *ngIf="customer.needsAddressVerification()"
+            [disabled]="customerAddresses.isDirty(originalAddress) || isDisabled()"
+            (click)="verifyJHAddress()">Address is correct
+      <waiting-backend *ngIf="waitingVerifyResponse"></waiting-backend>
+    </button>
+    <button type="button" class="pull-left btn btn-warning" *ngIf="customer.needsAddressVerification() || customer.hasValidAddressVerification()"
+            [disabled]="!customerAddresses.isDirty(originalAddress) || isDisabled()"
+            (click)="changeCustomerAddress()">Change address
+      <waiting-backend *ngIf="waitingChangeResponse"></waiting-backend>
+    </button>
+    <button type="button" class="pull-left btn btn-primary" *ngIf="isValidationOrigin()"
+            [disabled]="isDisabled()"
+            (click)="verifyJHAddress()">JH address is correct
+      <waiting-backend *ngIf="waitingVerifyResponse"></waiting-backend>
+    </button>
+    <button type="button" class="pull-left btn btn-danger" *ngIf="isDiscardOrigin()"
+            [disabled]="isDisabled()"
+            (click)="openConfirmationModal()">Discard modification
+      <waiting-backend *ngIf="waitingDiscardResponse"></waiting-backend>
+    </button>
+  </div>
+
+  <confirmation-modal
+    #confirmationModal
+    title="Discard address modification"
+    confirmationText="Are you sure you want to discard the address modification?"
+    buttonText="Discard"
+    (buttonFunction)="discardModification()"
+  ></confirmation-modal>
+</div>

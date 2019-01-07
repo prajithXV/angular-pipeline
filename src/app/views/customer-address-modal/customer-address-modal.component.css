@@ -1,0 +1,45 @@
+.row-container {
+  display: flex;
+  align-items: center;
+  margin: 10px 5px 5px 0;
+}
+
+.header {
+  margin: 0 30px;
+  padding-left: 0;
+}
+
+.title {
+  padding-top: 10px;
+}
+
+.data-container {
+  overflow: hidden;
+}
+
+.equal-text {
+  padding: 5px 0 0 0;
+}
+
+.equal-text.equal {
+  color: #18a689;
+}
+
+.equal-text.different {
+  color: #ED5565;
+}
+
+.orange {
+  color: #f8ac59;
+}
+
+.form-control {
+  width: 100%;
+}
+
+.btn-primary.disabled, .btn-primary.disabled:hover, .btn-primary.disabled:focus, .btn-primary.disabled:active, .btn-primary.disabled.active, .btn-primary[disabled], .btn-primary[disabled]:hover, .btn-primary[disabled]:focus, .btn-primary[disabled]:active, .btn-primary.active[disabled], fieldset[disabled] .btn-primary, fieldset[disabled] .btn-primary:hover, fieldset[disabled] .btn-primary:focus, fieldset[disabled] .btn-primary:active, fieldset[disabled] .btn-primary.active,
+.btn-warning.disabled, .btn-warning.disabled:hover, .btn-warning.disabled:focus, .btn-warning.disabled:active, .btn-warning.disabled.active, .btn-warning[disabled], .btn-warning[disabled]:hover, .btn-warning[disabled]:focus, .btn-warning[disabled]:active, .btn-warning.active[disabled], fieldset[disabled] .btn-warning, fieldset[disabled] .btn-warning:hover, fieldset[disabled] .btn-warning:focus, fieldset[disabled] .btn-warning:active, fieldset[disabled] .btn-warning.active {
+  color: inherit;
+  border: 1px solid #d2d2d2;
+  background-color: #ddd;
+}
