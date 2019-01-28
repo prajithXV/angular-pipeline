@@ -5,9 +5,7 @@ import {FormsModule} from "@angular/forms";
 import {WaitingBackendComponent} from "../waiting-backend/waiting-backend.component";
 import {DataService} from "../../services/data.service";
 import {BackendCommsService} from "../../services/backend-comms.service";
-import {HttpModule} from "@angular/http";
 import {UserFeedbackService} from "../../services/user-feedback.service";
-import {ToastOptions, ToastsManager} from "ng2-toastr";
 import {DatePipe} from "@angular/common";
 import {BooleanToStringPipe} from "../../pipes/boolean-to-string.pipe";
 import {CiscoCommsService} from "../../services/cisco-comms.service";
@@ -15,6 +13,9 @@ import {BooleanToStringDuePipe, BooleanToStringOrderPipe} from "../../pipes/bool
 import {ConsentPipeCorrectConversion} from "../../pipes/consent.pipe";
 import {TelephonePipe} from "../../pipes/telephone.pipe";
 import {FilterCodeToNamePipe} from "../../pipes/filter-code-to-name.pipe";
+import {HttpClientModule} from "@angular/common/http";
+import {HttpClientTestingModule} from "@angular/common/http/testing";
+import {ToastrModule} from "ngx-toastr";
 
 describe('SearchCaseCriteriaComponent', () => {
   let component: SearchCaseCriteriaComponent;
@@ -22,9 +23,9 @@ describe('SearchCaseCriteriaComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      imports: [ FormsModule, HttpModule ],
+      imports: [ FormsModule, HttpClientModule, HttpClientTestingModule, ToastrModule.forRoot() ],
       declarations: [ SearchCaseCriteriaComponent, WaitingBackendComponent, FilterCodeToNamePipe ],
-      providers: [ DataService, BackendCommsService, UserFeedbackService, ToastsManager, ToastOptions, DatePipe, BooleanToStringPipe,
+      providers: [ DataService, BackendCommsService, UserFeedbackService, DatePipe, BooleanToStringPipe,
                    CiscoCommsService, BooleanToStringOrderPipe, BooleanToStringDuePipe, ConsentPipeCorrectConversion, TelephonePipe ]
     })
     .compileComponents();

@@ -6,9 +6,7 @@ import {PaginatorComponent} from "../paginator/paginator.component";
 import {WaitingBackendComponent} from "../waiting-backend/waiting-backend.component";
 import {DataService} from "../../services/data.service";
 import {BackendCommsService} from "../../services/backend-comms.service";
-import {HttpModule} from "@angular/http";
 import {UserFeedbackService} from "../../services/user-feedback.service";
-import {ToastOptions, ToastsManager} from "ng2-toastr";
 import {DatePipe} from "@angular/common";
 import {CiscoCommsService} from "../../services/cisco-comms.service";
 import {CoinDateTransformPipe} from "../../pipes/coin-date-transform.pipe";
@@ -19,6 +17,9 @@ import {BooleanToStringDuePipe, BooleanToStringOrderPipe} from "../../pipes/bool
 import {ConsentPipeCorrectConversion} from "../../pipes/consent.pipe";
 import {TelephonePipe} from "../../pipes/telephone.pipe";
 import {IboxtoolsComponent} from "../../components/common/iboxtools/iboxtools.component";
+import {HttpClientModule} from "@angular/common/http";
+import {HttpClientTestingModule} from "@angular/common/http/testing";
+import {ToastrModule, ToastrService} from "ngx-toastr";
 
 describe('ManageCampaignListRecordsComponent', () => {
   let component: ManageCampaignListRecordsComponent;
@@ -26,10 +27,10 @@ describe('ManageCampaignListRecordsComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      imports: [ FormsModule, HttpModule ],
+      imports: [ FormsModule, HttpClientModule, HttpClientTestingModule, ToastrModule.forRoot() ],
       declarations: [ ManageCampaignListRecordsComponent, PaginatorComponent, CoinDateTransformPipe, WaitingBackendComponent, HeaderSorterComponent,
                       OrderByPipe, IboxtoolsComponent ],
-      providers: [ DataService, BackendCommsService, UserFeedbackService, ToastsManager, ToastOptions, DatePipe, CiscoCommsService,
+      providers: [ DataService, BackendCommsService, UserFeedbackService, DatePipe, CiscoCommsService, ToastrService,
                    BooleanToStringPipe, BooleanToStringOrderPipe, BooleanToStringDuePipe, ConsentPipeCorrectConversion, TelephonePipe ]
     })
     .compileComponents();

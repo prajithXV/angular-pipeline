@@ -32,17 +32,21 @@ import {Router} from "@angular/router";
 import {HeaderSorterComponent} from "../header-sorter/header-sorter.component";
 import {TemporalStateServiceService} from "../../services/temporal-state-service.service";
 import {FilterCodeToNamePipe} from "../../pipes/filter-code-to-name.pipe";
+import {HttpClientModule} from "@angular/common/http";
+import {HttpClientTestingModule} from "@angular/common/http/testing";
+import {ConfirmationModalComponent} from "../confirmation-modal/confirmation-modal.component";
+import {NgbActiveModal, NgbModal, NgbModule} from "@ng-bootstrap/ng-bootstrap";
 
-fdescribe('ManageCasesComponent', () => {
+describe('ManageCasesComponent', () => {
   let component: ManageCasesComponent;
   let fixture: ComponentFixture<ManageCasesComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      imports: [ FormsModule,  HttpModule, OwlDateTimeModule, RouterTestingModule ],
+      imports: [ HttpClientModule, HttpClientTestingModule, FormsModule,  OwlDateTimeModule, RouterTestingModule, NgbModule.forRoot() ],
       declarations: [ ManageCasesComponent, IboxtoolsComponent, SearchCaseCriteriaComponent, TicklerCasesTableComponent, ProcessCaseTicklerTableComponent,
                       WaitingBackendComponent, PaginatorComponent, CoinDateTransformPipe, NewTicklerCaseComponent, CampaignAttributeEditionComponent, CoinNumberInputComponent, DatepickerComponent,
-                      CoinNumberInputErrorsComponent, HeaderSorterComponent, FilterCodeToNamePipe ],
+                      CoinNumberInputErrorsComponent, HeaderSorterComponent, FilterCodeToNamePipe, ConfirmationModalComponent ],
       providers: [ { provide: DataService, useValue: dataServiceMock}, {provide: UserFeedbackService, useValue: userFeedbackMock}, { provide: GlobalStateService, useValue: globalStateServiceMock }, DatePipe, BooleanToStringPipe,
                      TemporalStateServiceService, Location, { provide: LocationStrategy, useClass: PathLocationStrategy }, { provide: APP_BASE_HREF, useValue: '/my/app'}]
     })

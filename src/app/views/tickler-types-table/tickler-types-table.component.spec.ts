@@ -11,7 +11,6 @@ import {NewTicklerTypeMapComponent} from "../new-tickler-type-map/new-tickler-ty
 import {AttributeTypeToStringPipe} from "../../pipes/attribute-type-to-string.pipe";
 import {TickCrossComponent} from "../tick-cross/tick-cross.component";
 import {DataService} from "../../services/data.service";
-import {HttpModule} from "@angular/http";
 import {UserFeedbackService} from "../../services/user-feedback.service";
 import {DatePipe} from "@angular/common";
 import {BooleanToStringPipe} from "../../pipes/boolean-to-string.pipe";
@@ -21,6 +20,9 @@ import {dataServiceMock} from "../../../test-utils/dataServiceMock";
 import {TicklerType} from "../../models/tickler-types";
 import {userFeedbackMock} from "../../../test-utils/userFeedback";
 import {TicklerProcess} from "../../models/tickler-processes";
+import {HttpClientModule} from "@angular/common/http";
+import {HttpClientTestingModule} from "@angular/common/http/testing";
+import {ConfirmationModalComponent} from "../confirmation-modal/confirmation-modal.component";
 
 describe('TicklerTypesTableComponent', () => {
   let component: TicklerTypesTableComponent;
@@ -28,9 +30,9 @@ describe('TicklerTypesTableComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      imports: [ FormsModule, HttpModule, NgbModule ],
+      imports: [ FormsModule, HttpClientModule, HttpClientTestingModule, NgbModule ],
       declarations: [ TicklerTypesTableComponent, WaitingBackendComponent, NewTicklerTypeComponent, CoinDateTransformPipe, SemaphoreComponent, NewTicklerAttributeMapComponent, NewTicklerTypeMapComponent,
-                      AttributeTypeToStringPipe, TickCrossComponent ],
+                      AttributeTypeToStringPipe, TickCrossComponent, ConfirmationModalComponent ],
       providers: [ { provide: DataService, useValue: dataServiceMock }, {provide: UserFeedbackService, useValue: userFeedbackMock }, DatePipe, BooleanToStringPipe, NgbModalStack ]
     })
     .compileComponents();

@@ -11,9 +11,7 @@ import {NgbModal, NgbModule} from "@ng-bootstrap/ng-bootstrap";
 import {NgbModalStack} from "@ng-bootstrap/ng-bootstrap/modal/modal-stack";
 import {DataService} from "../../services/data.service";
 import {BackendCommsService} from "../../services/backend-comms.service";
-import {HttpModule} from "@angular/http";
 import {UserFeedbackService} from "../../services/user-feedback.service";
-import {ToastOptions, ToastsManager} from "ng2-toastr";
 import {APP_BASE_HREF, DatePipe, LocationStrategy, PathLocationStrategy} from "@angular/common";
 import {BooleanToStringPipe} from "../../pipes/boolean-to-string.pipe";
 import {CiscoCommsService} from "../../services/cisco-comms.service";
@@ -22,6 +20,9 @@ import {BooleanToStringDuePipe, BooleanToStringOrderPipe} from "../../pipes/bool
 import {ConsentPipeCorrectConversion} from "../../pipes/consent.pipe";
 import {TemporalStateServiceService} from "../../services/temporal-state-service.service";
 import {TelephonePipe} from "../../pipes/telephone.pipe";
+import {HttpClientModule} from "@angular/common/http";
+import {HttpClientTestingModule} from "@angular/common/http/testing";
+import {ToastrModule} from "ngx-toastr";
 
 describe('CampaignListAccountsTableComponent', () => {
   let component: CampaignListAccountsTableComponent;
@@ -29,9 +30,9 @@ describe('CampaignListAccountsTableComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      imports:[ RouterTestingModule, FormsModule, NgbModule, HttpModule ],
+      imports:[ RouterTestingModule, FormsModule, NgbModule, HttpClientModule, HttpClientTestingModule, ToastrModule.forRoot() ],
       declarations: [ CampaignListAccountsTableComponent, WaitingBackendComponent, PaginatorComponent, CoinDateTransformPipe, NewProcessCaseComponent ],
-      providers: [ NgbModal, NgbModalStack, DataService, BackendCommsService, UserFeedbackService, ToastsManager, ToastOptions, DatePipe, BooleanToStringPipe,
+      providers: [ NgbModal, NgbModalStack, DataService, BackendCommsService, UserFeedbackService, DatePipe, BooleanToStringPipe,
                    CiscoCommsService, GlobalStateService, BooleanToStringOrderPipe, BooleanToStringDuePipe, ConsentPipeCorrectConversion, TemporalStateServiceService,
                    Location, { provide: LocationStrategy, useClass: PathLocationStrategy },
                   { provide: APP_BASE_HREF, useValue: '/my/app'}, TelephonePipe ]

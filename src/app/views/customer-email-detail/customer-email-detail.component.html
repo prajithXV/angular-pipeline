@@ -30,13 +30,13 @@
   <div class="col-lg-12 row-styles">
     <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3 body-height subtitle">Note <i class="fa fa-sticky-note-o" aria-hidden="true"></i></div>
     <div class="col-lg-9 col-md-9 col-sm-9 col-xs-9">
-      <span>{{customer.lastEmailVerification.note}}</span>
+      <span>{{customer?.lastEmailVerification.note}}</span>
     </div>
   </div>
   <div class="col-lg-12 row-styles">
     <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3 body-height subtitle">Date <i class="fa fa-calendar" aria-hidden="true"></i></div>
     <div class="col-lg-9 col-md-9 col-sm-9 col-xs-9 body-height">
-      <span>{{customer.lastEmailVerification.createdDate | coinDateTransform}}</span>
+      <span>{{customer?.lastEmailVerification.createdDate | coinDateTransform}}</span>
     </div>
   </div>
 </div>

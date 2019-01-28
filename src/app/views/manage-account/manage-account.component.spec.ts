@@ -29,7 +29,6 @@ import {CoinDateInputComponent} from "../coin-date-input/coin-date-input.compone
 import {CoinNumberInputErrorsComponent} from "../coin-number-input-errors/coin-number-input-errors.component";
 import {RouterTestingModule} from "@angular/router/testing";
 import {DataService} from "../../services/data.service";
-import {HttpModule} from "@angular/http";
 import {UserFeedbackService} from "../../services/user-feedback.service";
 import {APP_BASE_HREF, DatePipe, LocationStrategy, PathLocationStrategy} from "@angular/common";
 import {GlobalStateService} from "../../services/global-state.service";
@@ -67,6 +66,16 @@ import {CampaignListAttribute} from "../../models/campaign-list-attribute";
 import {CallNotesComponent} from "../call-notes/call-notes.component";
 import {NewCallNotesComponent} from "../new-call-notes/new-call-notes.component";
 import {LineType, PhoneType} from "../../models/phone";
+import {CustomerAddressModalComponent} from "../customer-address-modal/customer-address-modal.component";
+import {CustomerPhoneModalComponent} from "../customer-phone-modal/customer-phone-modal.component";
+import {CustomerEmailModalComponent} from "../customer-email-modal/customer-email-modal.component";
+import {AutodialConsentModalComponent} from "../autodial-consent-modal/autodial-consent-modal.component";
+import {ConfirmationModalComponent} from "../confirmation-modal/confirmation-modal.component";
+import {CustomerAddressDetailComponent} from "../customer-address-detail/customer-address-detail.component";
+import {TickCrossComponent} from "../tick-cross/tick-cross.component";
+import {CustomerPhoneDetailComponent} from "../customer-phone-detail/customer-phone-detail.component";
+import {CustomerEmailDetailComponent} from "../customer-email-detail/customer-email-detail.component";
+import {of} from "rxjs";
 
 
 describe('ManageAccountComponent', () => {
@@ -75,7 +84,7 @@ describe('ManageAccountComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      imports: [ NgbModule, PopoverModule, FormsModule, RouterTestingModule, HttpModule, AngularDraggableModule, OwlDateTimeModule, OwlMomentDateTimeModule, BrowserAnimationsModule ],
+      imports: [ NgbModule, PopoverModule, FormsModule, RouterTestingModule, AngularDraggableModule, OwlDateTimeModule, OwlMomentDateTimeModule, BrowserAnimationsModule ],
 
       declarations: [ ManageAccountComponent, CustomerNotesComponent, TabCounterComponent, CustomerCallRecordsComponent, NewCallRecordComponent, IboxtoolsComponent,
                       CustomersTableComponent, AccountsTableComponent, WaitingBackendComponent, AccountHistoryComponent, AccountAdditionalInfoComponent,
@@ -83,7 +92,8 @@ describe('ManageAccountComponent', () => {
                       AccountCollectionComponent, CustomerDetailComponent, CoinDateTransformPipe, CoinCurrencyPipe, CoinNumberInputComponent, CoinDateInputComponent, CoinNumberInputErrorsComponent,
                       NotificationTabComponent, CallRecordStandardSentencesComponent, TelephonePipe, CancelCallRecordComponent, DatepickerComponent, TelephoneTypePipe, NewProcessCaseComponent,
                       CustomerConsentComponent, ConsentPipe, TicklerCasesTableComponent, ProcessCaseTicklerTableComponent, PaginatorComponent, HeaderSorterComponent, NewTicklerCaseComponent,
-                      CampaignAttributeEditionComponent, CallNotesComponent, NewCallNotesComponent ],
+                      CampaignAttributeEditionComponent, CallNotesComponent, NewCallNotesComponent, CustomerAddressModalComponent, CustomerPhoneModalComponent, CustomerEmailModalComponent,
+                      AutodialConsentModalComponent, ConfirmationModalComponent, CustomerAddressDetailComponent, CustomerPhoneDetailComponent, CustomerEmailDetailComponent, TickCrossComponent ],
 
       providers: [ {provide: DataService, useValue: dataServiceMock }, { provide: UserFeedbackService, useValue: userFeedbackMock }, DatePipe, { provide: GlobalStateService, useValue: globalStateServiceMock }, NgbModalStack,
                    NgbTabsetConfig, PopoverConfig, ComponentLoaderFactory, PositioningService, BooleanToStringPipe, BooleanToStringOrderPipe,
@@ -161,7 +171,7 @@ describe('ManageAccountComponent', () => {
     let i = fixture.debugElement.injector.get(inject);
 
     if(isObservable){
-      return spy = spyOn(i, method).and.returnValue(Observable.of(value));
+      return spy = spyOn(i, method).and.returnValue(of(value));
     }else{
       return spy = spyOn(i, method).and.returnValue(Promise.resolve(value));
     }
@@ -505,7 +515,7 @@ describe('ManageAccountComponent', () => {
   it('not resolve the promise', fakeAsync(() => {
 
     callsToFunctions(false);
-    checkFeedbackMessage("Searching for account...", "Searching...", "Searching...", "Searching...")
+    checkFeedbackMessage("Searching for account...", "Searching...", "Searching...", "Loading...")
 
   }));
 
@@ -514,7 +524,7 @@ describe('ManageAccountComponent', () => {
 
     injectSpy(DataService, 'getCompleteInfoForAccount', dataServiceMock.account4, true);
     callsToFunctions(true, 1500);
-    checkBasicData("Nick","Furia","Nick Furia","SHIELD","777777777",LineType.Cellular, "Business Phone", PhoneType.Home, true,
+    checkBasicData("Nick","Furia","Nick Furia","SHIELD","777777777",LineType.LandLine, "Business Phone", PhoneType.Business, true,
                   "777","555555","#lCode",60,777,8888,777777,"#last prom date",6,5,
                   10,7,9999,"#last work date","#loan term","2/1/2001 12:00:00 AM","#loan rate",75,
                   45,"true");

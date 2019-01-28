@@ -1,6 +1,7 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { CustomerAddressDetailComponent } from './customer-address-detail.component';
+import {CoinDateTransformPipe} from "../../pipes/coin-date-transform.pipe";
 
 describe('CustomerAddressDetailComponent', () => {
   let component: CustomerAddressDetailComponent;
@@ -8,7 +9,7 @@ describe('CustomerAddressDetailComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ CustomerAddressDetailComponent ]
+      declarations: [ CustomerAddressDetailComponent, CoinDateTransformPipe ]
     })
     .compileComponents();
   }));

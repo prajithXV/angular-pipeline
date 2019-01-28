@@ -7,9 +7,7 @@ import {CoinDateTransformPipe} from "../../pipes/coin-date-transform.pipe";
 import {FormsModule} from "@angular/forms";
 import {DataService} from "../../services/data.service";
 import {BackendCommsService} from "../../services/backend-comms.service";
-import {HttpModule} from "@angular/http";
 import {UserFeedbackService} from "../../services/user-feedback.service";
-import {ToastOptions, ToastsManager} from "ng2-toastr";
 import {DatePipe} from "@angular/common";
 import {BooleanToStringPipe} from "../../pipes/boolean-to-string.pipe";
 import {CiscoCommsService} from "../../services/cisco-comms.service";
@@ -25,6 +23,10 @@ import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import {BooleanToStringDuePipe, BooleanToStringOrderPipe} from "../../pipes/boolean-to-string-order.pipe";
 import {ConsentPipeCorrectConversion} from "../../pipes/consent.pipe";
 import {TelephonePipe} from "../../pipes/telephone.pipe";
+import {ConfirmationModalComponent} from "../confirmation-modal/confirmation-modal.component";
+import {HttpClientModule} from "@angular/common/http";
+import {HttpClientTestingModule} from "@angular/common/http/testing";
+import {ToastrModule} from "ngx-toastr";
 
 describe('ProcessCaseTicklerTableComponent', () => {
   let component: ProcessCaseTicklerTableComponent;
@@ -32,10 +34,10 @@ describe('ProcessCaseTicklerTableComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      imports: [ FormsModule, HttpModule, RouterTestingModule,  OwlDateTimeModule, OwlMomentDateTimeModule, BrowserAnimationsModule ],
+      imports: [ FormsModule, HttpClientModule, HttpClientTestingModule, RouterTestingModule,  OwlDateTimeModule, OwlMomentDateTimeModule, BrowserAnimationsModule, ToastrModule.forRoot() ],
       declarations: [ ProcessCaseTicklerTableComponent, WaitingBackendComponent, NewTicklerCaseComponent, CoinDateTransformPipe, CampaignAttributeEditionComponent, CoinNumberInputComponent, DatepickerComponent,
-                      CoinNumberInputErrorsComponent ],
-      providers: [ DataService, BackendCommsService, UserFeedbackService, ToastsManager, ToastOptions, DatePipe, BooleanToStringPipe, CiscoCommsService,
+                      CoinNumberInputErrorsComponent, ConfirmationModalComponent ],
+      providers: [ DataService, BackendCommsService, UserFeedbackService, DatePipe, BooleanToStringPipe, CiscoCommsService,
                    GlobalStateService, BooleanToStringOrderPipe, BooleanToStringDuePipe, ConsentPipeCorrectConversion, TelephonePipe ]
     })
     .compileComponents();

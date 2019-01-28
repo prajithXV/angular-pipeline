@@ -47,7 +47,6 @@ describe('SearchComponent', () => {
       declarations: [ SearchComponent, IboxtoolsComponent, NextCallComponent, SearchCriteriaComponent, CampaignListAccountsTableComponent, CustomerSummaryComponent, AccountsTableComponent,
                       WaitingBackendComponent, PaginatorComponent, CoinDateTransformPipe, AddressPipe, CoinCurrencyPipe, FilterCodeToNamePipe ],
       providers: [ { provide: DataService, useValue: dataServiceMock },
-                  // {provide: Router, useValue: routerMock },
                   { provide: GlobalStateService, useValue: globalStateServiceMock},{ provide: UserFeedbackService, useValue: userFeedbackMock },
                     DatePipe, PopoverConfig, ComponentLoaderFactory, PositioningService, NgbTabsetConfig, NgbModal, NgbModalStack,
                     TemporalStateServiceService, Location, { provide: LocationStrategy, useClass: PathLocationStrategy }, { provide: APP_BASE_HREF, useValue: '/my/app'}],
@@ -214,14 +213,14 @@ describe('SearchComponent', () => {
 
   function checkViewClTableFields(array: Array<string>){
     let td = fixture.debugElement.query(By.css("table.clAccounts tbody tr")).children.map(e => e.nativeElement);
-    let fields = td.map(e=>e.innerText);
+    let fields = td.map(e=>e.innerText.trim());
 
     expect(fields).toEqual(array);
   }
 
   function checkViewClFilters(array: Array<string>){
     let h5 = fixture.debugElement.query(By.css("div.filterListAccounts h5")).children.map(e=>e.nativeElement);
-    let filters = h5.map(i=>i.innerText);
+    let filters = h5.map(i=>i.innerText.trim());
     expect(filters).toEqual(array);
 
     }
@@ -229,13 +228,13 @@ describe('SearchComponent', () => {
 
   function checkSearchCriteriaFilters(array: Array<string>){
     let h5 = fixture.debugElement.query(By.css("div.customer h5")).children.map(e=>e.nativeElement);
-    let filters = h5.map(i=>i.innerText);
+    let filters = h5.map(i=>i.innerText.trim());
     expect(filters).toEqual(array);
 
   }
 
     function checkSearchCriteriaTableFields(array: Array<any>, index){
-      let td = fixture.debugElement.queryAll(By.css("customer-summary table tbody tr")).map(e => e.children.map(e=>e.nativeElement).map(i=>i.innerText))[index];
+      let td = fixture.debugElement.queryAll(By.css("customer-summary table tbody tr")).map(e => e.children.map(e=>e.nativeElement).map(i=>i.innerText.trim()))[index];
       // let fields = td.map(e=>e.innerText);
 
       expect(td).toEqual(array);
@@ -244,7 +243,7 @@ describe('SearchComponent', () => {
 
   function checkSearchCriteriaAccountTableFields(array: Array<any>){
     let td = fixture.debugElement.query(By.css("div.accounts div.ibox-content tbody tr")).children.map(e => e.nativeElement);
-    let fields = td.map(e=>e.innerText);
+    let fields = td.map(e=>e.innerText.trim());
 
     expect(fields).toBeTruthy(array);
   }
@@ -644,7 +643,7 @@ describe('SearchComponent', () => {
     checkSearchCriteriaAccountSpy(spy2, 2,"DIRECT","703","L",113.07,"Certificate of Deposit",
       "Primary","Active");
 
-    checkSearchCriteriaFilters([ 'SSN: 436909217', 'Email address: michaelf@gmail.com', 'Account type: ', 'Account number: AAD9461', 'Phone number: 933787878' ]);
+    checkSearchCriteriaFilters([ 'SSN: 436909217', 'Email address: michaelf@gmail.com', 'Account type:', 'Account number: AAD9461', 'Phone number: 933787878' ]);
 
     checkSearchCriteriaTableFields(["", "AAD9461", "436909217", "Michael F.", "Los Angeles"], 0);
     checkSearchCriteriaTableFields([ "", "AAD9462", "436909218", "Robert D.", "USA"], 1);

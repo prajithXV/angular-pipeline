@@ -10,9 +10,7 @@ import {CoinDateTransformPipe} from "../../pipes/coin-date-transform.pipe";
 import {FormsModule} from "@angular/forms";
 import {DataService} from "../../services/data.service";
 import {BackendCommsService} from "../../services/backend-comms.service";
-import {HttpModule} from "@angular/http";
 import {UserFeedbackService} from "../../services/user-feedback.service";
-import {ToastOptions, ToastsManager} from "ng2-toastr";
 import {DatePipe} from "@angular/common";
 import {BooleanToStringPipe} from "../../pipes/boolean-to-string.pipe";
 import {CiscoCommsService} from "../../services/cisco-comms.service";
@@ -21,6 +19,9 @@ import {ConsentPipeCorrectConversion} from "../../pipes/consent.pipe";
 import {TelephonePipe} from "../../pipes/telephone.pipe";
 import {TemporalStateServiceService} from "../../services/temporal-state-service.service";
 import {PopoverModule} from "ngx-bootstrap";
+import {HttpClientModule} from "@angular/common/http";
+import {HttpClientTestingModule} from "@angular/common/http/testing";
+import {ToastrModule} from "ngx-toastr";
 
 describe('TicklerAttributeComponent', () => {
   let component: TicklerAttributeComponent;
@@ -28,10 +29,10 @@ describe('TicklerAttributeComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      imports: [ FormsModule, HttpModule, PopoverModule ],
+      imports: [ FormsModule, HttpClientModule, HttpClientTestingModule, PopoverModule, ToastrModule.forRoot() ],
       declarations: [ TicklerAttributeComponent, TicklerAttributeTableComponent, WaitingBackendComponent, NewTicklerAttributeComponent, AttributeTypeToStringPipe, SemaphoreComponent,
                       CoinDateTransformPipe ],
-      providers: [ DataService, BackendCommsService, UserFeedbackService, ToastsManager, ToastOptions, DatePipe, BooleanToStringPipe,
+      providers: [ DataService, BackendCommsService, UserFeedbackService, DatePipe, BooleanToStringPipe,
                    CiscoCommsService, BooleanToStringOrderPipe, BooleanToStringDuePipe, ConsentPipeCorrectConversion, TelephonePipe, TemporalStateServiceService ]
     })
     .compileComponents();

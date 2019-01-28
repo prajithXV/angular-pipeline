@@ -33,6 +33,7 @@ export class CustomerEmailModalComponent implements OnInit, OnChanges {
               private _globalStateService: GlobalStateService) { }
 
   ngOnInit() {
+    if (!this.customer) return;
     this.loadCustomerEmails();
     this.oldLastVerifiedEmail = new EmailListVerification(
       this.customer.lastEmailVerification ? this.customer.lastEmailVerification.emails : this.customer.emails,
@@ -109,6 +110,7 @@ export class CustomerEmailModalComponent implements OnInit, OnChanges {
   }
 
   isComparisonModal() {
+    if (!this.customer) return;
     return !this.customer.hasValidEmailVerification() && !this.customer.needsEmailVerification();
   }
 

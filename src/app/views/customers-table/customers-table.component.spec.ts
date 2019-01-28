@@ -5,14 +5,15 @@ import {WaitingBackendComponent} from "../waiting-backend/waiting-backend.compon
 import {TelephonePipe, TelephoneTypePipe} from "../../pipes/telephone.pipe";
 import {DataService} from "../../services/data.service";
 import {BackendCommsService} from "../../services/backend-comms.service";
-import {HttpModule} from "@angular/http";
 import {UserFeedbackService} from "../../services/user-feedback.service";
-import {ToastOptions, ToastsManager} from "ng2-toastr";
 import {DatePipe} from "@angular/common";
 import {BooleanToStringPipe} from "../../pipes/boolean-to-string.pipe";
 import {CiscoCommsService} from "../../services/cisco-comms.service";
 import {BooleanToStringDuePipe, BooleanToStringOrderPipe} from "../../pipes/boolean-to-string-order.pipe";
 import {ConsentPipeCorrectConversion} from "../../pipes/consent.pipe";
+import {HttpClientModule} from "@angular/common/http";
+import {HttpClientTestingModule} from "@angular/common/http/testing";
+import {ToastrModule} from "ngx-toastr";
 
 describe('CustomersTableComponent', () => {
   let component: CustomersTableComponent;
@@ -20,9 +21,9 @@ describe('CustomersTableComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      imports: [ HttpModule ],
+      imports: [ HttpClientModule, HttpClientTestingModule, ToastrModule.forRoot() ],
       declarations: [ CustomersTableComponent, WaitingBackendComponent, TelephoneTypePipe, TelephonePipe ],
-      providers: [ DataService, BackendCommsService, UserFeedbackService, ToastsManager, ToastOptions, DatePipe, BooleanToStringPipe,
+      providers: [ DataService, BackendCommsService, UserFeedbackService, DatePipe, BooleanToStringPipe,
                    CiscoCommsService, BooleanToStringOrderPipe, BooleanToStringDuePipe, ConsentPipeCorrectConversion, TelephonePipe ]
     })
     .compileComponents();

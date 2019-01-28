@@ -7,7 +7,6 @@ import {DataService} from "../../services/data.service";
 import {BackendCommsService} from "../../services/backend-comms.service";
 import {HttpModule} from "@angular/http";
 import {UserFeedbackService} from "../../services/user-feedback.service";
-import {ToastOptions, ToastsManager} from "ng2-toastr";
 import {DatePipe} from "@angular/common";
 import {BooleanToStringPipe} from "../../pipes/boolean-to-string.pipe";
 import {CiscoCommsService} from "../../services/cisco-comms.service";
@@ -23,6 +22,9 @@ import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import {BooleanToStringDuePipe, BooleanToStringOrderPipe} from "../../pipes/boolean-to-string-order.pipe";
 import {ConsentPipeCorrectConversion} from "../../pipes/consent.pipe";
 import {TelephonePipe} from "../../pipes/telephone.pipe";
+import {HttpClientModule} from "@angular/common/http";
+import {HttpClientTestingModule} from "@angular/common/http/testing";
+import {ToastrModule, ToastrService} from "ngx-toastr";
 
 
 describe('NewTicklerCaseComponent', () => {
@@ -31,10 +33,10 @@ describe('NewTicklerCaseComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      imports: [ FormsModule, HttpModule, RouterTestingModule,  OwlDateTimeModule, OwlMomentDateTimeModule, BrowserAnimationsModule ],
+      imports: [ HttpClientModule, HttpClientTestingModule, FormsModule, RouterTestingModule,  OwlDateTimeModule, OwlMomentDateTimeModule, BrowserAnimationsModule, ToastrModule.forRoot() ],
       declarations: [ NewTicklerCaseComponent, WaitingBackendComponent, CampaignAttributeEditionComponent, CoinNumberInputComponent, DatepickerComponent, CoinNumberInputErrorsComponent ],
-      providers: [ DataService, BackendCommsService, UserFeedbackService, ToastsManager, ToastOptions, DatePipe, BooleanToStringPipe, CiscoCommsService,
-                   GlobalStateService, BooleanToStringOrderPipe, BooleanToStringDuePipe, ConsentPipeCorrectConversion, TelephonePipe ],
+      providers: [ DataService, BackendCommsService, UserFeedbackService, DatePipe, BooleanToStringPipe, CiscoCommsService,
+                   GlobalStateService, BooleanToStringOrderPipe, BooleanToStringDuePipe, ConsentPipeCorrectConversion, TelephonePipe, ToastrService ],
     })
     .compileComponents();
   }));

@@ -14,9 +14,7 @@ import {OwlDateTimeModule} from "ng-pick-datetime";
 import {OwlMomentDateTimeModule} from "ng-pick-datetime-moment";
 import {DataService} from "../../services/data.service";
 import {BackendCommsService} from "../../services/backend-comms.service";
-import {HttpModule} from "@angular/http";
 import {UserFeedbackService} from "../../services/user-feedback.service";
-import {ToastOptions, ToastsManager} from "ng2-toastr";
 import {DatePipe} from "@angular/common";
 import {BooleanToStringPipe} from "../../pipes/boolean-to-string.pipe";
 import {TelephonePipe} from "../../pipes/telephone.pipe";
@@ -25,6 +23,9 @@ import {BooleanToStringDuePipe, BooleanToStringOrderPipe} from "../../pipes/bool
 import {CiscoCommsService} from "../../services/cisco-comms.service";
 import {GlobalStateService} from "../../services/global-state.service";
 import {RouterTestingModule} from "@angular/router/testing";
+import {HttpClientModule} from "@angular/common/http";
+import {HttpClientTestingModule} from "@angular/common/http/testing";
+import {ToastrModule} from "ngx-toastr";
 
 describe('LovValuesTableComponent', () => {
   let component: LovValuesTableComponent;
@@ -32,10 +33,10 @@ describe('LovValuesTableComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      imports: [ FormsModule, OwlDateTimeModule, OwlMomentDateTimeModule, BrowserAnimationsModule, HttpModule, RouterTestingModule ],
+      imports: [ FormsModule, OwlDateTimeModule, OwlMomentDateTimeModule, BrowserAnimationsModule, HttpClientModule, HttpClientTestingModule, RouterTestingModule, ToastrModule.forRoot() ],
       declarations: [ LovValuesTableComponent, WaitingBackendComponent, NewLovValueComponent, SemaphoreComponent, ValueEditionComponent, CoinNumberInputComponent,
                       DatepickerComponent, CoinNumberInputErrorsComponent ],
-      providers: [ DataService, BackendCommsService, UserFeedbackService, ToastsManager, ToastOptions, DatePipe, BooleanToStringPipe, TelephonePipe, ConsentPipe,
+      providers: [ DataService, BackendCommsService, UserFeedbackService, DatePipe, BooleanToStringPipe, TelephonePipe, ConsentPipe,
                    ConsentPipeCorrectConversion, BooleanToStringOrderPipe, BooleanToStringDuePipe, CiscoCommsService, GlobalStateService ]
     })
     .compileComponents();

@@ -35,6 +35,7 @@ export class CustomerPhoneModalComponent implements OnInit {
               private _globalStateService: GlobalStateService) { }
 
   ngOnInit() {
+    if (!this.customer) return;
     this.loadCustomerPhones();
     this.oldLastVerifiedPhone = new PhoneListVerification(
       this.customer.lastPhoneVerification ? this.customer.lastPhoneVerification.phones : this.customer.phones,
@@ -111,6 +112,7 @@ export class CustomerPhoneModalComponent implements OnInit {
   }
 
   isComparisonModal() {
+    if (!this.customer) return false;
     return !this.customer.hasValidPhoneVerification() && !this.customer.needsPhoneVerification() && !this.customer.phoneIsUnderCreation();
   }
 

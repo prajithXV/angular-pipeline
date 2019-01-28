@@ -28,10 +28,10 @@ export class HotkeysSubscriber {
       return;
     }
     if (show) {
-      console.log("Show");
+      // console.log("Show");
       pops.forEach(pop => pop.show());
     } else {
-      console.log("Hide");
+      // console.log("Hide");
       pops.forEach(pop => pop.hide());
     }
   }

@@ -1,12 +1,13 @@
 import { TestBed, inject } from '@angular/core/testing';
 
 import { CiscoCommsService } from './cisco-comms.service';
-import {HttpModule} from "@angular/http";
+import {HttpClientModule} from "@angular/common/http";
+import {HttpClientTestingModule} from "@angular/common/http/testing";
 
 describe('CiscoCommsService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [ HttpModule ],
+      imports: [ HttpClientModule, HttpClientTestingModule ],
       providers: [CiscoCommsService]
     });
   });
