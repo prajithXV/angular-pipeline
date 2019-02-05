@@ -59,7 +59,10 @@ const CtParties = [
   {value: "DL", display: "Dealer"},
   {value: "FM", display: "Family member", acronym: "FM"},
   {value: "GU", display: "Guarantor", acronym: "Gu"},
-  {value: "OF", display: "Officer"}
+  {value: "OF", display: "Officer"},
+  {value: "EX", display: "Third party"},
+  {value: "FR", display: "Authorized third party"},
+  {value: "TN", display: "Trustee"}
 ];
 // "Borrower", "CoBorrower", "Family Mbr", "Guarantor"
 const CtPartyIndexes = [
