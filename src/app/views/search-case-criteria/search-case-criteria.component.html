@@ -87,7 +87,7 @@
   <!--buttons-->
   <div class="form-group pull-right" style=" position: relative;
     bottom: -33px;">
-    <button (click)="search(); $event.preventDefault()" [disabled]="searchingProcessCases || hasFormErrors" class="btn btn-sm btn-primary m-t-n-xs" type="submit">Search
+    <button (click)="search(); $event.preventDefault()" [disabled]="searchingProcessCases || hasFormErrors" class="btn btn-sm btn-primary m-t-n-xs margin-right" type="submit">Search
       <waiting-backend *ngIf="searchingProcessCases"></waiting-backend>
     </button>
     <button (click)="reset()" class="btn btn-sm m-t-n-xs" type="button">Reset</button>

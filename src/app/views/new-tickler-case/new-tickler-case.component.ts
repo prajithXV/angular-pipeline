@@ -23,6 +23,7 @@ export class NewTicklerCaseComponent implements OnInit {
   @Input() currentProcessCase: ProcessCase = null;
   @Input() ticklerAttributes: TicklerAttribute[] = null;
   @Input() ticklerTypes: TicklerType[] = null;
+  @Input() isAccountPage: boolean = false;
   @Input() isMandatory: boolean;
   @Output() onCancelCaseTickler = new EventEmitter<boolean>();
   @Output() onAddCaseTickler = new EventEmitter<ProcessCaseTickler>();

@@ -88,7 +88,7 @@
     </div>
     <div class="form-group pull-right">
       <button (click)="viewCL(); $event.preventDefault()" [disabled]="buttonDisabled() || searchingCampaignListAccounts"
-              class="viewClButton btn btn-sm btn-primary m-t-n-xs"
+              class="btn btn-sm btn-primary m-t-n-xs margin-right"
               type="submit">
         View CL
         <waiting-backend *ngIf="searchingCampaignListAccounts"></waiting-backend>

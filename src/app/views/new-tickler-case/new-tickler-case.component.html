@@ -1,17 +1,21 @@
 <!--add tickler process-->
 <div class="row">
-  <div class="col-lg-6 col-xs-12 col">
+  <div class="col-xs-12 col" [ngClass]="{'col-lg-12': isAccountPage, 'col-lg-6': !isAccountPage}">
     <h2 class="text-success">General</h2>
     <p></p>
     <div class="form-group" [class.has-error]="errorNotes">
-      <div>
-        <p class="notes"><label class="control-label">Tickler type</label></p>
+      <div [ngClass]="{'row': isAccountPage}">
+        <div [ngClass]="{'col-lg-6': isAccountPage}">
+          <p class="notes"><label class="control-label">Tickler type</label></p>
+
+          <select class="form-control m-b" [disabled]="ticklerTypes?.length == 0 || waitingTicklerTypesToLoad"
+                  [(ngModel)]="selectedTicklerType" (change)="ticklerTypeSelected(selectedTicklerType)">
+            <option *ngFor="let t of comboTicklerTypes" [ngValue]="t">{{t.ticklerName}} <span *ngIf="t.isCore">*</span>
+            </option>
+          </select>
+        </div>
+        <div [ngClass]="{'col-lg-6': isAccountPage}"></div>
       </div>
-      <select class="form-control m-b" [disabled]="ticklerTypes?.length == 0 || waitingTicklerTypesToLoad"
-              [(ngModel)]="selectedTicklerType" (change)="ticklerTypeSelected(selectedTicklerType)">
-        <option *ngFor="let t of comboTicklerTypes" [ngValue]="t">{{t.ticklerName}} <span *ngIf="t.isCore">*</span>
-        </option>
-      </select>
     </div>
     <div class="form-group" [class.has-error]="errorNotes">
       <div>
@@ -26,32 +30,27 @@
         maxlength="250">
       </textarea>
     </div>
-    <!--button-->
-    <div class="form-group">
-      <button class="btn btn-sm btn-primary" (click)="add(model)"
-              [disabled]="waitingResponse || !canAddValues()">Add
-        <waiting-backend *ngIf="waitingResponse"></waiting-backend>
-      </button>
-      <button class="btn btn-sm" (click)="cancel()">Cancel
-      </button>
-    </div>
   </div>
   <!--tickler attributes-->
-  <div class="col-lg-6 col-xs-12 col">
+  <div class="col-xs-12 col" [ngClass]="{'col-lg-12': isAccountPage, 'col-lg-6': !isAccountPage}">
     <h2 class="text-success">Attributes</h2>
     <hr class="no-borders"/>
     <!--campaign attribute edition-->
     <ng-container *ngIf="attributesToLoad && !waitingAttributesToLoad">
-      <campaign-attribute-edition
-        *ngFor="let atm of attributesToLoad"
-        [listOfValues]="lovValuesToCode[atm.lovCode]"
-        [isInManageProcess]="true"
-        [attribute]="atm"
-        [isMandatory]="atm.mandatoryFlag"
-        [values]="getAttributeValues(atm)"
-        (onAddValue)="addAttribute(atm, $event)"
-        (onRemoveValue)="removeAttribute(atm, $event)">
-      </campaign-attribute-edition>
+      <div [class.row]="isAccountPage">
+        <div [ngClass]="{'col-lg-12': isAccountPage}">
+          <campaign-attribute-edition
+            *ngFor="let atm of attributesToLoad"
+            [listOfValues]="lovValuesToCode[atm.lovCode]"
+            [isInManageProcess]="true"
+            [attribute]="atm"
+            [isMandatory]="atm.mandatoryFlag"
+            [values]="getAttributeValues(atm)"
+            (onAddValue)="addAttribute(atm, $event)"
+            (onRemoveValue)="removeAttribute(atm, $event)">
+          </campaign-attribute-edition>
+        </div>
+      </div>
     </ng-container>
 
     <div *ngIf="waitingAttributesToLoad">
@@ -63,5 +62,18 @@
     </div>
     <!--<div *ngIf="processCaseTicklers?.length == 0"> No data found.</div>-->
   </div>
+</div>
 
+<div class="row" [class.margin-top-buttons]="isAccountPage">
+  <div class="col-lg-6 col-xs-12 col">
+    <!--button-->
+    <div class="form-group">
+      <button class="btn btn-sm btn-primary margin-right" (click)="add(model)"
+              [disabled]="waitingResponse || !canAddValues()">Add
+        <waiting-backend *ngIf="waitingResponse"></waiting-backend>
+      </button>
+      <button class="btn btn-sm" (click)="cancel()">Cancel
+      </button>
+    </div>
+  </div>
 </div>

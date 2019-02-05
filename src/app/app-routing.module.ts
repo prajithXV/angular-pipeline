@@ -23,7 +23,6 @@ import {ContactPercentageReportComponent} from "./views/contact-percentage-repor
 import {ManageCasesComponent} from "./views/manage-cases/manage-cases.component";
 import {AdminProcessesComponent} from "./views/admin-processes/admin-processes.component";
 import {AdminAttributesComponent} from "./views/admin-attributes/admin-attributes.component";
-import {ManageCaseComponent} from "./views/manage-case/manage-case.component";
 import {MainComponent} from "./views/main/main.component";
 import {LovManagementComponent} from "./views/lov-management/lov-management.component";
 
@@ -48,17 +47,6 @@ const routes: Routes = [
       // {path: UrlComponents.main, component: SearchComponent},
       {path: UrlComponents.main, component: MainComponent},
       // {path: "main2", component: MainComponent}
-    ]
-  },
-  // PROCESSES
-  {
-    path: UrlComponents.processPrefix,
-    component: BasicLayoutComponent,
-    canActivate: [TicklerAgentGuard],
-
-    children: [
-      // {path: UrlComponents.cases, component: ManageCasesComponent},
-      {path: `${UrlComponents.case}/:${PublicUrls.process_case.caseId}/:${PublicUrls.process_case.accountType}`, component: ManageCaseComponent},
     ]
   },
   // ADMIN

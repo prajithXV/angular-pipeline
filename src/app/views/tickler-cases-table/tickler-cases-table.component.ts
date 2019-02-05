@@ -5,17 +5,14 @@ import {PublicUrls} from "../../routing-constants";
 import {Router} from "@angular/router";
 import {SortOrder} from "../../models/sort-order";
 import {
-  CasesListInfo, CasesListInfoByAccount,
+  CasesListInfo,
   TemporalStateServiceService
 } from "../../services/temporal-state-service.service";
 import {SearchTicklerCaseParams} from "../../models/search-tickler-case-params";
 import {Account} from "../../models/account";
-import {ROLE_STANDARD_CODES} from "../../models/role";
-import {GlobalStateService} from "../../services/global-state.service";
 import {DataService} from "../../services/data.service";
 import {TicklerType} from "../../models/tickler-types";
-import {TicklerProcess} from "../../models/tickler-processes";
-import {ProcessCaseTickler} from "../../models/process-case-tickler";
+import {CoinConstants} from "../../services/coin-constants";
 
 @Component({
   selector: 'tickler-cases-table',
@@ -36,20 +33,19 @@ export class TicklerCasesTableComponent implements OnInit {
   @Input() currentParams: SearchTicklerCaseParams;
   @Input() isInRelatedInfo: boolean = false;
   @Input() account: Account = null;
+  @Input() canShowGoButton: boolean = false;
 
   ticklerTypes: TicklerType[];
 
   private count: number = 0;
 
-  constructor(private _router: Router, private _temporalStateService: TemporalStateServiceService, private _globalStateService: GlobalStateService,
+  constructor(private _router: Router, private _temporalStateService: TemporalStateServiceService,
               private _dataService: DataService) {
 
   }
 
   ngOnInit() {
-
   }
-
 
   ngOnChanges(changes) {
     if (changes.currentCasesServiceParams && this.currentCasesServiceParams && this.currentCasesServiceParams.currentPagination) {
@@ -156,35 +152,17 @@ export class TicklerCasesTableComponent implements OnInit {
     this.onPageChange.emit(increment);
   }
 
-
-  /*
-  * GO button: redirect to manage case page
-  * saves the current params of criteria, pagination and sort order on the temporal service
-  *
-  * */
-  goToManageCase(processCase: ProcessCase) {
-
-    if (!this.isInRelatedInfo) {
-      this._temporalStateService.casesListInfo = new CasesListInfo();
-
-      this._temporalStateService.casesListInfo.currentParams = this.currentParams;
-      this._temporalStateService.casesListInfo.currentPagination = this.pagination;
-      this._temporalStateService.casesListInfo.currentSortOrder = this.sort;
-
-    }
-    else {
-      this._temporalStateService.casesListInfoByAccount = new CasesListInfoByAccount();
-      this._temporalStateService.casesListInfoByAccount.currentId = this.account.accountId;
-      this._temporalStateService.casesListInfoByAccount.currentType = this.account.accountType;
-      this._temporalStateService.casesListInfoByAccount.currentCampaignRecordId = this.account.campaignRecordId;
-    }
-
-    this._router.navigate([PublicUrls.process_case.url, processCase.id, processCase.accountType]);
-
+  isOverflown(procCase) {
+    return procCase != null && procCase.caseDescription != null && procCase.caseDescription.length > 15;
   }
 
-  get canShowGoButton() {
-    return this._globalStateService.loggedAgentHasRoleCode(ROLE_STANDARD_CODES.TICKLER_AGENT);
-  }
+  goToAccount(pc: ProcessCase) {
+    this._temporalStateService.casesListInfo = new CasesListInfo();
 
+    this._temporalStateService.casesListInfo.currentParams = this.currentParams;
+    this._temporalStateService.casesListInfo.currentPagination = this.pagination;
+    this._temporalStateService.casesListInfo.currentSortOrder = this.sort;
+
+    this._router.navigate([PublicUrls.account.url, pc.accountId, pc.accountType, CoinConstants.NoCampaignRecordId]);
+  }
 }

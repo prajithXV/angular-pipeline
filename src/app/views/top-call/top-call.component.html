@@ -2,7 +2,7 @@
   <span *ngIf="isWrapUp()" class="widget reg-bg">Call finished. Wrapping up.</span>
   <span *ngIf="!isWrapUp() && isOutboundCall()" class="widget reg-bg">You are in an outbound call with <strong>{{currentCall.to | telephoneNumber : true}}</strong>.</span>
   <span *ngIf="!isWrapUp() && !isOutboundCall()" class="widget reg-bg">Inbound call from <strong>{{currentCall.from | telephoneNumber : true}}</strong>.</span>
-  <button *ngIf="!isOutboundCall() && !isWrapUp()" (click)="goSearch($event)" id="currentCallFrom" class="btn btn-success" type="button"><i class="fa fa-search"></i> <span class="bold">Search</span></button>
-  <button *ngIf="isAlerting()" (click)="pickUp()" class="btn btn-primary" type="button"><i class="fa fa-phone"></i> <span class="bold">Pick up</span></button>
+  <button *ngIf="!isOutboundCall() && !isWrapUp()" (click)="goSearch($event)" id="currentCallFrom" class="btn btn-success margin-right" type="button"><i class="fa fa-search"></i> <span class="bold">Search</span></button>
+  <button *ngIf="isAlerting()" (click)="pickUp()" class="btn btn-primary margin-right" type="button"><i class="fa fa-phone"></i> <span class="bold">Pick up</span></button>
   <button *ngIf="isAlerting() || isSpeaking() || isCalling()" (click)="hangUp()" class="btn btn-danger" type="button"><i class="fa fa-phone fa-rotate-90"></i> <span class="bold">Hang up</span></button>
 </li>

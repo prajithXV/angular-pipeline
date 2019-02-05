@@ -25,7 +25,7 @@ export class ProcessCaseTicklerTableComponent implements OnInit {
   @Input() ticklerAttributes: TicklerAttribute[] = null;
   @Input() waitingResponse: boolean = false;
   @Input() searchingCaseTicklers: boolean = false;
-  @Input() hasToShowNewButton: boolean = true;
+  @Input() isAccountPage: boolean = false;
   @Output() onAddTicklerCase = new EventEmitter<TicklerCaseModel>();
   @Output() onDeleteTicklerCase = new EventEmitter<ProcessCaseTickler>();
   @Output() onCancel = new EventEmitter<boolean>();
@@ -125,6 +125,9 @@ export class ProcessCaseTicklerTableComponent implements OnInit {
   openConfirmationModal(caseTickler: ProcessCaseTickler) {
     this._confirmationModal.open(caseTickler);
   }
+
+  isOverflown(tickler) {
+    return tickler != null && tickler.ticklerDescription != null && tickler.ticklerDescription.length > 15;
+  }
+
 }
-
-

@@ -157,12 +157,10 @@ export class TemporalStateServiceService{
       let route = _location.path();
 
       if (event instanceof NavigationEnd) {
-        if (!route.includes(PublicUrls.process_case.url) && !route.includes(PublicUrls.main.url)) {
-          this._casesListInfo = null;
-        }
         if(!route.includes(PublicUrls.main.url) && !route.includes(PublicUrls.account.url)){
           this._campaignListInfo = null;
           this._accountListInfo = null;
+          this._casesListInfo = null;
         }
         if(!route.includes(PublicUrls.account.url) && !route.includes(PublicUrls.account.accountId) &&
           !route.includes(PublicUrls.account.accountType) && !route.includes(PublicUrls.account.campaignRecord) &&

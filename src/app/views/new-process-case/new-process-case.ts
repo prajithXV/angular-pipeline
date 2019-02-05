@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {ChangeDetectorRef, Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {ProcessCaseModel} from "../../models/process-case-model";
 import {TicklerProcess} from "../../models/tickler-processes";
 import {PublicUrls} from "../../routing-constants";
@@ -19,15 +19,18 @@ export class NewProcessCaseComponent implements OnInit {
   @Input() account: Account = null;
   @Input() customer: Customer = null;
   @Input() saveText: String = "Save";
+  @Input() showSave: boolean = false;
+  @Output() onDefaultCaseCreated = new EventEmitter<ProcessCaseModel>();
   @Output() caseCreated = new EventEmitter<ProcessCaseModel>();
   @Output() onCancel = new EventEmitter<number>();
 
   private model: ProcessCaseModel = new ProcessCaseModel();
   private waitingResponse: boolean = false;
+  private waitingDefaultSaveResponse: boolean = false;
 
 
   constructor(private _dataService: DataService, private _userFeedbackService: UserFeedbackService,
-              private _globalStateService: GlobalStateService) { }
+              private _globalStateService: GlobalStateService, private _cdr: ChangeDetectorRef) { }
 
   ngOnInit() {
   }
@@ -45,16 +48,46 @@ export class NewProcessCaseComponent implements OnInit {
   }
 
   //create a new process case --> emits to the parent
-  createProcessCase(model: ProcessCaseModel) {
-    this.waitingResponse = true;
+  createProcessCase(model: ProcessCaseModel, isDefaultSave: boolean) {
+    if (!isDefaultSave) {
+      this.waitingResponse = true;
+    }
+    else {
+      this.waitingDefaultSaveResponse = true;
+    }
     this._dataService.createCaseTickler(this.account, this.customer, this._globalStateService.loggedAgent, model)
       .then(() => {
         this._userFeedbackService.handleSuccess("Process case created");
-        this.caseCreated.emit();
+        if (!isDefaultSave) {
+          this.caseCreated.emit();
+        }
+        else {
+          this.onDefaultCaseCreated.emit(model);
+        }
         this.waitingResponse = false;
+        this.waitingDefaultSaveResponse = false;
       }).catch((error) => {
         this._userFeedbackService.handleError("Error creating process case", error);
         this.waitingResponse = false;
+        this.waitingDefaultSaveResponse = false;
     });
+  }
+
+  resetForm() {
+    this.model = this.newModel();
+    this.model.clear();
+  }
+
+  private newModel(): ProcessCaseModel {
+    return {
+      processCode: this.processes && this.processes.length > 0 ? this.processes[0] : null,
+      caseDescription: "",
+      clear: () => {
+        this.model = this.newModel();
+        this.waitingResponse = false;
+        this.waitingDefaultSaveResponse = false;
+        this._cdr.detectChanges();
+      }
+    };
   }
 }

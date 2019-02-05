@@ -40,6 +40,8 @@ import {TemporalStateServiceService} from "../../services/temporal-state-service
 import {ROLE_STANDARD_CODES} from "../../models/role";
 import {MemoNote} from "../../models/memo-note";
 import {CallNotesComponent} from "../call-notes/call-notes.component";
+import {NewProcessCaseComponent} from "../new-process-case/new-process-case";
+import {ProcessCaseModel} from "../../models/process-case-model";
 
 enum ResultsMode {
   NEW_CALL_RECORD,
@@ -87,6 +89,7 @@ export class ManageAccountComponent implements OnInit, OnDestroy, AfterViewInit 
   @ViewChild('newCall') private _newCalliBox: IboxtoolsComponent;
   @ViewChild('customerData') private _customerData: IboxtoolsComponent;
   @ViewChild(NewCallRecordComponent) private _newCallComponent: NewCallRecordComponent;
+  @ViewChild(NewProcessCaseComponent) private _newProcessCaseComponent: NewProcessCaseComponent;
 
   @ViewChild('tabSetAccount') private _tsAccount: NgbTabset;
   @ViewChild('tabSetAdditional') private _tsAdditional: NgbTabset;
@@ -114,6 +117,7 @@ export class ManageAccountComponent implements OnInit, OnDestroy, AfterViewInit 
   searchingCoborrowers: boolean = false;
   searchingAccountDepInfo: boolean = false;
   loadingCustomerData: boolean = true;
+  isCreating: boolean = false;
 
   private isAutoDial: boolean = false;
   private phoneUsed: Phone = null;
@@ -327,7 +331,6 @@ export class ManageAccountComponent implements OnInit, OnDestroy, AfterViewInit 
       this._temporalStateService.casesListInfoByAccount = null;
     }
 
-
     this._hkSubscription.startSubscription(this._globalStateService, () => this._popovers);
   }
 
@@ -361,6 +364,7 @@ export class ManageAccountComponent implements OnInit, OnDestroy, AfterViewInit 
   loadCaseTicklers(processCase: ProcessCase) {
     this.searchingCaseTicklers = true;
     this.isTicklerVisible = true;
+    this.isCreating = false;
     this.processCaseTicklers = [];
     this.currentProcessCase = processCase;
     //gets Process cases
@@ -396,6 +400,7 @@ export class ManageAccountComponent implements OnInit, OnDestroy, AfterViewInit 
 
   loadCases(accountId: SearchTicklerCaseParams) {
     this.searchingProcessCases = true;
+    this.isCreating = false;
     if (!this.isRefreshed) {
       this.currentProcessCase = null;
     }
@@ -439,6 +444,7 @@ export class ManageAccountComponent implements OnInit, OnDestroy, AfterViewInit 
   //tickler case refresh
   refreshCaseTicklers() {
     this.isRefreshed = true;
+    this.isCreating = false;
     this.loadCases(this.criteria);
     this.loadCaseTicklers(this.currentProcessCase);
   }
@@ -461,7 +467,11 @@ export class ManageAccountComponent implements OnInit, OnDestroy, AfterViewInit 
   }
 
   get canShowTicklerProcesses() {
-    return this._globalStateService.loggedAgentHasRoleCode(ROLE_STANDARD_CODES.TICKLER_VIEW);
+    return this._globalStateService.loggedAgentHasRoleCode(ROLE_STANDARD_CODES.TICKLER_VIEW) || this._globalStateService.loggedAgentHasRoleCode(ROLE_STANDARD_CODES.TICKLER_AGENT);
+  }
+
+  get canCreateTicklerCase() {
+    return this._globalStateService.loggedAgentHasRoleCode(ROLE_STANDARD_CODES.TICKLER_AGENT);
   }
 
   ngAfterViewInit() {
@@ -470,6 +480,9 @@ export class ManageAccountComponent implements OnInit, OnDestroy, AfterViewInit 
     }
     if (this._newCallComponent) {
       this._newCallComponent.resetForm(this.isIncomingCall);
+    }
+    if (this._newProcessCaseComponent) {
+      this._newProcessCaseComponent.resetForm();
     }
     // Initially closed
     this._customerData.close();
@@ -720,6 +733,21 @@ export class ManageAccountComponent implements OnInit, OnDestroy, AfterViewInit 
       (this.account.customer.addressIsModifying() && this.account.customer.addressesAreEqual()) ||
       (this.account.customer.phoneIsModifying() && this.account.customer.phonesAreEqual()) ||
       (this.account.customer.emailIsModifying() && this.account.customer.emailsAreEqual()));
+  }
+
+  onNewTickler() {
+    this.isCreating = true;
+  }
+
+  onCancel(){
+    this.isCreating = false;
+  }
+
+  reloadCasesList(model: ProcessCaseModel) {
+    this.closeNewCall();
+    model.clear();
+    this.newCallRecordMode();
+    this.loadCases(this.criteria);
   }
 
 }

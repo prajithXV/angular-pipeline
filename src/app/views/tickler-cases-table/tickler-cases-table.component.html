@@ -25,6 +25,7 @@
         <th>Last tickler</th>
         <th>Assigned user</th>
         <th>Description</th>
+        <th></th>
         <th>Process code</th>
         <th>Status</th>
         <th>Created by</th>
@@ -57,15 +58,30 @@
         <td *ngIf="!isInRelatedInfo">{{tc.contactName}}</td>
         <td>{{tc.lastTicklerName}}</td>
         <td>{{tc.assignedUser}}</td>
-        <td>{{tc.caseDescription}}</td>
+        <td [class.overflow-desc]="isOverflown(tc)" style="max-width: 100px">{{tc.caseDescription}}</td>
+        <td>
+          <i *ngIf="tc != null && tc.caseDescription != null && tc.caseDescription != '' && isOverflown(tc)"
+             class="fa fa-info-circle"
+             style="font-size:1.2em;"
+             [popover]="popDesc"
+             outsideClick="false"
+             triggers="mouseenter: mouseleave"
+             placement="right"
+          ></i>
+        </td>
         <td>{{tc.processCode}}</td>
         <td>{{tc.statusCode}}</td>
         <td>{{tc.createdBy}}</td>
         <td>{{tc.createdDate | coinDateTransform: "STD_DATE"}}</td>
         <td>{{tc.followUpDueDate | coinDateTransform: "STD_DATE"}}</td>
         <td *ngIf="canShowGoButton">
-        <button class="buttonGo btn btn-xs btn-primary" (click)="goToManageCase(tc)">Go</button>
+          <button class="buttonGo btn btn-xs btn-primary" (click)="goToAccount(tc)">Go</button>
         </td>
+
+        <ng-template #popDesc>
+          <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" style="padding: 10px"><strong>Description:</strong> {{tc.caseDescription}}</div>
+        </ng-template>
+
       </tr>
       </tbody>
     </table>

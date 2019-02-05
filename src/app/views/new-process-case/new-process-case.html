@@ -31,10 +31,13 @@
 <div class="row">
   <div class="col-lg-12">
     <div class="form-group">
-      <button class="btn btn-primary" (click)="createProcessCase(model)" [disabled]="waitingResponse">{{saveText}}
+      <button class="btn btn-primary margin-right" (click)="createProcessCase(model, false)" [disabled]="waitingResponse">{{saveText}}
         <waiting-backend *ngIf="waitingResponse"></waiting-backend>
       </button>
-      <button class="btn" (click)="goToRecordCall()">Cancel
+      <button *ngIf="showSave" class="btn margin-right" (click)="createProcessCase(model, true)" [disabled]="waitingDefaultSaveResponse">Save
+        <waiting-backend *ngIf="waitingDefaultSaveResponse"></waiting-backend>
+      </button>
+      <button class="btn" [ngClass]="{'pull-right': showSave}" (click)="goToRecordCall()">Cancel
       </button>
     </div>
   </div>
