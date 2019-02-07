@@ -35,7 +35,7 @@ export class CustomerPhoneDetailComponent implements OnInit {
     this.equalPhones.splice(0);
     this.newPhones.splice(0);
     for (let phone of this.customer.lastPhoneVerification.newPhones) {
-      let pCurrent: Phone = this.customer.phones.find(p => phone.number === p.number);
+      let pCurrent: Phone = this.customer.phones.find(p => phone.number === p.number && phone.lineType === p.lineType);
       if (pCurrent) {
         this.equalPhones.push({current: pCurrent, newest: phone});
       }
@@ -47,7 +47,7 @@ export class CustomerPhoneDetailComponent implements OnInit {
     // Load obsoletePhones
     this.obsoletePhones.splice(0);
     for (let phone of this.customer.lastPhoneVerification.phones) {
-      if (!this.customer.lastPhoneVerification.newPhones.find(p => phone.number === p.number)) {
+      if (!this.customer.lastPhoneVerification.newPhones.find(p => phone.number === p.number && phone.lineType === p.lineType)) {
         this.obsoletePhones.push(phone);
       }
     }
