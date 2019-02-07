@@ -51,19 +51,19 @@ export const custInqBody = {
             "cifNo": "AAJ5318",
             "phoneLst": [
                 {
-                    "phoneNum": "5551628976",
+                    "phoneNum": "3376546539",
                     "phoneType": "Home Phone",
                     "phoneLineType": "P",
                     "callsMadeToday": null
                 },
                 {
-                    "phoneNum": "5556555069",
+                    "phoneNum": "3372337630",
                     "phoneType": "Business Phone",
                     "phoneLineType": null,
                     "callsMadeToday": null
                 },
                 {
-                    "phoneNum": "5554473843",
+                    "phoneNum": "3376546539",
                     "phoneType": "Home Cell Phone",
                     "phoneLineType": null,
                     "callsMadeToday": null
@@ -83,20 +83,28 @@ export const custInqBody = {
                     }
                 ],
                 "newPhone": [
-                    {
-                        "phoneNr": "123456789",
-                        "phoneType": "P",
-                        "phoneLineType": ""
-                    },
-                    {
-                        "phoneNr": "987654321",
-                        "phoneType": "P",
-                        "phoneLineType": ""
-                    }
+                  {
+                    "phoneNum": "3376546539",
+                    "phoneType": "Home Phone",
+                    "phoneLineType": "P",
+                    "callsMadeToday": null
+                  },
+                  {
+                    "phoneNum": "3372337630",
+                    "phoneType": "Business Phone",
+                    "phoneLineType": null,
+                    "callsMadeToday": null
+                  },
+                  {
+                    "phoneNum": "3376546539",
+                    "phoneType": "Home Cell Phone",
+                    "phoneLineType": null,
+                    "callsMadeToday": null
+                  }
                 ],
                 "note": "Test phone POST",
                 "statusFlg": "VERIFIED",
-                "createdDt": "2018-11-15T14:56:23.843",
+                "createdDt": "2019-01-30T14:56:23.843",
                 "createdBy": "vsharapo"
             },
             "languageIndicator": null,
