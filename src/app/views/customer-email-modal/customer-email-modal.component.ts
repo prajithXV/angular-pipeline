@@ -148,6 +148,34 @@ export class CustomerEmailModalComponent implements OnInit, OnChanges {
     return true;
   }
 
+  areEqualEmails(emailText: string, index: number) {
+    for (let i = 0; i < this.customerEmails.length; ++i) {
+      let email = this.customerEmails[i];
+      if (!email.isDeleted) {
+        if (!emailText) {
+          if (i < this.customerEmails.length) {
+            for (let j = i + 1; j < this.customerEmails.length; ++j) {
+              let auxEmail = this.customerEmails[j];
+              if (!auxEmail.isDeleted) {
+                if (email.email === auxEmail.email) {
+                  return true;
+                }
+              }
+            }
+          }
+        }
+        else {
+          if (i != index) {
+            if (email.email === emailText) {
+              return true;
+            }
+          }
+        }
+      }
+    }
+    return false;
+  }
+
   isNewEmail(iEmail: number) {
     return iEmail >= this.originalEmails.length;
   }

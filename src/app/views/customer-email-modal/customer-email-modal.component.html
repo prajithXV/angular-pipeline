@@ -36,7 +36,7 @@
           </div>
           <div class="col-lg-5 col-md-5 col-sm-5 col-xs-5">
             <input *ngIf="email && !email.isDeleted" type="text" [(ngModel)]="email.email" placeholder="eMail" class="form-control"
-                   [class.wrong-email]="!regExpEmail.test(email.email)">
+                   [class.wrong-email]="!regExpEmail.test(email.email) || areEqualEmails(email.email, ind)">
             <label *ngIf="!email || email.isDeleted" class="text-danger" style="font-style: italic">eMail deleted</label>
           </div>
           <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 no-padding" style="display: flex">
@@ -59,7 +59,7 @@
             </div>
             <div class="col-lg-5 col-md-5 col-sm-5 col-xs-5">
               <input type="text" [(ngModel)]="email.email" placeholder="eMail" class="form-control"
-                     [class.wrong-email]="!regExpEmail.test(email.email)">
+                     [class.wrong-email]="!regExpEmail.test(email.email) || areEqualEmails(email.email, ind)">
             </div>
             <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 no-padding" style="display: flex">
               <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1"></div>
@@ -98,7 +98,7 @@
   <div class="modal-footer">
     <button type="button" class="pull-left btn btn-primary"
             *ngIf="customer.needsEmailVerification()"
-            [disabled]="areEmailsDirty() || isDisabled() || !areEmailsInCorrectFormat()"
+            [disabled]="areEmailsDirty() || isDisabled() || !areEmailsInCorrectFormat() || areEqualEmails()"
             (click)="verifyJHEmail()">
       <span *ngIf="customer.emails.length > 0">eMails are correct</span>
       <span *ngIf="customer.emails.length == 0">Verify Customer has no eMails</span>
@@ -106,7 +106,7 @@
     </button>
     <button type="button" class="pull-left btn btn-warning"
             *ngIf="customer.needsEmailVerification() || customer.hasValidEmailVerification()"
-            [disabled]="!areEmailsDirty() || isDisabled() || !areEmailsInCorrectFormat()"
+            [disabled]="!areEmailsDirty() || isDisabled() || !areEmailsInCorrectFormat() || areEqualEmails()"
             (click)="changeCustomerEmail()">
       Change eMails
       <waiting-backend *ngIf="waitingChangeResponse"></waiting-backend>
@@ -125,6 +125,10 @@
       Discard modification
       <waiting-backend *ngIf="waitingDiscardResponse"></waiting-backend>
     </button>
+    <label class="modal-title title text-danger pull-left" style="padding-left: 10px"
+           *ngIf="areEqualEmails() && (customer.needsEmailVerification() || customer.hasValidEmailVerification())">
+      Some emails are equal
+    </label>
   </div>
 
   <confirmation-modal

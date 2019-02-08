@@ -52,7 +52,7 @@
             <div class="col-lg-5 col-md-5 col-sm-5 col-xs-5 phone-type">
               <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 no-padding-right" *ngIf="phone && !phone.isDeleted">
                 <input type="text" [(ngModel)]="phone.number" placeholder="Phone" class="form-control"
-                       [class.wrong-phone]="!regExpPhone.test(phone.number)">
+                       [class.wrong-phone]="!regExpPhone.test(phone.number) || areEqualPhones(phone.number, ind)">
               </div>
               <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 no-padding-right text-center" *ngIf="!phone || phone.isDeleted">
                 <label class="text-danger" style="font-style: italic">Phone deleted</label>
@@ -94,7 +94,7 @@
             <div class="col-lg-5 col-md-5 col-sm-5 col-xs-5 phone-type">
               <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 no-padding-right">
                 <input type="text" [(ngModel)]="phone.number" placeholder="Phone" class="form-control"
-                       [class.wrong-phone]="!regExpPhone.test(phone.number)">
+                       [class.wrong-phone]="!regExpPhone.test(phone.number) || areEqualPhones(phone.number, ind)">
               </div>
             </div>
             <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2" style="display: flex">
@@ -134,14 +134,14 @@
   <div class="modal-footer">
     <button type="button" class="pull-left btn btn-primary"
             *ngIf="customer.needsPhoneVerification() && !customer.phoneIsUnderCreation()"
-            [disabled]="arePhonesDirty() || isDisabled() || !arePhonesInCorrectFormat()"
+            [disabled]="arePhonesDirty() || isDisabled() || !arePhonesInCorrectFormat() || areEqualPhones()"
             (click)="verifyJHPhone()">
       Phones are correct
       <waiting-backend *ngIf="waitingVerifyResponse"></waiting-backend>
     </button>
     <button type="button" class="pull-left btn btn-warning"
             *ngIf="customer.needsPhoneVerification() || customer.hasValidPhoneVerification() || customer.phoneIsUnderCreation()"
-            [disabled]="!arePhonesDirty() || isDisabled() || !arePhonesInCorrectFormat() || !customerHasPhones()"
+            [disabled]="!arePhonesDirty() || isDisabled() || !arePhonesInCorrectFormat() || !customerHasPhones()  || areEqualPhones()"
             (click)="changeCustomerPhone()">
       Change phones
       <waiting-backend *ngIf="waitingChangeResponse"></waiting-backend>
@@ -160,6 +160,10 @@
       Discard modification
       <waiting-backend *ngIf="waitingDiscardResponse"></waiting-backend>
     </button>
+    <label class="modal-title title text-danger pull-left" style="padding-left: 10px"
+           *ngIf="areEqualPhones() && (customer.needsPhoneVerification() || customer.hasValidPhoneVerification() || customer.phoneIsUnderCreation())">
+      Some phone numbers are equal
+    </label>
   </div>
 
   <confirmation-modal

@@ -152,6 +152,34 @@ export class CustomerPhoneModalComponent implements OnInit {
     return true;
   }
 
+  areEqualPhones(phoneNumber: string, index: number) {
+    for (let i = 0; i < this.customerPhones.length; ++i) {
+      let phone = this.customerPhones[i];
+      if (!phone.isDeleted) {
+        if (!phoneNumber) {
+          if (i < this.customerPhones.length) {
+            for (let j = i + 1; j < this.customerPhones.length; ++j) {
+              let auxPhone = this.customerPhones[j];
+              if (!auxPhone.isDeleted) {
+                if (phone.number === auxPhone.number) {
+                  return true;
+                }
+              }
+            }
+          }
+        }
+        else {
+          if (i != index) {
+            if (phone.number === phoneNumber) {
+              return true;
+            }
+          }
+        }
+      }
+    }
+    return false;
+  }
+
   isNewPhone(iPhone: number) {
     return iPhone >= this.originalPhones.length;
   }

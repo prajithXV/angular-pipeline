@@ -26,25 +26,26 @@ export const custInqBody = {
                 "newPostalCode": "705033655",
                 "note": "Test addr POST",
                 "statusFlg": "VERIFIED",
-                "createdDt": "2018-10-12T11:16:33.013",
+                "createdDt": "2019-01-12T11:16:33.013",
                 "createdBy": "vsharapo"
             },
             // "emailLst": null,
             "emailLst": [
-              "hola@gmail.com"
+              "hola@gmail.com",
+              "adeu@gmail.com"
             ],
             // "emailLstVer": null,
             "emailLstVer": {
                 "email": [
-                  "adios@gmail.com",
                   "hola@gmail.com"
                 ],
                 "newEmail": [
-                  "hola@gmail.com"
+                  "hola@gmail.com",
+                  "adeu@gmail.com"
                 ],
                 "note": "Test email POST",
                 "statusFlg": "VERIFIED",
-                "createdDt": "2018-10-14T11:51:21.61",
+                "createdDt": "2018-01-30T11:51:21.61",
                 "createdBy": "vsharapo"
             },
             "accountNumber": null,
@@ -84,27 +85,24 @@ export const custInqBody = {
                 ],
                 "newPhone": [
                   {
-                    "phoneNum": "3376546539",
+                    "phoneNr": "3376546539",
                     "phoneType": "Home Phone",
-                    "phoneLineType": "P",
-                    "callsMadeToday": null
+                    "phoneLineType": "P"
                   },
                   {
-                    "phoneNum": "3372337630",
+                    "phoneNr": "3372337630",
                     "phoneType": "Business Phone",
-                    "phoneLineType": null,
-                    "callsMadeToday": null
+                    "phoneLineType": null
                   },
                   {
-                    "phoneNum": "3376546539",
+                    "phoneNr": "3376546539",
                     "phoneType": "Home Cell Phone",
-                    "phoneLineType": null,
-                    "callsMadeToday": null
+                    "phoneLineType": null
                   }
                 ],
                 "note": "Test phone POST",
-                "statusFlg": "VERIFIED",
-                "createdDt": "2019-01-30T14:56:23.843",
+                "statusFlg": "MODIFY",
+                "createdDt": "2018-01-30T14:56:23.843",
                 "createdBy": "vsharapo"
             },
             "languageIndicator": null,
