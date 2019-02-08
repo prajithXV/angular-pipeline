@@ -58,7 +58,7 @@
 
 
   <div class="buttons form-group pull-right">
-    <button (click)="search(); $event.preventDefault()" [disabled]="noCriteria(criteria) || searchingCustomer || aType.invalid" class="btn btn-sm btn-primary m-t-n-xs" type="submit">Search
+    <button (click)="search(); $event.preventDefault()" [disabled]="noCriteria(criteria) || searchingCustomer || aType.invalid" class="btn btn-sm btn-primary m-t-n-xs margin-right" type="submit">Search
       <waiting-backend *ngIf="searchingCustomer"></waiting-backend>
     </button>
     <button (click)="reset()" class="btn btn-sm m-t-n-xs" type="button">Reset</button>

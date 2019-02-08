@@ -119,7 +119,6 @@ import { NewTicklerAttributeMapComponent } from './views/new-tickler-attribute-m
 import { NewTicklerTypeMapComponent } from './views/new-tickler-type-map/new-tickler-type-map.component';
 import { AttributeTypeToStringPipe } from './pipes/attribute-type-to-string.pipe';
 import { BooleanToMandatoryStringPipe } from './pipes/boolean-to-mandatory-string.pipe';
-import { ManageCaseComponent } from './views/manage-case/manage-case.component';
 import { TicklerCasesDetailComponent } from './views/tickler-cases-detail/tickler-cases-detail.component';
 import {ConsentPipe, ConsentPipeCorrectConversion} from './pipes/consent.pipe';
 import { CustomerConsentComponent } from './views/customer-consent/customer-consent.component';
@@ -246,7 +245,6 @@ export const MY_MOMENT_FORMATS = {
     AdminAttributesComponent,
     NewTicklerAttributeMapComponent,
     NewTicklerTypeMapComponent,
-    ManageCaseComponent,
     TicklerCasesDetailComponent,
     CustomerConsentComponent,
     HeaderSorterComponent,

@@ -1,10 +1,3 @@
-<!--New button-->
-<!--<div *ngIf="currentProcessCase && !searchingCaseTicklers && hasToShowNewButton">-->
-  <!--<button class="btn btn-sm btn-primary" [disabled]="isCreating || currentProcessCase.statusCode == 'CLOSED'" (click)="onNewTickler()">-->
-    <!--<i class="fa fa-file-o"></i> New-->
-  <!--</button>-->
-<!--</div>-->
-
 <div *ngIf="searchingCaseTicklers" class="search">
   <waiting-backend></waiting-backend>
   Searching...
@@ -23,6 +16,7 @@
         [processCaseTicklers]="processCaseTicklers"
         [ticklerTypes]="ticklerTypes"
         [currentProcessCase]="currentProcessCase"
+        [isAccountPage]="isAccountPage"
         (onCancelCaseTickler)="onNewTicklerCancelled()"
         (onAddCaseTickler)="onNewTicklerAdded()">
       </new-tickler-case>
@@ -40,6 +34,7 @@
       <th>Tickler</th>
       <th>Name</th>
       <th>Description</th>
+      <th></th>
       <th>Created by</th>
       <th>Created on</th>
     </tr>
@@ -49,7 +44,17 @@
       <tr>
         <td>{{ct.id}}</td>
         <td>{{ct.ticklerName}}</td>
-        <td>{{ct.ticklerDescription}}</td>
+        <td [class.overflow-desc]="isOverflown(ct)" style="max-width: 100px">{{ct.ticklerDescription}}</td>
+        <td>
+          <i *ngIf="ct != null && ct.ticklerDescription != null && ct.ticklerDescription != '' && isOverflown(ct)"
+             class="fa fa-info-circle"
+             style="font-size:1.2em;"
+             [popover]="popDesc"
+             outsideClick="false"
+             triggers="mouseenter: mouseleave"
+             placement="right"
+          ></i>
+        </td>
         <td>{{ct.createdBy}}</td>
         <td>{{ct.createdDate | coinDateTransform}}</td>
         <td>
@@ -79,8 +84,8 @@
         <td colspan="10" class="col-padding white">
           <div class="box-shadow box-padding col-lg-12">
             <h3 class="title text-success">Attributes</h3>
-            <span *ngIf="!ct.attributes">No attributes.</span>
-            <table class="table" *ngIf="ct.attributes">
+            <span *ngIf="!ct.attributes" style="padding-left: 8px">No attributes.</span>
+            <table class="table" *ngIf="ct.attributes" style="margin-bottom: 0">
               <thead>
               <tr>
                 <td><strong>Name</strong></td>
@@ -94,9 +99,19 @@
               </tr>
               </tbody>
             </table>
+            <div *ngIf="ct.ticklerDescription != null && ct.ticklerDescription != ''"
+                 style="margin-top: 20px">
+              <h3 class="title text-success">Description</h3>
+              <span style="padding-left: 8px;">{{ct.ticklerDescription}} </span>
+            </div>
           </div>
         </td>
       </tr>
+
+      <ng-template #popDesc>
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" style="padding: 10px"><strong>Description:</strong> {{ct.ticklerDescription}}</div>
+      </ng-template>
+
     </ng-container>
     </tbody>
   </table>

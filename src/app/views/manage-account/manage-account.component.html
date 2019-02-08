@@ -158,20 +158,45 @@
                    [isInRelatedInfo]="true"
                    [ticklerProcessCases]="processCases"
                    [processCase]="currentProcessCase"
-                   (onSearchCases)="loadCaseTicklers($event)">
-                 </tickler-cases-table>
+                   (onSearchCases)="loadCaseTicklers($event)"
+                 ></tickler-cases-table>
 
-                  <ng-container *ngIf="processCases?.length > 0">
-                  <hr/>
-                  <h4 style="margin-bottom: 20px;">Ticklers</h4>
-                  <process-case-tickler-table
-                    [ticklerTypes]="ticklerTypes"
-                    [hasToShowNewButton]="false"
-                    [currentProcessCase]="currentProcessCase"
-                    [processCaseTicklers]="processCaseTicklers"
-                    [searchingCaseTicklers]="searchingCaseTicklers"
-                    (onAddTicklerCase)="refreshCaseTicklers()">
-                  </process-case-tickler-table>
+                  <ng-container *ngIf="currentProcessCase != null">
+                    <div class="ibox-title case-title">
+                      <h3>Case <strong>{{currentProcessCase.id}} {{currentProcessCase.processCode}}</strong></h3>
+                    </div>
+                    <div class="ibox-content">
+                      <div class="row" *ngIf="!searchingCaseTicklers">
+                        <div class="col-lg-10">
+                          <h3 class="title2 text-success">Ticklers</h3>
+                        </div>
+                        <div class="col-lg-2">
+                          <button *ngIf="currentProcessCase != null && canCreateTicklerCase"
+                            class="btn btn-sm btn-primary pull-right"
+                                  [disabled]="isCreating" (click)="onNewTickler()">
+                            <i class="fa fa-file-o"></i> New
+                          </button>
+                        </div>
+                      </div>
+
+                      <process-case-tickler-table
+                        [isCreating]="isCreating"
+                        [ticklerTypes]="ticklerTypes"
+                        [currentProcessCase]="currentProcessCase"
+                        [processCaseTicklers]="processCaseTicklers"
+                        [searchingCaseTicklers]="searchingCaseTicklers"
+                        [isAccountPage]="true"
+                        (onAddTicklerCase)="refreshCaseTicklers()"
+                        (onCancel)="onCancel()"
+                        (onDeleteTicklerCase)="refreshCaseTicklers()"
+                      ></process-case-tickler-table>
+
+                      <div *ngIf="currentProcessCase.caseDescription != null && currentProcessCase.caseDescription != '' && !searchingCaseTicklers">
+                        <h3 class="title2 text-success">Description</h3>
+                        <span>{{currentProcessCase.caseDescription}}</span>
+                      </div>
+
+                    </div>
                   </ng-container>
                 </ng-template>
               </ngb-tab>
@@ -215,6 +240,8 @@
             [account]="account"
             [customer]="account?.customer"
             saveText="Save and quit"
+            [showSave]="true"
+            (onDefaultCaseCreated)="reloadCasesList($event)"
             (caseCreated)="processCaseCreated()"
             (onCancel)="newCallRecordMode()">
           </new-process-case>

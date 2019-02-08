@@ -39,3 +39,10 @@ div.ibox-tools i.fa{
 .size-icon {
   font-size: 15px;
 }
+
+
+.ibox-title.case-title {
+  border-style: none !important;
+  padding-top: 0;
+  min-height: 20px;
+}

@@ -22,7 +22,7 @@ export const getCaseBody = [
     "AccountId": "6300104605",
     "AccountType": "L",
     "CifId": "JAA1223",
-    "CaseDesc": "sdfgsdfg",
+    "CaseDesc": "This is a description for the case identified with the id 17 and is just to observe how it will look a long description in the popover.",
     "ProcessCd": "SPOC",
     "StatusCd": "NEW",
     "FollowUpDueDt": "2018-03-27T11:23:15.303",

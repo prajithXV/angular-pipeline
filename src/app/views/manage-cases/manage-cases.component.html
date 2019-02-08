@@ -44,6 +44,7 @@
             [pagination]="pagination"
             [sort]="sortOrder"
             [searchingProcessCases]="searchingProcessCases"
+            [canShowGoButton]="true"
             (onSearchCases)="loadCaseTicklers($event)"
             (onSearch)="refreshOrder($event)"
             (onPageChange)="incPage($event)">

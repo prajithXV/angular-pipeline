@@ -2,11 +2,9 @@
   padding: 30px 60px !important;
 }
 
-
 .white{
   background-color: white;
 }
-
 
 .pointer{
   cursor: pointer;
@@ -21,12 +19,37 @@
   color: black;
 }
 
-
 .box-padding{
   padding-top: 15px;
   padding-bottom: 15px;
   font-size: 10pt;
 }
 
+.overflow-desc {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
 
+:host /deep/ .popover-content{
+  color: #000;
+  background: white;
+  padding: 0;
+}
 
+:host /deep/ .popover>.arrow:after {
+  border-right-color: white;
+}
+
+:host /deep/ .popover>.arrow {
+  border-right-color: #BDA990;
+}
+
+:host /deep/ .popover{
+  color: #000;
+  background: white;
+  width: 150px;
+  min-height: 50px;
+  z-index: 1700;
+  border: 1px solid #BDA990;
+}
