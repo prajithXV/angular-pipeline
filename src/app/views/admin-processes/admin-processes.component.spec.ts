@@ -26,6 +26,7 @@ import {NgbModalStack} from "@ng-bootstrap/ng-bootstrap/modal/modal-stack";
 import {SemaphoreComponent} from "../semaphore/semaphore.component";
 import {TickCrossComponent} from "../tick-cross/tick-cross.component";
 import {TicklerType} from "../../models/tickler-types";
+import {ConfirmationModalComponent} from "../confirmation-modal/confirmation-modal.component";
 
 describe('AdminProcessesComponent', () => {
   let component: AdminProcessesComponent;
@@ -35,7 +36,7 @@ describe('AdminProcessesComponent', () => {
     TestBed.configureTestingModule({
       imports: [ FormsModule, HttpModule, NgbModule ],
       declarations: [ AdminProcessesComponent, TicklerProcessTableComponent, TicklerTypesTableComponent, WaitingBackendComponent, CoinDateTransformPipe,
-                      NewTicklerTypeComponent, NewTicklerAttributeMapComponent, NewTicklerTypeMapComponent, AttributeTypeToStringPipe, SemaphoreComponent, TickCrossComponent ],
+                      NewTicklerTypeComponent, NewTicklerAttributeMapComponent, NewTicklerTypeMapComponent, AttributeTypeToStringPipe, SemaphoreComponent, TickCrossComponent, ConfirmationModalComponent ],
       providers: [ { provide: DataService, useValue: dataServiceMock }, { provide: UserFeedbackService, useValue: userFeedbackMock }, { provide: GlobalStateService, useValue: globalStateServiceMock },
                     DatePipe, BooleanToStringPipe, NgbModal, NgbModalStack ],
     })

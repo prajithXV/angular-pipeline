@@ -5,9 +5,7 @@ import {FormsModule} from "@angular/forms";
 import {CoinDateInputComponent} from "../coin-date-input/coin-date-input.component";
 import {DataService} from "../../services/data.service";
 import {BackendCommsService} from "../../services/backend-comms.service";
-import {HttpModule} from "@angular/http";
 import {UserFeedbackService} from "../../services/user-feedback.service";
-import {ToastOptions, ToastsManager} from "ng2-toastr";
 import {DatePipe} from "@angular/common";
 import {CiscoCommsService} from "../../services/cisco-comms.service";
 import {DatepickerComponent} from "../datepicker/datepicker.component";
@@ -19,6 +17,9 @@ import {BooleanToStringDuePipe, BooleanToStringOrderPipe} from "../../pipes/bool
 import {WaitingBackendComponent} from "../waiting-backend/waiting-backend.component";
 import {ConsentPipeCorrectConversion} from "../../pipes/consent.pipe";
 import {TelephonePipe} from "../../pipes/telephone.pipe";
+import {HttpClientModule} from "@angular/common/http";
+import {HttpClientTestingModule} from "@angular/common/http/testing";
+import {ToastrModule} from "ngx-toastr";
 
 
 describe('CallsPerHourCriteriaComponent', () => {
@@ -27,9 +28,9 @@ describe('CallsPerHourCriteriaComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      imports: [ FormsModule, HttpModule, OwlDateTimeModule, OwlMomentDateTimeModule, BrowserAnimationsModule ],
+      imports: [ FormsModule, OwlDateTimeModule, OwlMomentDateTimeModule, BrowserAnimationsModule, HttpClientModule, HttpClientTestingModule, ToastrModule.forRoot()],
       declarations: [ CallsPerHourCriteriaComponent, CoinDateInputComponent, DatepickerComponent, WaitingBackendComponent ],
-      providers: [ DataService, BackendCommsService, UserFeedbackService, ToastsManager, ToastOptions, DatePipe, CiscoCommsService,
+      providers: [ DataService, BackendCommsService, UserFeedbackService, DatePipe, CiscoCommsService,
                    BooleanToStringPipe, BooleanToStringOrderPipe, ConsentPipeCorrectConversion, BooleanToStringDuePipe, TelephonePipe ]
     })
     .compileComponents();

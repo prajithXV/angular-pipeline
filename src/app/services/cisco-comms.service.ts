@@ -80,7 +80,7 @@ export class CiscoCommsService {
 
 
   constructor(private _http: HttpClient) {
-    console.log("Cisco comm service created");
+    // console.log("Cisco comm service created");
   }
 
   getState(userId: string, tokenAuth: string): Promise<AgentState> {

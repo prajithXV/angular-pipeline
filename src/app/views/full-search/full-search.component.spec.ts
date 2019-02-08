@@ -11,9 +11,7 @@ import {WaitingBackendComponent} from "../waiting-backend/waiting-backend.compon
 import {GlobalStateService} from "../../services/global-state.service";
 import {DataService} from "../../services/data.service";
 import {BackendCommsService} from "../../services/backend-comms.service";
-import {HttpModule} from "@angular/http";
 import {UserFeedbackService} from "../../services/user-feedback.service";
-import {ToastOptions, ToastsManager} from "ng2-toastr";
 import {DatePipe} from "@angular/common";
 import {BooleanToStringPipe} from "../../pipes/boolean-to-string.pipe";
 import {TelephonePipe} from "../../pipes/telephone.pipe";
@@ -25,6 +23,9 @@ import {dataServiceMock} from "../../../test-utils/dataServiceMock";
 import {globalStateServiceMock} from "../../../test-utils/globalStateServiceMock";
 import {TemporalStateServiceService} from "../../services/temporal-state-service.service";
 import {FilterCodeToNamePipe} from "../../pipes/filter-code-to-name.pipe";
+import {HttpClientModule} from "@angular/common/http";
+import {HttpClientTestingModule} from "@angular/common/http/testing";
+import {ToastrModule} from "ngx-toastr";
 
 describe('FullSearchComponent', () => {
   let component: FullSearchComponent;
@@ -32,9 +33,9 @@ describe('FullSearchComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      imports: [ NgbTabsetModule, FormsModule, PopoverModule, HttpModule, RouterTestingModule, NgbTabsetModule ],
+      imports: [ NgbTabsetModule, FormsModule, PopoverModule, HttpClientModule, HttpClientTestingModule, RouterTestingModule, NgbTabsetModule, ToastrModule.forRoot() ],
       declarations: [ FullSearchComponent, NextCallComponent, SearchCriteriaComponent, SearchCaseCriteriaComponent, WaitingBackendComponent, FilterCodeToNamePipe ],
-      providers: [ {provide: GlobalStateService, useValue: globalStateServiceMock }, { provide: DataService, useValue: dataServiceMock }, BackendCommsService, UserFeedbackService, ToastsManager, ToastOptions, DatePipe, BooleanToStringPipe,
+      providers: [ {provide: GlobalStateService, useValue: globalStateServiceMock }, { provide: DataService, useValue: dataServiceMock }, BackendCommsService, UserFeedbackService, DatePipe, BooleanToStringPipe,
                    TelephonePipe , ConsentPipeCorrectConversion, BooleanToStringOrderPipe, BooleanToStringDuePipe, CiscoCommsService, NgbTabsetConfig, TemporalStateServiceService, PopoverConfig, ComponentLoaderFactory, PositioningService ]
     })
     .compileComponents();

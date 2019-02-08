@@ -6,7 +6,6 @@ import {DataService} from "../../services/data.service";
 
 import {HttpModule} from "@angular/http";
 import {UserFeedbackService} from "../../services/user-feedback.service";
-import {ToastOptions, ToastsManager} from "ng2-toastr";
 import {DatePipe} from "@angular/common";
 import {CiscoCommsService} from "../../services/cisco-comms.service";
 import {dataServiceMock} from "../../../test-utils/dataServiceMock";
@@ -31,7 +30,7 @@ describe('CampaignStatsComponent', () => {
         {provide: GlobalStateService, useValue: globalStateServiceMock},
         {
           provide: UserFeedbackService,
-          useValue: userFeedbackMock}, ToastsManager, ToastOptions, DatePipe, CiscoCommsService ]
+          useValue: userFeedbackMock}, DatePipe, CiscoCommsService ]
     })
     .compileComponents();
   }));

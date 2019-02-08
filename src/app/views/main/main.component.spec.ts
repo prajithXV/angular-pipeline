@@ -31,7 +31,6 @@ import {OwlDateTimeModule} from "ng-pick-datetime";
 import {DataService} from "../../services/data.service";
 import {HttpModule} from "@angular/http";
 import {UserFeedbackService} from "../../services/user-feedback.service";
-import {ToastOptions, ToastsManager} from "ng2-toastr";
 import {APP_BASE_HREF, DatePipe, Location, LocationStrategy, PathLocationStrategy} from "@angular/common";
 import {BooleanToStringPipe} from "../../pipes/boolean-to-string.pipe";
 import {TelephonePipe} from "../../pipes/telephone.pipe";
@@ -51,6 +50,7 @@ import {SearchAccountCriteriaParams} from "../../models/search-account-criteria-
 import {SearchTicklerCaseParams} from "../../models/search-tickler-case-params";
 import {Router} from "@angular/router";
 import {FilterCodeToNamePipe} from "../../pipes/filter-code-to-name.pipe";
+import {ConfirmationModalComponent} from "../confirmation-modal/confirmation-modal.component";
 
 describe('MainComponent', () => {
   let component: MainComponent;
@@ -62,8 +62,9 @@ describe('MainComponent', () => {
       declarations: [ MainComponent, FullSearchComponent, SearchComponent, ManageCasesComponent, NextCallComponent, SearchCriteriaComponent, SearchCaseCriteriaComponent,
                       CampaignListAccountsTableComponent, CustomerSummaryComponent, AccountsTableComponent, TicklerCasesTableComponent, ProcessCaseTicklerTableComponent,
                       WaitingBackendComponent, PaginatorComponent, CoinDateTransformPipe, NewProcessCaseComponent, AddressPipe, CoinCurrencyPipe, HeaderSorterComponent,
-                      NewTicklerCaseComponent, CampaignAttributeEditionComponent, CoinNumberInputComponent, DatepickerComponent, CoinNumberInputErrorsComponent, FilterCodeToNamePipe ],
-      providers: [ { provide:DataService, useValue: dataServiceMock }, { provide: UserFeedbackService, useValue: userFeedbackMock }, ToastsManager, ToastOptions, DatePipe, BooleanToStringPipe, TelephonePipe,
+                      NewTicklerCaseComponent, CampaignAttributeEditionComponent, CoinNumberInputComponent, DatepickerComponent, CoinNumberInputErrorsComponent, FilterCodeToNamePipe,
+                      ConfirmationModalComponent ],
+      providers: [ { provide:DataService, useValue: dataServiceMock }, { provide: UserFeedbackService, useValue: userFeedbackMock }, DatePipe, BooleanToStringPipe, TelephonePipe,
                    ConsentPipeCorrectConversion, BooleanToStringOrderPipe, BooleanToStringDuePipe, CiscoCommsService, TemporalStateServiceService,  Location,
                   { provide: LocationStrategy, useClass: PathLocationStrategy }, { provide: APP_BASE_HREF, useValue: '/my/app'}, { provide: GlobalStateService, useValue: globalStateServiceMock },
                   NgbTabsetConfig, PopoverConfig, ComponentLoaderFactory, PositioningService, NgbModal, NgbModalStack ]

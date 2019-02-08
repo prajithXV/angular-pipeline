@@ -1,12 +1,13 @@
 import { TestBed, inject } from '@angular/core/testing';
 
 import { UserFeedbackService } from './user-feedback.service';
-import {ToastOptions, ToastsManager} from "ng2-toastr";
+import {ToastrModule} from "ngx-toastr";
 
 describe('UserFeedbackService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
-      providers: [ UserFeedbackService, ToastsManager, ToastOptions ]
+      imports: [ToastrModule.forRoot()],
+      providers: [ UserFeedbackService ]
     });
   });
 

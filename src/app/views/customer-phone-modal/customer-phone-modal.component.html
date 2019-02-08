@@ -1,9 +1,9 @@
 <div class="row">
   <div class="header text-right">
-    <label class="modal-title title text-danger" *ngIf="customer.needsPhoneVerification() && customer.lastPhoneVerification">
-      Last verification: {{customer.lastPhoneVerification.createdDate | coinDateTransform}}. New verification needed.
+    <label class="modal-title title text-danger" *ngIf="customer?.needsPhoneVerification() && customer?.lastPhoneVerification">
+      Last verification: {{customer?.lastPhoneVerification.createdDate | coinDateTransform}}. New verification needed.
     </label>
-    <label class="modal-title title text-danger" *ngIf="customer.needsPhoneVerification() && !customer.lastPhoneVerification">
+    <label class="modal-title title text-danger" *ngIf="customer?.needsPhoneVerification() && !customer?.lastPhoneVerification">
       Not verified.
     </label>
     <label class="modal-title title orange" *ngIf="isValidationOrigin()">
@@ -12,8 +12,8 @@
     <label class="modal-title title orange" *ngIf="isDiscardOrigin()">
       Modification in progress.
     </label>
-    <label class="modal-title title text-info" *ngIf="customer.hasValidPhoneVerification()">
-      Last verification: {{customer.lastPhoneVerification.createdDate | coinDateTransform}}.
+    <label class="modal-title title text-info" *ngIf="customer?.hasValidPhoneVerification()">
+      Last verification: {{customer?.lastPhoneVerification.createdDate | coinDateTransform}}.
     </label>
   </div>
 </div>
@@ -23,14 +23,14 @@
       Customer does not have phones, but must have at least one.
     </label>
     <!-- Modal when customer phone needs verification and fields can be modified -->
-    <div class="form-group data-container" *ngIf="customer.needsPhoneVerification() || customer.hasValidPhoneVerification() || customer.phoneIsUnderCreation()">
+    <div class="form-group data-container" *ngIf="customer?.needsPhoneVerification() || customer?.hasValidPhoneVerification() || customer?.phoneIsUnderCreation()">
       <div class="col-lg-12 no-padding" *ngFor="let phone of customerPhones; let ind = index;" [class.row-format]="ind % 2 == 0">
         <!-- Existing phone that can be modifyed -->
         <div *ngIf="phone && !isNewPhone(ind)">
           <div class="col-lg-12 no-padding row-container">
             <div class="col-lg-5 col-md-5 col-sm-5 col-xs-5 phone-type">
               <div class="col-lg-10 col-md-10 col-sm-10 col-xs-10">
-                <label style="white-space: normal">{{ customer.phones[ind].type }}</label>
+                <label style="white-space: normal">{{ customer?.phones[ind].type }}</label>
               </div>
               <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 line-type text-right">
                 <i *ngIf="phone.lineType != 'P'" class="fa fa-mobile-phone" title="Cellular"></i>
@@ -47,7 +47,7 @@
           </div>
           <div class="col-lg-12 no-padding row-container number">
             <div class="col-lg-5 col-md-5 col-sm-5 col-xs-5" style="padding-right: 5px;">
-              <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 no-padding text-right"><label>{{customer.phones[ind] | telephoneNumber }}</label></div>
+              <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 no-padding text-right"><label>{{customer?.phones[ind] | telephoneNumber }}</label></div>
             </div>
             <div class="col-lg-5 col-md-5 col-sm-5 col-xs-5 phone-type">
               <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 no-padding-right" *ngIf="phone && !phone.isDeleted">
@@ -133,15 +133,15 @@
   </div>
   <div class="modal-footer">
     <button type="button" class="pull-left btn btn-primary"
-            *ngIf="customer.needsPhoneVerification() && !customer.phoneIsUnderCreation()"
+            *ngIf="customer?.needsPhoneVerification() && !customer?.phoneIsUnderCreation()"
             [disabled]="arePhonesDirty() || isDisabled() || !arePhonesInCorrectFormat() || areEqualPhones()"
             (click)="verifyJHPhone()">
       Phones are correct
       <waiting-backend *ngIf="waitingVerifyResponse"></waiting-backend>
     </button>
     <button type="button" class="pull-left btn btn-warning"
-            *ngIf="customer.needsPhoneVerification() || customer.hasValidPhoneVerification() || customer.phoneIsUnderCreation()"
-            [disabled]="!arePhonesDirty() || isDisabled() || !arePhonesInCorrectFormat() || !customerHasPhones()  || areEqualPhones()"
+            *ngIf="customer?.needsPhoneVerification() || customer?.hasValidPhoneVerification() || customer?.phoneIsUnderCreation()"
+            [disabled]="!arePhonesDirty() || isDisabled() || !arePhonesInCorrectFormat() || !customerHasPhones() || areEqualPhones()"
             (click)="changeCustomerPhone()">
       Change phones
       <waiting-backend *ngIf="waitingChangeResponse"></waiting-backend>

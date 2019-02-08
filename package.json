@@ -9,7 +9,7 @@
     "build-devroot": "ng build -c dev-root",
     "build-test": "ng build -c test",
     "build-prod": "ng build -c production",
-    "test": "ng test",
+    "test": "ng test --source-map=false",
     "lint": "ng lint",
     "e2e": "ng e2e"
   },

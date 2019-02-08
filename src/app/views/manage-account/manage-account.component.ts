@@ -479,7 +479,7 @@ export class ManageAccountComponent implements OnInit, OnDestroy, AfterViewInit 
   }
 
   ngOnDestroy() {
-    console.log("Unsubscribe");
+    // console.log("Unsubscribe");
     this._hkSubscription.endSubscritption();
   }
 

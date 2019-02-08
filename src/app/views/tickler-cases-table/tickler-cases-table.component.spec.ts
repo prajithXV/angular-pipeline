@@ -11,14 +11,15 @@ import {APP_BASE_HREF, DatePipe, LocationStrategy, PathLocationStrategy} from "@
 import {GlobalStateService} from "../../services/global-state.service";
 import {DataService} from "../../services/data.service";
 import {BackendCommsService} from "../../services/backend-comms.service";
-import {HttpModule} from "@angular/http";
 import {UserFeedbackService} from "../../services/user-feedback.service";
-import {ToastOptions, ToastsManager} from "ng2-toastr";
 import {BooleanToStringPipe} from "../../pipes/boolean-to-string.pipe";
 import {TelephonePipe} from "../../pipes/telephone.pipe";
 import {ConsentPipeCorrectConversion} from "../../pipes/consent.pipe";
 import {BooleanToStringDuePipe, BooleanToStringOrderPipe} from "../../pipes/boolean-to-string-order.pipe";
 import {CiscoCommsService} from "../../services/cisco-comms.service";
+import {HttpClientModule} from "@angular/common/http";
+import {HttpClientTestingModule} from "@angular/common/http/testing";
+import {ToastrModule} from "ngx-toastr";
 
 describe('TicklerCasesTableComponent', () => {
   let component: TicklerCasesTableComponent;
@@ -26,10 +27,10 @@ describe('TicklerCasesTableComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      imports: [ RouterTestingModule, HttpModule ],
+      imports: [ RouterTestingModule, HttpClientModule, HttpClientTestingModule, ToastrModule.forRoot() ],
       declarations: [ TicklerCasesTableComponent, WaitingBackendComponent, PaginatorComponent, CoinDateTransformPipe, HeaderSorterComponent ],
-      providers: [ TemporalStateServiceService, GlobalStateService, DataService, BackendCommsService, UserFeedbackService, ToastsManager,
-                   ToastOptions, DatePipe, BooleanToStringPipe, TelephonePipe, ConsentPipeCorrectConversion, BooleanToStringOrderPipe,
+      providers: [ TemporalStateServiceService, GlobalStateService, DataService, BackendCommsService, UserFeedbackService,
+                   DatePipe, BooleanToStringPipe, TelephonePipe, ConsentPipeCorrectConversion, BooleanToStringOrderPipe,
                    BooleanToStringOrderPipe, BooleanToStringDuePipe, CiscoCommsService, Location, { provide: LocationStrategy, useClass: PathLocationStrategy },
                   { provide: APP_BASE_HREF, useValue: '/my/app'}]
     })

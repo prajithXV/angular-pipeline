@@ -11,7 +11,6 @@ import {DataService} from "../../services/data.service";
 import {BackendCommsService} from "../../services/backend-comms.service";
 import {HttpModule} from "@angular/http";
 import {UserFeedbackService} from "../../services/user-feedback.service";
-import {ToastOptions, ToastsManager} from "ng2-toastr";
 import {DatePipe} from "@angular/common";
 import {CiscoCommsService} from "../../services/cisco-comms.service";
 import {GlobalStateService} from "../../services/global-state.service";
@@ -34,7 +33,7 @@ describe('ManageUsersComponent', () => {
     TestBed.configureTestingModule({
       imports: [ HttpModule, RouterTestingModule ],
       declarations: [ ManageUsersComponent, AgentsTableComponent, AgentCampaignsComponent, AgentRolesComponent, CoinDateTransformPipe, WaitingBackendComponent, TickCrossComponent, SemaphoreComponent ],
-      providers: [ {provide: DataService, useValue: dataServiceMock}, BackendCommsService, {provide:UserFeedbackService, useValue: userFeedbackMock}, ToastsManager, ToastOptions, DatePipe, CiscoCommsService, {provide:GlobalStateService, useValue: globalStateServiceMock}, BooleanToStringPipe ],
+      providers: [ {provide: DataService, useValue: dataServiceMock}, BackendCommsService, {provide:UserFeedbackService, useValue: userFeedbackMock}, DatePipe, CiscoCommsService, {provide:GlobalStateService, useValue: globalStateServiceMock}, BooleanToStringPipe ],
       schemas: [ NO_ERRORS_SCHEMA ],
     })
     .compileComponents();

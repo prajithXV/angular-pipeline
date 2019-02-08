@@ -30,6 +30,7 @@ export class CustomerAddressModalComponent implements OnInit, OnChanges {
               private _globalStateService: GlobalStateService) { }
 
   ngOnInit() {
+    if (!this.customer) return;
     this.loadCustomerAddresses();
     this.oldLastVerifiedAddress = new AddressVerification(
       this.customer.lastAddressVerification ? this.customer.lastAddressVerification.oldAddress : this.customer.mainAddress,
@@ -105,6 +106,7 @@ export class CustomerAddressModalComponent implements OnInit, OnChanges {
   }
 
   isComparisonModal() {
+    if (!this.customer) return false;
     return !this.customer.hasValidAddressVerification() && !this.customer.needsAddressVerification();
   }
 

@@ -6,7 +6,6 @@ import {DataService} from "./data.service";
 import {BackendCommsService} from "./backend-comms.service";
 import {HttpModule} from "@angular/http";
 import {UserFeedbackService} from "./user-feedback.service";
-import {ToastOptions, ToastsManager} from "ng2-toastr";
 import {DatePipe} from "@angular/common";
 import {CiscoCommsService} from "./cisco-comms.service";
 import {RouterTestingModule} from "@angular/router/testing";
@@ -20,7 +19,7 @@ describe('LoggedGuard', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [ HttpModule, RouterTestingModule ],
-      providers: [ LoggedGuard, NotLoggedGuard, AdminMagerGuard, AdminMagerSupervisorGuard, DataService, BackendCommsService, UserFeedbackService, ToastsManager, ToastOptions, DatePipe, CiscoCommsService, BooleanToStringPipe,
+      providers: [ LoggedGuard, NotLoggedGuard, AdminMagerGuard, AdminMagerSupervisorGuard, DataService, BackendCommsService, UserFeedbackService, DatePipe, CiscoCommsService, BooleanToStringPipe,
         {provide: Router, useValue: routerMock}, {provide: GlobalStateService, useValue: globalStateServiceMock}],
 
     });

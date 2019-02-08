@@ -15,7 +15,6 @@ import {OwlMomentDateTimeModule} from "ng-pick-datetime-moment";
 import {OwlDateTimeModule} from "ng-pick-datetime";
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import {DataService} from "../../services/data.service";
-import {HttpModule} from "@angular/http";
 import {UserFeedbackService} from "../../services/user-feedback.service";
 import {APP_BASE_HREF, DatePipe, LocationStrategy, PathLocationStrategy} from "@angular/common";
 import {BooleanToStringPipe} from "../../pipes/boolean-to-string.pipe";
@@ -31,6 +30,11 @@ import {TemporalStateServiceService} from "../../services/temporal-state-service
 import {TabCounterComponent} from "../tab-counter/tab-counter.component";
 import {IboxtoolsComponent} from "../../components/common/iboxtools/iboxtools.component";
 import {CustomerCallRecordsComponent} from "../customer-call-records/customer-call-records.component";
+import {ConfirmationModalComponent} from "../confirmation-modal/confirmation-modal.component";
+import {NgbModule} from "@ng-bootstrap/ng-bootstrap";
+import {GlobalStateService} from "../../services/global-state.service";
+import {globalStateServiceMock} from "../../../test-utils/globalStateServiceMock";
+import {of} from "rxjs";
 
 describe('ManageCaseComponent', () => {
   let component: ManageCaseComponent;
@@ -38,12 +42,13 @@ describe('ManageCaseComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      imports: [ FormsModule, OwlDateTimeModule, OwlMomentDateTimeModule, BrowserAnimationsModule, HttpModule, RouterTestingModule ],
+      imports: [ FormsModule, OwlDateTimeModule, OwlMomentDateTimeModule, BrowserAnimationsModule, RouterTestingModule, NgbModule.forRoot() ],
       declarations: [ ManageCaseComponent, TicklerCasesDetailComponent, ProcessCaseTicklerTableComponent, CoinDateTransformPipe, WaitingBackendComponent, NewTicklerCaseComponent,
                       CampaignAttributeEditionComponent, CoinNumberInputComponent, DatepickerComponent, CoinNumberInputErrorsComponent, CoinCurrencyPipe, TabCounterComponent,
-                      IboxtoolsComponent, CustomerCallRecordsComponent ],
+                      IboxtoolsComponent, CustomerCallRecordsComponent, ConfirmationModalComponent ],
       providers: [ { provide: DataService, useValue: dataServiceMock }, { provide: UserFeedbackService, useValue: userFeedbackMock }, DatePipe, BooleanToStringPipe,
-                   TemporalStateServiceService, Location, { provide: LocationStrategy, useClass: PathLocationStrategy }, { provide: APP_BASE_HREF, useValue: '/my/app'}]
+                   TemporalStateServiceService, Location, { provide: LocationStrategy, useClass: PathLocationStrategy }, { provide: APP_BASE_HREF, useValue: '/my/app'},
+                  { provide: GlobalStateService, useValue: globalStateServiceMock }]
     })
     .compileComponents();
   }));
@@ -98,7 +103,7 @@ describe('ManageCaseComponent', () => {
     let d = fixture.debugElement.injector.get(injector);
     if(isObservable){
       spy = spyOn(d, method).and.returnValue(
-        Observable.of(value)
+        of(value)
       );
 
     }else{

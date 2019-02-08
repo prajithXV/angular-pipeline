@@ -1,9 +1,9 @@
 <div class="row">
   <div class="header text-right">
-    <label class="modal-title title text-danger" *ngIf="customer.needsEmailVerification() && customer.lastEmailVerification">
-      Last verification: {{customer.lastEmailVerification.createdDate | coinDateTransform}}. New verification needed.
+    <label class="modal-title title text-danger" *ngIf="customer?.needsEmailVerification() && customer?.lastEmailVerification">
+      Last verification: {{customer?.lastEmailVerification.createdDate | coinDateTransform}}. New verification needed.
     </label>
-    <label class="modal-title title text-danger" *ngIf="customer.needsEmailVerification() && !customer.lastEmailVerification">
+    <label class="modal-title title text-danger" *ngIf="customer?.needsEmailVerification() && !customer?.lastEmailVerification">
       Not verified.
     </label>
     <label class="modal-title title orange" *ngIf="isValidationOrigin()">
@@ -12,8 +12,8 @@
     <label class="modal-title title orange" *ngIf="isDiscardOrigin()">
       Modification in progress.
     </label>
-    <label class="modal-title title text-info" *ngIf="customer.hasValidEmailVerification()">
-      Last verification: {{customer.lastEmailVerification.createdDate | coinDateTransform}}.
+    <label class="modal-title title text-info" *ngIf="customer?.hasValidEmailVerification()">
+      Last verification: {{customer?.lastEmailVerification.createdDate | coinDateTransform}}.
     </label>
   </div>
 </div>
@@ -23,7 +23,7 @@
       Customer does not have eMails.
     </label>
     <!-- Modal when customer email needs verification and fields can be modified -->
-    <div class="form-group data-container" *ngIf="customer.needsEmailVerification() || customer.hasValidEmailVerification()">
+    <div class="form-group data-container" *ngIf="customer?.needsEmailVerification() || customer?.hasValidEmailVerification()">
       <div class="col-lg-12 no-padding row-container" *ngFor="let email of customerEmails; let ind = index;">
         <!-- Existing email that can be modifyed -->
         <div *ngIf="email && !isNewEmail(ind)"
@@ -31,7 +31,7 @@
           <div class="col-lg-5 col-md-5 col-sm-5 col-xs-5 text-right">
             <label>
               <i class="far fa-envelope" aria-hidden="true"></i> :
-              <span>{{ customer.emails[ind] }}</span>
+              <span>{{ customer?.emails[ind] }}</span>
             </label>
           </div>
           <div class="col-lg-5 col-md-5 col-sm-5 col-xs-5">
@@ -97,15 +97,15 @@
   </div>
   <div class="modal-footer">
     <button type="button" class="pull-left btn btn-primary"
-            *ngIf="customer.needsEmailVerification()"
+            *ngIf="customer?.needsEmailVerification()"
             [disabled]="areEmailsDirty() || isDisabled() || !areEmailsInCorrectFormat() || areEqualEmails()"
             (click)="verifyJHEmail()">
-      <span *ngIf="customer.emails.length > 0">eMails are correct</span>
-      <span *ngIf="customer.emails.length == 0">Verify Customer has no eMails</span>
+      <span *ngIf="customer?.emails.length > 0">eMails are correct</span>
+      <span *ngIf="customer?.emails.length == 0">Verify Customer has no eMails</span>
       <waiting-backend *ngIf="waitingVerifyResponse"></waiting-backend>
     </button>
     <button type="button" class="pull-left btn btn-warning"
-            *ngIf="customer.needsEmailVerification() || customer.hasValidEmailVerification()"
+            *ngIf="customer?.needsEmailVerification() || customer?.hasValidEmailVerification()"
             [disabled]="!areEmailsDirty() || isDisabled() || !areEmailsInCorrectFormat() || areEqualEmails()"
             (click)="changeCustomerEmail()">
       Change eMails

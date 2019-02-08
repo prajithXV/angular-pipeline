@@ -6,7 +6,6 @@ import {WaitingBackendComponent} from "../waiting-backend/waiting-backend.compon
 import {DataService} from "../../services/data.service";
 import {HttpModule} from "@angular/http";
 import {UserFeedbackService} from "../../services/user-feedback.service";
-import {ToastOptions, ToastsManager} from "ng2-toastr";
 import {DatePipe} from "@angular/common";
 import {BooleanToStringPipe} from "../../pipes/boolean-to-string.pipe";
 import {TelephonePipe} from "../../pipes/telephone.pipe";
@@ -28,7 +27,7 @@ describe('NewLovTypeComponent', () => {
     TestBed.configureTestingModule({
       imports: [ FormsModule, HttpModule, RouterTestingModule ],
       declarations: [ NewLovTypeComponent, WaitingBackendComponent ],
-      providers: [ {provide: DataService, useValue: dataServiceMock}, {provide: UserFeedbackService, useValue: userFeedbackMock}, ToastsManager, ToastOptions, DatePipe, BooleanToStringPipe, TelephonePipe,
+      providers: [ {provide: DataService, useValue: dataServiceMock}, {provide: UserFeedbackService, useValue: userFeedbackMock}, DatePipe, BooleanToStringPipe, TelephonePipe,
                    ConsentPipeCorrectConversion, BooleanToStringOrderPipe, BooleanToStringDuePipe, {provide: GlobalStateService, useValue: globalStateServiceMock} ]
     })
     .compileComponents();

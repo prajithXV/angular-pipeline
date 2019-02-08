@@ -13,7 +13,6 @@ import {OwlMomentDateTimeModule} from "ng-pick-datetime-moment";
 import {DataService} from "../../services/data.service";
 import {HttpModule} from "@angular/http";
 import {UserFeedbackService} from "../../services/user-feedback.service";
-import {ToastOptions, ToastsManager} from "ng2-toastr";
 import {DatePipe} from "@angular/common";
 import {BooleanToStringPipe} from "../../pipes/boolean-to-string.pipe";
 import {TelephonePipe} from "../../pipes/telephone.pipe";
@@ -34,7 +33,7 @@ describe('NewLovValueComponent', () => {
     TestBed.configureTestingModule({
       imports: [ FormsModule, OwlDateTimeModule, OwlMomentDateTimeModule, BrowserAnimationsModule, HttpModule, RouterTestingModule ],
       declarations: [ NewLovValueComponent, ValueEditionComponent, WaitingBackendComponent, CoinNumberInputComponent, DatepickerComponent, CoinNumberInputErrorsComponent ],
-      providers: [ {provide: DataService, useValue: dataServiceMock}, {provide: UserFeedbackService, useValue: userFeedbackMock}, ToastsManager, ToastOptions, DatePipe, BooleanToStringPipe, TelephonePipe, ConsentPipeCorrectConversion,
+      providers: [ {provide: DataService, useValue: dataServiceMock}, {provide: UserFeedbackService, useValue: userFeedbackMock}, DatePipe, BooleanToStringPipe, TelephonePipe, ConsentPipeCorrectConversion,
                    BooleanToStringOrderPipe, BooleanToStringDuePipe, {provide: GlobalStateService, useValue: globalStateServiceMock} ]
     })
     .compileComponents();

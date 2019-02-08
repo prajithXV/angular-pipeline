@@ -10,7 +10,6 @@ import {GlobalStateService} from "../../services/global-state.service";
 import {BackendCommsService} from "../../services/backend-comms.service";
 import {HttpModule} from "@angular/http";
 import {UserFeedbackService} from "../../services/user-feedback.service";
-import {ToastOptions, ToastsManager} from "ng2-toastr";
 import {DatePipe} from "@angular/common";
 import {CiscoCommsService} from "../../services/cisco-comms.service";
 import {RouterTestingModule} from "@angular/router/testing";
@@ -37,7 +36,7 @@ describe('NewRecordCallComponent', () => {
       imports: [ FormsModule, HttpModule, RouterTestingModule, AngularDraggableModule, OwlDateTimeModule, OwlMomentDateTimeModule, BrowserAnimationsModule ],
       declarations: [ NewCallRecordComponent, CoinNumberInputComponent, CoinNumberInputComponent, CoinNumberInputErrorsComponent, CoinDateInputComponent, WaitingBackendComponent,
                       CallRecordStandardSentencesComponent, DatepickerComponent ],
-      providers: [ DataService, {provide: GlobalStateService, useValue: globalStateServiceMock}, BackendCommsService, {provide: UserFeedbackService, useValue: userFeedbackMock}, ToastsManager, ToastOptions, DatePipe, CiscoCommsService, BooleanToStringPipe ]
+      providers: [ DataService, {provide: GlobalStateService, useValue: globalStateServiceMock}, BackendCommsService, {provide: UserFeedbackService, useValue: userFeedbackMock}, DatePipe, CiscoCommsService, BooleanToStringPipe ]
     })
     .compileComponents();
   }));

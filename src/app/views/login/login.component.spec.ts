@@ -9,7 +9,6 @@ import {DataService} from "../../services/data.service";
 import {BackendCommsService} from "../../services/backend-comms.service";
 import {HttpModule} from "@angular/http";
 import {UserFeedbackService} from "../../services/user-feedback.service";
-import {ToastOptions, ToastsManager} from "ng2-toastr";
 import {DatePipe} from "@angular/common";
 import {CiscoCommsService} from "../../services/cisco-comms.service";
 import {BooleanToStringPipe} from "../../pipes/boolean-to-string.pipe";
@@ -31,7 +30,7 @@ describe('LoginComponent', () => {
       imports: [ FormsModule, RouterTestingModule, HttpModule ],
       declarations: [ LoginComponent, WaitingBackendComponent ],
       providers: [ {provide: GlobalStateService, useValue: globalStateServiceMock}, {provide: DataService, useValue: dataServiceMock}, BackendCommsService,
-                   {provide: UserFeedbackService, useValue: userFeedbackMock}, ToastsManager, ToastOptions, DatePipe, CiscoCommsService,
+                   {provide: UserFeedbackService, useValue: userFeedbackMock}, DatePipe, CiscoCommsService,
                    BooleanToStringPipe, BooleanToStringOrderPipe, BooleanToStringDuePipe, ConsentPipeCorrectConversion, TelephonePipe ]
     })
     .compileComponents();
