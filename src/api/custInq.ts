@@ -101,7 +101,7 @@ export const custInqBody = {
                   }
                 ],
                 "note": "Test phone POST",
-                "statusFlg": "MODIFY",
+                "statusFlg": "VERIFIED",
                 "createdDt": "2018-01-30T14:56:23.843",
                 "createdBy": "vsharapo"
             },

@@ -146,7 +146,7 @@ export class CustomerPhoneModalComponent implements OnInit {
   arePhonesInCorrectFormat() {
     for (let phone of this.customerPhones) {
       if (!phone.isDeleted) {
-        if (!phone.number || phone.number == "" || !this.regExpPhone.test(phone.number)) {
+        if (this.isEmptyPhone(phone.number) || !this.regExpPhone.test(phone.number)) {
           return false;
         }
       }
@@ -180,6 +180,10 @@ export class CustomerPhoneModalComponent implements OnInit {
       }
     }
     return false;
+  }
+
+  isEmptyPhone(phoneNumber: string) {
+    return phoneNumber == null || phoneNumber == "";
   }
 
   isNewPhone(iPhone: number) {

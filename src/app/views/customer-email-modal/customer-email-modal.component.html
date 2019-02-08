@@ -38,6 +38,17 @@
             <input *ngIf="email && !email.isDeleted" type="text" [(ngModel)]="email.email" placeholder="eMail" class="form-control"
                    [class.wrong-email]="!regExpEmail.test(email.email) || areEqualEmails(email.email, ind)">
             <label *ngIf="!email || email.isDeleted" class="text-danger" style="font-style: italic">eMail deleted</label>
+            <div *ngIf="isEmptyEmail(email.email) && !email.isDeleted" class="help-block m-b-none font-normal" style="color: #a94442">
+              eMail can't be empty.
+            </div>
+            <div *ngIf="!isEmptyEmail(email.email) && !regExpEmail.test(email.email) && !email.isDeleted"
+                 class="help-block m-b-none font-normal" style="color: #a94442">
+              Not a valid format.
+            </div>
+            <div *ngIf="!isEmptyEmail(email.email) && regExpEmail.test(email.email) && areEqualEmails(email.email, ind) && !email.isDeleted"
+                 class="help-block m-b-none font-normal" style="color: #a94442">
+              eMail repeated.
+            </div>
           </div>
           <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 no-padding" style="display: flex">
             <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1">
@@ -60,6 +71,17 @@
             <div class="col-lg-5 col-md-5 col-sm-5 col-xs-5">
               <input type="text" [(ngModel)]="email.email" placeholder="eMail" class="form-control"
                      [class.wrong-email]="!regExpEmail.test(email.email) || areEqualEmails(email.email, ind)">
+              <div *ngIf="isEmptyEmail(email.email)" class="help-block m-b-none font-normal" style="color: #a94442">
+                eMail can't be empty.
+              </div>
+              <div *ngIf="!isEmptyEmail(email.email) && !regExpEmail.test(email.email)"
+                   class="help-block m-b-none font-normal" style="color: #a94442">
+                Not a valid format.
+              </div>
+              <div *ngIf="!isEmptyEmail(email.email) && regExpEmail.test(email.email) && areEqualEmails(email.email, ind)"
+                   class="help-block m-b-none font-normal" style="color: #a94442">
+                eMail repeated.
+              </div>
             </div>
             <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 no-padding" style="display: flex">
               <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1"></div>
@@ -125,10 +147,6 @@
       Discard modification
       <waiting-backend *ngIf="waitingDiscardResponse"></waiting-backend>
     </button>
-    <label class="modal-title title text-danger pull-left" style="padding-left: 10px"
-           *ngIf="areEqualEmails() && (customer.needsEmailVerification() || customer.hasValidEmailVerification())">
-      Some emails are equal
-    </label>
   </div>
 
   <confirmation-modal

@@ -178,6 +178,10 @@ export class CustomerEmailModalComponent implements OnInit, OnChanges {
     return false;
   }
 
+  isEmptyEmail(email: string) {
+    return email == null || email == "";
+  }
+
   isNewEmail(iEmail: number) {
     return iEmail >= this.originalEmails.length;
   }
