@@ -146,12 +146,44 @@ export class CustomerPhoneModalComponent implements OnInit {
   arePhonesInCorrectFormat() {
     for (let phone of this.customerPhones) {
       if (!phone.isDeleted) {
-        if (!phone.number || phone.number == "" || !this.regExpPhone.test(phone.number)) {
+        if (this.isEmptyPhone(phone.number) || !this.regExpPhone.test(phone.number)) {
           return false;
         }
       }
     }
     return true;
+  }
+
+  areEqualPhones(phoneNumber: string, index: number) {
+    for (let i = 0; i < this.customerPhones.length; ++i) {
+      let phone = this.customerPhones[i];
+      if (!phone.isDeleted) {
+        if (!phoneNumber) {
+          if (i < this.customerPhones.length) {
+            for (let j = i + 1; j < this.customerPhones.length; ++j) {
+              let auxPhone = this.customerPhones[j];
+              if (!auxPhone.isDeleted) {
+                if (phone.number === auxPhone.number) {
+                  return true;
+                }
+              }
+            }
+          }
+        }
+        else {
+          if (i != index) {
+            if (phone.number === phoneNumber) {
+              return true;
+            }
+          }
+        }
+      }
+    }
+    return false;
+  }
+
+  isEmptyPhone(phoneNumber: string) {
+    return phoneNumber == null || phoneNumber == "";
   }
 
   isNewPhone(iPhone: number) {
