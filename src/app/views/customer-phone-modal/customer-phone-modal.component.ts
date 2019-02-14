@@ -113,7 +113,7 @@ export class CustomerPhoneModalComponent implements OnInit {
 
   isComparisonModal() {
     if (!this.customer) return false;
-    return !this.customer.hasValidPhoneVerification() && !this.customer.needsPhoneVerification() && !this.customer.phoneIsUnderCreation();
+    return !this.customer.hasValidPhoneVerification() && !this.customer.needsPhoneVerification();
   }
 
   isDiscardOrigin() {

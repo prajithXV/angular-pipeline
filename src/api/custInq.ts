@@ -31,8 +31,8 @@ export const custInqBody = {
             },
             // "emailLst": null,
             "emailLst": [
-              "hola@gmail.com",
-              "adeu@gmail.com"
+              // "hola@gmail.com",
+              // "adeu@gmail.com"
             ],
             // "emailLstVer": null,
             "emailLstVer": {
@@ -51,24 +51,24 @@ export const custInqBody = {
             "accountNumber": null,
             "cifNo": "AAJ5318",
             "phoneLst": [
-                {
-                    "phoneNum": "3376546539",
-                    "phoneType": "Home Phone",
-                    "phoneLineType": "P",
-                    "callsMadeToday": null
-                },
-                {
-                    "phoneNum": "3372337630",
-                    "phoneType": "Business Phone",
-                    "phoneLineType": null,
-                    "callsMadeToday": null
-                },
-                {
-                    "phoneNum": "3376546539",
-                    "phoneType": "Home Cell Phone",
-                    "phoneLineType": null,
-                    "callsMadeToday": null
-                }
+                // {
+                //     "phoneNum": "3376546539",
+                //     "phoneType": "Home Phone",
+                //     "phoneLineType": "P",
+                //     "callsMadeToday": null
+                // },
+                // {
+                //     "phoneNum": "3372337630",
+                //     "phoneType": "Business Phone",
+                //     "phoneLineType": null,
+                //     "callsMadeToday": null
+                // },
+                // {
+                //     "phoneNum": "3376546539",
+                //     "phoneType": "Home Cell Phone",
+                //     "phoneLineType": null,
+                //     "callsMadeToday": null
+                // }
             ],
             "phoneLstVer": {
                 "phone": [

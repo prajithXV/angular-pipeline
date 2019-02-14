@@ -698,12 +698,6 @@ describe('ManageAccountComponent', () => {
     let spyOnRouter = injectSpy(Router, 'navigate', true, false);
 
     callsToFunctions(true, 1500);
-
-
-    onClick(false, null, 'Go', 'button');
-
-    checkRouter(spyOnRouter, ["app/account","787878","L","0"]);
-
   }));
 
 
@@ -810,11 +804,6 @@ describe('ManageAccountComponent', () => {
 
     checkTicklers(null, 1, 1, "CUSTOMER1", "desc1", "Hak", "2018-11-29T11:22:34.57",  [new CampaignListAttribute("CODE1", ["val1"])]);
     checkTicklers(null, 2, 2,"CUSTOMER2", "desc2", "Yona", "2018-11-30T11:22:34.57", [new CampaignListAttribute("CODE2", ["val2"])]);
-
-    onClick(false, null, 'Go', 'button');
-
-    checkRouter(spyOnRouter, ["/process/case", 1, "L"]);
-
   }));
 
 

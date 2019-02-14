@@ -421,11 +421,6 @@ export class Customer {
     }
     return true;
   }
-
-  phoneIsUnderCreation() {
-    return (!this.phones || this.phones.length == 0) &&
-      (!this.lastPhoneVerification || this.lastPhoneVerification.status == VerificationStatus.Verified);
-  }
   /***********************************************************************/
 
   /***** Functions to control the customer emails verification ****/

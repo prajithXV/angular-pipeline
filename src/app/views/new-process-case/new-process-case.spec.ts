@@ -72,7 +72,7 @@ describe('NewProcessCaseComponent', () => {
 
   function callsToFunctions(processes:TicklerProcess[], model: ProcessCaseModel){
     component.ngOnChanges({changes: processes});
-    component.createProcessCase(model);
+    component.createProcessCase(model, true);
     tick();
     fixture.detectChanges();
   }
