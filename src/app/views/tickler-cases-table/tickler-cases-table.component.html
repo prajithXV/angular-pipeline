@@ -60,14 +60,13 @@
         <td>{{tc.assignedUser}}</td>
         <td [class.overflow-desc]="isOverflown(tc)" style="max-width: 100px">{{tc.caseDescription}}</td>
         <td>
-          <i *ngIf="tc != null && tc.caseDescription != null && tc.caseDescription != '' && isOverflown(tc)"
-             class="fa fa-info-circle"
-             style="font-size:1.2em;"
-             [popover]="popDesc"
-             outsideClick="false"
-             triggers="mouseenter: mouseleave"
-             placement="right"
-          ></i>
+          <span *ngIf="tc != null && tc.caseDescription != null && tc.caseDescription != '' && isOverflown(tc)"
+                [popover]="popDesc"
+                outsideClick="false"
+                triggers="mouseenter: mouseleave"
+                placement="right">
+            <i class="fa fa-info-circle" style="font-size:1.2em;"></i>
+          </span>
         </td>
         <td>{{tc.processCode}}</td>
         <td>{{tc.statusCode}}</td>

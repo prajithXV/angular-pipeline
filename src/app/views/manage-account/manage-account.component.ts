@@ -42,6 +42,7 @@ import {MemoNote} from "../../models/memo-note";
 import {CallNotesComponent} from "../call-notes/call-notes.component";
 import {NewProcessCaseComponent} from "../new-process-case/new-process-case";
 import {ProcessCaseModel} from "../../models/process-case-model";
+import {Pagination} from "../../models/pagination";
 
 enum ResultsMode {
   NEW_CALL_RECORD,
@@ -145,6 +146,8 @@ export class ManageAccountComponent implements OnInit, OnDestroy, AfterViewInit 
   processCaseTicklers: ProcessCaseTickler[] = null;
   currentProcessCase: ProcessCase = null;
   ticklerTypes: TicklerType[] = null;
+
+  private pagination: Pagination = new Pagination(0, 10);
 
   keyCodes = Hotkeys;
 
@@ -366,9 +369,12 @@ export class ManageAccountComponent implements OnInit, OnDestroy, AfterViewInit 
     this.isTicklerVisible = true;
     this.isCreating = false;
     this.processCaseTicklers = [];
+    if (this.currentProcessCase != null && this.currentProcessCase.id != processCase.id) {
+      this.pagination.currPage = 0;
+    }
     this.currentProcessCase = processCase;
     //gets Process cases
-    this._dataService.getProcessCaseTicklers(processCase).then(res => {
+    this._dataService.getProcessCaseTicklers(processCase, this.pagination).then(res => {
       this.processCaseTicklers = res;
       this.searchingCaseTicklers = false;
 
@@ -393,6 +399,11 @@ export class ManageAccountComponent implements OnInit, OnDestroy, AfterViewInit 
     })
   }
 
+  private incPage(increment = 1) {
+    this.pagination.currPage += increment;
+    this.loadCaseTicklers(this.currentProcessCase);
+  }
+
   get lastOrCurrentCall(): Call {
     return this._globalStateService.lastCall;
   }
@@ -414,7 +425,6 @@ export class ManageAccountComponent implements OnInit, OnDestroy, AfterViewInit 
       console.log(err);
       this.searchingProcessCases = false;
     });
-
   }
 
   setContactsTab() {
@@ -445,6 +455,7 @@ export class ManageAccountComponent implements OnInit, OnDestroy, AfterViewInit 
   refreshCaseTicklers() {
     this.isRefreshed = true;
     this.isCreating = false;
+    this.pagination.currPage = 0;
     this.loadCases(this.criteria);
     this.loadCaseTicklers(this.currentProcessCase);
   }

@@ -9,10 +9,8 @@ import {TicklerProcess} from "../../models/tickler-processes";
 import {TicklerType} from "../../models/tickler-types";
 import {SortOrder} from "../../models/sort-order";
 import {CasesListInfo, TemporalStateServiceService} from "../../services/temporal-state-service.service";
-import {NavigationEnd, NavigationError, NavigationStart, Router} from "@angular/router";
-import { Location } from '@angular/common';
 import {PublicUrls} from "../../routing-constants";
-import {NgbTabset, NgbTabsetConfig} from "@ng-bootstrap/ng-bootstrap";
+import {NgbTabset} from "@ng-bootstrap/ng-bootstrap";
 import {Code} from "../../models/code";
 
 
@@ -28,6 +26,7 @@ export class ManageCasesComponent implements OnInit {
   routes = PublicUrls;
 
   private pagination: Pagination = new Pagination(0, 10);
+  private pctPagination: Pagination = new Pagination(0, 10);
   private sortOrder: SortOrder = new SortOrder(null ,null);
   private currentParams: SearchTicklerCaseParams = null;
 
@@ -78,9 +77,12 @@ export class ManageCasesComponent implements OnInit {
     this.isCreating = false;
     this.isTicklerVisible = true;
     this.processCaseTicklers = [];
+    if (this.currentProcessCase != null && this.currentProcessCase.id != processCase.id) {
+      this.pctPagination.currPage = 0;
+    }
     this.currentProcessCase = processCase;
     //gets Process cases
-    this._dataService.getProcessCaseTicklers(processCase).then(res => {
+    this._dataService.getProcessCaseTicklers(processCase, this.pctPagination).then(res => {
       this.processCaseTicklers = res;
       this.searchingCaseTicklers = false;
 
@@ -139,6 +141,7 @@ export class ManageCasesComponent implements OnInit {
   refreshCaseTicklers(){
     this.isRefreshed = true;
     this.isCreating = false;
+    this.pctPagination.currPage = 0;
     this.onSearchProcessCases(this.currentParams);
     this.loadCaseTicklers(this.currentProcessCase);
   }
@@ -147,6 +150,11 @@ export class ManageCasesComponent implements OnInit {
   private incPage(increment = 1) {
     this.pagination.currPage += increment;
     this.onSearchProcessCases();
+  }
+
+  private incPCTPage(increment = 1) {
+    this.pctPagination.currPage += increment;
+    this.loadCaseTicklers(this.currentProcessCase);
   }
 
   onNewTickler() {

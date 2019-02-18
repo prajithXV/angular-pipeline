@@ -205,7 +205,7 @@ export const getTicklerTypes = [
     "CreatedDt": "2018-03-28T13:38:06.917",
     "ModifiedBy": "vsharapo",
     "ModifiedDt": "2018-03-28T13:38:19.153"
-  },
+  }
   // {
   //     "Id": 16,
   //     "TicklerCd": "TEST2",
@@ -457,7 +457,7 @@ export const getCaseTicklersBody = [
     "CaseId": 15,
     "TicklerNm": "Loss mitigation package sent",
     "TicklerTypeCd": "LOSS MIT PKG SENT",
-    "TicklerDesc": "test",
+    "TicklerDesc": "testtesttesttesttesttesttesttesttesttesttest",
     "CreatedBy": "vsharapo",
     "CreatedDt": "2018-02-19T16:24:15.987",
     "Attributes": "{\"TEST2\":[\"Val1\"],\"TEST3\":[\"111\",\"222\"],\"TEST4\":[\"04/25/2018 12:39\"]}"
@@ -503,6 +503,56 @@ export const getCaseTicklersBody = [
     "CreatedDt": "2018-03-19T16:24:15.987",
     "Attributes": null
   },
+  {
+    "Id": 7,
+    "CaseId": 14,
+    "TicklerNm": "test",
+    "TicklerTypeCd": "TEST",
+    "TicklerDesc": "test",
+    "CreatedBy": "vsharapo",
+    "CreatedDt": "2018-03-19T16:24:15.987",
+    "Attributes": null
+  },
+  {
+    "Id": 8,
+    "CaseId": 14,
+    "TicklerNm": "test",
+    "TicklerTypeCd": "TEST",
+    "TicklerDesc": "test",
+    "CreatedBy": "vsharapo",
+    "CreatedDt": "2018-03-19T16:24:15.987",
+    "Attributes": null
+  },
+  {
+    "Id": 9,
+    "CaseId": 14,
+    "TicklerNm": "test",
+    "TicklerTypeCd": "TEST",
+    "TicklerDesc": "test",
+    "CreatedBy": "vsharapo",
+    "CreatedDt": "2018-03-19T16:24:15.987",
+    "Attributes": null
+  },
+  {
+    "Id": 10,
+    "CaseId": 14,
+    "TicklerNm": "test",
+    "TicklerTypeCd": "TEST",
+    "TicklerDesc": "test",
+    "CreatedBy": "vsharapo",
+    "CreatedDt": "2018-03-19T16:24:15.987",
+    "Attributes": null
+  },
+  {
+    "Id": 11,
+    "CaseId": 14,
+    "TicklerNm": "test",
+    "TicklerTypeCd": "TEST",
+    "TicklerDesc": "test",
+    "CreatedBy": "vsharapo",
+    "CreatedDt": "2018-03-19T16:24:15.987",
+    "Attributes": null
+  }
 ];
 
 // addCaseTickler

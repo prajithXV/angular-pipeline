@@ -46,14 +46,13 @@
         <td>{{ct.ticklerName}}</td>
         <td [class.overflow-desc]="isOverflown(ct)" style="max-width: 100px">{{ct.ticklerDescription}}</td>
         <td>
-          <i *ngIf="ct != null && ct.ticklerDescription != null && ct.ticklerDescription != '' && isOverflown(ct)"
-             class="fa fa-info-circle"
-             style="font-size:1.2em;"
-             [popover]="popDesc"
-             outsideClick="false"
-             triggers="mouseenter: mouseleave"
-             placement="right"
-          ></i>
+          <span *ngIf="ct != null && ct.ticklerDescription != null && ct.ticklerDescription != '' && isOverflown(ct)"
+                [popover]="popDesc"
+                outsideClick="false"
+                triggers="mouseenter: mouseleave"
+                placement="right">
+            <i class="fa fa-info-circle" style="font-size:1.2em;"></i>
+          </span>
         </td>
         <td>{{ct.createdBy}}</td>
         <td>{{ct.createdDate | coinDateTransform}}</td>

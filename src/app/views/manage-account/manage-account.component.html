@@ -166,16 +166,22 @@
                       <h3>Case <strong>{{currentProcessCase.id}} {{currentProcessCase.processCode}}</strong></h3>
                     </div>
                     <div class="ibox-content">
-                      <div class="row" *ngIf="!searchingCaseTicklers">
-                        <div class="col-lg-10">
+                      <div class="row">
+                        <div class="col-lg-9">
                           <h3 class="title2 text-success">Ticklers</h3>
                         </div>
-                        <div class="col-lg-2">
-                          <button *ngIf="currentProcessCase != null && canCreateTicklerCase"
+                        <div class="col-lg-3">
+                          <button *ngIf="canCreateTicklerCase"
                             class="btn btn-sm btn-primary pull-right"
-                                  [disabled]="isCreating" (click)="onNewTickler()">
+                                  [disabled]="isCreating || searchingCaseTicklers" (click)="onNewTickler()">
                             <i class="fa fa-file-o"></i> New
                           </button>
+                          <paginator id="pagination" [data]="processCaseTicklers"
+                                     (onPageChange)="incPage($event)"
+                                     [pagination]="pagination"
+                                     [disabled]="isCreating || searchingCaseTicklers"
+                                     [hasNewSize]="true">
+                          </paginator>
                         </div>
                       </div>
 

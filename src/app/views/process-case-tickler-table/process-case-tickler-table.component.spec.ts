@@ -27,6 +27,7 @@ import {ConfirmationModalComponent} from "../confirmation-modal/confirmation-mod
 import {HttpClientModule} from "@angular/common/http";
 import {HttpClientTestingModule} from "@angular/common/http/testing";
 import {ToastrModule} from "ngx-toastr";
+import {ComponentLoaderFactory, PopoverConfig, PopoverModule, PositioningService} from "ngx-bootstrap";
 
 describe('ProcessCaseTicklerTableComponent', () => {
   let component: ProcessCaseTicklerTableComponent;
@@ -34,10 +35,10 @@ describe('ProcessCaseTicklerTableComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      imports: [ FormsModule, HttpClientModule, HttpClientTestingModule, RouterTestingModule,  OwlDateTimeModule, OwlMomentDateTimeModule, BrowserAnimationsModule, ToastrModule.forRoot() ],
+      imports: [ FormsModule, HttpClientModule, HttpClientTestingModule, RouterTestingModule,  OwlDateTimeModule, OwlMomentDateTimeModule, BrowserAnimationsModule, ToastrModule.forRoot(), PopoverModule ],
       declarations: [ ProcessCaseTicklerTableComponent, WaitingBackendComponent, NewTicklerCaseComponent, CoinDateTransformPipe, CampaignAttributeEditionComponent, CoinNumberInputComponent, DatepickerComponent,
                       CoinNumberInputErrorsComponent, ConfirmationModalComponent ],
-      providers: [ DataService, BackendCommsService, UserFeedbackService, DatePipe, BooleanToStringPipe, CiscoCommsService,
+      providers: [ DataService, BackendCommsService, UserFeedbackService, DatePipe, BooleanToStringPipe, CiscoCommsService, ComponentLoaderFactory, PopoverConfig, PositioningService,
                    GlobalStateService, BooleanToStringOrderPipe, BooleanToStringDuePipe, ConsentPipeCorrectConversion, TelephonePipe ]
     })
     .compileComponents();

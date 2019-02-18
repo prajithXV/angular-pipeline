@@ -36,6 +36,7 @@ import {HttpClientModule} from "@angular/common/http";
 import {HttpClientTestingModule} from "@angular/common/http/testing";
 import {ConfirmationModalComponent} from "../confirmation-modal/confirmation-modal.component";
 import {NgbActiveModal, NgbModal, NgbModule} from "@ng-bootstrap/ng-bootstrap";
+import {ComponentLoaderFactory, PopoverConfig, PopoverModule, PositioningService} from "ngx-bootstrap";
 
 describe('ManageCasesComponent', () => {
   let component: ManageCasesComponent;
@@ -43,11 +44,12 @@ describe('ManageCasesComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      imports: [ HttpClientModule, HttpClientTestingModule, FormsModule,  OwlDateTimeModule, RouterTestingModule, NgbModule.forRoot() ],
+      imports: [ HttpClientModule, HttpClientTestingModule, FormsModule,  OwlDateTimeModule, RouterTestingModule, NgbModule.forRoot(), PopoverModule ],
       declarations: [ ManageCasesComponent, IboxtoolsComponent, SearchCaseCriteriaComponent, TicklerCasesTableComponent, ProcessCaseTicklerTableComponent,
                       WaitingBackendComponent, PaginatorComponent, CoinDateTransformPipe, NewTicklerCaseComponent, CampaignAttributeEditionComponent, CoinNumberInputComponent, DatepickerComponent,
                       CoinNumberInputErrorsComponent, HeaderSorterComponent, FilterCodeToNamePipe, ConfirmationModalComponent ],
-      providers: [ { provide: DataService, useValue: dataServiceMock}, {provide: UserFeedbackService, useValue: userFeedbackMock}, { provide: GlobalStateService, useValue: globalStateServiceMock }, DatePipe, BooleanToStringPipe,
+      providers: [ { provide: DataService, useValue: dataServiceMock}, {provide: UserFeedbackService, useValue: userFeedbackMock}, { provide: GlobalStateService, useValue: globalStateServiceMock },
+                    DatePipe, BooleanToStringPipe, ComponentLoaderFactory, PopoverConfig, PositioningService,
                      TemporalStateServiceService, Location, { provide: LocationStrategy, useClass: PathLocationStrategy }, { provide: APP_BASE_HREF, useValue: '/my/app'}]
     })
     .compileComponents();
@@ -343,7 +345,7 @@ describe('ManageCasesComponent', () => {
 
     onClickGoButton();
 
-    checkRouter(spy2, "/process/case",1, 2);
+    checkRouter(spy2, "app/account",'122', 2);
 
   }));
 
@@ -369,7 +371,7 @@ describe('ManageCasesComponent', () => {
     checkCurrentSortOrder(null, null);
 
     //Go button 1 --> id: 1
-    checkRouter(spy2, "/process/case", 1);
+    checkRouter(spy2, "app/account", '122');
 
   }));
 
@@ -419,7 +421,7 @@ describe('ManageCasesComponent', () => {
     checkCurrentPagination(0, 10);
 
     //Go button 1 --> id: 1; check router
-    checkRouter(spy2, "/process/case", 1);
+    checkRouter(spy2, "app/account", '122');
 
   }));
 

@@ -65,8 +65,16 @@
           </h5>
 
           <!--new button-->
-          <div *ngIf="currentProcessCase && !searchingCaseTicklers" class="new-button col-lg-6 col-md-6 col-sm-6 col-xs-6 text-right" style="margin-bottom: 8px">
-            <button class="btn btn-sm btn-primary" [disabled]="isCreating || currentProcessCase.statusCode == 'CLOSED'"
+          <div *ngIf="currentProcessCase" class="new-button col-lg-6 col-md-6 col-sm-6 col-xs-6 text-right" style="margin-bottom: 8px">
+            <paginator [data]="processCaseTicklers"
+                       (onPageChange)="incPCTPage($event)"
+                       [pagination]="pctPagination"
+                       [disabled]="isCreating || searchingCaseTicklers"
+                       [hasNewSize]="true"
+                       style="margin-right: 10px;"
+            ></paginator>
+            <button class="btn btn-sm btn-primary"
+                    [disabled]="isCreating || currentProcessCase.statusCode == 'CLOSED' || searchingCaseTicklers"
                     (click)="onNewTickler()">
               <i class="fa fa-file-o"></i> New
             </button>

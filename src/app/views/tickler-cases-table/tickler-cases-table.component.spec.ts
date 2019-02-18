@@ -20,6 +20,7 @@ import {CiscoCommsService} from "../../services/cisco-comms.service";
 import {HttpClientModule} from "@angular/common/http";
 import {HttpClientTestingModule} from "@angular/common/http/testing";
 import {ToastrModule} from "ngx-toastr";
+import {ComponentLoaderFactory, PopoverConfig, PopoverModule, PositioningService} from "ngx-bootstrap";
 
 describe('TicklerCasesTableComponent', () => {
   let component: TicklerCasesTableComponent;
@@ -27,10 +28,11 @@ describe('TicklerCasesTableComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      imports: [ RouterTestingModule, HttpClientModule, HttpClientTestingModule, ToastrModule.forRoot() ],
+      imports: [ RouterTestingModule, HttpClientModule, HttpClientTestingModule, ToastrModule.forRoot(), PopoverModule ],
       declarations: [ TicklerCasesTableComponent, WaitingBackendComponent, PaginatorComponent, CoinDateTransformPipe, HeaderSorterComponent ],
       providers: [ TemporalStateServiceService, GlobalStateService, DataService, BackendCommsService, UserFeedbackService,
                    DatePipe, BooleanToStringPipe, TelephonePipe, ConsentPipeCorrectConversion, BooleanToStringOrderPipe,
+                    ComponentLoaderFactory, PopoverConfig, PositioningService,
                    BooleanToStringOrderPipe, BooleanToStringDuePipe, CiscoCommsService, Location, { provide: LocationStrategy, useClass: PathLocationStrategy },
                   { provide: APP_BASE_HREF, useValue: '/my/app'}]
     })
