@@ -9,8 +9,7 @@ import {ProcessCaseTickler} from "../../models/process-case-tickler";
 import {TicklerAttributeMap} from "../../models/tickler-attribute-map";
 import {TicklerTypeMap} from "../../models/tickler-type-map";
 import {Code} from "../../models/code";
-import {LovType} from "../../models/lov-types";
-import {LovValue} from "../../models/lov-values";
+import {Pagination} from "../../models/pagination";
 
 @Component({
   selector: 'new-tickler-case',
@@ -36,7 +35,6 @@ export class NewTicklerCaseComponent implements OnInit {
   private selectedTicklerType: TicklerType = null;
   attributesToLoad: TicklerAttribute[] = null;
   comboTicklerTypes: TicklerType[] = [];
-  // listOfValues: LovValue[] = [];
   lovValuesToCode: any  = {};
 
 
@@ -51,7 +49,7 @@ export class NewTicklerCaseComponent implements OnInit {
 
   ngOnChanges(changes) {
     if (changes.ticklerTypes && this.ticklerTypes && this.ticklerTypes.length > 0 && this.model.ticklerTypeCode == null) {
-      this.loadTicklerTypesMap(this.findLastCoreTickerType(this.processCaseTicklers, this.ticklerTypes));
+      this.loadTicklerTypesMap(this.ticklerTypes);
     }
   }
 
@@ -75,20 +73,6 @@ export class NewTicklerCaseComponent implements OnInit {
       console.log("Error retrieving LOV");
       console.log(err);
     })
-  }
-
-
-  findLastCoreTickerType(processTicklers: ProcessCaseTickler[], ticklerTypes: TicklerType[]) : TicklerType {
-    let ret: TicklerType = null;
-    let retDate: string = null;
-    for (let pct of processTicklers) {
-      let tt: TicklerType = ticklerTypes.find(ticlType => ticlType.ticklerCode == pct.ticklerTypeCode);
-      if (tt.isCore && (ret == null || retDate < pct.createdDate)) {
-        ret = tt;
-        retDate = pct.createdDate;
-      }
-    }
-    return ret;
   }
 
   /*
@@ -129,20 +113,29 @@ export class NewTicklerCaseComponent implements OnInit {
   * loads the tickler types map --> needs the the current tickler type selected (core)
   * calls to the functions that allow that the combo is written correctly
   * */
-  loadTicklerTypesMap(lastCore: TicklerType) {
+  loadTicklerTypesMap(ticklerTypes: TicklerType[]) {
     this.waitingTicklerTypesToLoad = true;
-    this._dataService.getTicklerTypesMap(lastCore).then(res => {
-      this.setTicklerTypesDestinationCoreToCombo(res);
-      this.setTicklerTypesNoCoreToCombo();
-      // We select the first TicklerType of the combo
-      this.ticklerTypeSelected(this.comboTicklerTypes.length == 0 ? null : this.comboTicklerTypes[0]);
-      // this.setCorrectTicklerTypesToCombo();
-      this.waitingTicklerTypesToLoad = false;
-      // this.setCorrectTicklerTypesToCombo();
+    let lastCorePagination: Pagination = new Pagination(0, 1);
+    this._dataService.getProcessCaseTicklers(this.currentProcessCase, lastCorePagination, true).then(res => {
+      if (res != null && res.length > 0) {
+        let lastCore: TicklerType = ticklerTypes.find(tType => tType.ticklerCode == res[0].ticklerTypeCode);
+
+        this._dataService.getTicklerTypesMap(lastCore).then(res => {
+          this.setTicklerTypesDestinationCoreToCombo(res);
+          this.setTicklerTypesNoCoreToCombo();
+          // We select the first TicklerType of the combo
+          this.ticklerTypeSelected(this.comboTicklerTypes.length == 0 ? null : this.comboTicklerTypes[0]);
+          this.waitingTicklerTypesToLoad = false;
+        }).catch(err => {
+          this.waitingTicklerTypesToLoad = false;
+          console.log("Error retrieving tickler types map", err);
+        })
+      }
     }).catch(err => {
-      this.waitingTicklerTypesToLoad = false;
-      console.log("Error retrieving tickler types map", err);
-    })
+      this.waitingTicklerTypesToLoad = true;
+      console.log("Error retrieving last core case tickler");
+      console.log(err)
+    });
   }
 
 

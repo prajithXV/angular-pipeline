@@ -201,7 +201,8 @@ const urls = {
     pageNr: "PageNr",
     pageSize: "PageSize",
     id: "Id",
-    DeletedBy: "DeletedBy"
+    DeletedBy: "DeletedBy",
+    isCore: "IsCore"
   },
 
   ticklersMap: {
@@ -262,6 +263,7 @@ let ufs: UserFeedbackService = null;
 let gss: GlobalStateService = null;
 
 const DatePatern = 'yyyy-MM-dd';
+const CoreProcessCaseTickler = 'Y'
 
 @Injectable()
 export class BackendCommsService {
@@ -642,7 +644,7 @@ export class BackendCommsService {
 
 
   //process case tickler
-  getProcessCaseTicklers(caseId: number, pageNumber?: number, pageSize?: number): Promise<ProcessCaseTickler[]> {
+  getProcessCaseTicklers(caseId: number, pageNumber?: number, pageSize?: number, isCore?: boolean): Promise<ProcessCaseTickler[]> {
     // Set query params
     let params = this.getParamsWithIETimestamp();
 
@@ -653,6 +655,10 @@ export class BackendCommsService {
     if (pageNumber != null && pageSize != null) {
       params = BackendCommsService.setNotEmptyParam(params, urls.processCaseTickler.pageNr, pageNumber.toString());
       params = BackendCommsService.setNotEmptyParam(params, urls.processCaseTickler.pageSize, pageSize.toString());
+    }
+
+    if (isCore) {
+      params = BackendCommsService.setNotEmptyParam(params, urls.processCaseTickler.isCore, CoreProcessCaseTickler);
     }
 
     let options = {

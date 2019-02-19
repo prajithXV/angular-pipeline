@@ -467,8 +467,8 @@ export class DataService {
 
 
   //process case tickler
-  getProcessCaseTicklers(pc: ProcessCase, pagination?: Pagination): Promise<ProcessCaseTickler[]>{
-    return this._backCommsService.getProcessCaseTicklers(pc ? pc.id : null, pagination ? pagination.currPage: null, pagination ? pagination.pageSize : null);
+  getProcessCaseTicklers(pc: ProcessCase, pagination?: Pagination, isCore?: boolean): Promise<ProcessCaseTickler[]>{
+    return this._backCommsService.getProcessCaseTicklers(pc ? pc.id : null, pagination ? pagination.currPage: null, pagination ? pagination.pageSize : null, isCore? isCore : null);
   }
 
   //tickler type map
