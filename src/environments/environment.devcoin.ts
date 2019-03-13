@@ -11,7 +11,7 @@ export const environment = {
   ciscoOneExtension: true,
   ciscoExtension: "215194",
   ciscoChangeTargetNumber: true,  // If true, uses allways ciscoTargetNumber for outbound calls
-  ciscoTargetNumber: "4696014194",
+  ciscoTargetNumber: "5127779658",
   ciscoUser: "coinapp",
   ciscoPassword: "215194",
   ciscoDialPrefix: "91",
